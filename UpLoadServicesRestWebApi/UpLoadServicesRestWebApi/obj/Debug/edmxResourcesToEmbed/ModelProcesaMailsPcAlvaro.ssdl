@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProcesarmailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="documentos">
+    <Key>
+      <PropertyRef Name="id_num" />
+    </Key>
+    <Property Name="id_num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fnombre" Type="varchar" MaxLength="500" />
+    <Property Name="estado" Type="int" />
+    <Property Name="fecha_insert" Type="datetime" Nullable="false" />
+    <Property Name="sitio" Type="int" />
+    <Property Name="idemail" Type="int" />
+  </EntityType>
+  <EntityType Name="estados">
+    <Key>
+      <PropertyRef Name="id_num" />
+    </Key>
+    <Property Name="id_num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idestado" Type="int" />
+    <Property Name="descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbl_mp_automotoras">
+    <Key>
+      <PropertyRef Name="uid_automotora" />
+    </Key>
+    <Property Name="uid_automotora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uid_sitio" Type="int" Nullable="false" />
+    <Property Name="cod_original" Type="int" Nullable="false" />
+    <Property Name="automotora" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_mp_email">
+    <Key>
+      <PropertyRef Name="uid_email" />
+    </Key>
+    <Property Name="uid_email" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uid_tipo" Type="int" Nullable="false" />
+    <Property Name="uid_estado" Type="int" Nullable="false" />
+    <Property Name="uid_automotora" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="8000" Nullable="false" />
+    <Property Name="fecha_recibido" Type="datetime" Nullable="false" />
+    <Property Name="asunto" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="cabecera" Type="varchar" MaxLength="8000" />
+    <Property Name="destinatarios" Type="varchar" MaxLength="500" />
+    <Property Name="remitente" Type="varchar" MaxLength="200" />
+    <Property Name="cc" Type="varchar" MaxLength="500" />
+    <Property Name="email_html" Type="varchar" MaxLength="8000" />
+  </EntityType>
+  <EntityType Name="tbl_mp_fuentes">
+    <Key>
+      <PropertyRef Name="uid_fuente" />
+    </Key>
+    <Property Name="uid_fuente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uid_sitio" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_mp_sitio">
+    <Key>
+      <PropertyRef Name="uid_sitio" />
+    </Key>
+    <Property Name="uid_sitio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sitio" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_mp_tipos">
+    <Key>
+      <PropertyRef Name="uid_tipo" />
+    </Key>
+    <Property Name="uid_tipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uid_fuente" Type="int" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_mp_automotoras_tbl_mp_sitio">
+    <End Role="tbl_mp_sitio" Type="Self.tbl_mp_sitio" Multiplicity="1" />
+    <End Role="tbl_mp_automotoras" Type="Self.tbl_mp_automotoras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_mp_sitio">
+        <PropertyRef Name="uid_sitio" />
+      </Principal>
+      <Dependent Role="tbl_mp_automotoras">
+        <PropertyRef Name="uid_sitio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_mp_fuentes_tbl_mp_sitio">
+    <End Role="tbl_mp_sitio" Type="Self.tbl_mp_sitio" Multiplicity="1" />
+    <End Role="tbl_mp_fuentes" Type="Self.tbl_mp_fuentes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_mp_sitio">
+        <PropertyRef Name="uid_sitio" />
+      </Principal>
+      <Dependent Role="tbl_mp_fuentes">
+        <PropertyRef Name="uid_sitio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_mp_tipos_tbl_mp_fuentes">
+    <End Role="tbl_mp_fuentes" Type="Self.tbl_mp_fuentes" Multiplicity="1" />
+    <End Role="tbl_mp_tipos" Type="Self.tbl_mp_tipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_mp_fuentes">
+        <PropertyRef Name="uid_fuente" />
+      </Principal>
+      <Dependent Role="tbl_mp_tipos">
+        <PropertyRef Name="uid_fuente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CargaSitio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ProcesarmailsModelStoreContainer">
+    <EntitySet Name="documentos" EntityType="Self.documentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mp_automotoras" EntityType="Self.tbl_mp_automotoras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mp_email" EntityType="Self.tbl_mp_email" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mp_fuentes" EntityType="Self.tbl_mp_fuentes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mp_sitio" EntityType="Self.tbl_mp_sitio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mp_tipos" EntityType="Self.tbl_mp_tipos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_mp_automotoras_tbl_mp_sitio" Association="Self.FK_tbl_mp_automotoras_tbl_mp_sitio">
+      <End Role="tbl_mp_sitio" EntitySet="tbl_mp_sitio" />
+      <End Role="tbl_mp_automotoras" EntitySet="tbl_mp_automotoras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_mp_fuentes_tbl_mp_sitio" Association="Self.FK_tbl_mp_fuentes_tbl_mp_sitio">
+      <End Role="tbl_mp_sitio" EntitySet="tbl_mp_sitio" />
+      <End Role="tbl_mp_fuentes" EntitySet="tbl_mp_fuentes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_mp_tipos_tbl_mp_fuentes" Association="Self.FK_tbl_mp_tipos_tbl_mp_fuentes">
+      <End Role="tbl_mp_fuentes" EntitySet="tbl_mp_fuentes" />
+      <End Role="tbl_mp_tipos" EntitySet="tbl_mp_tipos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

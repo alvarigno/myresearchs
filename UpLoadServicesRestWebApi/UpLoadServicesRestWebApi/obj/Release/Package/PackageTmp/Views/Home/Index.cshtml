@@ -1,0 +1,88 @@
+﻿<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var divProgress = $("#divProgress");
+        var divBar = $("#divPercentBar");
+        var divPercent = $("#divPercentText");
+
+        $("#formUpload").ajaxForm({
+            beforeSend: function () {
+                divProgress.show();
+                var percentVal = '0%';
+                divBar.width(percentVal)
+                divPercent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                divBar.width(percentVal)
+                divPercent.html(percentVal);
+            },
+            success: function (res) {
+                var percentVal = '100%';
+                divBar.width(percentVal)
+                divPercent.html(percentVal);
+                $.each(res, function (i, item) {
+                    viewModel.uploads.push(item);
+                });
+            },
+            complete: function (xhr) {
+                //divProgress.hide();
+            }
+        });
+    });
+    var viewModel = {
+        uploads: ko.observableArray([])
+    }
+    ko.applyBindings(viewModel);
+
+</script>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
+        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
+        is an ideal platform for building RESTful applications on the .NET Framework.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+    </div>
+
+    <section class="content-wrapper main-content clear-fix">
+        <div id="divFormUpload">
+            <form id="formUpload" action="@Url.Content("~/api/hdfiles")" method="post" enctype="multipart/form-data">
+                <label class="displayinline">Files</label>
+                <input name="inputFiles" type="file" multiple />
+                <input type="submit" value="Upload" />
+                <div id="divProgress" style="display: none">
+                    <div id="divPercentBar" class="classDivPercentBar"></div>
+                    <div id="divPercentText" class="classDivPercentText">0%</div>
+                    @*<img alt="" id="upload-animation" src="/Content/images/loading.gif" />*@
+                </div>
+            </form>
+        </div>
+
+        <ul data-bind="template: { name: 'fileContainer', foreach: uploads }"></ul>
+        <script type="text/html" id="fileContainer">
+            <li>
+                <span>Uploaded: <small data-bind="text: Name"></small>.</span>
+                <span>Size: <small data-bind="text: Size"></small>kB</span>
+                <span>Server path: <small><a data-bind=" attr: { href: Url }, text: Url"></a></small></span>
+            </li>
+        </script>
+    </section>
+
+</div>

@@ -1,0 +1,741 @@
+﻿<h2>Introduction</h2>
+
+<p>One of my first official tasks as a DotNet programmer was to write a Windows Service which monitored 
+a folder on a server for new files, processed those files, and then transferred them to another server 
+(via FTP).  I became immediately aware of the shortcomings of the <code>FileSystemWatcher</code> class, and those 
+shortcomings have always kind stuck on my brain.  A day or so ago, someone posted a question regarding 
+a similar task, and I immediately suggested the same route I had taken.  It was then, that the thought 
+occurred to me that thes <code>FileSystemWatcher</code> problems have never really be addressed (that I could find).</p>
+
+<h2>The Problem</h2>
+
+<p>My primary issue is that the <code>FileSystemWatcher</code> allows you to be notified that a file in a folder 
+has changed, but not precisely what change was made. I found this particularly irritating since they 
+provided eight notification filters to make the <code>FileSystemWatcher</code> send the <code>Changed</code> event.  You could 
+use one or more of these filters, but upon receiving the <code>Changed</code> event, there is no way to see what 
+filter triggered the event. The <code>ChangeType</code> property in the <code>FileSystemEventArgs</code> parameter for the 
+event merely indicated wether the item in question was changed, deleted, created, or renamed, and 
+there is no property indicating the applicable filter in the event of the <code>Changed</code> event.</p>
+
+<h2>My Solution</h2>
+
+<p>I came to the realization that you would need up to NINE <code>FileSystemWatcher</code> objects to pull this off - 
+one to handle all of the other ChangeTypes, and one for each of the eight <code>NotifyFilter</code> enumerators. You can 
+pretty much guess that trying to manage that many <code>FileSystemWatcher</code> objects in a form would be excrutiatingly painful. 
+The technique presented in this article is in the form of a wrapper class than manages these individual <code>FileSystemWatcher</code> 
+objects and provides a handy interface and event mechanism that can be used to cherry pick the filters you want to use. 
+Gone (I hope) are the days of multiple events thta are fired when programs like <i>NotePad</i> create a file. You should 
+now be able to pick and choose which events to handle, and when.</p>
+
+<h2>Something Borrowed - The FileSystemWatcherEx Class</h2>
+
+<p>While I was researching for this article, I stumbled across a CodeProject article by George Oakes, called 
+<a href="http://www.codeproject.com/KB/vb/AdvancedFileSystemWatcher.aspx?msg=3367375#xx3280046xx">Advanced FileSystemWatcher</a>. 
+In that article, George created an extension of the <code>FileSystemWatcher</code> class that allows it to monitor the folder being 
+watched to make sure it's available.  The reasons are laid out in his article, but I'll summarize his decsription by 
+saying that if the watched directory somehow becomes unaccessible (maybe it's on a remote machine, maybe it was deleted), 
+the <code>FileSystemWatcher</code> object doesn't receover - at all. The article was written in VB.Net, so I had to convert it 
+to C#, and I also made the following modification.</p>
+
+<h3>From Timer To Thread</h3>
+
+<p>The original version used a Timer object to trigger verification of the folder's existance. I have an unnatural disdain for the 
+Timer object (Windows timer events are the lowest priority event, and are NOT guaranteed to be sent on a very busy system), and 
+prefer to use honest-to-god threads for this kind of work. So, the first thing we have to do is create the thread.</p>
+
+<pre>//--------------------------------------------------------------------------------
+private void CreateThread()
+{
+    Interval = Math.Max(0, Math.Min(Interval, MaxInterval));
+    if (Interval > 0)
+    {
+        thread              = new Thread(new ThreadStart(MonitorFolderAvailability));
+        thread.Name         = Name;
+        thread.IsBackground = true;
+    }
+}
+</pre>
+
+<p></p>The first line of the method normalizes the interval (how long the object waits before checking for the watched folder). The 
+minimum acceptable value is 0 milliseconds, and the longest acceptable value is 60,000 milliseconds.  A value of zero indicates 
+that the programmer doesn't want to use this folder-checking functionality.  The default value is 100 milliseconds. (This demo 
+uses 250 milliseconds.)</p>
+
+<p>Next, we need to create a thread method.</p>
+
+<pre>//--------------------------------------------------------------------------------
+public void MonitorFolderAvailability()
+{
+    while (Run)
+    {
+        if (IsNetworkAvailable)
+        {
+            if (!Directory.Exists(base.Path))
+            {
+                IsNetworkAvailable = false;
+                RaiseEventNetworkPathAvailablity();
+            }
+        }
+        else
+        {
+            if (Directory.Exists(base.Path))
+            {
+                IsNetworkAvailable = true;
+                RaiseEventNetworkPathAvailablity();
+            }
+        }
+        Thread.Sleep(Interval);
+    }
+}
+</pre>
+
+<p>The method simply spins until it's told to stop, and during each cycle it checks to see if the watched folder exists. If 
+the statuis changes, and event uis sent that indicates the new status.  The evnt handler code looks like this:</p>
+
+<pre>//////////////////////////////////////////////////////////////////////////////////////
+public class FileSystemWatcherEx : FileSystemWatcher
+{
+    public  event  PathAvailabilityHandler EventPathAvailability = delegate{};
+
+    //--------------------------------------------------------------------------------
+    private void RaiseEventNetworkPathAvailablity()
+    {
+        EventPathAvailability(this, new PathAvailablitiyEventArgs(IsNetworkAvailable));
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+public class PathAvailablitiyEventArgs : EventArgs
+{
+	public bool PathIsAvailable { get; set; }
+	public PathAvailablitiyEventArgs(bool available)
+	{
+		PathIsAvailable = available;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+public delegate void PathAvailabilityHandler(object sender, PathAvailablitiyEventArgs e);
+</pre>
+
+<h3>Other Minor Changes</h3>
+
+<p>I added a readonly variable that specifies the maximum allowed interval (in milliseconds), a way to 
+name the file system watcher, and several constructor overloads to make the object more versatile.</p>
+
+<pre>
+//////////////////////////////////////////////////////////////////////////////////////
+public class FileSystemWatcherEx : FileSystemWatcher
+{
+    // set a reasonable maximum interval time
+    public readonly int MaxInterval = 60000;
+
+    public  event  PathAvailabilityHandler EventPathAvailability = delegate{};
+    private bool   IsNetworkAvailable = true;
+    private int    Interval           = 100;
+    private Thread thread             = null;
+    public  string Name               = "FileSystemWatcherEx";
+    private bool   Run                = false;
+
+    #region Constructors
+    //--------------------------------------------------------------------------------
+    public FileSystemWatcherEx():base()
+    {
+        CreateThread();
+    }
+
+    //--------------------------------------------------------------------------------
+    public FileSystemWatcherEx(string path):base(path)
+    {
+        CreateThread();
+    }
+
+    //--------------------------------------------------------------------------------
+    public FileSystemWatcherEx(int interval):base()
+    {
+        Interval = interval;
+        CreateThread();
+    }
+
+    //--------------------------------------------------------------------------------
+    public FileSystemWatcherEx(string path, int interval):base(path)
+    {
+        Interval = interval;
+        CreateThread();
+    }
+
+    //--------------------------------------------------------------------------------
+    public FileSystemWatcherEx(int interval, string name):base()
+    {
+        Interval = interval;
+        Name     = name;
+        CreateThread();
+    }
+
+    //--------------------------------------------------------------------------------
+    public FileSystemWatcherEx(string path, int interval, string name):base(path)
+    {
+        Interval = interval;
+        Name     = name;
+        CreateThread();
+    }
+}
+</pre>
+
+<p>Like I said before, the credit for the original class extension goes to George Oakes. He rocks!</p>
+
+<h2>Support Classes</h2>
+
+<p>The classes which support the <code>WatcherEx</code> class are few.  They're used to abstract out 
+some of the housekeeping from the main class and keep things a bit more organized and reusable.</p>
+
+<h3>The WatcherInfo Class</h3>
+
+<p>This class is responsible for initializing the WatcherEx class.</p>
+
+<pre>////////////////////////////////////////////////////////////////////////////////////// 
+public class WatcherInfo
+{
+    public string                  WatchPath         { get; set; }
+    public bool                    IncludeSubFolders { get; set; }
+    public bool                    WatchForError     { get; set; }
+    public bool                    WatchForDisposed  { get; set; }
+    public System.IO.NotifyFilters ChangesFilters    { get; set; }
+    public WatcherChangeTypes      WatchesFilters    { get; set; }
+    public string                  FileFilter        { get; set; }
+    public uint                    BufferKBytes      { get; set; }
+    // only applicable if using WatcherEx class
+    public int                     MonitorPathInterval     { get; set; }
+
+    //--------------------------------------------------------------------------------
+    public WatcherInfo()
+    {
+        WatchPath           = "";
+        IncludeSubFolders   = false;
+        WatchForError       = false;
+        WatchForDisposed    = false;
+        ChangesFilters      = NotifyFilters.Attributes;
+        WatchesFilters      = WatcherChangeTypes.All;
+        FileFilter          = "";
+        BufferKBytes        = 8;
+        MonitorPathInterval = 0;
+    }
+}
+</pre>
+
+<ul><li><b>WatchPath</b> - This is the path that is watched by all of the internal 
+<code>FileSystemWatcherEx</code> objects.</li></ul>
+
+<ul><li><b>IncludeSubFolders</b> - This value allows the programmer to specify 
+whether or not to include subfolders durin the watch.</li></ul>
+
+<ul><li><b>WatchForError</b> - If true, watches for <code>Error</code> events</li></ul>
+
+<ul><li><b>WatchForDispose</b> - If true, watches for <code>Disposed</code> events</li></ul>
+
+<ul><li><b>ChangeFilters</b> - This is a flags-base enumerator that allows the programmer 
+to specify which <code>NotifyFilters</code> to monitor.</li></ul>
+
+<ul><li><b>WatchesFilters</b> - This is a flags-based enumerator that allows the programmer 
+to specify which basic events to handle (Changed, Created, Deleted, Renamed, All).</li></ul>
+
+<ul><li><b>FileFilter</b> - This is the file mask of files to monitor. The default value 
+is an empty string.</li></ul>
+
+<ul><li><b>BufferKBytes</b> - This is the desired size of the internal buffer.</li></ul>
+
+<ul><li><b>MonitorPathInterval</b> - This is the sleep interval between verifications that 
+the watched folder exists.  If this is set to 0, the Availability event will not be sent.
+</li></ul>
+
+<p>This class is generally created/modified in the subscribing object, and passed as a 
+constructor parameter for the WatcherEx object.</p>
+
+<h3>The WatcherExEventArgs Class</h3>
+
+<p>Anytime you see a custom event in a program, chances are pretty good that they will require their 
+own custom EventArgs-derived object.  This particular exmaple is no different. The reason you almost 
+always want to create an\ custom argument object is so that you can pass specific data back to the 
+event subscriber. The data we need to pass back follows.</p>
+
+<ul><li><b>The <code></code>FileSystemWatcherEx</code> that's sending the event</b> - I know this seems 
+redundant since the sender parameter is exactly the same thing but you can never send back too much 
+info. :)</li></ul>
+
+<ul><li><b>The original EventArgs-derived event argument</b> - The <code>WatcherEx</code> class is 
+essentially reflecting many different events, and some of them are of different types. Since we may 
+want to be able to see the origial event arguments that were posted, we have to be able to pass them 
+back as part of this class.</li></ul>
+
+<ul><li><b>The EventArgs-derived argument type</b> - This is represented as an enum for easier 
+identification in the subscribing object.  Instead of investigating the type, you can simply 
+check this enumerator and castly for efficently.</li></ul>
+
+<ul><li><b>The NotifyFilter that triggered the evnt</b> - This would allow you to handle all Changed 
+events in a single subcsriber method, and decide how to handle the even from a switch statement.</li></ul>
+
+Here's the class source:
+
+<pre>////////////////////////////////////////////////////////////////////////////////////// 
+public class WatcherExEventArgs
+{
+    public FileSystemWatcherEx Watcher    { get; set; }
+    public object            Arguments  { get; set; }
+    public ArgumentType      ArgType    { get; set; }
+    public NotifyFilters     Filter     { get; set; }
+
+    //------------------------------------------------------------------------------------
+    public WatcherExEventArgs(FileSystemWatcherEx watcher, 
+                              object              arguments,
+                              ArgumentType        argType,
+                              NotifyFilters       filter)
+    {
+        Watcher   = watcher;
+        Arguments = arguments;
+        ArgType   = argType;
+        Filter    = filter;
+    }
+
+    //------------------------------------------------------------------------------------
+    public WatcherExEventArgs(FileSystemWatcherEx watcher, 
+                              object              arguments,
+                              ArgumentType        argType)
+    {
+        Watcher   = watcher;
+        Arguments = arguments;
+        ArgType   = argType;
+        Filter    = NotifyFilters.Attributes;
+    }
+}
+</pre>
+
+<h2>The WatcherEx Class</h2>
+
+<p>This is the class that wraps all of the internal <code>FileSystemWatcherEx</code> objects. The first item 
+of note is that the class inherits from <code>IDisposable</code>. The reason for this is that FileSystemWatchers 
+are disposable, and I felt the need to control the disposing. (It may not even be necessary, but I'm doing it 
+anyway.)</p>
+
+<pre>public class WatcherEx : IDisposable
+{
+</pre>
+
+<p>There are very few member variables - just enough to keep track of our internal watchers, the intialization 
+object, and whether or not the object has been disposed.</p>
+
+<pre>    private bool           disposed    = false;
+    private WatcherInfo    watcherInfo = null;
+    private WatchersExList watchers    = new WatchersExList();
+</pre>
+
+<p>Next, we have the event delegate definitions. You'll notice that there is one event delegate for each of 
+the possible <code>NotifyFilters</code> triggers</p>
+
+<pre>   public event WatcherExEventHandler EventChangedAttribute     = delegate {};
+    public event WatcherExEventHandler EventChangedCreationTime  = delegate {};
+    public event WatcherExEventHandler EventChangedDirectoryName = delegate {};
+    public event WatcherExEventHandler EventChangedFileName      = delegate {};
+    public event WatcherExEventHandler EventChangedLastAccess    = delegate {};
+    public event WatcherExEventHandler EventChangedLastWrite     = delegate {};
+    public event WatcherExEventHandler EventChangedSecurity      = delegate {};
+    public event WatcherExEventHandler EventChangedSize          = delegate {};
+    public event WatcherExEventHandler EventCreated              = delegate {};
+    public event WatcherExEventHandler EventDeleted              = delegate {};
+    public event WatcherExEventHandler EventRenamed              = delegate {};
+    public event WatcherExEventHandler EventError                = delegate {};
+    public event WatcherExEventHandler EventDisposed             = delegate {};
+    public event WatcherExEventHandler EventPathAvailability     = delegate {};
+</pre>
+
+<p>Then we see some helper methods that make remove some of the chore of typing. These methods simply manipulate 
+the two flag enumerators to find out if the specified ChangeType or NotifyFilter have been specified.</p>
+
+<pre>   //--------------------------------------------------------------------------------
+    public bool HandleNotifyFilter(NotifyFilters filter)
+    {
+        return (((NotifyFilters)(watcherInfo.ChangesFilters & filter)) == filter);
+    }
+
+    //--------------------------------------------------------------------------------
+    public bool HandleWatchesFilter(WatcherChangeTypes filter)
+    {
+        return (((WatcherChangeTypes)(watcherInfo.WatchesFilters & filter)) == filter);
+    }
+</pre>
+
+<p>After the subscribing object has created a WatcherEX onbject, it at some point call the Initialize method.  
+This method is responsible for creating all of the necessary internlal FileSystemWatcherEx objects.</p>
+
+<pre>   //--------------------------------------------------------------------------------
+    private void Initialize()
+    {
+        watcherInfo.BufferKBytes = Math.Max(4, Math.Min(watcherInfo.BufferKBytes, 64));
+
+        CreateWatcher(false, watcherInfo.ChangesFilters);
+
+        CreateWatcher(true, NotifyFilters.Attributes);
+        CreateWatcher(true, NotifyFilters.CreationTime);
+        CreateWatcher(true, NotifyFilters.DirectoryName);
+        CreateWatcher(true, NotifyFilters.FileName);
+        CreateWatcher(true, NotifyFilters.LastAccess);
+        CreateWatcher(true, NotifyFilters.LastWrite);
+        CreateWatcher(true, NotifyFilters.Security);
+        CreateWatcher(true, NotifyFilters.Size);
+    }
+</pre>
+
+<p>The first line in the method performs a sanity check on the buffer size. Default is 8k, minimum is 4k, 
+and the maximum is 64k.  The next line creates what I call the "main" <code>FileSystemWatcherEx</code> 
+object.  This watcher is responsible for handling everything <b>except</b> <code>Changed</code> events. 
+Finally, the last eight lines create a FileSystemWatcherEx object for each of the <code>NotifyFilters</code>.</p>
+
+<p>Here's the common <code>CreateWatcher</code> method called from <code>Initialize</code>. First, we create a watcher, 
+and calualte the actual buffer size.</p>
+
+<pre>   //--------------------------------------------------------------------------------
+    private void CreateWatcher(bool changedWatcher, NotifyFilters filter)
+    {
+        FileSystemWatcherEx watcher = null;
+        int bufferSize = (int)watcherInfo.BufferKBytes * 1024;
+</pre>
+
+<p>If the watcher we're trying to create is one of the Changed events.  This code only creates a watcher for the 
+specified filter if the filter was included in the WatcherInfo initializing object.  The appropriate settings are 
+applied to the watcher, and the <code>Changed</code> event is registered.</p>
+
+<pre>        if (changedWatcher)
+        {
+            // if we're not handling the currently specified filter, get out
+            if (HandleNotifyFilter(filter))
+            {
+                watcher                       = new FileSystemWatcherEx(watcherInfo.WatchPath);
+                watcher.IncludeSubdirectories = watcherInfo.IncludeSubFolders;
+                watcher.Filter                = watcherInfo.FileFilter;
+                watcher.NotifyFilter          = filter;
+                watcher.InternalBufferSize    = bufferSize;
+				switch (filter)
+                {
+                    case NotifyFilters.Attributes    :
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedAttribute);
+                        break;
+                    case NotifyFilters.CreationTime  : 
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedCreationTime);
+                        break;
+                    case NotifyFilters.DirectoryName : 
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedDirectoryName);
+                        break;
+                    case NotifyFilters.FileName      : 
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedFileName);
+                        break;
+                    case NotifyFilters.LastAccess    : 
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedLastAccess);
+                        break;
+                    case NotifyFilters.LastWrite     : 
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedLastWrite);
+                        break;
+                    case NotifyFilters.Security      : 
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedSecurity);
+                        break;
+                    case NotifyFilters.Size          : 
+                        watcher.Changed += new FileSystemEventHandler(watcher_ChangedSize);
+                        break;
+                }
+            }
+        }
+</pre>
+
+<p>If the watcher is the "main" watcher, we setup all of the appropriate events for it.</p> 
+
+<pre>        else
+        {
+            if (HandleWatchesFilter(WatcherChangeTypes.Created) ||
+                                    HandleWatchesFilter(WatcherChangeTypes.Deleted) ||
+                                    HandleWatchesFilter(WatcherChangeTypes.Renamed) ||
+                                    watcherInfo.WatchForError ||
+                                    watcherInfo.WatchForDisposed)
+            {
+                watcher                       = new FileSystemWatcherEx(watcherInfo.WatchPath, 
+                                                                        watcherInfo.MonitorPathInterval);
+                watcher.IncludeSubdirectories = watcherInfo.IncludeSubFolders;
+                watcher.Filter                = watcherInfo.FileFilter;
+                watcher.InternalBufferSize    = bufferSize;
+            }
+
+            if (HandleWatchesFilter(WatcherChangeTypes.Created)) 
+            {
+                watcher.Created += new FileSystemEventHandler(watcher_CreatedDeleted);
+            }
+            if (HandleWatchesFilter(WatcherChangeTypes.Deleted))
+            {
+                watcher.Deleted += new FileSystemEventHandler(watcher_CreatedDeleted);
+            }
+            if (HandleWatchesFilter(WatcherChangeTypes.Renamed))
+            {
+                watcher.Renamed += new RenamedEventHandler(watcher_Renamed);
+            }
+            if (watcherInfo.MonitorPathInterval > 0)
+            {
+                watcher.EventPathAvailability += new PathAvailabilityHandler(watcher_EventPathAvailability);
+            }
+        }
+</pre>
+
+<p>Finally, we register the Error and Disposed events if necessary, and add the watcher to our list.  Notice 
+that these handlers are registered for EVERY watcher we create if the programmer specified them in the 
+WatcherInfo object. If you want more "atomic" application of these events, I leave it to you to implement.</p>
+
+<pre>   if (watcher != null)
+        {
+            if (watcherInfo.WatchForError)
+            {
+	            watcher.Error += new ErrorEventHandler(watcher_Error);
+            }
+            if (watcherInfo.WatchForDisposed)
+            {
+	            watcher.Disposed += new EventHandler(watcher_Disposed);
+            }
+            watchers.Add(watcher);
+        }
+    }
+</pre>
+
+<p>The last thing of any interest in the class are the <code>Start</code>/<code>Stop</code> methods. They 
+simply set all of the watchers' EnableRaisingEvent property to the value appropriate for the method.</p>
+
+<pre>   //--------------------------------------------------------------------------------
+    public void Start()
+    {
+        watchers[0].StartFolderMonitor();
+        for (int i = 0; i < watchers.Count; i++)
+        {
+            watchers[i].EnableRaisingEvents = true;
+        }
+    }
+
+    //--------------------------------------------------------------------------------
+    public void Stop()
+    {
+        watchers[0].StopFolderMonitor();
+        for (int i = 0; i < watchers.Count; i++)
+        {
+            watchers[i].EnableRaisingEvents = false;
+        }
+    }
+</pre>
+
+<p>The remaining methods in the object are the watcher event handlers, and while not very interesting, 
+I'll show you one of them in the interest of completeness.</p>
+
+<pre>   //--------------------------------------------------------------------------------
+    private void watcher_ChangedAttribute(object sender, FileSystemEventArgs e)
+    {
+        EventChangedAttribute(this, new WatcherExEventArgs(sender as FileSystemWatcherEx, 
+                                                           e, 
+                                                           ArgumentType.FileSystem, 
+                                                           NotifyFilters.Attributes));
+    }
+</pre>
+
+<h2>Usage Example - The Form In The Demo Application</h2>
+
+<p>The form itself is a simple affair, providing the following controls:</p>
+
+<ul><li>A TextBox/Browse button combo that allows you to specify 
+a folder to monitor</li></ul>
+
+<ul><li>A checkbox to indicate that you want to include sub-directories while monitoring</li></ul>
+
+<ul><li>A listView to display events as the form receives them</li></ul>
+
+<ul><li>A Clear button to clear the list contents (mostly because I wanted to keep the <code>ListView<code> 
+fairly free of clutter for Part 2 of this article.</li></ul>
+
+<ul><li>A Start/Stop button to control the watcher</li></ul>
+
+<p>We start off with some helper methods.  The first is one registers/unregisters <code>WatcherEx</code> 
+events. Notice that I handle of the <code>Changed</code> events in one method.  This certainly isn't a 
+requirement, and you should feel free to do it differently if you so choose. In the interest of brevity, 
+the snippet below just shows the registering code (the unregistering code is in the actual demo).</p>
+
+<pre>//--------------------------------------------------------------------------------
+private void ManageEventHandlers(bool add)
+{
+    if (fileWatcher != null)
+    {
+        if (add)
+        {
+            fileWatcher.EventChangedAttribute     += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventChangedCreationTime  += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventChangedDirectoryName += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventChangedFileName      += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventChangedLastAccess    += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventChangedLastWrite     += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventChangedSecurity      += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventChangedSize          += new WatcherExEventHandler(fileWatcher_EventChanged);
+            fileWatcher.EventCreated              += new WatcherExEventHandler(fileWatcher_EventCreated);
+            fileWatcher.EventDeleted              += new WatcherExEventHandler(fileWatcher_EventDeleted);
+            fileWatcher.EventDisposed             += new WatcherExEventHandler(fileWatcher_EventDisposed);
+            fileWatcher.EventError                += new WatcherExEventHandler(fileWatcher_EventError);
+            fileWatcher.EventRenamed              += new WatcherExEventHandler(fileWatcher_EventRenamed);
+            fileWatcher.EventPathAvailability     += new WatcherExEventHandler(fileWatcher_EventPathAvailability);
+        }
+        else
+        {
+            // .....
+        }
+    }
+}
+</pre>
+
+<p>Next, we have the <code>InitWatcher()</code> method.  It's purpose in life is to create and initialize the 
+<code>WatcherEx</code> object. For the purpose of this demo, I'm monitoring all of the <code>NotifyFilter</code> 
+events, but in actuality, you probably will never want to do that.</p>
+
+<pre>//--------------------------------------------------------------------------------
+private bool InitWatcher()
+{
+    bool result = false;
+    if (Directory.Exists(this.textBoxFolderToWatch.Text) || 
+        File.Exists(this.textBoxFolderToWatch.Text))
+    {
+        WatcherInfo info = new WatcherInfo();
+        info.ChangesFilters = NotifyFilters.Attributes    | 
+                              NotifyFilters.CreationTime  | 
+                              NotifyFilters.DirectoryName | 
+                              NotifyFilters.FileName      | 
+                              NotifyFilters.LastAccess    | 
+                              NotifyFilters.LastWrite     | 
+                              NotifyFilters.Security      | 
+                              NotifyFilters.Size;
+
+        info.IncludeSubFolders   = this.checkBoxIncludeSubfolders.Checked;
+        info.WatchesFilters      = WatcherChangeTypes.All;
+        info.WatchForDisposed    = true;
+        info.WatchForError       = false;
+        info.WatchPath           = this.textBoxFolderToWatch.Text;
+        info.BufferKBytes        = 8;
+        info.MonitorPathInterval = 250;
+        fileWatcher              = new WatcherEx(info);
+        ManageEventHandlers(true);
+        result                   = true;
+    }
+    else
+    {
+        MessageBox.Show("The folder (or file) specified does not exist...");
+    }
+    return result;
+}
+</pre>
+
+<p>Because the ListView could potentially be updated from another thread (remember, the <code>FileSystemWatcherEx</code> 
+object runs a thread that monitors the existance of the folder being watched), we need to be able to access 
+it through a delegate.</p>
+
+<pre>   private delegate void DelegateCreateListViewItem(string eventName, 
+                                                         string filterName, 
+                                                         string fileName);
+</pre>
+
+<p>And our delegate method looks like this.</p>
+
+<pre>
+    //--------------------------------------------------------------------------------
+    private void InvokedCreateListViewItem(string eventName, string filterName, string fileName)
+    {
+        ListViewItem lvi = new ListViewItem();
+        lvi.Text = DateTime.Now.ToString("HH:mm");
+        lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, eventName)); 
+        lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, filterName)); 
+        lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, fileName));
+        this.listView1.Items.Add(lvi);
+    }
+</pre>
+
+<p>All of the event handlers call this method in order to update the <code>ListView</code>.</p>
+
+<pre>   //--------------------------------------------------------------------------------
+    void CreateListViewItem(string eventName, string filterName, string fileName)
+    {
+        if (this.listView1.InvokeRequired)
+        {
+            DelegateCreateListViewItem method = new DelegateCreateListViewItem(InvokedCreateListViewItem);
+            Invoke(method, new object[3]{eventName, filterName, fileName} );
+        }
+        else
+        {
+            InvokedCreateListViewItem(eventName, filterName, fileName);
+        }
+    }
+</pre>
+
+<p>When you're done with the <code>WatcherEx</code> object, you should call <code>Dispose</code> on it.</p>
+
+<pre>    //--------------------------------------------------------------------------------
+    private void Form1Ex_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (fileWatcher != null)
+        {
+            ManageEventHandlers(false);
+            fileWatcher.Dispose();
+            fileWatcher = null;
+        }
+    }
+</pre>
+
+<h3> The ListView Control</h3>
+
+<p>While playing with the demo app, I noticed that it flickered quite a bit, and search around until I found a 
+quick-and-easy fix. I ended up with a solution from a user named <b>stromenet</b> on <b><i>Stackoverflow</i></b>. 
+This solution involves writing a new class that inherits from the original <code>ListView</code> class, sets 
+<code>DoubleBuffering</code> and intercepts/eats <code>WM_BACKGROUND</code> messages.  Here's the code (and 
+many thanks once more to the StackOverflow user <b>stormenet</b>.</p>
+
+<pre>//////////////////////////////////////////////////////////////////////////////////////
+public class ListViewNoFlicker : System.Windows.Forms.ListView
+{
+    //--------------------------------------------------------------------------------
+    public ListViewNoFlicker()
+    {
+        // Activate double buffering
+        this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+        // Enable the OnNotifyMessage event so we get a chance to filter out 
+        // Windows messages before they get to the form's WndProc
+        this.SetStyle(ControlStyles.EnableNotifyMessage, true);
+    }
+
+    //--------------------------------------------------------------------------------
+    protected override void OnNotifyMessage(Message m)
+    {
+        // Filter out the WM_ERASEBKGND message
+        if (m.Msg != 0x14)
+        {
+            base.OnNotifyMessage(m);
+        }
+    }
+
+}
+</pre>
+
+<p>I don't know what side-effects this will have regarding the background image in cells, but since we're not 
+directly concerned with those issues in this demo applcation, I'll leave it as an exercise for the reader to 
+figure out. I also did NOT use this inherited ListView in the regular form (that uses the original DotNet 
+version of the <code>FileSystemWatcher</code> object).</p>
+
+<h2>Other Comments</h2>
+
+<p>When I started the demo app, I had originally created a <code>Watcher</code> class that used the 
+original DotNet <code>FileSystemWatcher</code> object.  During my research into this object, I discovered 
+George Oakes article and thought it might make for a more complete and appropriate implementation, so I 
+essentially duplicated the original <code>Watcher</code> object in the newer <code>WatcherEx</code> class. 
+I was originally going to remove the original code, but I figured that there might be a number of you that 
+don't want to use the <code>WatcherEx</code> object, so I left BOTH versions in the demo (each version of 
+the class has its own form).  The demo currently only uses the WatcherEx version of the form, but it's a 
+simple matter to change <code>Program.cs</code> to use the form you want to use.  Be aware that the non-Ex 
+version of the form may not be as up-to-date and might required some tweaking.</p>
+
+<h2>Part 2 In The Series</h2>
+
+<p>Because this article ended up being fairly lengthy, I decided to create a multi-part article series, with 
+Part 2 centering on the <code>FileSystemWatcher</code> object quirks discovered when working on this 
+article.</p>
+

@@ -1,0 +1,6 @@
+c:\users\álvaro\documents\visual studio 2015\Projects\COnsoleWahtSystem\COnsoleWahtSystem\bin\Debug\COnsoleWahtSystem.exe.config
+c:\users\álvaro\documents\visual studio 2015\Projects\COnsoleWahtSystem\COnsoleWahtSystem\bin\Debug\COnsoleWahtSystem.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\COnsoleWahtSystem\COnsoleWahtSystem\bin\Debug\COnsoleWahtSystem.pdb
+c:\users\álvaro\documents\visual studio 2015\Projects\COnsoleWahtSystem\COnsoleWahtSystem\obj\Debug\COnsoleWahtSystem.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\COnsoleWahtSystem\COnsoleWahtSystem\obj\Debug\COnsoleWahtSystem.pdb
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\COnsoleWahtSystem\COnsoleWahtSystem\obj\Debug\COnsoleWahtSystem.csprojResolveAssemblyReference.cache

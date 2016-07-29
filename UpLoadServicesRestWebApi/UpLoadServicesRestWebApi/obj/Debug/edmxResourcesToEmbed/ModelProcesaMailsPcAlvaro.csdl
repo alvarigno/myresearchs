@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProcesarmailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="documento">
+    <Key>
+      <PropertyRef Name="id_num" />
+    </Key>
+    <Property Name="id_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fnombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="fecha_insert" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sitio" Type="Int32" />
+    <Property Name="idemail" Type="Int32" />
+  </EntityType>
+  <EntityType Name="estado">
+    <Key>
+      <PropertyRef Name="id_num" />
+    </Key>
+    <Property Name="id_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idestado" Type="Int32" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_mp_automotoras">
+    <Key>
+      <PropertyRef Name="uid_automotora" />
+    </Key>
+    <Property Name="uid_automotora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid_sitio" Type="Int32" Nullable="false" />
+    <Property Name="cod_original" Type="Int32" Nullable="false" />
+    <Property Name="automotora" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_mp_sitio" Relationship="Self.FK_tbl_mp_automotoras_tbl_mp_sitio" FromRole="tbl_mp_automotoras" ToRole="tbl_mp_sitio" />
+  </EntityType>
+  <EntityType Name="tbl_mp_email">
+    <Key>
+      <PropertyRef Name="uid_email" />
+    </Key>
+    <Property Name="uid_email" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid_tipo" Type="Int32" Nullable="false" />
+    <Property Name="uid_estado" Type="Int32" Nullable="false" />
+    <Property Name="uid_automotora" Type="Int32" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_recibido" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="asunto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cabecera" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+    <Property Name="destinatarios" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="remitente" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="cc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="email_html" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_mp_fuentes">
+    <Key>
+      <PropertyRef Name="uid_fuente" />
+    </Key>
+    <Property Name="uid_fuente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid_sitio" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_mp_sitio" Relationship="Self.FK_tbl_mp_fuentes_tbl_mp_sitio" FromRole="tbl_mp_fuentes" ToRole="tbl_mp_sitio" />
+    <NavigationProperty Name="tbl_mp_tipos" Relationship="Self.FK_tbl_mp_tipos_tbl_mp_fuentes" FromRole="tbl_mp_fuentes" ToRole="tbl_mp_tipos" />
+  </EntityType>
+  <EntityType Name="tbl_mp_sitio">
+    <Key>
+      <PropertyRef Name="uid_sitio" />
+    </Key>
+    <Property Name="uid_sitio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sitio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_mp_automotoras" Relationship="Self.FK_tbl_mp_automotoras_tbl_mp_sitio" FromRole="tbl_mp_sitio" ToRole="tbl_mp_automotoras" />
+    <NavigationProperty Name="tbl_mp_fuentes" Relationship="Self.FK_tbl_mp_fuentes_tbl_mp_sitio" FromRole="tbl_mp_sitio" ToRole="tbl_mp_fuentes" />
+  </EntityType>
+  <EntityType Name="tbl_mp_tipos">
+    <Key>
+      <PropertyRef Name="uid_tipo" />
+    </Key>
+    <Property Name="uid_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid_fuente" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_mp_fuentes" Relationship="Self.FK_tbl_mp_tipos_tbl_mp_fuentes" FromRole="tbl_mp_tipos" ToRole="tbl_mp_fuentes" />
+  </EntityType>
+  <Association Name="FK_tbl_mp_automotoras_tbl_mp_sitio">
+    <End Role="tbl_mp_sitio" Type="Self.tbl_mp_sitio" Multiplicity="1" />
+    <End Role="tbl_mp_automotoras" Type="Self.tbl_mp_automotoras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_mp_sitio">
+        <PropertyRef Name="uid_sitio" />
+      </Principal>
+      <Dependent Role="tbl_mp_automotoras">
+        <PropertyRef Name="uid_sitio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_mp_fuentes_tbl_mp_sitio">
+    <End Role="tbl_mp_sitio" Type="Self.tbl_mp_sitio" Multiplicity="1" />
+    <End Role="tbl_mp_fuentes" Type="Self.tbl_mp_fuentes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_mp_sitio">
+        <PropertyRef Name="uid_sitio" />
+      </Principal>
+      <Dependent Role="tbl_mp_fuentes">
+        <PropertyRef Name="uid_sitio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_mp_tipos_tbl_mp_fuentes">
+    <End Role="tbl_mp_fuentes" Type="Self.tbl_mp_fuentes" Multiplicity="1" />
+    <End Role="tbl_mp_tipos" Type="Self.tbl_mp_tipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_mp_fuentes">
+        <PropertyRef Name="uid_fuente" />
+      </Principal>
+      <Dependent Role="tbl_mp_tipos">
+        <PropertyRef Name="uid_fuente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProcesarmailsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="documentos" EntityType="Self.documento" />
+    <EntitySet Name="estados" EntityType="Self.estado" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tbl_mp_automotoras" EntityType="Self.tbl_mp_automotoras" />
+    <EntitySet Name="tbl_mp_email" EntityType="Self.tbl_mp_email" />
+    <EntitySet Name="tbl_mp_fuentes" EntityType="Self.tbl_mp_fuentes" />
+    <EntitySet Name="tbl_mp_sitio" EntityType="Self.tbl_mp_sitio" />
+    <EntitySet Name="tbl_mp_tipos" EntityType="Self.tbl_mp_tipos" />
+    <AssociationSet Name="FK_tbl_mp_automotoras_tbl_mp_sitio" Association="Self.FK_tbl_mp_automotoras_tbl_mp_sitio">
+      <End Role="tbl_mp_sitio" EntitySet="tbl_mp_sitio" />
+      <End Role="tbl_mp_automotoras" EntitySet="tbl_mp_automotoras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_mp_fuentes_tbl_mp_sitio" Association="Self.FK_tbl_mp_fuentes_tbl_mp_sitio">
+      <End Role="tbl_mp_sitio" EntitySet="tbl_mp_sitio" />
+      <End Role="tbl_mp_fuentes" EntitySet="tbl_mp_fuentes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_mp_tipos_tbl_mp_fuentes" Association="Self.FK_tbl_mp_tipos_tbl_mp_fuentes">
+      <End Role="tbl_mp_fuentes" EntitySet="tbl_mp_fuentes" />
+      <End Role="tbl_mp_tipos" EntitySet="tbl_mp_tipos" />
+    </AssociationSet>
+    <FunctionImport Name="CargaSitio" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ProcesarmailsModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ProcesarmailsModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,6 @@
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsolePruebaConec\ConsolePruebaConec\bin\Debug\ConsolePruebaConec.exe.config
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsolePruebaConec\ConsolePruebaConec\bin\Debug\ConsolePruebaConec.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsolePruebaConec\ConsolePruebaConec\bin\Debug\ConsolePruebaConec.pdb
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsolePruebaConec\ConsolePruebaConec\obj\Debug\ConsolePruebaConec.csprojResolveAssemblyReference.cache
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsolePruebaConec\ConsolePruebaConec\obj\Debug\ConsolePruebaConec.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsolePruebaConec\ConsolePruebaConec\obj\Debug\ConsolePruebaConec.pdb

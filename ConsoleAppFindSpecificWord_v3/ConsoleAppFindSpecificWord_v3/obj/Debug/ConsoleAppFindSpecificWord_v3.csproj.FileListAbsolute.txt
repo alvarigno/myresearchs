@@ -1,0 +1,9 @@
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\bin\Debug\ConsoleAppFindSpecificWord_v3.exe.config
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\bin\Debug\ConsoleAppFindSpecificWord_v3.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\bin\Debug\ConsoleAppFindSpecificWord_v3.pdb
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\obj\Debug\ConsoleAppFindSpecificWord_v3.csprojResolveAssemblyReference.cache
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\obj\Debug\ConsoleAppFindSpecificWord_v3.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\obj\Debug\ConsoleAppFindSpecificWord_v3.pdb
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\research_resource\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\bin\Debug\ConsoleAppFindSpecificWord_v3.exe.config
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\research_resource\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\obj\Debug\ConsoleAppFindSpecificWord_v3.exe
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\research_resource\ConsoleAppFindSpecificWord_v3\ConsoleAppFindSpecificWord_v3\obj\Debug\ConsoleAppFindSpecificWord_v3.pdb

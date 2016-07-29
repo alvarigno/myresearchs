@@ -1,0 +1,120 @@
+Return-path: <info@chileautos.cl>
+Envelope-to: encoautos2@prospectos.cl
+Delivery-date: Mon, 04 Jul 2016 20:01:20 -0400
+Received: from send01.iia.cl ([200.6.104.136]:23530)
+	by cp01.chileautos.cl with esmtps (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.87)
+	(envelope-from <info@chileautos.cl>)
+	id 1bKDnc-0005Q9-Sx
+	for encoautos2@prospectos.cl; Mon, 04 Jul 2016 20:01:20 -0400
+Received: from [200.6.96.199] (helo=Chileautosw1n)
+	by send01.iia.cl with smtp (Exim 4.63)
+	(envelope-from <info@chileautos.cl>)
+	id 1bKDlV-0001Th-Pw
+	for encoautos2@prospectos.cl; Mon, 04 Jul 2016 19:58:36 -0400
+From: "Álvaro Emparán" <info@chileautos.cl>
+To: encoautos3@prospectos.cl
+Subject: Amazon Prime Day running smoothly, if mutedly
+Date: Mon, 04 Jul 2016 20:00:24 -0400
+Message-ID: <20160704-20002450-1bd4@Chileautosw1n>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--=49EC2D45F1994B3F9620_50BC_5FF2_6C79"
+X-Spam-Score: -201.8 (---------------------------------------------------)
+X-Spam-Report: (no report template found)
+X-Spam-Status: No, score=0.7
+X-Spam-Score: 7
+X-Spam-Bar: /
+X-Ham-Report: Spam detection software, running on the system "cp01.chileautos.cl",
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ root\@localhost for details.
+ 
+ Content preview:  
+    "As those of us on the East Coast are wrapping up lunchtime, we observe that 
+    Lightning Prime Day Deals, available for a set period of time, usually two 
+    to four hours, are selling out but not at a rate that they did last year," 
+    Chaudhury said.
+    Halfway through lunch, only one of 21 Spotlight deals has sold out, and that 
+    was the Samsung curved TV "which sold out just before noon," she said. 
+    Analysts also weren’t seeing a huge jump in sales compared with last year.
+    By 9:00 AM Pacific time, U.S. Prime Day sales were in line with Prime Day in 
+    2015, according to ChannelAdvisor, an e-commerce software company that works 
+    with approximately 3,000 online retailers including marketplaces like Amazon.
+
+    However, in the United Kingdom Prime Day sales were up 11% year over year as 
+    of 9:00 AM Seattle time. Prime Day is occurring in ten countries: the United 
+    States, the United Kingdom, Spain, Japan, Italy, Germany, France, Canada, 
+    Belgium, and Austria. It runs midnight to midnight Seattle time.
+
+    It’s possible higher numbers of sales will come later in the day and that 
+    those numbers could rise, said ChannelAdvisor executive chairman Scot Wingo.
+
+    "It looks like Amazon has spread out the deals more," he said.
+
+    Whether or not Prime Day makes a profit is somewhat beside the point, said 
+    Charlie O’Shea, lead retail analyst with Moody’s.
+
+    The real winner is Amazon, which will get more Prime members.
+
+    "As Amazon shifts more of its business strategy toward entertainment and 
+    digital content, Prime Day becomes a way to not only increase Prime membership 
+    but get more of those members to buy Amazon devices like the Echo or Kindle 
+    Fire and use them for exclusive Amazon content."
+
+    Glitch quickly fixed
+
+    A morning glitch kept some customers from being able to add items to their 
+    carts.
+
+    Amazon issued a brief statement on Twitter following those reports. Judging 
+    from the trickling off of complaints, the issue appears to be dealt with. 
+    Still, the tech problems resulted in a few missed Prime Day deals. [...] 
+ 
+ Content analysis details:   (0.7 points, 5.0 required)
+ 
+  pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+                             See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [URIs: prospectos.cl]
+ -1.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+  1.1 MIME_HTML_ONLY         BODY: Message only has text/html MIME parts
+  0.0 HTML_MESSAGE           BODY: HTML included in message
+  0.6 HTML_MIME_NO_HTML_TAG  HTML-only message, but there is no HTML tag
+X-Spam-Flag: NO
+
+----=49EC2D45F1994B3F9620_50BC_5FF2_6C79
+Content-Type: text/html;charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+“As those of us on the East Coast are wrapping up lunchtime, we observe that Lightning Prime Day Deals, available for a set period of time, usually two to four hours, are selling out but not at a rate that they did last year,” Chaudhury said.
+
+Halfway through lunch, only one of 21 Spotlight deals has sold out, and that was the Samsung curved TV "which sold out just before noon,” she said.
+
+Analysts also weren’t seeing a huge jump in sales compared with last year.
+
+By 9:00 AM Pacific time, U.S. Prime Day sales were in line with Prime Day in 2015, according to ChannelAdvisor, an e-commerce software company that works with approximately 3,000 online retailers including marketplaces like Amazon.
+
+However, in the United Kingdom Prime Day sales were up 11% year over year as of 9:00 AM Seattle time. Prime Day is occurring in ten countries: the United States, the United Kingdom, Spain, Japan, Italy, Germany, France, Canada, Belgium, and Austria. It runs midnight to midnight Seattle time.
+
+It’s possible higher numbers of sales will come later in the day and that those numbers could rise, said ChannelAdvisor executive chairman Scot Wingo.
+
+"It looks like Amazon has spread out the deals more,” he said.
+
+Whether or not Prime Day makes a profit is somewhat beside the point, said Charlie O’Shea, lead retail analyst with Moody’s.
+
+The real winner is Amazon, which will get more Prime members.
+
+“As Amazon shifts more of its business strategy toward entertainment and digital content, Prime Day becomes a way to not only increase Prime membership but get more of those members to buy Amazon devices like the Echo or Kindle Fire and use them for exclusive Amazon content.”
+
+Glitch quickly fixed
+
+A morning glitch kept some customers from being able to add items to their carts.
+
+Amazon issued a brief statement on Twitter following those reports. Judging from the trickling off of complaints, the issue appears to be dealt with. Still, the tech problems resulted in a few missed Prime Day deals.
+
+----=49EC2D45F1994B3F9620_50BC_5FF2_6C79--

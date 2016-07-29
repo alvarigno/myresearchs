@@ -1,0 +1,9 @@
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\bin\Release\FileWatcherDemo.exe
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\bin\Release\FileWatcherDemo.pdb
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\obj\Release\FileWatcherDemo.csprojResolveAssemblyReference.cache
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\obj\Release\FileWatcherDemo.Form1.resources
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\obj\Release\FileWatcherDemo.Form1Ex.resources
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\obj\Release\FileWatcherDemo.Properties.Resources.resources
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\obj\Release\FileWatcherDemo.csproj.GenerateResource.Cache
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\obj\Release\FileWatcherDemo.exe
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\MonitoringFolderChange\FileWatcherDemo\FileWatcherDemo\obj\Release\FileWatcherDemo.pdb

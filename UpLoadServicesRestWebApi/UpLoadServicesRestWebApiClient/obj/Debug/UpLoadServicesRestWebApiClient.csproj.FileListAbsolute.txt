@@ -1,0 +1,1 @@
+c:\users\álvaro\documents\visual studio 2015\Projects\UpLoadServicesRestWebApi\UpLoadServicesRestWebApiClient\obj\Debug\UpLoadServicesRestWebApiClient.csprojResolveAssemblyReference.cache

@@ -1,0 +1,7 @@
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\FileSystem_Watcher\C#\bin\Debug\DirectoryMonitorWinForm.exe
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\FileSystem_Watcher\C#\bin\Debug\DirectoryMonitorWinForm.pdb
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\FileSystem_Watcher\C#\obj\Debug\DirectoryMonitorWinForm.csprojResolveAssemblyReference.cache
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\FileSystem_Watcher\C#\obj\Debug\DirectoryMonitorWinForm.DirectoryMonitorForm.resources
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\FileSystem_Watcher\C#\obj\Debug\DirectoryMonitorWinForm.csproj.GenerateResource.Cache
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\FileSystem_Watcher\C#\obj\Debug\DirectoryMonitorWinForm.exe
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\FileSystem_Watcher\C#\obj\Debug\DirectoryMonitorWinForm.pdb

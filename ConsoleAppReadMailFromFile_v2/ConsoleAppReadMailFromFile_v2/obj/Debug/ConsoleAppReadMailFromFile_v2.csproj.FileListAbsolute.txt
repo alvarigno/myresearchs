@@ -1,0 +1,9 @@
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\bin\Debug\ConsoleAppReadMailFromFile_v2.exe.config
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\obj\Debug\ConsoleAppReadMailFromFile_v2.csprojResolveAssemblyReference.cache
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\bin\Debug\ConsoleAppReadMailFromFile_v2.exe
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\bin\Debug\ConsoleAppReadMailFromFile_v2.pdb
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\bin\Debug\BouncyCastle.Crypto.dll
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\bin\Debug\MimeKit.dll
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\bin\Debug\MimeKit.xml
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\obj\Debug\ConsoleAppReadMailFromFile_v2.exe
+c:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadMailFromFile_v2\ConsoleAppReadMailFromFile_v2\obj\Debug\ConsoleAppReadMailFromFile_v2.pdb

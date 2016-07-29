@@ -1,0 +1,6 @@
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppDetectChangeOnFolder\ConsoleAppDetectChangeOnFolder\bin\Debug\ConsoleAppDetectChangeOnFolder.exe.config
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppDetectChangeOnFolder\ConsoleAppDetectChangeOnFolder\bin\Debug\ConsoleAppDetectChangeOnFolder.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppDetectChangeOnFolder\ConsoleAppDetectChangeOnFolder\bin\Debug\ConsoleAppDetectChangeOnFolder.pdb
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppDetectChangeOnFolder\ConsoleAppDetectChangeOnFolder\obj\Debug\ConsoleAppDetectChangeOnFolder.csprojResolveAssemblyReference.cache
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppDetectChangeOnFolder\ConsoleAppDetectChangeOnFolder\obj\Debug\ConsoleAppDetectChangeOnFolder.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppDetectChangeOnFolder\ConsoleAppDetectChangeOnFolder\obj\Debug\ConsoleAppDetectChangeOnFolder.pdb
