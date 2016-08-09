@@ -1,0 +1,62 @@
+From info@chileautos.cl Wed Jul 27 15:09:10 2016
+Received: from send02.iia.cl ([200.6.104.137]:46851)
+	by cp01.chileautos.cl with esmtps (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.87)
+	(envelope-from <info@chileautos.cl>)
+	id 1bSUCV-0004uQ-Jt
+	for encoautos2@prospectos.cl; Wed, 27 Jul 2016 15:09:10 -0400
+Received: from [200.6.96.199] (helo=Chileautosw1n)
+	by send02.iia.cl with smtp (Exim 4.63)
+	(envelope-from <info@chileautos.cl>)
+	id 1bSUBn-0000eN-0l
+	for encoautos2@prospectos.cl; Wed, 27 Jul 2016 15:07:53 -0400
+From: "Prueba" <info@chileautos.cl>
+To: encoautos2@prospectos.cl
+Subject: pregunta para encoautos2@prospectos.cl
+Date: Wed, 27 Jul 2016 15:08:22 -0400
+Message-ID: <20160727-15082265-1dac@Chileautosw1n>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--=0A331C3354F840D4B63D_4A22_5E4F_D15D"
+X-Spam-Score: -201.8 (---------------------------------------------------)
+X-Spam-Report: (no report template found)
+X-Spam-Status: No, score=0.7
+X-Spam-Score: 7
+X-Spam-Bar: /
+X-Ham-Report: Spam detection software, running on the system "cp01.chileautos.cl",
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ root\@localhost for details.
+ 
+ Content preview:  Hola Rivera Automotriz, Te hicieron una pregunta en Dodge
+   Ram 2500 2006 Quad Cab Slt Sport 4x4: 120? Estos son los datos del interesado:
+    [...] 
+ 
+ Content analysis details:   (0.7 points, 5.0 required)
+ 
+  pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+                             See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [URIs: prospectos.cl]
+ -1.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+  1.1 MIME_HTML_ONLY         BODY: Message only has text/html MIME parts
+  0.0 HTML_MESSAGE           BODY: HTML included in message
+  0.6 HTML_MIME_NO_HTML_TAG  HTML-only message, but there is no HTML tag
+X-Spam-Flag: NO
+
+----=0A331C3354F840D4B63D_4A22_5E4F_D15D
+Content-Type: text/html;charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hola Rivera Automotriz,<br><br>Te hicieron una pregunta en Dodge Ram 25=
+00 2006 Quad Cab Slt Sport 4x4:<br><br><br>120?<br>Estos son los datos =
+del interesado:<br><br>Nombre: ROBERTO<br><br>E-mail: alienencounter@gm=
+ail.com<br><br>Tel=E9fono: 4771650009<br><br><br><br><br><br>Responder<=
+br><br><br><br><br><br>=A1=C9xitos!<br><br>El equipo de MercadoLibre
+
+----=0A331C3354F840D4B63D_4A22_5E4F_D15D--
+

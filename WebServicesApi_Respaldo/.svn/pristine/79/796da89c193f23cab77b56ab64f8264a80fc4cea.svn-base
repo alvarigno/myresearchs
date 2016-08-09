@@ -1,0 +1,418 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ParsearEmails_WebAPI.Models
+{
+    public class DatosEmail
+    {
+        public int UidEmail { get; set; }
+        public string Contenido { get; set; }
+        public string TipoCampo { get; set; }
+        public string Nombre { get; set; }
+        public bool ReglaAplicada { get; set; }
+
+        public enum EstadoEmail : int
+        {
+            Parseado = 1,
+            NoParseado = 2,
+            Check = 3,
+            EnCola = 4,
+            EnProceso = 5
+        }
+
+        public enum OpcionRegla : int
+        {
+            TextMatchAfter = 1,
+            TextMatchBefore = 2,
+            AfterXLine = 3,
+            AfterXCharacters = 4,
+            AfterXWords = 5,
+            SearchAndReplace = 6,
+            BeforeXLine = 7
+        };
+
+        public void AplicarReglas(AccionDelimitador regla, ref string cuerpoEmail, ref string[] bodyEmail, ref int position1, ref int position2, ref string nomRegla, ref int vienesDe,
+                                ref bool reglaAplicada, ref int buscarEnLinea, ref int iFilaInicial)
+        {
+            int start = 0;
+            const int SIN_COINCIDENCIA = -1;
+            int iFila = 0;
+            //Array con cada una de las palabras en una línea
+            string[] strPalabrasEnLinea = new string[] { };
+            int ctaPalabras = 0;
+
+
+            switch (regla.Accion)
+            {
+                //dentro del if
+                case (int)OpcionRegla.TextMatchAfter:
+                    //Busco entre las filas, donde está texto delimitador
+                    foreach (var fila in bodyEmail)
+                    {
+                        position1 = fila.IndexOf(regla.Delimitador, start, StringComparison.Ordinal);
+                        if (position1 != SIN_COINCIDENCIA)
+                        {
+                            buscarEnLinea = iFila;
+                            break;
+                        }
+                        iFila++;
+                    }
+
+                    // Delimitador no existe
+                    if (position1 == SIN_COINCIDENCIA)
+                    {
+                        reglaAplicada = false;
+                    }
+                    else
+                    {
+                        position1 += regla.Delimitador.Length + 1;
+                        reglaAplicada = true;
+                    }
+                    break;
+
+                case (int)OpcionRegla.TextMatchBefore:
+                    if (position1 != SIN_COINCIDENCIA)
+                    {
+                        if (regla.Delimitador == "")
+                        {
+                            position2 = bodyEmail[buscarEnLinea].Length;
+                        }
+                        else
+                        {
+                            //Averiguo posición y fila del delimitador
+                            foreach (var fila in bodyEmail)
+                            {
+                                position2 = fila.IndexOf(regla.Delimitador, start, StringComparison.Ordinal);
+                                if (position2 != SIN_COINCIDENCIA)
+                                {
+                                    buscarEnLinea = iFila;
+                                    break;
+                                }
+                                iFila++;
+                            }
+                        }
+                    }
+                    break;
+
+                case (int)OpcionRegla.AfterXLine:
+                    cuerpoEmail = "";
+                    buscarEnLinea = int.Parse(regla.Delimitador);
+                    iFilaInicial = buscarEnLinea;
+                    //Cortamos el mensaje, desde la línea seleccionada hasta el final
+                    for (int i = buscarEnLinea; i < bodyEmail.Length; i++)
+                    {
+                        cuerpoEmail += bodyEmail[i] + "\r\n";
+                    }
+                    bodyEmail = Regex.Split(cuerpoEmail, "\r\n");
+                    vienesDe = (int)OpcionRegla.AfterXLine;
+                    buscarEnLinea = 0;
+                    position1 = 0;
+                    break;
+
+                case (int)OpcionRegla.AfterXCharacters:
+                    position1 = int.Parse(regla.Delimitador);
+                    cuerpoEmail = bodyEmail[buscarEnLinea].Substring(position1);
+                    bodyEmail = Regex.Split(cuerpoEmail, "\r\n");
+                    position1 = 0;
+                    break;
+
+                case (int)OpcionRegla.AfterXWords:
+                    cuerpoEmail = "";
+
+                    if ((buscarEnLinea == SIN_COINCIDENCIA) || (buscarEnLinea == 0))
+                    {
+                        //Cuento las palabras por cada línea del texto
+                        for (int i = 0; i < bodyEmail.Length; i++)
+                        {
+                            if (bodyEmail[i].Trim() != "")
+                            {
+                                strPalabrasEnLinea = bodyEmail[i].Split(' ');
+                                buscarEnLinea = i;
+
+                                //Verifico si sobrepasé la cantidad de palabras en la línea en revisión
+                                if (ctaPalabras + strPalabrasEnLinea.Length > int.Parse(regla.Delimitador))
+                                {
+                                    int pos = 0;
+                                    string strNuevaLinea = "";
+
+                                    while (int.Parse(regla.Delimitador) != ctaPalabras)
+                                    {
+                                        strNuevaLinea = "";
+                                        ctaPalabras++;
+                                        //pos++;
+                                        for (int z = 1; z < strPalabrasEnLinea.Length; z++)
+                                        {
+                                            strNuevaLinea += strPalabrasEnLinea[z] + ' ';
+                                        }
+                                        bodyEmail[i] = strNuevaLinea;
+                                        strPalabrasEnLinea = bodyEmail[i].Split(' ');
+                                        if (int.Parse(regla.Delimitador) == ctaPalabras) break;
+                                    }
+                                }
+                                else
+                                {
+                                    ctaPalabras += strPalabrasEnLinea.Length;
+                                }
+                                if (int.Parse(regla.Delimitador) == ctaPalabras) break;
+                            }
+                            else buscarEnLinea = i;
+                        }
+
+                        //Salto aquellas líneas que no contienen texto después de la cantidad de palabras, 
+                        //hasta encontrar la primera línea con palabras
+                        //if (vienesDe != (int) OpcionRegla.BeforeXLine)
+                        //{
+                        //    for (int i = buscarEnLinea + 1; i < bodyEmail.Length; i++)
+                        //    {
+                        //        if (bodyEmail[i].Trim() != "")
+                        //        {
+                        //            buscarEnLinea = i;
+                        //            break;
+                        //        }
+                        //    }
+                        //}
+                        
+
+                        //Armo de nuevo el cuerpo del email, después de la cantidad de palabras seleccionadas
+                        for (int i = buscarEnLinea; i < bodyEmail.Length; i++)
+                        {
+                            cuerpoEmail += bodyEmail[i] + "\r\n";
+                        }
+                    }
+                    vienesDe = (int)OpcionRegla.AfterXWords;
+
+                    break;
+
+                case (int)OpcionRegla.SearchAndReplace:
+                    break;
+
+                case (int)OpcionRegla.BeforeXLine:
+                    //Cortamos el mensaje, hasta la línea seleccionada
+                    if (vienesDe == (int)OpcionRegla.AfterXLine)
+                    {
+                        cuerpoEmail = "";
+                        for (int i = buscarEnLinea; i < int.Parse(regla.Delimitador) - (iFilaInicial + 1); i++)
+                        {
+
+                            cuerpoEmail += bodyEmail[i] + "\r\n";
+                        }
+                        bodyEmail = Regex.Split(cuerpoEmail, "\r\n");
+
+                    }
+                    vienesDe = (int)OpcionRegla.BeforeXLine;
+                    break;
+
+            }
+            nomRegla = regla.Nombre;
+        }
+
+        public void CambioEstadoEmail(int uidEmail, int uidEstado, SqlConnection cnx)
+        {
+            //cambio el estado del email en tbl_mp_email
+            SqlCommand cmdUpdateEstadoEmail = new SqlCommand("SP_UpdateEstadoEmail", cnx)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure
+            };
+            // Añado el parametro de entrada @uidEmail establecido en SQL Server
+            SqlParameter p1 = new SqlParameter("@uidEmail", uidEmail)
+            {
+                Direction = System.Data.ParameterDirection.Input
+            };
+            cmdUpdateEstadoEmail.Parameters.Add(p1);
+
+            //Añado el segundo parámetro @uidEstado
+            SqlParameter p2 = new SqlParameter("@uidEstado", uidEstado)
+            {
+                Direction = System.Data.ParameterDirection.Input
+            };
+            cmdUpdateEstadoEmail.Parameters.Add(p2);
+
+            cmdUpdateEstadoEmail.ExecuteNonQuery();
+        }
+
+        public List<DatosEmail> Parsear(List<AccionDelimitador> lpasos, string cuerpoEmail, int uidEmail, SqlConnection cnx)
+        {
+            const int SIN_COINCIDENCIA = -1;
+
+            string nomRegla = "";
+
+            // posiciones de inicio y término para realizar la extracción 
+            int position1 = 0, position2 = 0;
+
+            //Me indica desde qué acción previa viene. Estas están en enum OpcionRegla
+            int vienesDe = 0;
+
+            // En qué línea realizar la búsqueda
+            int buscarEnLinea = -1;
+
+
+            bool reglaAplicada = true;
+            int start = 0;
+
+            //Aquí se guardarán los valores que se almacenarán en la tabla tbl_mp_datosEmail
+            List<DatosEmail> lDatosEmails = new List<DatosEmail>();
+
+            //Mantengo la fila de la regla AfterXLine
+            int iFilaInicial = 0;
+
+            //Un array con el contenido del email
+            string[] bodyEmail = Regex.Split(cuerpoEmail, "\r\n");
+
+            string strMensaje = cuerpoEmail;
+
+            //Cambio el estado de email en tbl_mp_email, mientras se intenta parsear
+            CambioEstadoEmail(uidEmail, (int)EstadoEmail.EnProceso, cnx);
+
+
+
+
+            foreach (var regla in lpasos)
+            {
+
+                if ((nomRegla == regla.Nombre) || (nomRegla == ""))
+                {
+                    AplicarReglas(regla, ref cuerpoEmail, ref bodyEmail, ref position1, ref position2, ref nomRegla, ref vienesDe,
+                        ref reglaAplicada, ref buscarEnLinea, ref iFilaInicial);
+                }
+                else
+                {
+                    // dentro del foreach
+
+                    if ((position1 == SIN_COINCIDENCIA) || (position2 == SIN_COINCIDENCIA))
+                    {
+                        // Insertar en objeto lDatosEmail
+                        lDatosEmails.Add(new DatosEmail()
+                        {
+                            UidEmail = uidEmail,
+                            Nombre = nomRegla,
+                            Contenido = "-",
+                            TipoCampo = "-",
+                            ReglaAplicada = false
+                        });
+
+                        vienesDe = 0;
+                        buscarEnLinea = 0;
+                        position1 = 0;
+                    }
+                    else
+                    {
+                        string strContenido = "";
+
+                        strContenido = bodyEmail[buscarEnLinea].Substring(position1, position2 - position1);
+                        if (strContenido.Trim() == "")
+                        {
+                            reglaAplicada = false;
+                        }
+                        else
+                        {
+                            reglaAplicada = true;
+
+                            if (strContenido.ToLower() == strContenido.ToUpper())
+                            {
+                                try
+                                {
+                                    reglaAplicada = int.Parse(strContenido) != 0;
+                                }
+                                catch (FormatException)
+                                {
+
+                                    reglaAplicada = strContenido.IndexOf("$", start, StringComparison.Ordinal) != SIN_COINCIDENCIA;
+                                }
+
+                            }
+                        }
+
+
+                        // Insertar en objeto lDatosEmail
+                        lDatosEmails.Add(new DatosEmail()
+                        {
+                            UidEmail = uidEmail,
+                            Nombre = nomRegla,
+                            Contenido = strContenido,
+                            TipoCampo = "-",
+                            ReglaAplicada = reglaAplicada
+                        });
+                        vienesDe = 0;
+                        buscarEnLinea = 0;
+                        position1 = 0;
+                    }
+
+                    //Recupero el texto del mensaje original, al cambiar de regla
+                    cuerpoEmail = strMensaje;
+                    bodyEmail = Regex.Split(cuerpoEmail, "\r\n");
+
+                    AplicarReglas(regla, ref cuerpoEmail, ref bodyEmail, ref position1, ref position2, ref nomRegla, ref vienesDe, ref reglaAplicada, ref buscarEnLinea,
+                         ref iFilaInicial);
+
+                }
+            } // fin del  foreach
+
+            if ((position1 == SIN_COINCIDENCIA) || (position2 == SIN_COINCIDENCIA))
+            {
+                // Insertar en objeto lDatosEmail
+                lDatosEmails.Add(new DatosEmail()
+                {
+                    UidEmail = uidEmail,
+                    Nombre = nomRegla,
+                    Contenido = "-",
+                    TipoCampo = "-",
+                    ReglaAplicada = false
+                });
+
+            }
+            else
+            {
+                string strContenido = "";
+
+                strContenido = bodyEmail[buscarEnLinea].Substring(position1, position2 - position1);
+
+                if (strContenido.Trim() == "")
+                {
+                    reglaAplicada = false;
+                }
+                else
+                {
+                    reglaAplicada = true;
+
+                    if (strContenido.ToLower() == strContenido.ToUpper())
+                    {
+                        try
+                        {
+                            reglaAplicada = int.Parse(strContenido) != 0;
+                        }
+                        catch (FormatException)
+                        {
+                            reglaAplicada = strContenido.IndexOf("$", start, StringComparison.Ordinal) != SIN_COINCIDENCIA;
+                        }
+
+                    }
+                }
+
+                // Insertar en objeto lDatosEmail
+                lDatosEmails.Add(new DatosEmail()
+                {
+                    UidEmail = uidEmail,
+                    Nombre = nomRegla,
+                    Contenido = strContenido,
+                    TipoCampo = "-",
+                    ReglaAplicada = reglaAplicada
+                });
+
+            }
+
+            int ctaReglasNoAplicadas = lDatosEmails.Count(item => item.ReglaAplicada == false);
+            if (ctaReglasNoAplicadas >= 1)
+                CambioEstadoEmail(uidEmail, (int)EstadoEmail.Check, cnx);
+            else
+            {
+                CambioEstadoEmail(uidEmail, (int)EstadoEmail.Parseado, cnx);
+            }
+            return lDatosEmails;
+        }
+    }
+}

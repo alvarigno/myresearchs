@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA7SBWl3UW40GGMVyAc0JXgAAAAAACAAAAAAAQZgAAAAEAACAAAACAakHhiZDzuALTxLo+0oT8flE8EvUAFyORkgrt0CwtvgAAAAAOgAAAAAIAACAAAABYu6wqFNwywh7vZPFzVuOX90rusZJSAaRhP/prYD6uZDAAAABg8G71HlP7dvQ3rGexKLNmM6Zo/0eJ/IWU6Hzt0R/+Kqv8rK3JPRhBIDYUZbLn1PFAAAAAZhUUcs4KQf542UhsEW4MSH7IwHA7xhLpcOdMpDLduYRnyfQjuG4YBMVpceYOhY/qEkEo/H4eox+GEIgsJJCNsw==</EncryptedPassword>
+    <_PublishTargetUrl>ftp://200.6.96.204/desarrollofotos/mpcorreos</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/ApplicationInsights.config">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/EAGetMail45.dll">
+      <publishTime>06/29/2016 13:51:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 02:06:24</publishTime>
+    </File>
+    <File Include="bin/MimeKit.dll">
+      <publishTime>07/17/2016 08:04:30</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/03/2014 20:33:56</publishTime>
+    </File>
+    <File Include="bin/ParsearEmails_WebAPI.dll">
+      <publishTime>08/08/2016 19:05:49</publishTime>
+    </File>
+    <File Include="bin/ParsearEmails_WebAPI.pdb">
+      <publishTime>08/08/2016 19:05:49</publishTime>
+    </File>
+    <File Include="bin/ProcesaDocumentos.dll">
+      <publishTime>08/08/2016 19:05:45</publishTime>
+    </File>
+    <File Include="bin/ProcesaDocumentos.pdb">
+      <publishTime>08/08/2016 19:05:45</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>01/28/2015 04:02:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>01/28/2015 04:02:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>01/28/2015 04:03:46</publishTime>
+    </File>
+    <File Include="bin/UpLoadServicesRestWebApiModel.dll">
+      <publishTime>08/08/2016 19:05:44</publishTime>
+    </File>
+    <File Include="bin/UpLoadServicesRestWebApiModel.pdb">
+      <publishTime>08/08/2016 19:05:44</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>07/26/2016 16:35:39</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/26/2016 16:35:39</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/08/2016 19:05:54</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

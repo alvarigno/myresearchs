@@ -1,0 +1,219 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web.Http;
+using ParsearEmails_WebAPI.Models;
+
+namespace ParsearEmails_WebAPI.Controllers
+{
+    public class ParsearController : ApiController
+    {
+        private static SqlConnection _cnx;
+
+        
+
+        
+
+        // POST: api/Parsear
+        public string Post()
+        {
+            string strMensaje = "";
+
+            try
+            {
+                strMensaje += "'Conexión':'Conectándose a la base de datos...',";
+                ConexionSql con = new ConexionSql();
+                _cnx = con.Conexion();
+                SqlConnection.ClearAllPools();
+                con.Abrir();
+
+                strMensaje += "'Conexion':'Conexión...OK',";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+            //Creamos el comando de tipo StoredProcedure
+            SqlCommand cmd = new SqlCommand("SP_GetEmailsSinParsear", _cnx)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            //Ejecutamos el comando
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            // crea la lista del tipo MailSinParsearModel
+            List<MailsSinParsearModel> listaEmails = new List<MailsSinParsearModel>();
+            while (reader.Read())
+            {
+                listaEmails.Add(new MailsSinParsearModel
+                {
+                    uid_automotora = int.Parse(reader["uid_automotora"].ToString()),
+                    uid_email = int.Parse(reader["uid_email"].ToString()),
+                    uid_estado = int.Parse(reader["uid_estado"].ToString()),
+                    uid_tipo = int.Parse(reader["uid_tipo"].ToString()),
+                    uid_fuente = int.Parse(reader["uid_fuente"].ToString()),
+                    asunto = reader["asunto"].ToString(),
+                    cabecera = reader["cabecera"].ToString(),
+                    cc = reader["cc"].ToString(),
+                    destinatarios = reader["destinatarios"].ToString(),
+                    email = reader["email"].ToString(),
+                    remitente = reader["remitente"].ToString(),
+                });
+            }
+            reader.Close(); 
+            _cnx.Close();
+
+            // determina tipo "correcto"
+            Condicion condicion = new Condicion();
+            listaEmails = condicion.getTipo(listaEmails);
+
+            //Retornó filas?, entonces leemos con Read()
+            if (listaEmails.Count > 0)
+            {
+                int uidTipo = 0;
+                int uidEmail = 0;
+                int Procesados = 0;
+                int Parseados = 0;
+                int ConObservacion = 0;
+                bool bProcesar = false;
+                List<DatosEmail> lDatosEmails = new List<DatosEmail>();
+
+                List<AccionDelimitador> lpasos = new List<AccionDelimitador>();
+                string CuerpoEmail = "";
+
+                DatosEmail metodo = new DatosEmail();
+
+                foreach (var itemEmail in listaEmails)
+                {
+                    if (uidTipo != itemEmail.uid_tipo)
+                    {
+                        uidTipo = itemEmail.uid_tipo;
+                        uidEmail = itemEmail.uid_email;
+
+                        try
+                        {
+                            ConexionSql con = new ConexionSql();
+                            _cnx = con.Conexion();
+                            con.Abrir();
+                        }
+                        catch (Exception e)
+                        {
+                            return e.Message;
+                        }
+
+
+                        /***************************************************************** 
+                                Obtengo las reglas asociadas al tipo
+                         ******************************************************************
+                        */
+                        SqlCommand cmdReglas = new SqlCommand("SP_GetReglasTipo", _cnx)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        };
+                        // Añado el parametro de entrada @uidTipo establecido en SQL Server
+                        SqlParameter p1 = new SqlParameter("@uidTipo", uidTipo)
+                        {
+                            Direction = ParameterDirection.Input
+                        };
+                        cmdReglas.Parameters.Add(p1);
+
+                        SqlDataReader rdReglas = cmdReglas.ExecuteReader();
+
+                        // ¿Existen filas?
+                        if (!rdReglas.HasRows)
+                        {
+                            lpasos.Clear();
+                            bProcesar = false;
+                            continue;
+                        }
+                        bProcesar = true;
+
+                        List<AccionDelimitador> opciones = new List<AccionDelimitador>();
+                        while (rdReglas.Read())
+                        {
+                            string[] opcContenido = rdReglas[2].ToString().Split(Convert.ToChar(">"));
+                            opciones.Add(new AccionDelimitador()
+                            {
+                                Accion = (int)rdReglas[3],
+                                Delimitador = opcContenido[1],
+                                Nombre = rdReglas[1].ToString()
+                            }
+                            );
+                        }
+
+                        rdReglas.Close(); 
+                        _cnx.Close();
+
+                        lpasos = opciones;
+                    }
+                    /*
+                     *  Aplico las reglas
+                     *  Extraigo los contenidos
+                     *  Copia en la tabla tbl_mp_datosEmail
+                     */
+                    if (bProcesar)
+                    {
+                        uidEmail = itemEmail.uid_email;
+                        CuerpoEmail = itemEmail.email;
+                        try
+                        {
+                            ConexionSql con = new ConexionSql();
+                            _cnx = con.Conexion();
+                            con.Abrir();
+                        }
+                        catch (Exception e)
+                        {
+                            return e.Message;
+                        }
+
+
+                        /* Se aplican las reglas definidas
+                         * y se extraen los contenidos
+                        */
+                        lDatosEmails = metodo.Parsear(lpasos, CuerpoEmail, uidEmail);
+
+                        string strCadenaParseada = lDatosEmails.Aggregate("", (current, regDatos) => current + (regDatos.UidEmail + "~" + regDatos.Contenido + "~" + regDatos.TipoCampo + "~" + regDatos.Nombre + "¬"));
+
+                        
+                        /****************************************************************
+                         * Paso cadena parseada a procedimiento
+                         ****************************************************************/
+                        SqlCommand cmdDatosEmail = new SqlCommand("SP_AddDatosEmail", _cnx)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        };
+                        // Añado el parametro de entrada @DatosEmail establecido en SQL Server
+                        SqlParameter cadParseada = new SqlParameter("@DatosEmail", strCadenaParseada)
+                        {
+                            Direction = ParameterDirection.Input
+                        };
+                        cmdDatosEmail.Parameters.Add(cadParseada);
+
+                        cmdDatosEmail.ExecuteNonQuery();
+                        Procesados++;
+                        int ReglasOK = 0;
+                        foreach (var resultado in lDatosEmails)
+                        {
+                            if (resultado.ReglaAplicada) ReglasOK++;
+                        }
+                        if (ReglasOK == lDatosEmails.Count)
+                            Parseados++;
+                        else
+                            ConObservacion++;
+                    }
+                }
+                strMensaje += "'Procesados':'" + Procesados + " emails','Parseados':'"+Parseados+"','Con observación':'"+ ConObservacion+"'";
+            }
+            else
+            {
+                strMensaje +="'Correos para parsear':'El procedimiento no retorno ninguna fila'";
+            }
+            return strMensaje;
+        }
+    }
+}
+
