@@ -5,11 +5,12 @@ using System.Text;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.IO;
-using EAGetMail;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Data;
+using MimeKit;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 
 namespace ConsoleAppReadFile
 {
@@ -18,8 +19,9 @@ namespace ConsoleAppReadFile
 
         myConnection myConn = new myConnection();
 
+        public static string pruebadato;
         public static int count = 0;
-        public static string mailbox;
+        public static string PosicionDocumento;
         public static String DatoContenidoMailPlain;
         public static String DatoContenidoMailHtml;
         public static int IdEmailParse;
@@ -27,7 +29,7 @@ namespace ConsoleAppReadFile
         public static string format = "yyyy-MM-dd HH:MM:ss";
         public static DateTime DatoFechaFromate;
         public static String DatoAsuntoMail;
-        public static String DatoHeaderMail;
+        public static String DatoHeaderMail = "";
         public static String[] DatoDestinatariosMail = new string[100];
         public static string DataDestinatariosString;
         public static String[] DatoCcMail = new string[100];
@@ -47,74 +49,58 @@ namespace ConsoleAppReadFile
         public static int DataUidAutomotora;
 
 
-        private static void ParseEmail(string emlFile)
+        public static void ParseEmail(string emlFile)
         {
 
-            Mail oMail = new Mail("TryIt");
-            
-            oMail.Load(emlFile, false);
+            var mimeMessage = MimeMessage.Load(emlFile);
 
-            // Parse Header Mail
-            DatoHeaderMail = oMail.Headers.ToString();
-            DatoHeaderMail = DatoHeaderMail.Replace("'", "\'");
-            //Console.WriteLine("Header: {0}", oMail.Headers.ToString());
+            var header = mimeMessage.Headers;
+
+            var mailto = mimeMessage.To;
+            var mailfrom = mimeMessage.From;
+            var mailcc = mimeMessage.Cc;
+            var mailsubject = mimeMessage.Subject;
+            DateTime maildate = mimeMessage.Date.UtcDateTime;
+            var mailplainbody = mimeMessage.TextBody;
+            var mailhtmlbody = mimeMessage.HtmlBody;
+
+            for (int i = 0; i < header.Count; i++)
+            {
+
+                string datoslocales;
+                datoslocales = header[i].ToString() + "\r\n";
+                DatoHeaderMail = DatoHeaderMail + datoslocales;
+
+            }
+
 
             // Parse Mail From, Sender
-            DatoRemitenteMail = oMail.From.ToString();
+            DatoRemitenteMail = mailfrom.ToString();
             //Console.WriteLine("From: {0}", oMail.From.ToString());
 
             //Date
-            DatoFechaMail = oMail.SentDate.ToString();
-
-            DatoFechaFromate = oMail.SentDate;
-
-            //DatoFechaFromate = DateTime.Parse(DatoFechaMail, culture, System.Globalization.DateTimeStyles.AssumeLocal);
-            //DatoFechaFromate = Convert.ToDateTime(DatoFechaMail);
-
-            //            string format = "yyyy-dd-MM HH:MM:ss";
-            //            DatoFechaFromate.ToString(format);
-
+            DatoFechaFromate = maildate;
             //Console.WriteLine("Date: {0}"+ DatoFechaFromate);
 
             // Parse Mail To, Recipient
-            EAGetMail.MailAddress[] addrs = oMail.To;
-            DatoDestinatariosMail = new string[addrs.Length]; 
-            for (int i = 0; i < addrs.Length; i++)
-            {
-                DatoDestinatariosMail[i] = addrs[i].ToString();
-            }
-            if (addrs.Length > 0)
-            {
-                DataDestinatariosString = DatoDestinatariosMail.Aggregate((a, b) => Convert.ToString(a) + "," + Convert.ToString(b));
-            }
+            DataDestinatariosString = mailto.ToString();
             //Console.WriteLine("Destinatarios To: " + DataDestinatariosString);
 
             // Parse Mail CC
-            EAGetMail.MailAddress[] addrs2 = oMail.Cc;
-            DatoCcMail = new string[addrs2.Length];
-            for (int i = 0; i < addrs2.Length; i++)
-            {
-                DatoCcMail[i] = addrs2[i].ToString();
-            }
-            if (addrs2.Length > 0)
-            {
-                DataCcString = DatoCcMail.Aggregate((c, d) => Convert.ToString(c) + "," + Convert.ToString(d));
-            }else { DataCcString = "vacio"; }
+
+            DataCcString = mailcc.ToString();
             //Console.WriteLine("Destinatarios Cc: " + DataCcString); 
 
             // Parse Mail Subject
-            String personalprueba = oMail.Subject;
-            personalprueba =  oMail.Subject;
-            personalprueba = personalprueba.Replace("(Trial Version)", "");
-            DatoAsuntoMail = personalprueba.ToString();
+            DatoAsuntoMail = mailsubject;
             //Console.WriteLine("Subject: "+ personalprueba);
 
             // Parse Mail Text/Plain body
-            DatoContenidoMailPlain = oMail.TextBody.ToString();
+            DatoContenidoMailPlain = mailplainbody;
             //Console.WriteLine("TextBody: {0}", oMail.TextBody);
 
             // Parse Mail Html Body
-            DatoContenidoMailHtml = oMail.HtmlBody.ToString();
+            DatoContenidoMailHtml = mailhtmlbody;
             //Console.WriteLine("HtmlBody: {0}", oMail.HtmlBody);
 
         }
@@ -124,8 +110,8 @@ namespace ConsoleAppReadFile
 
             //string curpath = Directory.GetCurrentDirectory();
             //string mailbox = String.Format("{0}\\inbox", curpath);
-            mailbox = String.Format("{0}\\mails_prueba", "C:\\");
-            //mailbox = String.Format("{0}\\git\\mailparser\\documentos", "D:\\");
+            PosicionDocumento = String.Format("{0}\\mails_prueba\\", "C:\\");
+            //PosicionDocumento = String.Format("{0}\\git\\mailparser\\documentos", "D:\\");
 
             Run();
 
@@ -193,45 +179,80 @@ namespace ConsoleAppReadFile
         // Define the event handlers. To Process Files.
         public static void OnChanged(object source, FileSystemEventArgs e)
         {
-            LoadDocmumentos(mailbox);
+            LoadDocmumentos(PosicionDocumento);
         }
 
         public static bool insertondatabase()
         {
-
+            int a = 0;
             try
             {
-                DatoContenidoMailHtml = DatoContenidoMailHtml.Replace("'", "\"").Replace("\n", "").Replace("\r", "").Replace("\t", "");
-                if (DatoContenidoMailHtml.Length == 0) {
+                //DatoContenidoMailHtml = DatoContenidoMailHtml.Replace("'", "\"").Replace("\n", "").Replace("\r", "").Replace("\t", "");
+                if (string.IsNullOrEmpty(DatoContenidoMailHtml) && DatoContenidoMailPlain.Length > 0)
+                {
                     DatoContenidoMailHtml = DatoContenidoMailPlain.Replace("'", "\"");
                 }
-                else if(DatoContenidoMailHtml.Length > 7000 ) { DatoContenidoMailHtml = DatoContenidoMailPlain.Replace("'", "\""); }
+
+                if (DatoContenidoMailHtml.Length > 7000 && DatoContenidoMailPlain.Length > 0)
+                {
+
+                    DatoContenidoMailHtml = DatoContenidoMailPlain.Replace("'", "\"");
+                }
+
+                if (DatoContenidoMailHtml.Length < 7000 && string.IsNullOrEmpty(DatoContenidoMailPlain))
+                {
+
+                    //DatoContenidoMailPlain = DatoContenidoMailHtml; 
+                    DatoContenidoMailPlain = GetPlainTextFromHtml(DatoContenidoMailHtml);
+                }
 
                 //Data before to Inster//
 
                 DatoContenidoMailPlain = DatoContenidoMailPlain.Replace("'", "\"");
                 DatoContenidoMailPlain = ChangeEncodingFormat(DatoContenidoMailPlain);
+
                 DatoAsuntoMail = ChangeEncodingFormat(DatoAsuntoMail);
+
                 DatoHeaderMail = DatoHeaderMail.Replace("'", "''");
                 DatoHeaderMail = ChangeEncodingFormat(DatoHeaderMail);
+
                 DataDestinatariosString = ChangeEncodingFormat(DataDestinatariosString);
+
 
                 DatoRemitenteMail = ChangeEncodingFormat(DatoRemitenteMail);
 
-
                 DataCcString = ChangeEncodingFormat(DataCcString);
+
                 DatoContenidoMailHtml = ChangeEncodingFormat(DatoContenidoMailHtml);
 
-                //Console.WriteLine("INSERT INTO[dbo].[tbl_mp_email] (uid_tipo,uid_estado,uid_automotora,email,fecha_recibido,asunto,cabecera,destinatarios,remitente, cc, email_html) VALUES("+DataUidTipo+","+4+","+DataUidAutomotora+",'" + DatoContenidoMailPlain.Replace("'", "\"") + "','" + DatoFechaFromate.ToString(format) + "','" + DatoAsuntoMail + "','" + DatoHeaderMail.Replace("'", "''") + "','" + DataDestinatariosString + "','" + DatoRemitenteMail + "', '" + DataCcString + "', '" + DatoContenidoMailHtml + "');");
+                //Console.WriteLine("INSERT INTO[dbo].[tbl_mp_email] (uid_tipo,uid_estado,uid_automotora,email,fecha_recibido,asunto,cabecera,destinatarios,remitente, cc, email_html) VALUES(" + DataUidTipo + "," + 4 + "," + DataUidAutomotora + ",'" + DatoContenidoMailPlain.Replace("'", "\"") + "','" + DatoFechaFromate.ToString(format) + "','" + DatoAsuntoMail + "','" + DatoHeaderMail.Replace("'", "''") + "','" + DataDestinatariosString + "','" + DatoRemitenteMail + "', '" + DataCcString + "', '" + DatoContenidoMailHtml + "');");
 
                 SqlCommand mycommand = new SqlCommand();
 
                 mycommand.CommandType = System.Data.CommandType.Text;
                 mycommand.Connection = myConnection.GetConnection();
-                mycommand.CommandText = "INSERT INTO[dbo].[tbl_mp_email] (uid_tipo,uid_estado,uid_automotora,email,fecha_recibido,asunto,cabecera,destinatarios,remitente, cc, email_html) VALUES(" + DataUidTipo + "," + 4 + "," + DataUidAutomotora + ",'" + DatoContenidoMailPlain.Replace("'", "\"") + "','" + DatoFechaFromate.ToString(format) + "','" + DatoAsuntoMail + "','" + DatoHeaderMail.Replace("'", "''") + "','" + DataDestinatariosString + "','" + DatoRemitenteMail + "', '" + DataCcString + "', '" + DatoContenidoMailHtml + "')";
+                mycommand.CommandText = "INSERT INTO [dbo].[tbl_mp_email] (uid_tipo,uid_estado,uid_automotora,email,fecha_recibido,asunto,cabecera,destinatarios,remitente, cc, email_html) VALUES(" + DataUidTipo + "," + 4 + "," + DataUidAutomotora + ",'" + DatoContenidoMailPlain.Replace("'", "\"") + "',CONVERT(DATETIME, '" + DatoFechaFromate.ToString(format) + "', 120),'" + DatoAsuntoMail + "','" + DatoHeaderMail.Replace("'", "''") + "','" + DataDestinatariosString + "','" + DatoRemitenteMail + "', '" + DataCcString + "', '" + DatoContenidoMailHtml + "')";
 
-                int a = mycommand.ExecuteNonQuery();
+                a = mycommand.ExecuteNonQuery();
                 mycommand.Connection.Close();
+
+
+                //myConnection con = new myConnection();
+                //_cnx = con.Conexion();
+
+
+                //string queryString = "INSERT INTO [dbo].[tbl_mp_email] (uid_tipo,uid_estado,uid_automotora,email,fecha_recibido,asunto,cabecera,destinatarios,remitente, cc, email_html) VALUES(" + DataUidTipo + "," + 4 + "," + DataUidAutomotora + ",'" + DatoContenidoMailPlain.Replace("'", "\"") + "',CONVERT(DATETIME, '" + DatoFechaFromate.ToString(format) + "', 120),'" + DatoAsuntoMail + "','" + DatoHeaderMail.Replace("'", "''") + "','" + DataDestinatariosString + "','" + DatoRemitenteMail + "', '" + DataCcString + "', '" + DatoContenidoMailHtml + "')";
+
+                //using (con.Conexion())
+                //{
+                //    SqlCommand cmd = new SqlCommand();
+                //    SqlCommand command = new SqlCommand(queryString, con.Conexion());
+                //    con.Abrir();
+                //    a = command.ExecuteNonQuery();
+                //    con.Cerrar();
+
+                //}
+
 
                 //int a = 0;
                 if (a == 0)
@@ -266,55 +287,44 @@ namespace ConsoleAppReadFile
  
                     using (var reader = connection.ExecuteReader())
                     {
-                        while (reader.Read())
+                    while (reader.Read())
+                    {
+
+                        var documentoemail = new Documentos();
+                        documentoemail.id_num = int.Parse(reader["id_num"].ToString());
+                        documentoemail.estado = int.Parse(reader["estado"].ToString());
+                        documentoemail.fnombre = reader["fnombre"].ToString();
+                        documentoemail.sitio = int.Parse(reader["sitio"].ToString());
+
+                        listOfDocumentos.Add(documentoemail);
+
+
+
+                        ParseEmail(PosicionDocumento + documentoemail.fnombre);
+
+                        pruebadato = PosicionDocumento + documentoemail.fnombre + "|" + DataDestinatariosString;
+
+                        if (new FileInfo(PosicionDocumento + documentoemail.fnombre).Length > 0)
                         {
-                            var documentoemail = new Documentos();
-                            documentoemail.id_num = reader["id_num"].ToString();
-                            documentoemail.estado = reader["estado"].ToString();
-                            documentoemail.fnombre = reader["fnombre"].ToString();
-                            documentoemail.sitio = reader["sitio"].ToString(); ;
 
-                            listOfDocumentos.Add(documentoemail);
+                            if (VerificaSitio(documentoemail.sitio) && VerificaAutomotora(DataDestinatariosString))
+                            {
 
-                            ParseEmail(ubicacion+"\\"+documentoemail.fnombre);
-
-                            if (new FileInfo(ubicacion + "\\" + documentoemail.fnombre).Length > 0) {
-
-
-                                if (VerificaSitio(int.Parse(documentoemail.sitio)) && VerificaAutomotora(DataDestinatariosString))
+                                if (VerificaFuente(DatoRemitenteMail, documentoemail.sitio))
                                 {
 
-                                    Console.WriteLine("Si, existe sitio y automotora, para archivo:" + documentoemail.fnombre);
-                                    if (VerificaFuente(DatoRemitenteMail, int.Parse(documentoemail.sitio)))
+                                    if (VerificaTipo(DataUidFuente, "default"))
                                     {
 
-                                        Console.WriteLine("Fuente Existe");
-                                        if (VerificaTipo(DataUidFuente, "default"))
+                                        if (insertondatabase())
                                         {
-
-                                            Console.WriteLine("Tipo Existe");
-
-                                            Console.WriteLine("UiTipo: " + DataUidTipo + ", Estado: encola (4) , UidAutomotora: " + DataUidAutomotora);
-                                            if (insertondatabase())
-                                            {
-                                                IndiceMasAlto();
-                                                UpDateEstadoDocumento(documentoemail.fnombre, int.Parse(documentoemail.sitio));
-                                                Console.WriteLine("nº: " + count + ", Datos documento: " + documentoemail.id_num + ", " + documentoemail.fnombre + ", estado: " + documentoemail.estado + ", Sitio: " + documentoemail.sitio);
-
-                                            }
-                                            else
-                                            {
-
-                                                Console.WriteLine("No logro ser procesado");
-
-                                            }
+                                            IndiceMasAlto();
+                                            UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio);
 
                                         }
                                         else
                                         {
-
-                                            Console.WriteLine("Tipo NO Existe");
-                                            insertTipo(DataUidFuente);
+                                            pruebadato = "Documento no logro ser procesado";
 
                                         }
 
@@ -322,31 +332,60 @@ namespace ConsoleAppReadFile
                                     else
                                     {
 
-                                        Console.WriteLine("Fuente no existe");
-                                        insertFuente(DatoRemitenteMail, int.Parse(documentoemail.sitio));
-                                        Console.WriteLine("Inserto fuentes" + DatoRemitenteMail);
+                                        insertTipo(DataUidFuente);
+                                        VerificaTipo(DataUidFuente, "default");
+
+                                        if (insertondatabase())
+                                        {
+                                            IndiceMasAlto();
+                                            UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio);
+                                        }
+                                        else
+                                        {
+                                            pruebadato = "Documento no logro ser procesado";
+
+                                        }
+
                                     }
 
                                 }
                                 else
                                 {
 
-                                    Console.WriteLine("NO existe sitio ni automotora.");
+                                    insertFuente(DatoRemitenteMail, documentoemail.sitio);
+                                    VerificaFuente(DatoRemitenteMail, documentoemail.sitio);
+                                    insertTipo(DataUidFuente);
+                                    VerificaTipo(DataUidFuente, "default");
 
+                                    if (insertondatabase())
+                                    {
+                                        IndiceMasAlto();
+                                        UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio);
+
+                                    }
+                                    else
+                                    {
+                                        pruebadato = "Documento no logro ser procesado";
+
+                                    }
                                 }
 
                             }
-                            else {
-
-                                Console.WriteLine("Archivo: " + ubicacion + "\\" + documentoemail.fnombre + ", viene vacio.");
+                            else
+                            {
+                                pruebadato = "Sitio y/o Automotora no existe";
 
                             }
-                        Console.WriteLine("nº: " + count +"\n");
-
-                        count++;
 
                         }
+                        else
+                        {
+                            pruebadato = "Documento no existe";
+
+                        }
+
                     }
+                }
                 connection.Connection.Close();
             }
 
@@ -587,9 +626,170 @@ namespace ConsoleAppReadFile
 
         }
 
-        public static string ChangeEncodingFormat(string input) {
+        public static string ChangeEncodingFormat(string DataChangeEnconde)
+        {
 
-            var specialCharacters = "áéíóúÁÉÍÓÚñÑüÜ\"";
+            //string utf8String = DataChangeEnconde;
+            string propEncodeString = string.Empty;
+
+            //byte[] utf8_Bytes = new byte[utf8String.Length];
+            //for (int i = 0; i < utf8String.Length; ++i)
+            //{
+            //    utf8_Bytes[i] = (byte)utf8String[i];
+            //}
+
+            //propEncodeString = Encoding.UTF8.GetString(utf8_Bytes, 0, utf8_Bytes.Length);
+
+            ///////////////////////New Code v4 ////////////////////////////////////////////
+
+            if (DataChangeEnconde.Contains("Ã"))
+            {
+                byte[] utf8_Bytes = new byte[DataChangeEnconde.Length];
+                for (int i = 0; i < DataChangeEnconde.Length; ++i)
+                {
+                    utf8_Bytes[i] = (byte)DataChangeEnconde[i];
+                }
+
+                propEncodeString = Encoding.UTF8.GetString(utf8_Bytes, 0, utf8_Bytes.Length);
+                //Console.WriteLine("trae caracter raro Ã ");
+            }
+            else
+            {
+                propEncodeString = DataChangeEnconde;
+                //Console.WriteLine("NO trae caracter raro Ã ");
+            }
+
+            ///////////////////////End New Code v4 ////////////////////////////////////////////
+
+            return propEncodeString;
+        }
+
+        public static string returnPath(string dato)//metodo de prueba de comunicación
+        {
+            string folder = Environment.CurrentDirectory;
+            return folder + dato;
+        }
+
+        public static string GetPlainTextFromHtml(string htmlString)
+        {
+            htmlString = Regex.Replace(htmlString, @"</p>", "\r\n", RegexOptions.Multiline).Trim();
+            htmlString = Regex.Replace(htmlString, @"<br>", "\n", RegexOptions.Multiline).Trim();
+            htmlString = Regex.Replace(htmlString, @"<br />", "\n", RegexOptions.Multiline).Trim();
+            htmlString = Regex.Replace(htmlString, @"</tr>", "\r", RegexOptions.Multiline).Trim();
+            string htmlTagPattern = "<.*?>";
+            var regexCss = new Regex("(\\<script(.+?)\\</script\\>)|(\\<style(.+?)\\</style\\>)", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+            htmlString = regexCss.Replace(htmlString, string.Empty);
+            htmlString = Regex.Replace(htmlString, htmlTagPattern, string.Empty);
+            //htmlString = Regex.Replace(htmlString, @"^\s+$[\r\n]*", "", RegexOptions.Multiline);
+            //htmlString = Regex.Replace(htmlString, @"\s", " ", RegexOptions.Multiline);
+            //htmlString = Regex.Replace(htmlString, @"\n", " ", RegexOptions.Multiline).Trim();
+            htmlString = htmlString.Replace("&nbsp;", string.Empty);
+
+            return htmlString;
+        }
+
+        /// <summary>
+        /// 
+        /// Pruebas de codificación de Textos 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
+        public static bool ContainsUnicodeCharacter(string input)
+        {
+            const int MaxAnsiCode = 255;
+
+            return input.Any(c => c > MaxAnsiCode);
+        }
+
+        public static string GetASCIIvar(string input)
+        {
+
+            string inputString = input;
+            string asAscii = Encoding.ASCII.GetString(
+                Encoding.Convert(
+                    Encoding.UTF8,
+                    Encoding.GetEncoding(
+                        Encoding.ASCII.EncodingName,
+                        new EncoderReplacementFallback(string.Empty),
+                        new DecoderExceptionFallback()
+                        ),
+                    Encoding.UTF8.GetBytes(inputString)
+
+                )
+
+            );
+
+            Console.WriteLine("Valor asAsCii: " + asAscii);
+            return asAscii;
+        }
+
+
+
+
+        public static string decodificaTextoUTF8(string strLine)
+        {
+
+            //////////////////////////////////////////////////////////////
+            var buffer = new List<byte>();
+            var i = 0;
+            while (i < strLine.Length)
+            {
+                var character = strLine[i];
+                if (character == '=')
+                {
+                    var part = strLine.Substring(i + 1, 2);
+                    Console.WriteLine("LLega aquí?, part:" + part);
+                    buffer.Add(byte.Parse(part, NumberStyles.HexNumber));
+                    i += 3;
+                }
+                else
+                {
+                    buffer.Add((byte)character);
+                    i++;
+                }
+            };
+            string output = Encoding.UTF8.GetString(buffer.ToArray());
+            ////////////////////////////////////////////////
+            return output;
+        }
+
+        public static string pruebaborrame(string input)
+        {
+
+            // Create a UTF-8 encoding.
+            UTF8Encoding utf8 = new UTF8Encoding();
+
+            // A Unicode string with two characters outside an 8-bit code range.
+            String unicodeString = input;
+            Console.WriteLine("Original string:");
+            Console.WriteLine(unicodeString);
+
+            // Encode the string.
+            Byte[] encodedBytes = utf8.GetBytes(unicodeString);
+            Console.WriteLine();
+            Console.WriteLine("Encoded bytes:");
+            for (int ctr = 0; ctr < encodedBytes.Length; ctr++)
+            {
+                Console.Write("{0:X2} ", encodedBytes[ctr]);
+                if ((ctr + 1) % 25 == 0)
+                    Console.WriteLine();
+            }
+            Console.WriteLine();
+
+            // Decode bytes back to string.
+            String decodedString = utf8.GetString(encodedBytes);
+            Console.WriteLine();
+            Console.WriteLine("Decoded bytes:");
+            Console.WriteLine(decodedString);
+            return decodedString;
+        }
+
+        public static string pruebaborrame2(string input)
+        {
+            //Console.WriteLine("Borrame 2 "+ input);
+            var specialCharacters = "áéíóúÁÉÍÓÚñÑüÜ@%!#$%^&*()?/>";
+            //var specialCharacters = @"%!@#$%^&*()?/>.<,:;'\´|}]{[_~`+=-" + "\"";
             var goodEncoding = Encoding.UTF8;
             var badEncoding = Encoding.GetEncoding(28591);
             var badStrings = specialCharacters.Select(c => badEncoding.GetString(goodEncoding.GetBytes(c.ToString())));
@@ -604,6 +804,30 @@ namespace ConsoleAppReadFile
 
         }
 
+        public static string borrame3(string input) {
+
+            System.Text.Encoding utf_8 = System.Text.Encoding.UTF8;
+            string s_unicode = input;
+            byte[] utf8Bytes = System.Text.Encoding.UTF8.GetBytes(s_unicode);
+            string s_unicode2 = System.Text.Encoding.UTF8.GetString(utf8Bytes);
+            return s_unicode2;
+
+        }
+
+
+        public static string GetStringformat(string data) {
+
+            string localdata;
+
+            //localdata = data.GetType().ToString();
+            //localdata =  data.GetTypeCode().ToString();
+            //localdata = data.GetHashCode().ToString();
+            localdata = data.IsNormalized().ToString();
+
+            return localdata;
+
+
+        }
 
     }
 }

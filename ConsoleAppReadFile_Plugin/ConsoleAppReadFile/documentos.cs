@@ -9,10 +9,10 @@ namespace ConsoleAppReadFile
     public class Documentos
     {
 
-        public string id_num { get; set; }
+        public int id_num { get; set; }
         public string fnombre { get; set; }
-        public string estado { get; set; }
-        public string sitio { get; set; }
+        public int estado { get; set; }
+        public int sitio { get; set; }
         public DateTime fecha_insert { get; set; }
 
     }

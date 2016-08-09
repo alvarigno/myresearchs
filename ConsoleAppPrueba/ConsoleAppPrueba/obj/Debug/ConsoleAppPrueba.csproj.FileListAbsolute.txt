@@ -1,0 +1,8 @@
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\bin\Debug\ConsoleAppPrueba.exe.config
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\bin\Debug\ConsoleAppPrueba.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\bin\Debug\ConsoleAppPrueba.pdb
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\bin\Debug\BouncyCastle.Crypto.dll
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\bin\Debug\MimeKit.dll
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\bin\Debug\MimeKit.xml
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\obj\Debug\ConsoleAppPrueba.exe
+c:\users\álvaro\documents\visual studio 2015\Projects\ConsoleAppPrueba\ConsoleAppPrueba\obj\Debug\ConsoleAppPrueba.pdb

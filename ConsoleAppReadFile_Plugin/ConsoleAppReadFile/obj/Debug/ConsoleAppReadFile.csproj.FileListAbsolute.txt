@@ -17,5 +17,6 @@ C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin
 C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\obj\Debug\ConsoleAppReadFile.pdb
 C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\bin\Debug\ConsoleAppReadFile.exe
 C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\bin\Debug\ConsoleAppReadFile.pdb
-C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\bin\Debug\EAGetMail45.dll
-C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\obj\Debug\ConsoleAppReadFile.csprojResolveAssemblyReference.cache
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\bin\Debug\MimeKit.dll
+C:\Users\Álvaro\Documents\Visual Studio 2015\Projects\ConsoleAppReadFile_Plugin\ConsoleAppReadFile\bin\Debug\MimeKit.xml
