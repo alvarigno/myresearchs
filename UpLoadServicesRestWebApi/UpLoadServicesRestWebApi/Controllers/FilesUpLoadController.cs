@@ -51,6 +51,7 @@ namespace UpLoadServicesRestWebApi.Controllers
                         var fileInfo = streamProvider.FileData.Select(i =>
                         {
                             var info = new FileInfo(i.LocalFileName);
+                            //var info = new FileInfo(i.Headers.ContentDisposition.FileName);
                             nombrerealarchivo = info.Name;
                             Rename(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                             string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
@@ -122,6 +123,8 @@ namespace UpLoadServicesRestWebApi.Controllers
 
             int a = mycommand.ExecuteNonQuery();
             mycommand.Connection.Close();
+            mycommand.Connection.Dispose();
+            SqlConnection.ClearAllPools();
 
             //int a = 0;
             if (a == 0)

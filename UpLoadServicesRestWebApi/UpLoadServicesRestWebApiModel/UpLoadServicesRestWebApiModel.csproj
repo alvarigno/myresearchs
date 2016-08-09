@@ -104,6 +104,8 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automotora.cs" />
+    <Compile Include="Documentos.cs" />
     <Compile Include="FilesUpLoad.cs" />
     <Compile Include="HDFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

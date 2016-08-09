@@ -133,7 +133,7 @@ namespace UpLoadServicesRestWebApi.Controllers
             }
             else {
 
-                File.Delete(@"C:\mails_prueba\" + direarchivo);
+                File.Delete(uploadFolderPath + direarchivo);
 
             }
 
