@@ -1,0 +1,12 @@
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\bin\Debug\MimeKit_ConsoleApp.exe.config
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\bin\Debug\MimeKit_ConsoleApp.exe
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\bin\Debug\MimeKit_ConsoleApp.pdb
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\bin\Debug\BouncyCastle.Crypto.dll
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\bin\Debug\MimeKit.dll
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\bin\Debug\MimeKit.xml
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\obj\Debug\MimeKit_ConsoleApp.csprojResolveAssemblyReference.cache
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\obj\Debug\MimeKit_ConsoleApp.exe
+c:\users\wizer\documents\visual studio 2015\Projects\MimeKit_ConsoleApp\MimeKit_ConsoleApp\obj\Debug\MimeKit_ConsoleApp.pdb
+C:\Users\wizer\Source\Repos\myresearchs\MimeKit_ConsoleApp\MimeKit_ConsoleApp\bin\Debug\MimeKit_ConsoleApp.exe.config
+C:\Users\wizer\Source\Repos\myresearchs\MimeKit_ConsoleApp\MimeKit_ConsoleApp\obj\Debug\MimeKit_ConsoleApp.exe
+C:\Users\wizer\Source\Repos\myresearchs\MimeKit_ConsoleApp\MimeKit_ConsoleApp\obj\Debug\MimeKit_ConsoleApp.pdb
