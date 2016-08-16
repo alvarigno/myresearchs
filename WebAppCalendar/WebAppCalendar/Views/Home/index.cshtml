@@ -1,0 +1,84 @@
+﻿@model WebAppCalendar.Models.EmpModel
+
+@{
+    ViewBag.Title = "www.compilemode.com";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+
+
+  $(document).ready(function() {
+      $("#EnterDate").datepicker({
+          dateFormat:"dd-mm-yy",
+          minDate: -0,
+          //maxDate: "+0M +0D" //deja libre sólo el día de hoy.
+          //maxDate: "+0M +4D"  //deja libre para selección los 5 dias a contar de la fecha de hoy.
+          maxDate: ""  //deja libre todos los días desde el día de hoy.
+
+      });
+
+      /* Inicialización en español para la extensión 'UI date picker' para jQuery. */
+      (function (factory) {
+          if (typeof define === "function" && define.amd) {
+
+              // AMD. Register as an anonymous module.
+              define(["../widgets/datepicker"], factory);
+          } else {
+
+              // Browser globals
+              factory(jQuery.datepicker);
+          }
+      }(function (datepicker) {
+
+          datepicker.regional.es = {
+              closeText: "Cerrar",
+              prevText: "&#x3C;Ant",
+              nextText: "Sig&#x3E;",
+              currentText: "Hoy",
+              monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+              "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+              monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun",
+              "jul", "ago", "sep", "oct", "nov", "dic"],
+              dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
+              dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
+              dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
+              weekHeader: "Sm",
+              dateFormat: "dd/mm/yy",
+              firstDay: 1,
+              isRTL: false,
+              showMonthAfterYear: false,
+              yearSuffix: ""
+          };
+          datepicker.setDefaults(datepicker.regional.es);
+
+          return datepicker.regional.es;
+
+      }));
+
+  });
+</script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.EnterDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EnterDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EnterDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    </div>
+}  
