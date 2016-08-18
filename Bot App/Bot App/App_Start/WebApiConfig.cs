@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace BotApp
+namespace Bot_App
 {
     public static class WebApiConfig
     {
