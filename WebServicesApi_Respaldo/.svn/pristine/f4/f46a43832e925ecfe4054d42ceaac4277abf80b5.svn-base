@@ -54,6 +54,7 @@ namespace ProcesaDocumentos
         /// Parse documento divido en las partes del e-mail
         /// </summary>
         /// <returns></returns>
+
         public void ParseEmail(string emlFile)
         {
 
@@ -116,6 +117,7 @@ namespace ProcesaDocumentos
         /// <param name="documentoRecibido"></param>
         /// <param name="PosicionDocumento"></param>
         /// <returns></returns>
+
         public string Comienzaproceso(string documentoRecibido, string PosicionDocumento)
         {
             
@@ -124,7 +126,7 @@ namespace ProcesaDocumentos
         }
 
         /// <summary>
-        /// Método que hace el insert de los datos ya parseados dentro de la base de datos (dbo.tbl_mp_email).
+        /// Método que hace el insert de los datos de parseo dentro de la base de datos.
         /// </summary>
         /// <returns></returns>
 
@@ -184,48 +186,19 @@ namespace ProcesaDocumentos
 
 
                 myConnection con = new myConnection();
-                //_cnx = con.Conexion();
+                _cnx = con.Conexion();
 
 
-                //string queryString = "INSERT INTO [dbo].[tbl_mp_email] (uid_tipo,uid_estado,uid_automotora,email,fecha_recibido,asunto,cabecera,destinatarios,remitente, cc, email_html) VALUES(" + DataUidTipo + "," + 4 + "," + DataUidAutomotora + ",'" + DatoContenidoMailPlain.Replace("'", "\"") + "',CONVERT(DATETIME, '" + DatoFechaFromate + "', 120),'" + DatoAsuntoMail + "','" + DatoHeaderMail.Replace("'", "''") + "','" + DataDestinatariosString + "','" + DatoRemitenteMail + "', '" + DataCcString + "', '" + DatoContenidoMailHtml + "')";
-
-                //using (con.Conexion())
-                //{
-                //    SqlCommand cmd = new SqlCommand();
-                //    SqlCommand command = new SqlCommand(queryString, con.Conexion());
-                //    con.Abrir();
-                //    a = command.ExecuteNonQuery();
-                //    con.Cerrar();
-
-                //}
-
-                using (SqlConnection mycon = con.Conexion())
+                string queryString = "INSERT INTO [dbo].[tbl_mp_email] (uid_tipo,uid_estado,uid_automotora,email,fecha_recibido,asunto,cabecera,destinatarios,remitente, cc, email_html) VALUES(" + DataUidTipo + "," + 4 + "," + DataUidAutomotora + ",'" + DatoContenidoMailPlain.Replace("'", "\"") + "',CONVERT(DATETIME, '" + DatoFechaFromate + "', 120),'" + DatoAsuntoMail + "','" + DatoHeaderMail.Replace("'", "''") + "','" + DataDestinatariosString + "','" + DatoRemitenteMail + "', '" + DataCcString + "', '" + DatoContenidoMailHtml + "')";
+                
+                using (con.Conexion())
                 {
-                    using (SqlCommand cmd2 = new SqlCommand("SP_AddEmail", mycon))
-                    {
-                        cmd2.CommandType = CommandType.StoredProcedure;
+                    SqlCommand cmd = new SqlCommand();
+                    SqlCommand command = new SqlCommand(queryString, con.Conexion());
+                    con.Abrir();
+                    a = command.ExecuteNonQuery();
+                    con.Cerrar();
 
-                        cmd2.Parameters.Add("@uidTipo", SqlDbType.Int).Value = DataUidTipo;
-                        cmd2.Parameters.Add("@uidestado", SqlDbType.Int).Value = 4;
-                        cmd2.Parameters.Add("@uidAutom", SqlDbType.Int).Value = DataUidAutomotora;
-                        cmd2.Parameters.Add("@txtEmail", SqlDbType.VarChar).Value = DatoContenidoMailPlain.Replace("'", "\"");
-                        //cmd2.Parameters.Add("@fecha", SqlDbType.DateTime).Value = "CONVERT(DATETIME, '" + DatoFechaFromate + "', 120)";
-                        cmd2.Parameters.Add("@fecha", SqlDbType.DateTime).Value = DatoFechaFromate;
-
-                        cmd2.Parameters.Add("@asunto", SqlDbType.VarChar).Value = DatoAsuntoMail;
-                        cmd2.Parameters.Add("@cabecera", SqlDbType.VarChar).Value = DatoHeaderMail.Replace("'", "''");
-                        cmd2.Parameters.Add("@destinatarios", SqlDbType.VarChar).Value = DataDestinatariosString;
-                        cmd2.Parameters.Add("@remitente", SqlDbType.VarChar).Value = DatoRemitenteMail;
-                        cmd2.Parameters.Add("@cc", SqlDbType.VarChar).Value = DataCcString;
-                        cmd2.Parameters.Add("@htmlEmail", SqlDbType.VarChar).Value = DatoContenidoMailHtml;
-
-                        var returnParameter = cmd2.Parameters.Add("@uidEmail", SqlDbType.Int);
-                        returnParameter.Direction = ParameterDirection.Output;
-
-                        mycon.Open();
-                        a = cmd2.ExecuteNonQuery();
-                        IdEmailParse = Int32.Parse(returnParameter.Value.ToString());
-                    }
                 }
 
 
@@ -305,8 +278,8 @@ namespace ProcesaDocumentos
 
                                         if (insertondatabase())
                                         {
-                                            //IndiceMasAlto();
-                                            UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio, IdEmailParse);
+                                            IndiceMasAlto();
+                                            UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio);
 
                                         }
                                         else
@@ -324,8 +297,8 @@ namespace ProcesaDocumentos
 
                                         if (insertondatabase())
                                         {
-                                            //IndiceMasAlto();
-                                            UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio, IdEmailParse);
+                                            IndiceMasAlto();
+                                            UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio);
                                         }
                                         else
                                         {
@@ -346,8 +319,8 @@ namespace ProcesaDocumentos
 
                                     if (insertondatabase())
                                     {
-                                        //IndiceMasAlto();
-                                        UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio, IdEmailParse);
+                                        IndiceMasAlto();
+                                        UpDateEstadoDocumento(documentoemail.fnombre, documentoemail.sitio);
 
                                     }
                                     else
@@ -380,15 +353,15 @@ namespace ProcesaDocumentos
         }
 
         /// <summary>
-        /// Actualiza la tabla documento con el estato = 1, ingreando el uid_email de los adtos parseados.
+        /// Actualiza la tabla documento con el estato = 1, estado leido, estado = 0 , no liedo.
         /// </summary>
         /// <param name="fnombre"></param>
         /// <param name="sitio"></param>
-        public void UpDateEstadoDocumento(string fnombre, int sitio, int IdEmailParselocal)
+        public void UpDateEstadoDocumento(string fnombre, int sitio)
         {
             myConnection con = new myConnection();
 
-            string queryString = "UPDATE [dbo].[documentos] SET estado = 1, idemail = " + IdEmailParselocal + " WHERE fnombre = '" + fnombre + "' and sitio =" + sitio;
+            string queryString = "UPDATE [dbo].[documentos] SET estado = 1, idemail = " + IdEmailParse + " WHERE fnombre = '" + fnombre + "' and sitio =" + sitio;
 
             using (con.Conexion())
             {
@@ -599,11 +572,6 @@ namespace ProcesaDocumentos
             return verifica;
         }
 
-        /// <summary>
-        /// Método que devuelve el indide más alto del último registro que posee la tabla dbo.tbl_mp_email. 
-        /// Esto trae el uid_emial de lo registrado, siendo el id de los datos extraidos del documento procesado.
-        /// </summary>
-        /// <returns></returns>
         public bool IndiceMasAlto()
         {
             bool verifica = false;
@@ -645,11 +613,6 @@ namespace ProcesaDocumentos
         }
 
         /** Inserts **/
-
-        /// <summary>
-        /// Registra el nuevo dato de la fuente encontrada en el documento procesado del correo electrónico. Si este no existe.
-        /// </summary>
-        /// <returns></returns>
         public void insertFuente(string fuente, int uidsitio)
         {
 
@@ -674,10 +637,6 @@ namespace ProcesaDocumentos
             }
         }
 
-        /// <summary>
-        /// Registra un nuevo dato tipo, si este no existe.
-        /// </summary>
-        /// <returns></returns>
         public void insertTipo(int UidFunte)
         {
             myConnection con = new myConnection();
@@ -697,10 +656,6 @@ namespace ProcesaDocumentos
 
         }
 
-        /// <summary>
-        /// Verifica y modifica el formato de los datos del correo extraidos desde el documento ".eml"
-        /// </summary>
-        /// <returns></returns>
         public string ChangeEncodingFormat(string DataChangeEnconde)
         {
 
@@ -738,21 +693,13 @@ namespace ProcesaDocumentos
 
             return propEncodeString;
         }
-
-        /// <summary>
-        /// Regresa al ruta extacta del archivo en el servidor.
-        /// </summary>
-        /// <returns></returns>
+        
         public string returnPath(string dato)//metodo de prueba de comunicación
         {
             string folder = Environment.CurrentDirectory;
             return folder+dato;
         }
 
-        /// <summary>
-        /// Modifica el cuerpo del mensaje del correo que está en formato HTML en Texto plano.
-        /// </summary>
-        /// <returns></returns>
         public string GetPlainTextFromHtml(string htmlString)
         {
             htmlString = Regex.Replace(htmlString, @"</p>", "\r\n", RegexOptions.Multiline).Trim();

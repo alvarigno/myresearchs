@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using ParsearEmails_WebAPI.Infrastructure;
-//Enlace a modelos creados para procesar documentos, esto creado por la posibilidad de usos en distintos proyectos o procesos.
 using UpLoadServicesRestWebApiModel;
 using System.Web.Hosting;
 
