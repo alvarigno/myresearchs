@@ -21,7 +21,7 @@ namespace TimeZoneBot.Services
             using (var client = new HttpClient())
             {
                 //Key will be generated after Registration http://timezonedb.com/register
-                const string authKey = "ZMZCM1BQ5L5H";
+                const string authKey = "ZMZCM1BQ5L5H";// Kay Api
 
                 var url = string.Format("http://api.timezonedb.com/?zone={0}&format=json&key={1}", zoneName, authKey);
                 client.DefaultRequestHeaders.Accept.Clear();
