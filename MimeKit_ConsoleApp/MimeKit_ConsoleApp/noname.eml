@@ -1,0 +1,55 @@
+Received: from mail6.bemta8.domain.com (ip address) by
+ corp-ho-mail-01.domain.example (ip address) with Microsoft SMTP Server
+ (TLS) id 14.2.328.9; Thu, 14 Jul 2016 14:01:56 +1000
+Received: from [ip address] by server-5.bemta-8.domain.com id
+ 2B/78-12199-1BE07875; Thu, 14 Jul 2016 04:01:53 +0000
+Received: (qmail 000000 invoked from network); 14 Jul 2016 04:01:52 -0000
+Received: from mail-s45.domain.us (HELO mail-s45.domain.us) (ip address)
+  by server-2.tower-75.domain.com with AES128-SHA encrypted SMTP; 14 Jul
+ 2016 04:01:52 -0000
+Received: from domain.com (www.domain.com [ip address]) by
+ www.domain.com with ESMTP id 57870eaf.7f03bbb8b6f8-in06; Thu, 14 Jul 2016
+ 04:01:51 -0000 (UTC)
+From: domine.com <no-reply@domine.com>
+To: Your name <name.lasname@domain.com>
+Subject: Title about message
+Thread-Topic: 
+Thread-Index: AQHR3YR2PBl4vb/YHEyByXj+kmHZYw==
+Sender: "no-reply=domain.com@domain.com"
+	<no-reply=domain.com@domain.com>
+Date: Thu, 14 Jul 2016 04:01:51 +0000
+Message-ID: <57870eafc40c4@domain.com>
+Reply-To: =?utf-8?B?RGFsdG9uIFRveW90YSBMw7NwZXogTWF0ZW9z?=
+	<name@domine.com>
+Content-Language: en-EN
+X-MS-Exchange-Organization-AuthSource: corp-ho-mail-01.domain.example
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-env-sender: bounce+3c5aad.aa0faa-name.lastname=domain.com@domain.com
+x-originating-ip: [ip address]
+x-viruschecked: Checked
+x-starscan-version: 8.46; banners=-,-,-
+x-msg-ref: server-2.tower-75.messagelabs.com!1468468911!24467258!1
+x-spamreason: No, hits=1.3 required=7.0 tests=HTML_FONT_LOW_CONTRAST,
+  HTML_MESSAGE,SUBJECT_EXCESS_QP
+user-agent: CodeIgniter
+domainkey-signature: a=rsa-sha1; c=nofws; d=domain.com; s=mailo; q=dns;
+ h=Sender: Date: From: Reply-To: To: Subject: Message-ID: Mime-Version:
+ Content-Type;
+dkim-signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=domain.com;
+ q=dns/txt; s=mailo; t=1468468911; h=Content-Type: Mime-Version: Message-ID:
+ Subject: To: Reply-To: From: Date: Sender;
+x-sender: no-reply@domain.com
+Content-Type: multipart/alternative;
+	boundary="_000_57870eafc40c4_"
+MIME-Version: 1.0
+
+--_000_57870eafc40c4_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+Hi, this is a Message Plain Text.
+
+Bye. 
+
+--_000_57870eafc40c4_
