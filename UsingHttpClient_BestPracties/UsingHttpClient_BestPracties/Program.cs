@@ -9,6 +9,8 @@ namespace UsingHttpClient_BestPracties
 {
     class Program
     {
+        //YOU'RE USING HTTPCLIENT WRONG AND IT IS DESTABILIZING YOUR SOFTWARE - URL 
+        //http://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
         private static HttpClient Client = new HttpClient();
         static void Main(string[] args)
         {
