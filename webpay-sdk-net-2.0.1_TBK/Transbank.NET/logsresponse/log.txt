@@ -1,0 +1,80 @@
+
+Log Entry : 13:19:10 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"425","responseCode":"0","token_ws":"\"e43353aaa514e104d47e91009578b296d42be73a7d3b2d4f4f9ec6f096abe11b\""}
+-------------------------------
+
+Log Entry : 13:19:11 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"425","responseCode":"0","token_ws":"\"e43353aaa514e104d47e91009578b296d42be73a7d3b2d4f4f9ec6f096abe11b\""}
+-------------------------------
+
+Log Entry : 13:24:15 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"741","responseCode":"0","token_ws":"\"e7ff0e9f6215455ff0499c34a1c71fe19c9a67edfb8cad59ff88d0fc3c17e6fa\""}
+-------------------------------
+
+Log Entry : 13:26:16 jueves, 02 de febrero de 2017
+  :
+  :{"token_ws":"\"e7ff0e9f6215455ff0499c34a1c71fe19c9a67edfb8cad59ff88d0fc3c17e6fa\""}
+-------------------------------
+
+Log Entry : 13:41:19 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"979","responseCode":"0","result":null,"token_ws":"\"ea7216fdabffffd10cdeac15a53876b7ec5f8e28d6f164f82888c899d8a40ee7\""}
+-------------------------------
+
+Log Entry : 13:41:22 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"979","responseCode":"0","result":null,"token_ws":"\"ea7216fdabffffd10cdeac15a53876b7ec5f8e28d6f164f82888c899d8a40ee7\""}
+-------------------------------
+
+Log Entry : 13:43:24 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"793","responseCode":"0","result":"Webpay.Transbank.Library.Wsdl.Normal.transactionResultOutput","token_ws":"\"ec342aac237d048d0986065770e1fd4f7061dac33e64d9f713c53b218105d437\""}
+-------------------------------
+
+Log Entry : 13:47:34 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"898","responseCode":"0","result":"{","token_ws":"\"e8f882da9e052a4248e3199db72baf76ae7ec6c9dad3791ccfbe3eec5e6c5ee8\""}
+-------------------------------
+
+Log Entry : 13:47:46 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"898","responseCode":"0","result":"{","token_ws":"\"e8f882da9e052a4248e3199db72baf76ae7ec6c9dad3791ccfbe3eec5e6c5ee8\""}
+-------------------------------
+
+Log Entry : 13:56:21 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"684","responseCode":"0","result":"{","token_ws":"\"eb2236dbc813741c87625c246889c6732e2ae83724b903a4b995fc73ba84998c\""}
+-------------------------------
+
+Log Entry : 14:00:34 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"328","responseCode":"0","result":"{","token_ws":"\"e406e12f8204574c89e1b0429c86ad07d21dfdaa1fbc2dfb696fc4daab9365bc\""}
+-------------------------------
+
+Log Entry : 14:00:51 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"328","responseCode":"0","result":"{","token_ws":"\"e406e12f8204574c89e1b0429c86ad07d21dfdaa1fbc2dfb696fc4daab9365bc\""}
+-------------------------------
+
+Log Entry : 14:07:41 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"887","responseCode":"0","result":"{","token_ws":"\"e3c20d476707ccd3499760bfabf49b86280cbc936b25742b85d22cd4a3b1cf8c\""}
+-------------------------------
+
+Log Entry : 14:07:47 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"887","responseCode":"0","result":"{","token_ws":"\"e3c20d476707ccd3499760bfabf49b86280cbc936b25742b85d22cd4a3b1cf8c\""}
+-------------------------------
+
+Log Entry : 14:18:55 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"887","responseCode":"0","result":"{","token_ws":"\"ed741a89c4a01c33a422bf055c6a25a95bcdd31c2d1730b98f2080f5084c92b2\""}
+-------------------------------
+
+Log Entry : 14:19:00 jueves, 02 de febrero de 2017
+  :
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"887","responseCode":"0","result":"{","token_ws":"\"ed741a89c4a01c33a422bf055c6a25a95bcdd31c2d1730b98f2080f5084c92b2\""}
+-------------------------------
