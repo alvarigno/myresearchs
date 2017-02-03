@@ -52,6 +52,7 @@ namespace Transbank.NET
 
         Dictionary<string, string> responseTBK = new Dictionary<string, string>();
         Dictionary<string, string> requestTBK = new Dictionary<string, string>();
+        wsInitTransactionOutput resultresponseTBK;
 
         protected void Page_Load()
         {
@@ -135,6 +136,7 @@ namespace Transbank.NET
                         string urlFinal = sample_baseurl + "?action=end";
 
 
+                        request.Add("comerceId", configuration.CommerceCode);
                         request.Add("amount", amount.ToString());
                         request.Add("buyOrder", buyOrder.ToString());
                         request.Add("sessionId", sessionId.ToString());
@@ -143,6 +145,8 @@ namespace Transbank.NET
 
                         /** Ejecutamos metodo initTransaction desde Libreria */
                         wsInitTransactionOutput result = webpay.getNormalTransaction().initTransaction(amount, buyOrder, sessionId, urlReturn, urlFinal);
+                        
+
 
                         /** Verificamos respuesta de inicio en webpay */
                         if (result.token != null && result.token != "")
@@ -161,16 +165,16 @@ namespace Transbank.NET
                         HttpContext.Current.Response.Write("<form action=" + result.url + " method='post'><input type='hidden' name='token_ws' value=" + result.token + "><input type='submit' value='Continuar &raquo;'></form>");
 
                         requestTBK = request;
-                        requestTBK.Add("token", result.token);
-                        requestTBK.Add("url", result.url);
+                        resultresponseTBK = result;
 
-                        createlog(requestTBK, tx_step);
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step);
 
                     }
                     catch (Exception ex)
                     {
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
                     }
 
                     break;
@@ -225,6 +229,9 @@ namespace Transbank.NET
                             Response.Cookies.Add(ChCookie);
 
 
+                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step);
+
+
                         }
                         else
                         {
@@ -238,6 +245,7 @@ namespace Transbank.NET
                             ChCookie.Values.Add("responseCode", result.detailOutput[0].responseCode.ToString());
                             Response.Cookies.Add(ChCookie);
 
+                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step);
                         }
 
                         HttpContext.Current.Response.Write(message + "</br></br>");
@@ -247,6 +255,7 @@ namespace Transbank.NET
                     {
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
                     }
 
                     break;
@@ -294,7 +303,7 @@ namespace Transbank.NET
                         HttpContext.Current.Response.Write("<script>var amount = localStorage.getItem('amount');document.getElementById('amount').value = amount;</script>");
                         HttpContext.Current.Response.Write("<script>var buyOrder = localStorage.getItem('buyOrder');document.getElementById('buyOrder').value = buyOrder;</script>");
 
-                        createlog(responseTBK, tx_step);
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(responseTBK), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]), tx_step);
 
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
                         ChCookie.Expires = DateTime.Now.AddDays(-1d);
@@ -308,12 +317,9 @@ namespace Transbank.NET
                         ChCookie.Expires = DateTime.Now.AddDays(-1d);
                         Response.Cookies.Add(ChCookie);
 
-
-                        requestTBK = request;
-                        createlog(requestTBK, tx_step);
-
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
                     }
 
                     break;
@@ -358,12 +364,14 @@ namespace Transbank.NET
 
                         message = "Transacci&oacute;n Finalizada";
                         HttpContext.Current.Response.Write(message + "</br></br>");
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(resultNullify), tx_step);
 
                     }
                     catch (Exception ex)
                     {
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
                     }
 
                     break;
@@ -374,7 +382,7 @@ namespace Transbank.NET
 
         }
 
-        protected void createlog(Dictionary<string, string> recibetTBK, string tx_step) {
+        protected void createlog(string recibetTBK, string resultresponseTBK, string tx_step) {
 
             string m_exePath = string.Empty;
             //m_exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -392,7 +400,7 @@ namespace Transbank.NET
             {
                 using (StreamWriter w = File.AppendText(m_exePath + "\\" + "log.txt"))
                 {
-                    Log(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(recibetTBK), w);
+                    Log(recibetTBK, resultresponseTBK, w);
                 }
             }
             catch (Exception ex)
@@ -401,15 +409,18 @@ namespace Transbank.NET
 
         }
 
-        protected void Log(string logMessage, TextWriter txtWriter)
+        protected void Log(string logMessage, string logMessage2,  TextWriter txtWriter)
         {
             try
             {
                 txtWriter.Write("\r\nLog Entry : ");
                 txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
                     DateTime.Now.ToLongDateString());
-                txtWriter.WriteLine("  :");
+                txtWriter.WriteLine("  :Request");
                 txtWriter.WriteLine("  :{0}", logMessage);
+                txtWriter.WriteLine("-------------------------------");
+                txtWriter.WriteLine("  :Response");
+                txtWriter.WriteLine("  :{0}", logMessage2);
                 txtWriter.WriteLine("-------------------------------");
             }
             catch (Exception ex)
