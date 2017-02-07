@@ -286,3 +286,1040 @@ Log Entry : 12:48:17 viernes, 03 de febrero de 2017
   :Response
   :"e5d862379e70538b85c99d7f14dd1bff61d1a8ed6b240123ae77365e69ba62dc"
 -------------------------------
+
+Log Entry : 17:08:17 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e572a0d45c3c3f70af6168f0308940a18ae9e9555d101e61a3cc23945cd73188"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_1234560000123","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VN","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_1234560000123"}],"sessionId":"704","transactionDate":"\/Date(1486411537698)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 17:08:44 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_1234560000123","responseCode":"0","detalletransaccion":"9990-1213-oc_1234560000123-597020000541-VN-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_1234560000123\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VN\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_1234560000123\"}],\"sessionId\":\"704\",\"transactionDate\":\"\\/Date(1486411537698)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"e572a0d45c3c3f70af6168f0308940a18ae9e9555d101e61a3cc23945cd73188\""}
+-------------------------------
+  :Response
+  :"e572a0d45c3c3f70af6168f0308940a18ae9e9555d101e61a3cc23945cd73188"
+-------------------------------
+
+Log Entry : 17:21:04 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ee555e654709fdb32bfc44f296263f9ad6c180fa0be20746f17ae52f85b32de6"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_1234560001547","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VN","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1200,"commerceCode":"597020000541","buyOrder":"oc_1234560001547"}],"sessionId":"592","transactionDate":"\/Date(1486412297574)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 17:22:22 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"1200","buyOrder":"oc_1234560001547","responseCode":"0","detalletransaccion":"1200-1213-oc_1234560001547-597020000541-VN-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_1234560001547\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VN\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":1200,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_1234560001547\"}],\"sessionId\":\"592\",\"transactionDate\":\"\\/Date(1486412297574)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"ee555e654709fdb32bfc44f296263f9ad6c180fa0be20746f17ae52f85b32de6\""}
+-------------------------------
+  :Response
+  :"ee555e654709fdb32bfc44f296263f9ad6c180fa0be20746f17ae52f85b32de6"
+-------------------------------
+
+Log Entry : 17:31:30 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e78f1e5d6a46c4de999490a7efa0706e7af54e260e52ae56d586f4a963bc3a33"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 17:31:45 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e78f1e5d6a46c4de999490a7efa0706e7af54e260e52ae56d586f4a963bc3a33"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 17:31:54 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e78f1e5d6a46c4de999490a7efa0706e7af54e260e52ae56d586f4a963bc3a33"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 17:33:17 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"eceaee65d53eb5d9edb7d1e0945a429db0caa6e6ab13838a5113744a4dea3e8f"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_1234560000123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"624356","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_1234560000123456"}],"sessionId":"73","transactionDate":"\/Date(1486413047532)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 17:33:54 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"624356","commercecode":"597020000541","amount":"9990","buyOrder":"oc_1234560000123456","responseCode":"0","detalletransaccion":"9990-624356-oc_1234560000123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_1234560000123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"624356\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_1234560000123456\"}],\"sessionId\":\"73\",\"transactionDate\":\"\\/Date(1486413047532)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"eceaee65d53eb5d9edb7d1e0945a429db0caa6e6ab13838a5113744a4dea3e8f\""}
+-------------------------------
+  :Response
+  :"eceaee65d53eb5d9edb7d1e0945a429db0caa6e6ab13838a5113744a4dea3e8f"
+-------------------------------
+
+Log Entry : 17:51:46 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ec3cef53920f7d07d87a1a21b65def3e92a604edc504553204e91f85f026c068"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"393","transactionDate":"\/Date(1486414151771)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 17:51:57 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"393\",\"transactionDate\":\"\\/Date(1486414151771)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"ec3cef53920f7d07d87a1a21b65def3e92a604edc504553204e91f85f026c068\""}
+-------------------------------
+  :Response
+  :"ec3cef53920f7d07d87a1a21b65def3e92a604edc504553204e91f85f026c068"
+-------------------------------
+
+Log Entry : 18:01:39 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e1cddd911b21e7f68dd775a072b184e8c64e74f65d3802a3b51a7d7591c0dcc3"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"71","transactionDate":"\/Date(1486414742832)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:02:33 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"71\",\"transactionDate\":\"\\/Date(1486414742832)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"e1cddd911b21e7f68dd775a072b184e8c64e74f65d3802a3b51a7d7591c0dcc3\""}
+-------------------------------
+  :Response
+  :"e1cddd911b21e7f68dd775a072b184e8c64e74f65d3802a3b51a7d7591c0dcc3"
+-------------------------------
+
+Log Entry : 18:02:34 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"71\",\"transactionDate\":\"\\/Date(1486414742832)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"e1cddd911b21e7f68dd775a072b184e8c64e74f65d3802a3b51a7d7591c0dcc3\""}
+-------------------------------
+  :Response
+  :"e1cddd911b21e7f68dd775a072b184e8c64e74f65d3802a3b51a7d7591c0dcc3"
+-------------------------------
+
+Log Entry : 18:17:16 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ef39cf3bdc4f182c315845d5e583f755ac95bad4a9b4f783ea2293fea1bc23ff"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":456,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"165","transactionDate":"\/Date(1486415663192)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:18:35 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"456","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"456-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":456,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"165\",\"transactionDate\":\"\\/Date(1486415663192)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"ef39cf3bdc4f182c315845d5e583f755ac95bad4a9b4f783ea2293fea1bc23ff\""}
+-------------------------------
+  :Response
+  :"ef39cf3bdc4f182c315845d5e583f755ac95bad4a9b4f783ea2293fea1bc23ff"
+-------------------------------
+
+Log Entry : 18:18:46 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"456","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"456-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":456,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"165\",\"transactionDate\":\"\\/Date(1486415663192)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"ef39cf3bdc4f182c315845d5e583f755ac95bad4a9b4f783ea2293fea1bc23ff\""}
+-------------------------------
+  :Response
+  :"ef39cf3bdc4f182c315845d5e583f755ac95bad4a9b4f783ea2293fea1bc23ff"
+-------------------------------
+
+Log Entry : 18:21:57 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ef5b2b157a9fbff57363213149ff7fdd0db27f0a4f0476e082b8cce97bfd8b08"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"191","transactionDate":"\/Date(1486415963772)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:22:40 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"\"{\\\"accountingDate\\\":\\\"0206\\\",\\\"buyOrder\\\":\\\"oc_123456\\\",\\\"cardDetail\\\":{\\\"cardNumber\\\":\\\"6623\\\",\\\"cardExpirationDate\\\":null},\\\"detailOutput\\\":[{\\\"authorizationCode\\\":\\\"1213\\\",\\\"paymentTypeCode\\\":\\\"VD\\\",\\\"responseCode\\\":0,\\\"sharesAmount\\\":0,\\\"sharesAmountSpecified\\\":false,\\\"sharesNumber\\\":0,\\\"sharesNumberSpecified\\\":true,\\\"amount\\\":9990,\\\"commerceCode\\\":\\\"597020000541\\\",\\\"buyOrder\\\":\\\"oc_123456\\\"}],\\\"sessionId\\\":\\\"191\\\",\\\"transactionDate\\\":\\\"\\\\/Date(1486415963772)\\\\/\\\",\\\"transactionDateSpecified\\\":true,\\\"urlRedirection\\\":\\\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\\\",\\\"VCI\\\":\\\"TSY\\\"}\"","token_ws":"\"ef5b2b157a9fbff57363213149ff7fdd0db27f0a4f0476e082b8cce97bfd8b08\""}
+-------------------------------
+  :Response
+  :"ef5b2b157a9fbff57363213149ff7fdd0db27f0a4f0476e082b8cce97bfd8b08"
+-------------------------------
+
+Log Entry : 18:22:43 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"\"{\\\"accountingDate\\\":\\\"0206\\\",\\\"buyOrder\\\":\\\"oc_123456\\\",\\\"cardDetail\\\":{\\\"cardNumber\\\":\\\"6623\\\",\\\"cardExpirationDate\\\":null},\\\"detailOutput\\\":[{\\\"authorizationCode\\\":\\\"1213\\\",\\\"paymentTypeCode\\\":\\\"VD\\\",\\\"responseCode\\\":0,\\\"sharesAmount\\\":0,\\\"sharesAmountSpecified\\\":false,\\\"sharesNumber\\\":0,\\\"sharesNumberSpecified\\\":true,\\\"amount\\\":9990,\\\"commerceCode\\\":\\\"597020000541\\\",\\\"buyOrder\\\":\\\"oc_123456\\\"}],\\\"sessionId\\\":\\\"191\\\",\\\"transactionDate\\\":\\\"\\\\/Date(1486415963772)\\\\/\\\",\\\"transactionDateSpecified\\\":true,\\\"urlRedirection\\\":\\\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\\\",\\\"VCI\\\":\\\"TSY\\\"}\"","token_ws":"\"ef5b2b157a9fbff57363213149ff7fdd0db27f0a4f0476e082b8cce97bfd8b08\""}
+-------------------------------
+  :Response
+  :"ef5b2b157a9fbff57363213149ff7fdd0db27f0a4f0476e082b8cce97bfd8b08"
+-------------------------------
+
+Log Entry : 18:26:12 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e24c7ab52a36281a6451bccdf57ae6bbb37809e8525253476ed442b95a275591"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"166","transactionDate":"\/Date(1486416222724)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:26:32 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"166\",\"transactionDate\":\"\\/Date(1486416222724)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"e24c7ab52a36281a6451bccdf57ae6bbb37809e8525253476ed442b95a275591\""}
+-------------------------------
+  :Response
+  :"e24c7ab52a36281a6451bccdf57ae6bbb37809e8525253476ed442b95a275591"
+-------------------------------
+
+Log Entry : 18:26:39 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"166\",\"transactionDate\":\"\\/Date(1486416222724)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"e24c7ab52a36281a6451bccdf57ae6bbb37809e8525253476ed442b95a275591\""}
+-------------------------------
+  :Response
+  :"e24c7ab52a36281a6451bccdf57ae6bbb37809e8525253476ed442b95a275591"
+-------------------------------
+
+Log Entry : 18:28:34 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e6a861525fc626ded61315a235c63a1dbef928da28eeceae8469d776ea40a467"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"364","transactionDate":"\/Date(1486416358921)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:28:57 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"364\",\"transactionDate\":\"\\/Date(1486416358921)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"e6a861525fc626ded61315a235c63a1dbef928da28eeceae8469d776ea40a467\""}
+-------------------------------
+  :Response
+  :"e6a861525fc626ded61315a235c63a1dbef928da28eeceae8469d776ea40a467"
+-------------------------------
+
+Log Entry : 18:29:09 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"{\"accountingDate\":\"0206\",\"buyOrder\":\"oc_123456\",\"cardDetail\":{\"cardNumber\":\"6623\",\"cardExpirationDate\":null},\"detailOutput\":[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}],\"sessionId\":\"364\",\"transactionDate\":\"\\/Date(1486416358921)\\/\",\"transactionDateSpecified\":true,\"urlRedirection\":\"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi\",\"VCI\":\"TSY\"}","token_ws":"\"e6a861525fc626ded61315a235c63a1dbef928da28eeceae8469d776ea40a467\""}
+-------------------------------
+  :Response
+  :"e6a861525fc626ded61315a235c63a1dbef928da28eeceae8469d776ea40a467"
+-------------------------------
+
+Log Entry : 18:36:33 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ec2127f62d67d4743e72b2c93be435ee80c1db86a5f78a922b8c59c3b077adf3"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"212","transactionDate":"\/Date(1486416794254)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:38:09 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}]","token_ws":"\"ec2127f62d67d4743e72b2c93be435ee80c1db86a5f78a922b8c59c3b077adf3\""}
+-------------------------------
+  :Response
+  :"ec2127f62d67d4743e72b2c93be435ee80c1db86a5f78a922b8c59c3b077adf3"
+-------------------------------
+
+Log Entry : 18:38:12 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}]","token_ws":"\"ec2127f62d67d4743e72b2c93be435ee80c1db86a5f78a922b8c59c3b077adf3\""}
+-------------------------------
+  :Response
+  :"ec2127f62d67d4743e72b2c93be435ee80c1db86a5f78a922b8c59c3b077adf3"
+-------------------------------
+
+Log Entry : 18:44:29 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e91676587417b6848fe4881cb62af8a29fc833580803c6823975e788cc2cdd6e"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"655","transactionDate":"\/Date(1486417316756)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:45:34 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}]","token_ws":"\"e91676587417b6848fe4881cb62af8a29fc833580803c6823975e788cc2cdd6e\""}
+-------------------------------
+  :Response
+  :"e91676587417b6848fe4881cb62af8a29fc833580803c6823975e788cc2cdd6e"
+-------------------------------
+
+Log Entry : 18:45:35 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}]","token_ws":"\"e91676587417b6848fe4881cb62af8a29fc833580803c6823975e788cc2cdd6e\""}
+-------------------------------
+  :Response
+  :"e91676587417b6848fe4881cb62af8a29fc833580803c6823975e788cc2cdd6e"
+-------------------------------
+
+Log Entry : 18:46:32 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 18:48:48 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ef12ea99ee8a822335e37d731980f9f215a51c196c58a27746a071b82a2142c9"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"212","transactionDate":"\/Date(1486417589051)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:56:33 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e1322435273ffade9fbcc1f4138040e432ffedc1a2b649be70a49c9a0c742b7f"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"373","transactionDate":"\/Date(1486418054717)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:02:32 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e460be414cae9d9f7d28893e1ca679a8af5b068a1f30b43f25d0fa2429417f3a"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"702","transactionDate":"\/Date(1486418414403)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:03:43 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index
+-------------------------------
+
+Log Entry : 19:03:48 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index
+-------------------------------
+
+Log Entry : 19:06:56 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ecd47fd872b30a3867351227b3d6497595a87c20e8913c5247868e8c2c2ac942"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"535","transactionDate":"\/Date(1486418674259)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:07:04 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index
+-------------------------------
+
+Log Entry : 19:07:26 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 19:08:30 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ef3b5e3ddde66ddd48530a970da82935c4c065da468438ba38cf96c9e49eda30"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"724","transactionDate":"\/Date(1486418769825)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:11:39 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ed2ad93ac12c01f2a420d5256c87d306d201f3266d82a72388c3efce016a4a30"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"135","transactionDate":"\/Date(1486418955367)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:12:07 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}]","token_ws":"\"ed2ad93ac12c01f2a420d5256c87d306d201f3266d82a72388c3efce016a4a30\""}
+-------------------------------
+  :Response
+  :"ed2ad93ac12c01f2a420d5256c87d306d201f3266d82a72388c3efce016a4a30"
+-------------------------------
+
+Log Entry : 19:12:10 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","commercecode":"597020000541","amount":"9990","buyOrder":"oc_123456","responseCode":"0","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"[{\"authorizationCode\":\"1213\",\"paymentTypeCode\":\"VD\",\"responseCode\":0,\"sharesAmount\":0,\"sharesAmountSpecified\":false,\"sharesNumber\":0,\"sharesNumberSpecified\":true,\"amount\":9990,\"commerceCode\":\"597020000541\",\"buyOrder\":\"oc_123456\"}]","token_ws":"\"ed2ad93ac12c01f2a420d5256c87d306d201f3266d82a72388c3efce016a4a30\""}
+-------------------------------
+  :Response
+  :"ed2ad93ac12c01f2a420d5256c87d306d201f3266d82a72388c3efce016a4a30"
+-------------------------------
+
+Log Entry : 19:16:41 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ea6cb111287372b0b5e3e023acdca83f8fb94933e1073e73c85115d734af8b40"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"452","transactionDate":"\/Date(1486419258449)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:17:59 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :El tipo 'System.String' no se admite para la deserialización de una matriz.
+-------------------------------
+
+Log Entry : 19:23:16 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Referencia a objeto no establecida como instancia de un objeto.
+-------------------------------
+
+Log Entry : 19:24:26 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e872ed25a17df17de86d9a64c4a0d7d6a378e74338a995282a791ff21e1005af"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"24","transactionDate":"\/Date(1486419724308)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:44:28 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e11bbc4a35f4e69acbd6218605dd68d55027dcabce5f5ebac116923ffe1174c4"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"1111","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"919313","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"33","transactionDate":"\/Date(1486420928819)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:44:44 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:44:44 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:45:30 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 19:45:39 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 19:45:40 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 19:45:41 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 19:46:58 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e486b32de3634244bdce7c0d9f4cf6d451ac42f9c07ca9a2602fef4698ded6c9"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"542","transactionDate":"\/Date(1486421068566)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:47:10 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:49:34 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e791ae0fc44c6444316c54aa94d8ecb53ba9cd5137faaa014e7ddf07a9b89b86"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"419","transactionDate":"\/Date(1486421215640)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:49:45 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:50:29 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 19:50:30 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 19:51:46 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e001f68c380c920a93d66dd69bfdea4c1e4cee0b60bd2f8688cb6174a1b826a9"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"816","transactionDate":"\/Date(1486421355679)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:52:15 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:54:02 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"eda99b0198d18fe5876904ffbb0b850bcd2c69d4f013daf4dcba7ebd689a6076"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"739","transactionDate":"\/Date(1486421489235)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:54:34 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:54:34 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:57:26 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ed831d99727cf97abd172249158b9c227f38ec7c1e8bc6838d4c2c10ee112fbd"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"117","transactionDate":"\/Date(1486421696779)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:57:36 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:59:14 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e230fa97c566a61b6e6c73e8ebccb2c3f669979727523a87880c376cf0163c6e"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_1234560001","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_1234560001"}],"sessionId":"686","transactionDate":"\/Date(1486421798173)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 19:59:50 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 19:59:52 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 20:03:04 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ef66cebbe92026e58f83ff2a7ad62642e73343d0033d0a9ed1e7848421a804d3"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_102030","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_102030"}],"sessionId":"800","transactionDate":"\/Date(1486422035629)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:03:38 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 20:03:40 lunes, 06 de febrero de 2017
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :Ya se agregó un elemento con la misma clave.
+-------------------------------
+
+Log Entry : 20:05:16 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e12a1c2f6976673bf7552889da34ffa9badf4267a7cfc0277733463f3bec064d"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":124,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"491","transactionDate":"\/Date(1486422180641)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:05:52 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :Primitivo JSON no válido: Webpay.Transbank.Library.Wsdl.Normal.cardDetail.
+-------------------------------
+
+Log Entry : 20:09:34 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"edeff1d8567253f8b074530e5598d371d023ef1d23d00b7e4992029c75cc8230"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"159","transactionDate":"\/Date(1486422434499)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:09:42 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456,oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"9990","commerceCode":"597020000541","sessionId":"159","transactionDate":"06/02/2017 20:07:14","VCI":"TSY","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"edeff1d8567253f8b074530e5598d371d023ef1d23d00b7e4992029c75cc8230\""}
+-------------------------------
+  :Response
+  :"edeff1d8567253f8b074530e5598d371d023ef1d23d00b7e4992029c75cc8230"
+-------------------------------
+
+Log Entry : 20:17:28 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ef82f7eda9123c54160acdaa50e740c7721dcc016e23df41868c00df890c8669"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":9,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"921","transactionDate":"\/Date(1486422892337)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:17:40 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456,oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VC","responseCode":"0","sharesNumber":"9","amount":"9990","commerceCode":"597020000541","sessionId":"921","transactionDate":"06/02/2017 20:14:52","VCI":"TSY","detalletransaccion":"9990-1213-oc_123456-597020000541-VC-0-0-False-9-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"ef82f7eda9123c54160acdaa50e740c7721dcc016e23df41868c00df890c8669\""}
+-------------------------------
+  :Response
+  :"ef82f7eda9123c54160acdaa50e740c7721dcc016e23df41868c00df890c8669"
+-------------------------------
+
+Log Entry : 20:22:02 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e7e4a1941eea51c305adfc7bc9a8ab124de3a75a2bd797482f67fdcb1a285b68"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"548","transactionDate":"\/Date(1486423183716)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:22:24 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"9990","commerceCode":"597020000541","sessionId":"548","transactionDate":"06/02/2017 20:19:43","VCI":"TSY","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e7e4a1941eea51c305adfc7bc9a8ab124de3a75a2bd797482f67fdcb1a285b68\""}
+-------------------------------
+  :Response
+  :"e7e4a1941eea51c305adfc7bc9a8ab124de3a75a2bd797482f67fdcb1a285b68"
+-------------------------------
+
+Log Entry : 20:22:28 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"9990","commerceCode":"597020000541","sessionId":"548","transactionDate":"06/02/2017 20:19:43","VCI":"TSY","detalletransaccion":"9990-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e7e4a1941eea51c305adfc7bc9a8ab124de3a75a2bd797482f67fdcb1a285b68\""}
+-------------------------------
+  :Response
+  :"e7e4a1941eea51c305adfc7bc9a8ab124de3a75a2bd797482f67fdcb1a285b68"
+-------------------------------
+
+Log Entry : 20:26:45 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e0f131e173abcccbc50d9d1da47aec3529d154a304db5adbc55d64b5e1d1082b"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_100200300400","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":5,"sharesNumberSpecified":true,"amount":9990,"commerceCode":"597020000541","buyOrder":"oc_100200300400"}],"sessionId":"955","transactionDate":"\/Date(1486423457082)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:27:00 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_100200300400","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VC","responseCode":"0","sharesNumber":"5","amount":"9990","commerceCode":"597020000541","sessionId":"955","transactionDate":"06/02/2017 20:24:17","VCI":"TSY","detalletransaccion":"9990-1213-oc_100200300400-597020000541-VC-0-0-False-5-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e0f131e173abcccbc50d9d1da47aec3529d154a304db5adbc55d64b5e1d1082b\""}
+-------------------------------
+  :Response
+  :"e0f131e173abcccbc50d9d1da47aec3529d154a304db5adbc55d64b5e1d1082b"
+-------------------------------
+
+Log Entry : 20:43:46 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e9c487b619dff194b76d574901276c059b1c75be0f56700f06c0360f9b143704"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_10000200003000040000","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":9995,"commerceCode":"597020000541","buyOrder":"oc_10000200003000040000"}],"sessionId":"976","transactionDate":"\/Date(1486424449268)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:44:09 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_10000200003000040000","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"9995","commerceCode":"597020000541","sessionId":"976","transactionDate":"06/02/2017 20:40:49","VCI":"TSY","detalletransaccion":"9995-1213-oc_10000200003000040000-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e9c487b619dff194b76d574901276c059b1c75be0f56700f06c0360f9b143704\""}
+-------------------------------
+  :Response
+  :"e9c487b619dff194b76d574901276c059b1c75be0f56700f06c0360f9b143704"
+-------------------------------
+
+Log Entry : 20:44:12 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_10000200003000040000","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"9995","commerceCode":"597020000541","sessionId":"976","transactionDate":"06/02/2017 20:40:49","VCI":"TSY","detalletransaccion":"9995-1213-oc_10000200003000040000-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e9c487b619dff194b76d574901276c059b1c75be0f56700f06c0360f9b143704\""}
+-------------------------------
+  :Response
+  :"e9c487b619dff194b76d574901276c059b1c75be0f56700f06c0360f9b143704"
+-------------------------------
+
+Log Entry : 20:49:21 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e5a095b6e6713779e54465c44c63c498236157ea80f9b785621ea432d0e665cb"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456000001254","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"S2","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":2,"sharesNumberSpecified":true,"amount":12345,"commerceCode":"597020000541","buyOrder":"oc_123456000001254"}],"sessionId":"727","transactionDate":"\/Date(1486424780267)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:49:34 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456000001254","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"S2","responseCode":"0","sharesNumber":"2","amount":"12345","commerceCode":"597020000541","sessionId":"727","transactionDate":"06/02/2017 20:46:20","VCI":"TSY","detalletransaccion":"12345-1213-oc_123456000001254-597020000541-S2-0-0-False-2-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e5a095b6e6713779e54465c44c63c498236157ea80f9b785621ea432d0e665cb\""}
+-------------------------------
+  :Response
+  :"e5a095b6e6713779e54465c44c63c498236157ea80f9b785621ea432d0e665cb"
+-------------------------------
+
+Log Entry : 20:53:00 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 20:53:45 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 20:54:53 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ee47c7ad478fefb9a703013da53521669a0002c8145535f2f79e130d090622e1"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123000123000123","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123000123000123"}],"sessionId":"585","transactionDate":"\/Date(1486425152335)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 20:55:04 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123000123000123","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"1234","commerceCode":"597020000541","sessionId":"585","transactionDate":"06/02/2017 20:52:32","VCI":"TSY","detalletransaccion":"1234-1213-oc_123000123000123-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"ee47c7ad478fefb9a703013da53521669a0002c8145535f2f79e130d090622e1\""}
+-------------------------------
+  :Response
+  :"ee47c7ad478fefb9a703013da53521669a0002c8145535f2f79e130d090622e1"
+-------------------------------
+
+Log Entry : 20:56:20 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e81cbf797f4fa5f6d32387b6f83177bd9441b27705baedb5c52efd6b93ac6b0c"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456000120012045","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VC","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":6,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123456000120012045"}],"sessionId":"554","transactionDate":"\/Date(1486425231913)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------
+
+Log Entry : 20:58:31 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :El valor no puede ser nulo.
+Nombre del parámetro: key
+-------------------------------
+
+Log Entry : 20:59:54 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ec33d282bc265e79eaf9fe9d0c3f141e61c53b4e41ce7035563702aa7962798d"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_1234560000112","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VN","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":45612,"commerceCode":"597020000541","buyOrder":"oc_1234560000112"}],"sessionId":"129","transactionDate":"\/Date(1486425429950)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------
+
+Log Entry : 21:00:01 lunes, 06 de febrero de 2017
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :El valor no puede ser nulo.
+Nombre del parámetro: key
+-------------------------------
+
+Log Entry : 21:04:59 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ec6f6a94e8b78de242a5f5ff989f6e82d441255a64ab330f368f4e90a2d16a1a"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"NC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":4,"sharesNumberSpecified":true,"amount":203,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"363","transactionDate":"\/Date(1486425724453)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:05:13 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"NC","responseCode":"0","sharesNumber":"4","amount":"203","commerceCode":"597020000541","sessionId":"363","transactionDate":"06/02/2017 21:02:04","VCI":"TSY","detalletransaccion":"203-1213-oc_123456-597020000541-NC-0-0-False-4-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"ec6f6a94e8b78de242a5f5ff989f6e82d441255a64ab330f368f4e90a2d16a1a\""}
+-------------------------------
+  :Response
+  :"ec6f6a94e8b78de242a5f5ff989f6e82d441255a64ab330f368f4e90a2d16a1a"
+-------------------------------
+
+Log Entry : 21:05:31 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"1213","authorizedAmount":"203","buyOrder":"828","nullifyAmount":"3","commercecode":"597020000541"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 21:06:51 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e0b8cb5fe7ab0cc5b28bfa75d355fcc1096e3f920acff604b1ebdbc99651cb6d"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"509368","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":12,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"414","transactionDate":"\/Date(1486425873593)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:07:00 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"509368","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"12","commerceCode":"597020000541","sessionId":"414","transactionDate":"06/02/2017 21:04:33","VCI":"TSY","detalletransaccion":"12-509368-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e0b8cb5fe7ab0cc5b28bfa75d355fcc1096e3f920acff604b1ebdbc99651cb6d\""}
+-------------------------------
+  :Response
+  :"e0b8cb5fe7ab0cc5b28bfa75d355fcc1096e3f920acff604b1ebdbc99651cb6d"
+-------------------------------
+
+Log Entry : 21:07:27 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"509368","authorizedAmount":"12","buyOrder":"828","nullifyAmount":"3","commercecode":"597020000541"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 21:07:33 lunes, 06 de febrero de 2017
+  :Request
+  :{"authorizationCode":"509368","authorizedAmount":"12","buyOrder":"828","nullifyAmount":"3","commercecode":"597020000541"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 21:13:16 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e1e7c88a9e1956167bcd0cf7a957410a60323b89d65eda720c0f34be49ddac25"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"NC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":4,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"845","transactionDate":"\/Date(1486426234785)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:13:39 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"NC","responseCode":"0","sharesNumber":"4","amount":"1234","commerceCode":"597020000541","sessionId":"845","transactionDate":"06/02/2017 21:10:34","VCI":"TSY","detalletransaccion":"1234-1213-oc_123456-597020000541-NC-0-0-False-4-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e1e7c88a9e1956167bcd0cf7a957410a60323b89d65eda720c0f34be49ddac25\""}
+-------------------------------
+  :Response
+  :"e1e7c88a9e1956167bcd0cf7a957410a60323b89d65eda720c0f34be49ddac25"
+-------------------------------
+
+Log Entry : 21:27:00 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e49023d650f85120e02a11c0a102a7c25afe195dbba9b29a6ecf3a9cc695b2b1"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"364","transactionDate":"\/Date(1486427079026)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:27:47 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"123","commerceCode":"597020000541","sessionId":"364","transactionDate":"06/02/2017 21:24:39","VCI":"TSY","detalletransaccion":"123-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e49023d650f85120e02a11c0a102a7c25afe195dbba9b29a6ecf3a9cc695b2b1\""}
+-------------------------------
+  :Response
+  :"e49023d650f85120e02a11c0a102a7c25afe195dbba9b29a6ecf3a9cc695b2b1"
+-------------------------------
+
+Log Entry : 21:30:44 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"eccf3531818b1b841e99601af8012b28e3528bede65d978e14c2eb82e5187032"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"754","transactionDate":"\/Date(1486427309765)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:30:44 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"eccf3531818b1b841e99601af8012b28e3528bede65d978e14c2eb82e5187032"}
+-------------------------------
+  :Response
+  :Subproceso anulado.
+-------------------------------
+
+Log Entry : 21:30:54 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"eccf3531818b1b841e99601af8012b28e3528bede65d978e14c2eb82e5187032"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 21:31:53 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e47c3181547ae90c555ac8a22052ecc6b78ca6c9aa4b0a2c65fb54b23b06cdd2"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"632","transactionDate":"\/Date(1486427369300)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:31:58 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e47c3181547ae90c555ac8a22052ecc6b78ca6c9aa4b0a2c65fb54b23b06cdd2"}
+-------------------------------
+  :Response
+  :Subproceso anulado.
+-------------------------------
+
+Log Entry : 21:33:58 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ed9f16ab168d80b186320e19030c536925590c8c727957ae0cb8e0bb96c85ad3"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"764","transactionDate":"\/Date(1486427503959)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:34:02 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ed9f16ab168d80b186320e19030c536925590c8c727957ae0cb8e0bb96c85ad3"}
+-------------------------------
+  :Response
+  :Subproceso anulado.
+-------------------------------
+
+Log Entry : 21:36:23 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e8c64d933b63714c083da0e369f0b688da6f77a5a744e95c3d8f82783bc023b5"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"928","transactionDate":"\/Date(1486427645021)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:36:29 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e8c64d933b63714c083da0e369f0b688da6f77a5a744e95c3d8f82783bc023b5"}
+-------------------------------
+  :Response
+  :Subproceso anulado.
+-------------------------------
+
+Log Entry : 21:44:51 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"eeb64c5b6c234d9a2b0e2a57951c4215835263d0c6684d5eeb4d77259ef6b6ed"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"438","transactionDate":"\/Date(1486428158443)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:45:41 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"eeb64c5b6c234d9a2b0e2a57951c4215835263d0c6684d5eeb4d77259ef6b6ed"}
+-------------------------------
+  :Response
+  :Error en el servidor remoto: (500) Error interno del servidor.
+-------------------------------
+
+Log Entry : 21:45:57 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"123","commerceCode":"597020000541","sessionId":"438","transactionDate":"06/02/2017 21:42:38","VCI":"TSY","detalletransaccion":"123-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"eeb64c5b6c234d9a2b0e2a57951c4215835263d0c6684d5eeb4d77259ef6b6ed\""}
+-------------------------------
+  :Response
+  :"eeb64c5b6c234d9a2b0e2a57951c4215835263d0c6684d5eeb4d77259ef6b6ed"
+-------------------------------
+
+Log Entry : 21:47:26 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ed22a2db4768397dc7b2a6c2ca6a3ed67793308cdd99651f16ff5301f7314f60"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"730","transactionDate":"\/Date(1486428309848)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:47:28 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"ed22a2db4768397dc7b2a6c2ca6a3ed67793308cdd99651f16ff5301f7314f60"}
+-------------------------------
+  :Response
+  :Error en el servidor remoto: (500) Error interno del servidor.
+-------------------------------
+
+Log Entry : 21:52:30 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e63c1ee48dce9124f1b0dbc310d4b1dd7edaf8dfdaacbf62c042af856b314d43"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"65","transactionDate":"\/Date(1486428617807)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:52:49 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VD","responseCode":"0","sharesNumber":"0","amount":"123","commerceCode":"597020000541","sessionId":"65","transactionDate":"06/02/2017 21:50:17","VCI":"TSY","detalletransaccion":"123-1213-oc_123456-597020000541-VD-0-0-False-0-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e63c1ee48dce9124f1b0dbc310d4b1dd7edaf8dfdaacbf62c042af856b314d43\""}
+-------------------------------
+  :Response
+  :"e63c1ee48dce9124f1b0dbc310d4b1dd7edaf8dfdaacbf62c042af856b314d43"
+-------------------------------
+
+Log Entry : 21:57:32 lunes, 06 de febrero de 2017
+  :Request
+  :{"token":"e1814bcac2d0f8c54129c2c315f2ccd4b31ee77a40fb40c29f8e04e665191677"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0206","buyOrder":"oc_123456","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":8,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456"}],"sessionId":"932","transactionDate":"\/Date(1486428905064)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:57:46 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VC","responseCode":"0","sharesNumber":"8","amount":"123","commerceCode":"597020000541","sessionId":"932","transactionDate":"06/02/2017 21:55:05","VCI":"TSY","detalletransaccion":"123-1213-oc_123456-597020000541-VC-0-0-False-8-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e1814bcac2d0f8c54129c2c315f2ccd4b31ee77a40fb40c29f8e04e665191677\""}
+-------------------------------
+  :Response
+  :"e1814bcac2d0f8c54129c2c315f2ccd4b31ee77a40fb40c29f8e04e665191677"
+-------------------------------
+
+Log Entry : 21:57:47 lunes, 06 de febrero de 2017
+  :Request
+  :{"accountingDate":"0206","buyOrder":"oc_123456","Cardnumber":"6623","CardExpirationDate":"","authorizationCode":"1213","paymentTypeCode":"VC","responseCode":"0","sharesNumber":"8","amount":"123","commerceCode":"597020000541","sessionId":"932","transactionDate":"06/02/2017 21:55:05","VCI":"TSY","detalletransaccion":"123-1213-oc_123456-597020000541-VC-0-0-False-8-True","resoluciontransaccion":"Webpay.Transbank.Library.Wsdl.Normal.cardDetail","token_ws":"\"e1814bcac2d0f8c54129c2c315f2ccd4b31ee77a40fb40c29f8e04e665191677\""}
+-------------------------------
+  :Response
+  :"e1814bcac2d0f8c54129c2c315f2ccd4b31ee77a40fb40c29f8e04e665191677"
+-------------------------------
