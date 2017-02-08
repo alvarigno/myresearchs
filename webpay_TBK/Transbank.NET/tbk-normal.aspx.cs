@@ -44,6 +44,8 @@ namespace Transbank.NET
         /** Mensaje de Ejecución */
         private string message;
 
+        private string[] keys;
+
         /** Crea Dictionary con datos Integración Pruebas */
         private Dictionary<string, string> certificate = Transbank.NET.sample.certificates.CertNormal.certificate();
 
@@ -120,12 +122,14 @@ namespace Transbank.NET
             HttpContext.Current.Response.Write("<div class='col-xs-12 col-md-12 u-bg-gray-light'>");
             HttpContext.Current.Response.Write("<div style='text-align:center;margin:0 auto;display:block;margin-bottom:15px;'>");
             HttpContext.Current.Response.Write("<h3> PAGO CON TRANSBANK</h3>");
-            HttpContext.Current.Response.Write("<img src='/imagenes/logos/tarjetas_webpay.gif' border='0'>");
-            HttpContext.Current.Response.Write("<img src= '/imagenes/logos/WPP2.jpg' border='0'>");
+            HttpContext.Current.Response.Write("<img src='imagenes/logos/tarjetas_webpay.gif' border='0'>");
+            HttpContext.Current.Response.Write("<img src= 'imagenes/logos/WPP2.jpg' border='0'>");
             HttpContext.Current.Response.Write("</div>");
             HttpContext.Current.Response.Write("<div class='search-wrapper'>");
             HttpContext.Current.Response.Write("<div class='tab-content tab-content--search'>");
             HttpContext.Current.Response.Write("<div id='tab-marca-y-modelo' class='tab-pane active fade in' role='tabpanel'>");
+
+            keys = Request.Form.AllKeys;
 
             switch (action)
             {
@@ -141,7 +145,13 @@ namespace Transbank.NET
                         HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Confirmación de Datos para inicio de Proceso</p>");
 
                         Random random = new Random();
-                        string[] keys = Request.Form.AllKeys;
+                        
+
+                        //for(int i=0; i<keys.Length; i++) {
+
+                        //   HttpContext.Current.Response.Write(keys[i]+": "+Request.Form[keys[i]]+"<br />");
+
+                        //}
 
                         HttpContext.Current.Response.Write("<label>Nombre:</label> <strong>" + Request.Form[keys[0]] + "</strong><br />");
                         HttpContext.Current.Response.Write("<label>RUT:</label> <strong>" + Request.Form[keys[1]] + "-" + Request.Form[keys[2]] + "</strong><br />");
@@ -159,7 +169,8 @@ namespace Transbank.NET
                         buyOrder = Request.Form[keys[6]];
 
                         /** (Opcional) Identificador de sesión, uso interno de comercio */
-                        string sessionId = random.Next(0, 1000).ToString();
+                        //string sessionId = random.Next(0, 1000).ToString();
+                        string sessionId = Request.Form[keys[6]];
 
                         /** URL Final */
                         baseurl = Request.Form[keys[11]];
@@ -200,7 +211,7 @@ namespace Transbank.NET
                         requestTBK = request;
                         resultresponseTBK = result;
 
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step);
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, Request.Form[keys[6]]);
 
                     }
                     catch (Exception ex)
@@ -208,7 +219,7 @@ namespace Transbank.NET
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>Respuesta</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
                         HttpContext.Current.Response.Write("Favor de completar el formulario con datos correctos.");
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Form[keys[6]]);
                     }
 
                     break;
@@ -235,6 +246,7 @@ namespace Transbank.NET
 
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
+
 
                         if (result.detailOutput[0].responseCode == 0)
                         {
@@ -266,13 +278,42 @@ namespace Transbank.NET
                             ChCookie.Values.Add("commerceCode", result.detailOutput[0].commerceCode);
                             ChCookie.Values.Add("sessionId", result.sessionId);
                             ChCookie.Values.Add("transactionDate", result.transactionDate.ToString());
+                            ChCookie.Values.Add("transactionDateSpecified", result.transactionDateSpecified.ToString());
                             ChCookie.Values.Add("VCI", result.VCI);
                             ChCookie.Values.Add("detalletransaccion", result.detailOutput[0].amount + "-" + result.detailOutput[0].authorizationCode + "-" + result.detailOutput[0].buyOrder + "-" + result.detailOutput[0].commerceCode + "-" + result.detailOutput[0].paymentTypeCode + "-" + result.detailOutput[0].responseCode + "-" + result.detailOutput[0].sharesAmount + "-" + result.detailOutput[0].sharesAmountSpecified + "-" + result.detailOutput[0].sharesNumber + "-" + result.detailOutput[0].sharesNumberSpecified);
                             ChCookie.Values.Add("resoluciontransaccion", HttpUtility.HtmlEncode(result.cardDetail));
                             Response.Cookies.Add(ChCookie);
 
-                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step);
+                            //HttpContext.Current.Response.Write("Día: "+result.transactionDate.Day+"<br />");
+                            //HttpContext.Current.Response.Write("Mes: "+result.transactionDate.Month + "<br />");
+                            //HttpContext.Current.Response.Write("Año: "+result.transactionDate.Year + "<br />");
+                            //HttpContext.Current.Response.Write("Hora: "+result.transactionDate.Hour + "<br />");
+                            //HttpContext.Current.Response.Write("Minutos: "+result.transactionDate.Minute + "<br />");
+                            //HttpContext.Current.Response.Write("Segundos: "+result.transactionDate.Second + "<br />");
+                            //HttpContext.Current.Response.Write("Milesimas: "+result.transactionDate.Millisecond + "<br />");
+                            //HttpContext.Current.Response.Write("Detalle salida: "+ new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result.detailOutput) + "<br />");
+                            //HttpContext.Current.Response.Write("idTransaccion: " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request["token"]) + "<br />");
 
+                            Dictionary<string, string> detalletransaccion = new Dictionary<string, string>();
+                            detalletransaccion.Add("idOC", result.detailOutput[0].buyOrder);
+                            detalletransaccion.Add("tipo_transaccion", "TR_NORMAL");
+                            detalletransaccion.Add("TBK_Respuesta", result.detailOutput[0].responseCode.ToString());
+                            detalletransaccion.Add("TBK_Monto", result.detailOutput[0].amount.ToString());
+                            detalletransaccion.Add("TBK_cod_autorizacion", result.detailOutput[0].authorizationCode);
+                            detalletransaccion.Add("TBK_final_tarjeta", result.cardDetail.cardNumber.ToString());
+                            detalletransaccion.Add("TBK_fecha_contable", result.accountingDate);
+                            detalletransaccion.Add("TBK_fecha_transaccion", result.accountingDate);
+                            detalletransaccion.Add("TBK_hora_transaccion", result.transactionDate.Hour.ToString() + result.transactionDate.Minute.ToString() + result.transactionDate.Second.ToString());
+                            detalletransaccion.Add("TBK_id_session", result.sessionId);
+                            detalletransaccion.Add("TBK_id_transaccion", result.sessionId);
+                            detalletransaccion.Add("TBK_tipo_pago", result.detailOutput[0].paymentTypeCode);
+                            detalletransaccion.Add("TBK_numero_cuotas", result.detailOutput[0].sharesNumber.ToString());
+                            detalletransaccion.Add("TBK_tasa_interes_max", "");
+                            detalletransaccion.Add("fecha_f_trans",  result.transactionDate.ToString());
+
+
+                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
+                            UpDateEstadoDocumento(detalletransaccion);
 
                         }
                         else
@@ -280,14 +321,43 @@ namespace Transbank.NET
                             message = "Pago RECHAZADO por webpay <br />Código : " + result.detailOutput[0].responseCode + "<br /> Descripción: " + codes[result.detailOutput[0].responseCode.ToString()];
 
                             HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
-                            ChCookie.Values.Add("authorizationCode", result.detailOutput[0].authorizationCode);
-                            ChCookie.Values.Add("commercecode", result.detailOutput[0].commerceCode);
-                            ChCookie.Values.Add("amount", result.detailOutput[0].amount.ToString());
+                            ChCookie.Values.Add("accountingDate", result.accountingDate);
                             ChCookie.Values.Add("buyOrder", result.detailOutput[0].buyOrder);
+                            ChCookie.Values.Add("Cardnumber", result.cardDetail.cardNumber);
+                            ChCookie.Values.Add("CardExpirationDate", result.cardDetail.cardExpirationDate);
+                            ChCookie.Values.Add("authorizationCode", result.detailOutput[0].authorizationCode);
+                            ChCookie.Values.Add("paymentTypeCode", result.detailOutput[0].paymentTypeCode);
                             ChCookie.Values.Add("responseCode", result.detailOutput[0].responseCode.ToString());
+                            ChCookie.Values.Add("sharesNumber", result.detailOutput[0].sharesNumber.ToString());
+                            ChCookie.Values.Add("amount", result.detailOutput[0].amount.ToString());
+                            ChCookie.Values.Add("commerceCode", result.detailOutput[0].commerceCode);
+                            ChCookie.Values.Add("sessionId", result.sessionId);
+                            ChCookie.Values.Add("transactionDate", result.transactionDate.ToString());
+                            ChCookie.Values.Add("transactionDateSpecified", result.transactionDateSpecified.ToString());
+                            ChCookie.Values.Add("VCI", result.VCI);
+                            ChCookie.Values.Add("detalletransaccion", result.detailOutput[0].amount + "-" + result.detailOutput[0].authorizationCode + "-" + result.detailOutput[0].buyOrder + "-" + result.detailOutput[0].commerceCode + "-" + result.detailOutput[0].paymentTypeCode + "-" + result.detailOutput[0].responseCode + "-" + result.detailOutput[0].sharesAmount + "-" + result.detailOutput[0].sharesAmountSpecified + "-" + result.detailOutput[0].sharesNumber + "-" + result.detailOutput[0].sharesNumberSpecified);
+                            ChCookie.Values.Add("resoluciontransaccion", HttpUtility.HtmlEncode(result.cardDetail));
                             Response.Cookies.Add(ChCookie);
 
-                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step);
+                            Dictionary<string, string> detalletransaccion = new Dictionary<string, string>();
+                            detalletransaccion.Add("idOC", result.detailOutput[0].buyOrder);
+                            detalletransaccion.Add("tipo_transaccion", "TR_NORMAL");
+                            detalletransaccion.Add("TBK_Respuesta", result.detailOutput[0].responseCode.ToString());
+                            detalletransaccion.Add("TBK_Monto", result.detailOutput[0].amount.ToString());
+                            detalletransaccion.Add("TBK_cod_autorizacion", result.detailOutput[0].authorizationCode);
+                            detalletransaccion.Add("TBK_final_tarjeta", result.cardDetail.cardNumber.ToString());
+                            detalletransaccion.Add("TBK_fecha_contable", result.accountingDate);
+                            detalletransaccion.Add("TBK_fecha_transaccion", result.accountingDate);
+                            detalletransaccion.Add("TBK_hora_transaccion", result.transactionDate.Hour.ToString() + result.transactionDate.Minute.ToString() + result.transactionDate.Second.ToString());
+                            detalletransaccion.Add("TBK_id_session", result.sessionId);
+                            detalletransaccion.Add("TBK_id_transaccion", result.sessionId);
+                            detalletransaccion.Add("TBK_tipo_pago", result.detailOutput[0].paymentTypeCode);
+                            detalletransaccion.Add("TBK_numero_cuotas", result.detailOutput[0].sharesNumber.ToString());
+                            detalletransaccion.Add("TBK_tasa_interes_max", "");
+                            detalletransaccion.Add("fecha_f_trans", result.transactionDate.ToString());
+
+                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
+                            UpDateEstadoDocumento(detalletransaccion);
                         }
 
                         HttpContext.Current.Response.Write(message + "</br></br>");
@@ -298,7 +368,7 @@ namespace Transbank.NET
                     {
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request["token"]));
                     }
 
                     break;
@@ -332,6 +402,7 @@ namespace Transbank.NET
                                 responseTBK.Add("commerceCode", Request.Cookies["ChileautosSettingTBK"]["commerceCode"]);
                                 responseTBK.Add("sessionId", Request.Cookies["ChileautosSettingTBK"]["sessionId"]);
                                 responseTBK.Add("transactionDate", Request.Cookies["ChileautosSettingTBK"]["transactionDate"]);
+                                responseTBK.Add("transactionDateSpecified", Request.Cookies["ChileautosSettingTBK"]["transactionDateSpecified"]);
                                 responseTBK.Add("VCI", Request.Cookies["ChileautosSettingTBK"]["VCI"]);
                                 responseTBK.Add("detalletransaccion", Request.Cookies["ChileautosSettingTBK"]["detalletransaccion"]);
                                 responseTBK.Add("resoluciontransaccion", HttpUtility.HtmlDecode(Request.Cookies["ChileautosSettingTBK"]["resoluciontransaccion"]));
@@ -349,11 +420,14 @@ namespace Transbank.NET
 
                         string codpago ="";
                         if (description.ContainsKey(responseTBK["paymentTypeCode"]))
+                        {
                             codpago = description[responseTBK["paymentTypeCode"]];
-
+                        }
                         string codrespuesta = "";
                         if (codes.ContainsKey(responseTBK["responseCode"]))
+                        {
                             codrespuesta = codes[responseTBK["responseCode"]];
+                        }
 
                         HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
                         HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
@@ -375,14 +449,15 @@ namespace Transbank.NET
 
                         string next_page = baseurl + "?action=nullify";
 
-                        HttpContext.Current.Response.Write("<form action=" + next_page + " method='post'><input type='hidden' name='commercecode' id='commercecode' value=''><input type='hidden' name='authorizationCode' id='authorizationCode' value=''><input type='hidden' name='amount' id='amount' value=''><input type='hidden' name='buyOrder' id='buyOrder' value=''><input type='submit' value='Anular Transacci&oacute;n &raquo;'></form>");
-                        HttpContext.Current.Response.Write("<script>var commercecode = localStorage.getItem('commercecode');document.getElementById('commercecode').value = commercecode;</script>");
-                        HttpContext.Current.Response.Write("<script>var authorizationCode = localStorage.getItem('authorizationCode');document.getElementById('authorizationCode').value = authorizationCode;</script>");
-                        HttpContext.Current.Response.Write("<script>var amount = localStorage.getItem('amount');document.getElementById('amount').value = amount;</script>");
-                        HttpContext.Current.Response.Write("<script>var buyOrder = localStorage.getItem('buyOrder');document.getElementById('buyOrder').value = buyOrder;</script>");
-
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(responseTBK), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]), tx_step);
-
+                        //HttpContext.Current.Response.Write("<form action=" + next_page + " method='post'><input type='hidden' name='commercecode' id='commercecode' value=''><input type='hidden' name='authorizationCode' id='authorizationCode' value=''><input type='hidden' name='amount' id='amount' value=''><input type='hidden' name='buyOrder' id='buyOrder' value=''><input type='submit' value='Anular Transacci&oacute;n &raquo;'></form>");
+                        //HttpContext.Current.Response.Write("<script>var commercecode = localStorage.getItem('commercecode');document.getElementById('commercecode').value = commercecode;</script>");
+                        //HttpContext.Current.Response.Write("<script>var authorizationCode = localStorage.getItem('authorizationCode');document.getElementById('authorizationCode').value = authorizationCode;</script>");
+                        //HttpContext.Current.Response.Write("<script>var amount = localStorage.getItem('amount');document.getElementById('amount').value = amount;</script>");
+                        //HttpContext.Current.Response.Write("<script>var buyOrder = localStorage.getItem('buyOrder');document.getElementById('buyOrder').value = buyOrder;</script>");
+                        
+                        //createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(responseTBK), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]), tx_step, Request.Form[keys[6]]);
+                        //leearchivo(responseTBK["buyOrder"]);
+                        
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
                         ChCookie.Expires = DateTime.Now.AddDays(-1d);
                         Response.Cookies.Add(ChCookie);
@@ -391,13 +466,14 @@ namespace Transbank.NET
                     catch (Exception ex)
                     {
 
+                        //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
+                        HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Cookies["ChileautosSettingTBK"]["buyOrder"]);
+
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
                         ChCookie.Expires = DateTime.Now.AddDays(-1d);
                         Response.Cookies.Add(ChCookie);
 
-                        //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
-                        HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
                     }
 
                     break;
@@ -443,14 +519,14 @@ namespace Transbank.NET
 
                         message = "Transacci&oacute;n Finalizada";
                         HttpContext.Current.Response.Write(message + "</br></br>");
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(resultNullify), tx_step);
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(resultNullify), tx_step, buyOrder.ToString());
 
                     }
                     catch (Exception ex)
                     {
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step);
+                        //createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Form[keys[6]]);
                     }
 
                     break;
@@ -468,7 +544,7 @@ namespace Transbank.NET
 
         }
 
-        protected void createlog(string recibetTBK, string resultresponseTBK, string tx_step) {
+        protected void createlog(string recibetTBK, string resultresponseTBK, string tx_step, string filename) {
 
             string m_exePath = string.Empty;
             //m_exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -484,9 +560,9 @@ namespace Transbank.NET
 
             try
             {
-                using (StreamWriter w = File.AppendText(m_exePath + "\\" + "log.txt"))
+                using (StreamWriter w = File.AppendText(m_exePath + "\\" + filename+"_log.txt"))
                 {
-                    Log(recibetTBK, resultresponseTBK, w);
+                    Log(recibetTBK, resultresponseTBK, w, tx_step);
                 }
             }
             catch (Exception ex)
@@ -495,13 +571,13 @@ namespace Transbank.NET
 
         }
 
-        protected void Log(string logMessage, string logMessage2,  TextWriter txtWriter)
+        protected void Log(string logMessage, string logMessage2,  TextWriter txtWriter, string stepname)
         {
             try
             {
                 txtWriter.Write("\r\nLog Entry : ");
-                txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
-                    DateTime.Now.ToLongDateString());
+                txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString());
+                txtWriter.WriteLine("  :{0}", stepname);
                 txtWriter.WriteLine("  :Request");
                 txtWriter.WriteLine("  :{0}", logMessage);
                 txtWriter.WriteLine("-------------------------------");
@@ -512,6 +588,42 @@ namespace Transbank.NET
             catch (Exception ex)
             {
             }
+        }
+
+        protected void leearchivo(string path) {
+
+            string readText = File.ReadAllText(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)+ "\\logsresponse\\" + path +"_log.txt");
+            HttpContext.Current.Response.Write("lecura del documento" + readText);
+        }
+
+
+
+        public void UpDateEstadoDocumento(Dictionary<string, string> datosupdate)
+        {
+
+            int datoestado = 0;
+
+            if (int.Parse(datosupdate["TBK_Respuesta"]) == 0) {
+
+                datoestado = 1;
+
+            }
+
+            myConnection myConn = new myConnection();
+
+            using (var connection = new System.Data.SqlClient.SqlCommand())
+            {
+                //HttpContext.Current.Response.Write("UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '"+ datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '"+ datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '"+ datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '"+ datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '"+ datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '"+ datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '"+ datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '"+ datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '"+ datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '"+ datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '"+ datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '"+ datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= "+datoestado +" , [fecha_f_trans] = '" + datosupdate["fecha_f_trans"] + "' WHERE TBK_ORDEN_COMPRA = '"+ datosupdate["idOC"] + "'");
+                connection.Connection = myConnection.GetConnection();
+                connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = '" + datosupdate["fecha_f_trans"] + "' WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
+                connection.ExecuteNonQuery();
+                connection.Connection.Close();
+                connection.Dispose();
+                System.Data.SqlClient.SqlConnection.ClearAllPools();
+
+
+            }
+
         }
 
 

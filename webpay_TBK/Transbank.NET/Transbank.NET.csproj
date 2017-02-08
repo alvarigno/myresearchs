@@ -79,6 +79,7 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="myConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="certificates\cert-normal.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -102,13 +103,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\pagoTBK-local.pubxml" />
     <None Include="Properties\PublishProfiles\Prueba.pubxml" />
     <None Include="Properties\PublishProfiles\Webpay.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="certificates\597020000541\597020000541.pfx" />
+    <Content Include="certificates\597020000541\597020000541.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="certificates\597020000541\tbk.pem" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

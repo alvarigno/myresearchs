@@ -1,0 +1,18 @@
+
+Log Entry : 17:46:33 martes, 07 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e82e81e6982d45646a21fa6b3414c77a39f3b3bce72220776c259874f922ad55"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0207","buyOrder":"oc_123456005","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"oc_123456005"}],"sessionId":"oc_123456005","transactionDate":"\/Date(1486500255698)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 17:46:43 martes, 07 de febrero de 2017
+  :End
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :No se pudo encontrar el archivo 'C:\Users\Álvaro\Source\Repos\myresearchs\webpay_TBK\Transbank.NET\logsrequest\oc_123456005.txt'.
+-------------------------------

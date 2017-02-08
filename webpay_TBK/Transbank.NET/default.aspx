@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head>
     <title></title>
 </head>
 <body>
@@ -20,7 +20,7 @@
 </table>
 
                     <div id="tab-marca-y-modelo" class="tab-pane active fade in" role="tabpanel">
-                        <FORM name="form1" METHOD="POST" ACTION="tbk-normal.aspx?i=0">
+                        <form id="form1" action="tbk-normal.aspx?i=0" method="post">
 
 							<div class="row">
 								<div class="col-sm-12 form-row">
@@ -73,7 +73,7 @@
 							<div class="row">
                                 <div class="col-sm-12 form-row">
                                     <div class="form-group">
-										<nobr><INPUT TYPE="TEXT" ID="TBK_MONTO2" NAME="TBK_MONTO2" VALUE="" maxlength="7" class="form-control" placeholder="Monto a pagar a Chileautos $ (en pesos" ></nobr> 
+										<nobr><INPUT TYPE="TEXT" ID="TBK_MONTO2" NAME="TBK_MONTO2" VALUE="" maxlength="7" class="form-control" placeholder="Monto a pagar a Chileautos $ (en pesos)" ></nobr> 
 									</div>
                                 </div>
                             </div>
@@ -109,7 +109,8 @@
 							<div class="row">
                                 <div class="col-sm-12 form-row">
                                     <div class="form-group">
-										<INPUT TYPE="submit" VALUE="PAGAR CON REDCOMPRA o TARJETA DE CR�DITO" SIZE="20" class="form-control" style="color:#ffffff;background-color:#003366;"> 
+										<INPUT TYPE="submit" VALUE="PAGAR CON REDCOMPRA o TARJETA DE CR�DITO" SIZE="20" class="form-control" style="color:#ffffff;background-color:#003366;">
+                                        
                                     </div>
                                 </div>
                             </div>

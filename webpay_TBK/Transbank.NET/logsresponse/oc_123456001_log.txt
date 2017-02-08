@@ -1,0 +1,9 @@
+
+Log Entry : 17:03:44 martes, 07 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e3224571627adeef6138a84493dd5623c7527cdfdd9f1d3e008f3df35adc9b9f"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0207","buyOrder":"oc_123456001","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VD","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123456001"}],"sessionId":"oc_123456001","transactionDate":"\/Date(1486497671483)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------

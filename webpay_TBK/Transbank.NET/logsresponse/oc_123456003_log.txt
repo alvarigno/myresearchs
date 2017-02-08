@@ -1,0 +1,27 @@
+
+Log Entry : 17:41:15 martes, 07 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"ea4e6760f59d9a802b89ca2d93fad7b518b614da56c0be7e6692565924d52555"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0207","buyOrder":"oc_123456003","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123456003"}],"sessionId":"oc_123456003","transactionDate":"\/Date(1486499936323)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 17:41:31 martes, 07 de febrero de 2017
+  :End
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :No se pudo encontrar el archivo 'C:\Program Files (x86)\IIS Express\oc_123456003.txt'.
+-------------------------------
+
+Log Entry : 17:41:34 martes, 07 de febrero de 2017
+  :End
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :No se pudo encontrar el archivo 'C:\Program Files (x86)\IIS Express\oc_123456003.txt'.
+-------------------------------
