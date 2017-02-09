@@ -418,10 +418,10 @@ namespace Transbank.NET
                                 responseTBK.Add("resoluciontransaccion", HttpUtility.HtmlDecode(Request.Cookies["ChileautosSettingTBK"]["resoluciontransaccion"]));
                             }
                         }
-                        else {
-
-
-
+                        else
+                        {
+                            HttpContext.Current.Response.Write("<strong>proceso anulado</strong>");
+                                
                         }
                         ///
                         request.Add("", "");
@@ -433,75 +433,82 @@ namespace Transbank.NET
                         //HttpContext.Current.Response.Write("<label>Núm. Órden:</label> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
                         //HttpContext.Current.Response.Write("resoluciontransaccion <strong>" + responseTBK["resoluciontransaccion"] + "</strong><br />");
 
-                        string codpago ="";
-                        if (description.ContainsKey(responseTBK["paymentTypeCode"]))
-                        {
-                            codpago = description[responseTBK["paymentTypeCode"]];
+
+                        if (Request.Cookies["ChileautosSettingTBK"] != null) { 
+
+                            string codpago = "";
+                            if (description.ContainsKey(responseTBK["paymentTypeCode"]))
+                            {
+                                codpago = description[responseTBK["paymentTypeCode"]];
+                            }
+                            string codrespuesta = "";
+                            if (codes.ContainsKey(responseTBK["responseCode"]))
+                            {
+                                codrespuesta = codes[responseTBK["responseCode"]];
+                            }
+
+                            if (int.Parse(responseTBK["responseCode"]) != 0)
+                            {
+                                HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
+                                HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Núm. Tarjeta: </span> <strong>" + responseTBK["Cardnumber"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Núm.Cuotas: </span> <strong>" + responseTBK["sharesNumber"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Cód. pago: </span> <strong>" + codpago + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Cód. Autorización: </span> <strong>" + responseTBK["authorizationCode"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Código de Respuesta: </span> <strong>" + codrespuesta + "</strong><br />");
+                                HttpContext.Current.Response.Write("<p>Las posibles causas de este rechazo son:</p><ul>");
+                                HttpContext.Current.Response.Write("<li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o Código de seguridad).</li>");
+                                HttpContext.Current.Response.Write("<li>Su tarjeta de crédito o Débito no cuenta con el cupo necesario parta cancelar la compra.</li>");
+                                HttpContext.Current.Response.Write("<li>Tarjeta aún no habilitada en el sistema financiero.</li>");
+                                HttpContext.Current.Response.Write("</ul><br />");
+
+
+                            }
+                            else
+                            {
+
+                                HttpContext.Current.Response.Write("<h4 style='color:#00ff00;'>Transacción Aprobada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
+                                HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Núm. Tarjeta: </span> <strong>" + responseTBK["Cardnumber"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Núm.Cuotas: </span> <strong>" + responseTBK["sharesNumber"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Cód. pago: </span> <strong>" + codpago + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Cód. Autorización: </span> <strong>" + responseTBK["authorizationCode"] + "</strong><br />");
+                                HttpContext.Current.Response.Write("<span>Código de Respuesta: </span> <strong>" + codrespuesta + "</strong><br />");
+
+                            }
+
+
+
+                            //HttpContext.Current.Response.Write("<span>Cód. Comercio: </span> <strong>" + responseTBK["commerceCode"] + "</strong><br />");
+                            //HttpContext.Current.Response.Write("<span>Fecha Expiración: </span> <strong>" + responseTBK["CardExpirationDate"] + "</strong><br />");
+                            //HttpContext.Current.Response.Write("<span>Forma: </span> <strong>" + responseTBK["VCI"] + "</strong><br />");
+
+                            responseTBK.Add("token_ws", new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]));
+
+                            message = "Transacci&oacute;n Finalizada";
+                            HttpContext.Current.Response.Write("<br /><br /><strong>" + message + "</strong><br /><br />");
+
+                            string next_page = baseurl + "?action=nullify";
+
+                            //HttpContext.Current.Response.Write("<form action=" + next_page + " method='post'><input type='hidden' name='commercecode' id='commercecode' value=''><input type='hidden' name='authorizationCode' id='authorizationCode' value=''><input type='hidden' name='amount' id='amount' value=''><input type='hidden' name='buyOrder' id='buyOrder' value=''><input type='submit' value='Anular Transacci&oacute;n &raquo;'></form>");
+                            //HttpContext.Current.Response.Write("<script>var commercecode = localStorage.getItem('commercecode');document.getElementById('commercecode').value = commercecode;</script>");
+                            //HttpContext.Current.Response.Write("<script>var authorizationCode = localStorage.getItem('authorizationCode');document.getElementById('authorizationCode').value = authorizationCode;</script>");
+                            //HttpContext.Current.Response.Write("<script>var amount = localStorage.getItem('amount');document.getElementById('amount').value = amount;</script>");
+                            //HttpContext.Current.Response.Write("<script>var buyOrder = localStorage.getItem('buyOrder');document.getElementById('buyOrder').value = buyOrder;</script>");
+
+                            //createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(responseTBK), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]), tx_step, Request.Form[keys[6]]);
+                            //leearchivo(responseTBK["buyOrder"]);
+
+                            HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
+                            ChCookie.Expires = DateTime.Now.AddDays(-1d);
+                            Response.Cookies.Add(ChCookie);
+
                         }
-                        string codrespuesta = "";
-                        if (codes.ContainsKey(responseTBK["responseCode"]))
-                        {
-                            codrespuesta = codes[responseTBK["responseCode"]];
-                        }
 
-                        if (int.Parse(responseTBK["responseCode"]) != 0)
-                        {
-                            HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
-                            HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Núm. Tarjeta: </span> <strong>" + responseTBK["Cardnumber"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Núm.Cuotas: </span> <strong>" + responseTBK["sharesNumber"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Cód. pago: </span> <strong>" + codpago + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Cód. Autorización: </span> <strong>" + responseTBK["authorizationCode"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Código de Respuesta: </span> <strong>" + codrespuesta + "</strong><br />");
-                            HttpContext.Current.Response.Write("<p>Las posibles causas de este rechazo son:</p><ul>");
-                            HttpContext.Current.Response.Write("<li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o Código de seguridad).</li>");
-                            HttpContext.Current.Response.Write("<li>Su tarjeta de crédito o Débito no cuenta con el cupo necesario parta cancelar la compra.</li>");
-                            HttpContext.Current.Response.Write("<li>Tarjeta aún no habilitada en el sistema financiero.</li>");
-                            HttpContext.Current.Response.Write("</ul><br />");
-
-
-                        }
-                        else {
-
-                            HttpContext.Current.Response.Write("<h4 style='color:#00ff00;'>Transacción Aprobada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
-                            HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Núm. Tarjeta: </span> <strong>" + responseTBK["Cardnumber"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Núm.Cuotas: </span> <strong>" + responseTBK["sharesNumber"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Cód. pago: </span> <strong>" + codpago + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Cód. Autorización: </span> <strong>" + responseTBK["authorizationCode"] + "</strong><br />");
-                            HttpContext.Current.Response.Write("<span>Código de Respuesta: </span> <strong>" + codrespuesta + "</strong><br />");
-
-                        }
-
-
-
-                        //HttpContext.Current.Response.Write("<span>Cód. Comercio: </span> <strong>" + responseTBK["commerceCode"] + "</strong><br />");
-                        //HttpContext.Current.Response.Write("<span>Fecha Expiración: </span> <strong>" + responseTBK["CardExpirationDate"] + "</strong><br />");
-                        //HttpContext.Current.Response.Write("<span>Forma: </span> <strong>" + responseTBK["VCI"] + "</strong><br />");
-
-                        responseTBK.Add("token_ws", new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]));
-
-                        message = "Transacci&oacute;n Finalizada";
-                        HttpContext.Current.Response.Write("<br /><br /><strong>" + message + "</strong><br /><br />");
-
-                        string next_page = baseurl + "?action=nullify";
-
-                        //HttpContext.Current.Response.Write("<form action=" + next_page + " method='post'><input type='hidden' name='commercecode' id='commercecode' value=''><input type='hidden' name='authorizationCode' id='authorizationCode' value=''><input type='hidden' name='amount' id='amount' value=''><input type='hidden' name='buyOrder' id='buyOrder' value=''><input type='submit' value='Anular Transacci&oacute;n &raquo;'></form>");
-                        //HttpContext.Current.Response.Write("<script>var commercecode = localStorage.getItem('commercecode');document.getElementById('commercecode').value = commercecode;</script>");
-                        //HttpContext.Current.Response.Write("<script>var authorizationCode = localStorage.getItem('authorizationCode');document.getElementById('authorizationCode').value = authorizationCode;</script>");
-                        //HttpContext.Current.Response.Write("<script>var amount = localStorage.getItem('amount');document.getElementById('amount').value = amount;</script>");
-                        //HttpContext.Current.Response.Write("<script>var buyOrder = localStorage.getItem('buyOrder');document.getElementById('buyOrder').value = buyOrder;</script>");
-                        
-                        //createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(responseTBK), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]), tx_step, Request.Form[keys[6]]);
-                        //leearchivo(responseTBK["buyOrder"]);
-                        
-                        HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
-                        ChCookie.Expires = DateTime.Now.AddDays(-1d);
-                        Response.Cookies.Add(ChCookie);
 
                     }
                     catch (Exception ex)
@@ -519,11 +526,6 @@ namespace Transbank.NET
                                 createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Cookies["ChileautosSettingTBK"]["buyOrder"]);
 
                             }
-                        }
-                        else {
-                            request.Add("proceso: ", "anulado");
-                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, "error_");
-
                         }
                         
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");

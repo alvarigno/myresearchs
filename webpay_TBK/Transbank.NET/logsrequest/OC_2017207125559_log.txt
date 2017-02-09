@@ -547,3 +547,39 @@ Log Entry : 17:19:03 jueves, 09 de febrero de 2017
   :Response
   :{"token":"e2cbb3affb65b3a40a0211ec98f58ca5f2c0ebf7075634181b492b1e75551323","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
 -------------------------------
+
+Log Entry : 17:31:54 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e4bdbf78435fa643ccd97698c3883ed4f07f7b53b532a5d88d9ed77df14ee5b9","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 17:32:21 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e8624680335fdb7fde005a8d635c893d4ae1e30f2e9e3ccf880703a24c40533c","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 17:43:18 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e4af2613090c7e2641d37337ed0cadd1e26201826f07b6b28ded0ed29470cd89","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 17:46:47 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e53c118979edb118072e6967645e21ee5ffd72fd33463c19b72ebc80ca6e7eab","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
