@@ -430,3 +430,93 @@ Log Entry : 22:15:37 miércoles, 08 de febrero de 2017
   :Response
   :{"token":"ea25adb0fc290f24f5bdb37f96b68a6834444d9a547db14fe9bb7f5530f4c727","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
 -------------------------------
+
+Log Entry : 11:57:52 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"32631274","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 11:58:25 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"32631274","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 12:24:56 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e0808ad0b9054507dab3e4993e7a5c77f43eba5da865a699f1572cf40db3add7","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 14:11:32 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 14:22:08 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e303f054123a0954d162493fd49fe19de6a4fc698864d40e5f5b5d1715ff515c","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 14:36:22 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 14:38:39 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 14:39:26 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 14:39:49 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------
+
+Log Entry : 14:44:21 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------

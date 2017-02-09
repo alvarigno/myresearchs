@@ -190,6 +190,10 @@ namespace Transbank.NET
                         /** Ejecutamos metodo initTransaction desde Libreria */
                         wsInitTransactionOutput result = webpay.getNormalTransaction().initTransaction(amount, buyOrder, sessionId, urlReturn, urlFinal);
 
+
+                        string PublicCertuno = configuration.PublicCert;
+                        string WebpayCertdos = configuration.WebpayCert;
+
                         /** Verificamos respuesta de inicio en webpay */
                         if (result.token != null && result.token != "")
                         {
@@ -364,7 +368,7 @@ namespace Transbank.NET
                         }
 
                         HttpContext.Current.Response.Write(message + "</br></br>");
-                        HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
+                        //HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
                         HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' value='Continuar &raquo;'></form>");
                         
 
@@ -438,21 +442,37 @@ namespace Transbank.NET
                         if (int.Parse(responseTBK["responseCode"]) != 0)
                         {
                             HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
+                            HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Núm. Tarjeta: </span> <strong>" + responseTBK["Cardnumber"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Núm.Cuotas: </span> <strong>" + responseTBK["sharesNumber"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Cód. pago: </span> <strong>" + codpago + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Cód. Autorización: </span> <strong>" + responseTBK["authorizationCode"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Código de Respuesta: </span> <strong>" + codrespuesta + "</strong><br />");
+                            HttpContext.Current.Response.Write("<p>Las posibles causas de este rechazo son:</p><ul>");
+                            HttpContext.Current.Response.Write("<li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o Código de seguridad).</li>");
+                            HttpContext.Current.Response.Write("<li>Su tarjeta de crédito o Débito no cuenta con el cupo necesario parta cancelar la compra.</li>");
+                            HttpContext.Current.Response.Write("<li>Tarjeta aún no habilitada en el sistema financiero.</li>");
+                            HttpContext.Current.Response.Write("</ul><br />");
+
+
                         }
                         else {
 
                             HttpContext.Current.Response.Write("<h4 style='color:#00ff00;'>Transacción Aprobada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
+                            HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Núm. Tarjeta: </span> <strong>" + responseTBK["Cardnumber"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Núm.Cuotas: </span> <strong>" + responseTBK["sharesNumber"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Cód. pago: </span> <strong>" + codpago + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Cód. Autorización: </span> <strong>" + responseTBK["authorizationCode"] + "</strong><br />");
+                            HttpContext.Current.Response.Write("<span>Código de Respuesta: </span> <strong>" + codrespuesta + "</strong><br />");
 
                         }
 
-                        HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
-                        HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
-                        HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
-                        HttpContext.Current.Response.Write("<span>Núm. Tarjeta: </span> <strong>" + responseTBK["Cardnumber"] + "</strong><br />");
-                        HttpContext.Current.Response.Write("<span>Núm.Cuotas: </span> <strong>" + responseTBK["sharesNumber"] + "</strong><br />");
-                        HttpContext.Current.Response.Write("<span>Cód. pago: </span> <strong>" + codpago + "</strong><br />");
-                        HttpContext.Current.Response.Write("<span>Cód. Autorización: </span> <strong>" + responseTBK["authorizationCode"] + "</strong><br />");
-                        HttpContext.Current.Response.Write("<span>Código de Respuesta: </span> <strong>" + codrespuesta + "</strong><br />");
+
 
                         //HttpContext.Current.Response.Write("<span>Cód. Comercio: </span> <strong>" + responseTBK["commerceCode"] + "</strong><br />");
                         //HttpContext.Current.Response.Write("<span>Fecha Expiración: </span> <strong>" + responseTBK["CardExpirationDate"] + "</strong><br />");
