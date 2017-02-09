@@ -418,6 +418,11 @@ namespace Transbank.NET
                                 responseTBK.Add("resoluciontransaccion", HttpUtility.HtmlDecode(Request.Cookies["ChileautosSettingTBK"]["resoluciontransaccion"]));
                             }
                         }
+                        else {
+
+
+
+                        }
                         ///
                         request.Add("", "");
 
@@ -504,9 +509,23 @@ namespace Transbank.NET
 
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
-                        /** creamos el log del mensaje de envío y su respuesta */
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Cookies["ChileautosSettingTBK"]["buyOrder"]);
 
+                        if (Request.Cookies["ChileautosSettingTBK"] != null)
+                        {
+                            if (Request.Cookies["ChileautosSettingTBK"]["authorizationCode"] != null)
+                            {
+
+                                /** creamos el log del mensaje de envío y su respuesta */
+                                createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Cookies["ChileautosSettingTBK"]["buyOrder"]);
+
+                            }
+                        }
+                        else {
+                            request.Add("proceso: ", "anulado");
+                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, "error_");
+
+                        }
+                        
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
                         ChCookie.Expires = DateTime.Now.AddDays(-1d);
                         Response.Cookies.Add(ChCookie);
@@ -641,7 +660,8 @@ namespace Transbank.NET
 
             int datoestado = 0;
 
-            if (int.Parse(datosupdate["TBK_Respuesta"]) == 0) {
+            if (int.Parse(datosupdate["TBK_Respuesta"]) == 0)
+            {
 
                 datoestado = 1;
 

@@ -520,3 +520,30 @@ Log Entry : 14:44:21 jueves, 09 de febrero de 2017
   :Response
   :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
 -------------------------------
+
+Log Entry : 17:00:23 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"12","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"eafa80772b900ae7d132696debb5d062e08968438d3b01e6a4d9b946b3b6435c","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 17:13:54 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"12","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"eec06363a64e28dc10729ed47c1f1306fbbf01abd68e183c0e80df36746b502f","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 17:19:03 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e2cbb3affb65b3a40a0211ec98f58ca5f2c0ebf7075634181b492b1e75551323","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------

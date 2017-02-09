@@ -1,0 +1,9 @@
+
+Log Entry : 17:15:45 jueves, 09 de febrero de 2017
+  :End
+  :Request
+  :{"":""}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
