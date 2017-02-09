@@ -189,29 +189,28 @@ namespace Transbank.NET
 
                         /** Ejecutamos metodo initTransaction desde Libreria */
                         wsInitTransactionOutput result = webpay.getNormalTransaction().initTransaction(amount, buyOrder, sessionId, urlReturn, urlFinal);
-                        
-
 
                         /** Verificamos respuesta de inicio en webpay */
                         if (result.token != null && result.token != "")
                         {
-                            message = "Sesion iniciada con exito en Webpay";
+                            //message = "Sesion iniciada con exito en Webpay";
+                            //HttpContext.Current.Response.Write("" + message + "</br></br>");
+                            HttpContext.Current.Response.Write("<form action=" + result.url + " method='post'><input type='hidden' name='token_ws' value=" + result.token + "><input type='submit' value='Continuar &raquo;'></form>");
+
+                            /** creamos el log del mensaje de envío y su respuesta */
+                            createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, Request.Form[keys[6]]);
+
                         }
                         else
                         {
                             message = "webpay no disponible";
+                            HttpContext.Current.Response.Write("" + message + "</br></br>");
                         }
 
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
 
-                        HttpContext.Current.Response.Write("" + message + "</br></br>");
-                        HttpContext.Current.Response.Write("<form action=" + result.url + " method='post'><input type='hidden' name='token_ws' value=" + result.token + "><input type='submit' value='Continuar &raquo;'></form>");
-
-                        requestTBK = request;
-                        resultresponseTBK = result;
-
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, Request.Form[keys[6]]);
+                       
 
                     }
                     catch (Exception ex)
@@ -219,6 +218,7 @@ namespace Transbank.NET
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>Respuesta</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
                         HttpContext.Current.Response.Write("Favor de completar el formulario con datos correctos.");
+                        /** creamos el log del mensaje de envío y su respuesta del error */
                         createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Form[keys[6]]);
                     }
 
@@ -244,11 +244,11 @@ namespace Transbank.NET
 
                         transactionResultOutput result = webpay.getNormalTransaction().getTransactionResult(token);
 
-                        //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
-                        //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
 
+                            //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
+                            //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
 
-                        if (result.detailOutput[0].responseCode == 0)
+                            if (result.detailOutput[0].responseCode == 0)
                         {
                             message = "Pago ACEPTADO por webpay (se deben guardar datos para mostrar voucher)";
 
@@ -311,8 +311,9 @@ namespace Transbank.NET
                             detalletransaccion.Add("TBK_tasa_interes_max", "");
                             detalletransaccion.Add("fecha_f_trans",  result.transactionDate.ToString());
 
-
+                            /** creamos el log del mensaje de envío y su respuesta */
                             createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
+                            /** creamos el update de la transacción en BD */
                             UpDateEstadoDocumento(detalletransaccion);
 
                         }
@@ -356,18 +357,23 @@ namespace Transbank.NET
                             detalletransaccion.Add("TBK_tasa_interes_max", "");
                             detalletransaccion.Add("fecha_f_trans", result.transactionDate.ToString());
 
+                            /** creamos el log del mensaje de envío y su respuesta */
                             createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
+                            /** creamos el update de la transacción en BD */
                             UpDateEstadoDocumento(detalletransaccion);
                         }
 
                         HttpContext.Current.Response.Write(message + "</br></br>");
-                        HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' value='Continuar &raquo;'></form>");
+                        HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
+                        HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' value='Continuar &raquo;'></form>");
+                        
 
                     }
                     catch (Exception ex)
                     {
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
+                        /** creamos el log del mensaje de envío y su respuesta */
                         createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request["token"]));
                     }
 
@@ -429,6 +435,16 @@ namespace Transbank.NET
                             codrespuesta = codes[responseTBK["responseCode"]];
                         }
 
+                        if (int.Parse(responseTBK["responseCode"]) != 0)
+                        {
+                            HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
+                        }
+                        else {
+
+                            HttpContext.Current.Response.Write("<h4 style='color:#00ff00;'>Transacción Aprobada <span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</ strong ></h4>");
+
+                        }
+
                         HttpContext.Current.Response.Write("<span>Núm. Orden: </span> <strong>" + responseTBK["buyOrder"] + "</strong><br />");
                         HttpContext.Current.Response.Write("<span>Monto: </span> <strong>" + responseTBK["amount"] + "</strong><br />");
                         HttpContext.Current.Response.Write("<span>Fecha Transacción: </span> <strong>" + responseTBK["transactionDate"] + "</strong><br />");
@@ -468,6 +484,7 @@ namespace Transbank.NET
 
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
+                        /** creamos el log del mensaje de envío y su respuesta */
                         createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Cookies["ChileautosSettingTBK"]["buyOrder"]);
 
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
@@ -519,6 +536,7 @@ namespace Transbank.NET
 
                         message = "Transacci&oacute;n Finalizada";
                         HttpContext.Current.Response.Write(message + "</br></br>");
+                        /** creamos el log del mensaje de envío y su respuesta */
                         createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(resultNullify), tx_step, buyOrder.ToString());
 
                     }
@@ -625,6 +643,9 @@ namespace Transbank.NET
             }
 
         }
+
+
+
 
 
 

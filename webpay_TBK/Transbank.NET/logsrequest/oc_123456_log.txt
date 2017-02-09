@@ -61,3 +61,21 @@ Log Entry : 12:06:27 miércoles, 08 de febrero de 2017
   :Response
   :{"token":"e6bd525b926a01d746f9e36623467937ac94c07663e52ba2c352492ba7915815","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
 -------------------------------
+
+Log Entry : 19:55:14 miércoles, 08 de febrero de 2017
+  :Init
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La cadena de entrada no tiene el formato correcto.
+-------------------------------
+
+Log Entry : 22:06:07 miércoles, 08 de febrero de 2017
+  :Init
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La cadena de entrada no tiene el formato correcto.
+-------------------------------
