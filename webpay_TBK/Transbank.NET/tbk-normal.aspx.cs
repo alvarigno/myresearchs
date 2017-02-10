@@ -444,7 +444,7 @@ namespace Transbank.NET
                                     HttpContext.Current.Response.Write("</table>");
                                     HttpContext.Current.Response.Write("</div>");
                                     HttpContext.Current.Response.Write("<br />");
-                                    enviaremail();
+                                    enviaremail(responseTBK["buyOrder"]);
 
                                 }
                                 else
@@ -692,10 +692,12 @@ namespace Transbank.NET
         }
 
         /* envia datos de pago aceptado en webpay */
-        protected void enviaremail() {
+        protected void enviaremail(string ordencompra) {
+
+            Dictionary<string, string> datoamensajes = mensajeemail(ordencompra);
 
             string apiPublicar = "http://dws.chileautos.cl/api-cla/EnvioCorreo/Contactenos";
-            string parametros = "Nombre=alvaro&EmailFrom=alvaro.emparan@gmail.com&EmailTo=alvaro.emparan@gmail.com,aemparan@chileautos.cl&Comentario=el sr(a). prueba, está compartiendo el siguiente aviso con usted: <br /><br /> conteido&Asunto=Aviso en Chileautos.cl - prueba&Pie=pago TBK";
+            string parametros = "Nombre=alvaro&EmailFrom=alvaro.emparan@gmail.com&EmailTo=alvaro.emparan@gmail.com,aemparan@chileautos.cl&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). "+ datoamensajes["txt_nombre"] + ", con rut: "+ datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: "+ datoamensajes["cmb_motivo"] + ", cuyo monto es: "+ datoamensajes["TBK_MONTO2"] + ", realizada con "+ datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  "+ datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: "+ datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - "+ datoamensajes["TBK_ORDEN_COMPRA"] + "&Pie=pago TBK";
             
             try
             {
@@ -708,14 +710,71 @@ namespace Transbank.NET
             }
             catch(Exception ex)
             {
+            }
+            
+        }
 
+        protected Dictionary<string, string> mensajeemail(string ordencompra) {
+
+            Dictionary<string, string> datoamensajes = new Dictionary<string, string>();
+
+            myConnection myConn = new myConnection();
+            
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myConnection.GetConnection();
+                    connection.CommandText = "Select TBK_ORDEN_COMPRA, txt_nombre, txt_rut, txt_digito, cmb_motivo, txt_comentario, TBK_MONTO2, TBK_TIPO_PAGO from transbank_pagos where TBK_ORDEN_COMPRA = '"+ordencompra+"' and Estado = 1 ";
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+
+                            if (reader.Read() == true)
+                            {
+
+                                datoamensajes.Add("TBK_ORDEN_COMPRA", reader["TBK_ORDEN_COMPRA"].ToString());
+                                datoamensajes.Add("txt_nombre", reader["txt_nombre"].ToString());
+                                datoamensajes.Add("txt_rut", reader["txt_rut"].ToString() +"-" + reader["txt_digito"].ToString());
+
+                                if (reader["cmb_motivo"].ToString() == "Pago 1") {
+                                    datoamensajes.Add("cmb_motivo", "Pago 1%");
+                                } else {
+                                    datoamensajes.Add("cmb_motivo", reader["cmb_motivo"].ToString());
+                                }
+
+                                datoamensajes.Add("txt_comentario", reader["txt_comentario"].ToString());
+                                datoamensajes.Add("TBK_MONTO2", reader["TBK_MONTO2"].ToString());
+
+                                if (reader["TBK_TIPO_PAGO"].ToString() == "VD")
+                                {
+                                    datoamensajes.Add("TBK_TIPO_PAGO", "Tarjeta Débito");
+                                }
+                                else {
+
+                                    datoamensajes.Add("TBK_TIPO_PAGO", "Tarjeta Crédito");
+                                    
+                                }
+
+
+                            }
+
+                        }
+
+                    }
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
 
 
             }
+            catch (Exception ex) { }
 
-
+            return datoamensajes;
         }
-
 
         public string ChangeEncodingFormat(string DataChangeEnconde)
         {

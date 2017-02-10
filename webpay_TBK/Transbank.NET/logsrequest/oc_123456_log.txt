@@ -88,3 +88,12 @@ Log Entry : 19:47:07 jueves, 09 de febrero de 2017
   :Response
   :La cadena de entrada no tiene el formato correcto.
 -------------------------------
+
+Log Entry : 21:43:56 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1234","buyOrder":"oc_123456","sessionId":"oc_123456","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ea469a0107afd29049b06d2171a5d44d6ba6d082f63637af704dc4e278d3fc37","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
