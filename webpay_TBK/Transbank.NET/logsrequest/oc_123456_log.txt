@@ -79,3 +79,12 @@ Log Entry : 22:06:07 miércoles, 08 de febrero de 2017
   :Response
   :La cadena de entrada no tiene el formato correcto.
 -------------------------------
+
+Log Entry : 19:47:07 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La cadena de entrada no tiene el formato correcto.
+-------------------------------

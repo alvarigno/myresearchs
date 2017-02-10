@@ -583,3 +583,480 @@ Log Entry : 17:46:47 jueves, 09 de febrero de 2017
   :Response
   :{"token":"e53c118979edb118072e6967645e21ee5ffd72fd33463c19b72ebc80ca6e7eab","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
 -------------------------------
+
+Log Entry : 18:29:32 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e193ff7642be9a780c1bca9bcd75f392d6f34f482094979f8e51ea5382544aae","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 18:33:43 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e4d54926fcb5479328e14c963dba51fa6e1fa07260a49989d49feaa178f99846","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 18:38:25 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e26bd8ec3e6e3f6d28ab8e63ff8564bb05161f2090287ff74076e689311eff61","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 18:42:32 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"eab2ddc0e9b8a820d3dab807c507cfb854779c359c20fae8aa0fc4d021b7c6dd","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 18:47:51 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ed4fefa7ade6079d02dab71ed415668865750a281b059a0c402314cc3b7bc07d","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 18:53:49 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ecb4643b5d1a2fb4b870f4756613073911efedeed65f357564d6d6456d315776","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:01:26 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e416cbc44b1d57994e6e2427dbe4776cd60553dde0fa3d6411f3829cc7b1bd1c","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:07:06 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e143244416ead7ffc820088a82fe36a3c05b2bf38f76947f0869a2df820bad52","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:09:43 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ef60625d39057ac1cb0b3db105141ad9befce1570d524585bf1db79c5da07a78","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:22:30 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ed0da4724962d64ad2303106e00fa71175f7dafea702e1b1186cde660f317232","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:27:20 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e8e6c1fc983ad9b55d9f56c49473ce99aa649b7f662788127f90c8a552a302a7","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:27:48 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"edd1f0c1d199f29b5e98445025ae7481b01f357359fa7b140295dda476f3c31c","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:29:37 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e6f132d060b0c53f15104acb12221f7c50b54ea3bb43f67c7fba83722d2a3edf","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:29:57 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e55c4d9a4a5cd2dc5a4390e308f7f1f2462bbe0bbdda2053265d28bb9fc1a2be","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:46:21 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e005c4d1e4c7ed3980c8f94fafcdb3ed75dac12cde8f5b8563fa708cf09065c9","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:46:45 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e439b36c6d0c25d3094ca9b02497d53f49bea8d2d4bee727d893d28050c5e98a","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:47:34 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e16e5e5d2cc1f0277943c0bccd56d7ac3407943a555334e96300c93e19f12ed6","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:49:37 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e93fdac2575e61b8dc73bd9eca4a02f4650bd3096ff93f704396b7e4d93368f7","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:50:28 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e6b188e4f4daba1b18e37bfe3c20bc005ec2f09740ed387536ba99643ad54999","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 19:53:26 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e115650a4b2a434322b6177f35efeeff054a02aaff6e2349eab4ae2ef858aa9a","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:01:36 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e24ca361adf5d0e171ce474a88c946500ac7a1867e5d03a0d0f090b55553b255","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:08:42 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"eadf0d25cebb6b973e511451ce6f982d727cbb3f236dd3285deaf00b4d2c51b3","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:09:55 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"eb86729bdb9686db502f689cca5d6b612f336085fefa53373e9ac5782df7596e","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:10:58 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e67f16b1822cbf81b7ccaa025941c6f9a4b5763bdf2c6cc63a735ef3800a461f","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:11:38 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e993284b2c3f03f296fa19dd3884699e727ff85bc82b2908b45a5ddf3de82c5e","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:12:41 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e9d291e557461d183823957ec899c8ecf8cc0872c67ae5487aec012aaaa7b19a","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:14:38 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ea06ff86fc753f9f823aba51c833e0bfa37391a7ca899a66d6cdeca35c040161","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:15:13 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e4d6110077a1bafeb687815681f3cb7844a8a180f609f8ffa975789d61123b72","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:15:19 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e8582d33e0a20eb7dcaf89208f78491645db2ff271d17c52598d84af632c7067","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:15:47 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e4942ecb977e67225d81cfab848013dd8a61ffe312070a9af990c7b950761675","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:15:56 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"efdece604351fc6f2d6526aba9058542df5da0215addc1165dd6bd5f03f94960","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:16:11 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e471a39ca1854b1fe5d3c127bad5c97eb6a69be77b9a61952756c3804c3bf7a8","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:18:02 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ef267cf7bc54a1c23794ad40c80e921b685b05a6241da6bda59bc37b389c341f","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:18:11 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e09ca4ca4d25a67c0ae89fef327db8fbb77fef84e2ee7d6a977da2fa0626193f","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:19:24 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e53edd9a8b717e3d06dbe6ce6254ae2fb4964631c58c2750ea09519079cf47d7","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:20:01 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e6d5fa798a27cd19435b8a3bbd1b3f487f8785106ba069bf741ff048c35d012d","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:21:26 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e75228323e00eeb4cfc32a884627c6d78cb35885da708213b822f8eed102b2da","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:22:13 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"efee6d7ea15d806d076258c29cd33435638d7e0ef1153554aab373bc864a392b","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:24:02 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ecc635c0e775d85ba71bf6a20b41852cec4a524c350d8a12a80b6511b26d92eb","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:27:22 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e10a7bbd0cfcb9f597938a1e56991f6323adca143bae58fc45a801f6f82e44a2","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:28:57 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ea516fc894b0679f7589f1460e478cf45d31b2d62f75f9bc91340c130d4964f5","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:32:03 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ebf9f3685ba8d128647c4861b5b8874128b9ade47b61c93164eb0bdfa6c44c60","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:34:42 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e00163fa0142a91fb9841568d5daa1876691561b8b75623f33940b28ef000e44","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:37:08 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e1a41de7fdce9a7c516f760f751d0fcb28dcc7a63aed979ae2852389d67fe0a0","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:39:50 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ec21d796aacdba64748e74654f5e3dc22b6f1c611bc19cb61cbf5aeb7bbb6b2e","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:40:16 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e757f15270b8c8cc1f734fc2cfb891b8f4081ccd4afa14b89d7aae08f56363e8","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:49:24 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ebaa04ed146100fae326c1621adea79f034f9e6d5cc70d928d8873723af40e9d","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:52:18 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e9a1518bbcb03010a8600f495dcdebf5d4d7c1a682d2f6416a1d642c5382392f","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 20:58:43 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e001ac3b95def9dcd6311a8e281915b8672cee15710b629a2a4bec258682ffa2","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 21:00:33 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e1a7dc55a33da4c2e9ed9d9deb1e59a49ce51a534eea5ec38ae1251be999d3a7","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 21:06:49 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e41028c40685b1486caf104c6928d0daf6b6f6397e5333eef302ccbc511844f8","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 21:07:24 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ef89f127ef2e16927789097401c4ad450209c2be51ff9cdb122d5db5f63a682d","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 21:08:55 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ec82eebef628964b56143b227e4a081d238ec8d88ece0b7dffd5c0f702a6f213","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
