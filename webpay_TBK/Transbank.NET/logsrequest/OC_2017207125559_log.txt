@@ -1132,3 +1132,39 @@ Log Entry : 22:12:26 jueves, 09 de febrero de 2017
   :Response
   :{"token":"e7ce2900c07932998c77ddb2937d81265f18052de248f50e0c51d461c09fccd6","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
 -------------------------------
+
+Log Entry : 22:20:09 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"https://operaciones.chileautos.cl/pagoTBK/tbk-normal.aspx?action=result","urlFinal":"https://operaciones.chileautos.cl/pagoTBK/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e9af083d8004be24d8eb08adbf78f1475e5a47c031abd2aa1129c2ba5692d7ea","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 22:22:07 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e4a2832898984c5d34035f08563b81a1313e101a47f69823ac6eece27655f905","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 22:24:08 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e9ae1061d89f1284bcd79534140509e0b702d0a0ac706b8ad0db2dda7b71d035","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 22:26:50 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"OC_2017207125559","sessionId":"OC_2017207125559","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"ed6af0070c870354f0a2f14980bfb3dbe0a5e7713180e25e053f647ea0a17b90","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------

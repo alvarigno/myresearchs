@@ -7,3 +7,12 @@ Log Entry : 22:10:38 miércoles, 08 de febrero de 2017
   :Response
   :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
 -------------------------------
+
+Log Entry : 22:26:24 jueves, 09 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"1231234","buyOrder":"","sessionId":"","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------

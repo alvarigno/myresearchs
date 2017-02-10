@@ -696,22 +696,25 @@ namespace Transbank.NET
 
             Dictionary<string, string> datoamensajes = mensajeemail(ordencompra);
 
-            string apiPublicar = "http://dws.chileautos.cl/api-cla/EnvioCorreo/Contactenos";
-            string parametros = "Nombre=alvaro&EmailFrom=alvaro.emparan@gmail.com&EmailTo=alvaro.emparan@gmail.com,aemparan@chileautos.cl&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). "+ datoamensajes["txt_nombre"] + ", con rut: "+ datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: "+ datoamensajes["cmb_motivo"] + ", cuyo monto es: "+ datoamensajes["TBK_MONTO2"] + ", realizada con "+ datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  "+ datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: "+ datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - "+ datoamensajes["TBK_ORDEN_COMPRA"] + "&Pie=pago TBK";
-            
-            try
+            if (datoamensajes != null)
             {
-                System.Net.WebClient wc = new System.Net.WebClient();
-                wc.Encoding = System.Text.Encoding.UTF8;
-                string data = parametros;
-                wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-                string resultado = wc.UploadString(apiPublicar, "POST", data);
 
+                string apiPublicar = "http://dws.chileautos.cl/api-cla/EnvioCorreo/Contactenos";
+                string parametros = "Nombre=alvaro&EmailFrom=alvaro.emparan@gmail.com&EmailTo=alvaro.emparan@gmail.com,aemparan@chileautos.cl&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + "&Pie=pago TBK";
+
+                try
+                {
+                    System.Net.WebClient wc = new System.Net.WebClient();
+                    wc.Encoding = System.Text.Encoding.UTF8;
+                    string data = parametros;
+                    wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
+                    string resultado = wc.UploadString(apiPublicar, "POST", data);
+
+                }
+                catch (Exception ex)
+                {
+                }
             }
-            catch(Exception ex)
-            {
-            }
-            
         }
 
         protected Dictionary<string, string> mensajeemail(string ordencompra) {
