@@ -605,6 +605,7 @@ namespace Transbank.NET
             }
 
             //HttpContext.Current.Response.Write("</br><a href='https://operaciones.chileautos.cl/pago_v2.asp?i=0'>&laquo; volver a index</a>");
+            //HttpContext.Current.Response.Write("</br><a href='https://desarrollo.chileautos.cl/pago_v2.asp?i=0'>&laquo; volver a index</a>");
             HttpContext.Current.Response.Write("<br /><a href='http://"+ httpHost + "/default.aspx'>&laquo; volver a index</a>");
             HttpContext.Current.Response.Write("</div>");
             HttpContext.Current.Response.Write("</div>");
@@ -680,7 +681,8 @@ namespace Transbank.NET
 
             myConnection myConn = new myConnection();
 
-            try {
+            try
+            {
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     //HttpContext.Current.Response.Write("UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '"+ datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '"+ datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '"+ datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '"+ datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '"+ datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '"+ datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '"+ datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '"+ datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '"+ datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '"+ datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '"+ datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '"+ datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= "+datoestado +" , [fecha_f_trans] = '" + datosupdate["fecha_f_trans"] + "' WHERE TBK_ORDEN_COMPRA = '"+ datosupdate["idOC"] + "'");
@@ -692,7 +694,8 @@ namespace Transbank.NET
                     System.Data.SqlClient.SqlConnection.ClearAllPools();
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 HttpContext.Current.Response.Write("Error: " + ex.Message);
 
@@ -716,7 +719,7 @@ namespace Transbank.NET
                 string procedenciamailtest = "pago prueba TBK";
 
                 string apiPublicar = "http://dws.chileautos.cl/api-cla/EnvioCorreo/Contactenos";
-                string parametros = "Nombre=alvaro&EmailFrom=alvaro.emparan@gmail.com&EmailTo="+ emailsdestinotest + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + "&Pie="+ procedenciamailtest;
+                string parametros = "Nombre=alvaro&EmailFrom=alvaro.emparan@gmail.com&EmailTo=" + emailsdestinotest + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con "+ datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamailtest;
 
                 try
                 {
@@ -729,7 +732,7 @@ namespace Transbank.NET
                 }
                 catch (Exception ex)
                 {
-                    HttpContext.Current.Response.Write("Error: "+ex.Message);
+                    HttpContext.Current.Response.Write("Error: " + ex.Message);
                 }
             }
         }
