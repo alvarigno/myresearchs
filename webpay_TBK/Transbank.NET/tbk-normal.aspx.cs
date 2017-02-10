@@ -615,6 +615,7 @@ namespace Transbank.NET
 
         }
 
+        /*Obtiene los datos del proceso de TBK para procesar la creación de log*/
         protected void createlog(string recibetTBK, string resultresponseTBK, string tx_step, string filename) {
 
             string m_exePath = string.Empty;
@@ -643,6 +644,7 @@ namespace Transbank.NET
 
         }
 
+        /*Crear los log según corresponda, de acuerdo al stepname*/
         protected void Log(string logMessage, string logMessage2,  TextWriter txtWriter, string stepname)
         {
             try
@@ -663,6 +665,7 @@ namespace Transbank.NET
             }
         }
 
+        /*Actualiza la OC procesada en BBDD cambiando estado a 1, si el pago fue exitoso*/
         public void UpDateEstadoDocumento(Dictionary<string, string> datosupdate)
         {
 
@@ -697,16 +700,18 @@ namespace Transbank.NET
 
         }
 
-        /* envia datos de pago aceptado en webpay */
+        /* envia datos de pago aceptado en webpay y verificados en BBDD */
         protected void enviaremail(string ordencompra) {
 
             Dictionary<string, string> datoamensajes = mensajeemail(ordencompra);
 
             if (datoamensajes != null)
             {
-                
+                /*datos formales*/
                 string emailsdestino = "ventas2@chileautos.cl,andres.cooper@gmail.com,cprieto@chileautos.cl,pagos@chileautos.cl,contabilidad@chileautos.cl";
                 string procedenciamail = "pago TBK";
+
+                /*datos de prueba*/
                 string emailsdestinotest = "alvaro.emparan@gmail.com,aemparan@chileautos.cl";
                 string procedenciamailtest = "pago prueba TBK";
 
@@ -729,6 +734,7 @@ namespace Transbank.NET
             }
         }
 
+        /* obtiene los datos registrados de la OC procesada en TBK en Base de datos con estado = 1*/
         protected Dictionary<string, string> mensajeemail(string ordencompra) {
 
             Dictionary<string, string> datoamensajes = new Dictionary<string, string>();
