@@ -1,0 +1,9 @@
+
+Log Entry : 19:03:31 lunes, 13 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"efb71effcc548d35bf66ff82ab824cac6e7d1daa6ca1c2064cc660ffe1eb9f70"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0213","buyOrder":"OC_2017207141559","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"OC_2017207141559"}],"sessionId":"OC_2017207141559","transactionDate":"\/Date(1487023282043)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------

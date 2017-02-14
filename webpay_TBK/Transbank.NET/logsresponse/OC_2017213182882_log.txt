@@ -1,0 +1,27 @@
+
+Log Entry : 18:34:09 lunes, 13 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"ed33a195deb2da52391926f9104b42ba560813317698e6a707dd555375aa0000"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0213","buyOrder":"OC_2017213182882","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"OC_2017213182882"}],"sessionId":"OC_2017213182882","transactionDate":"\/Date(1487021489782)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:35:46 lunes, 13 de febrero de 2017
+  :End
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 18:36:07 lunes, 13 de febrero de 2017
+  :End
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
