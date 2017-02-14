@@ -64,8 +64,6 @@
   <ItemGroup>
     <Content Include="imagenes\logos\tarjetas_webpay.gif" />
     <Content Include="imagenes\logos\WPP2.jpg" />
-    <Content Include="logsrequest\log.txt" />
-    <Content Include="logsresponse\log.txt" />
     <Content Include="default.aspx" />
     <Content Include="tbk-normal.aspx" />
     <Content Include="tbk-nullify-normal.aspx" />

@@ -710,15 +710,17 @@ namespace Transbank.NET
             if (datoamensajes != null)
             {
                 /*datos formales*/
-                string emailsdestino = "ventas2@chileautos.cl,andres.cooper@gmail.com,cprieto@chileautos.cl,pagos@chileautos.cl,contabilidad@chileautos.cl";
+                string emailsfrom = "ventas2@chileautos.cl";
+                string emailsdestino = "pagos@chileautos.cl,contabilidad@chileautos.cl";
                 string procedenciamail = "pago TBK";
 
                 /*datos de prueba*/
+                string emailsfromtest = "alvaro.emparan@gmail.com";
                 string emailsdestinotest = "alvaro.emparan@gmail.com,aemparan@chileautos.cl";
                 string procedenciamailtest = "pago prueba TBK";
 
                 string apiPublicar = "http://dws.chileautos.cl/api-cla/EnvioCorreo/Contactenos";
-                string parametros = "Nombre=alvaro&EmailFrom=alvaro.emparan@gmail.com&EmailTo=" + emailsdestinotest + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamailtest;
+                string parametros = "Nombre=alvaro&EmailFrom="+ emailsfrom + "&EmailTo=" + emailsdestino + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamail;
 
                 try
                 {
