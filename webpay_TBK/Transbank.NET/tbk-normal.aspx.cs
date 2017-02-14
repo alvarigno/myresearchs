@@ -55,6 +55,7 @@ namespace Transbank.NET
         Dictionary<string, string> responseTBK = new Dictionary<string, string>();
         Dictionary<string, string> requestTBK = new Dictionary<string, string>();
         wsInitTransactionOutput resultresponseTBK;
+        string tipotbk = "";
 
         protected void Page_Load()
         {
@@ -180,7 +181,11 @@ namespace Transbank.NET
                         /** URL Final */
                         string urlFinal = baseurl + "?action=end";
 
+                        wsInitTransactionInput uno = new wsInitTransactionInput();
 
+                        tipotbk = uno.wSTransactionType.ToString();
+
+                        request.Add("wsTransactionType", tipotbk);
                         request.Add("comerceId", configuration.CommerceCode);
                         request.Add("amount", amount.ToString());
                         request.Add("buyOrder", buyOrder.ToString());
@@ -191,13 +196,14 @@ namespace Transbank.NET
                         /** Ejecutamos metodo initTransaction desde Libreria */
                         wsInitTransactionOutput result = webpay.getNormalTransaction().initTransaction(amount, buyOrder, sessionId, urlReturn, urlFinal);
 
+                        string urlrespuesta = result.url;
 
                         string PublicCertuno = configuration.PublicCert;
                         string WebpayCertdos = configuration.WebpayCert;
 
                         /** Verificamos respuesta de inicio en webpay */
-                        if (result.token != null && result.token != "")
-                        {
+                        if (result.token != null && result.token != "" && urlrespuesta == "https://webpay3gint.transbank.cl/filtroUnificado/initTransaction")
+                            {
                             //message = "Sesion iniciada con exito en Webpay";
                             //HttpContext.Current.Response.Write("" + message + "</br></br>");
                             HttpContext.Current.Response.Write("<form action=" + result.url + " method='post'><input type='hidden' name='token_ws' value=" + result.token + "><input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'></form>");
@@ -236,6 +242,8 @@ namespace Transbank.NET
                     try
                     {
 
+
+
                         //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Step: " + tx_step + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Resultado de Transacción</p>");
 
@@ -249,9 +257,17 @@ namespace Transbank.NET
 
                         transactionResultOutput result = webpay.getNormalTransaction().getTransactionResult(token);
 
+                        string idsession = result.sessionId;
 
-                            //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
-                            //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
+                        string urlrespuesta = result.urlRedirection;
+
+                        wsInitTransactionInput uno = new wsInitTransactionInput();
+
+                        tipotbk = uno.wSTransactionType.ToString();
+                        string urlfinalEndPoint = uno.finalURL;
+
+                        //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
+                        //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br> " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
 
                         if (result.detailOutput[0].responseCode == 0)
                         {
@@ -300,7 +316,7 @@ namespace Transbank.NET
 
                             Dictionary<string, string> detalletransaccion = new Dictionary<string, string>();
                             detalletransaccion.Add("idOC", result.detailOutput[0].buyOrder);
-                            detalletransaccion.Add("tipo_transaccion", "TR_NORMAL");
+                            detalletransaccion.Add("tipo_transaccion", tipotbk);
                             detalletransaccion.Add("TBK_Respuesta", result.detailOutput[0].responseCode.ToString());
                             detalletransaccion.Add("TBK_Monto", result.detailOutput[0].amount.ToString());
                             detalletransaccion.Add("TBK_cod_autorizacion", result.detailOutput[0].authorizationCode);
@@ -317,8 +333,33 @@ namespace Transbank.NET
 
                             /** creamos el log del mensaje de envío y su respuesta */
                             createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
-                            /** creamos el update de la transacción en BD */
-                            UpDateEstadoDocumento(detalletransaccion);
+
+                            if (VerificaOCExiste(result.detailOutput[0].buyOrder))
+                            {
+
+                                HttpContext.Current.Response.Write("OC número: " + result.detailOutput[0].buyOrder+"<br />");
+                                HttpContext.Current.Response.Write("Ya está autorizada. <br /> Favor de intentarlo de nuevo.<br /><br />");
+
+                                tx_step = tx_step + " Sin llamda a acknowledgeTransaction "+token;
+                                /** creamos el log del acknowledgeTransaction de envío y su respuesta */
+                                createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
+
+
+                            }
+                            else {
+
+                                HttpContext.Current.Response.Write(message + "</br></br>");
+                                HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
+                                HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'></form>");
+
+                                tx_step = tx_step + " Con llamda a acknowledgeTransaction, toke: "+ token;
+                                /** creamos el log del mensaje de envío y su respuesta */
+                                createlog(token, "", tx_step, result.detailOutput[0].buyOrder);
+
+                                /** creamos el update de la transacción en BD */
+                                UpDateEstadoDocumento(detalletransaccion);
+
+                            }
 
                         }
                         else
@@ -346,7 +387,7 @@ namespace Transbank.NET
 
                             Dictionary<string, string> detalletransaccion = new Dictionary<string, string>();
                             detalletransaccion.Add("idOC", result.detailOutput[0].buyOrder);
-                            detalletransaccion.Add("tipo_transaccion", "TR_NORMAL");
+                            detalletransaccion.Add("tipo_transaccion", tipotbk);
                             detalletransaccion.Add("TBK_Respuesta", result.detailOutput[0].responseCode.ToString());
                             detalletransaccion.Add("TBK_Monto", result.detailOutput[0].amount.ToString());
                             detalletransaccion.Add("TBK_cod_autorizacion", result.detailOutput[0].authorizationCode);
@@ -363,14 +404,36 @@ namespace Transbank.NET
 
                             /** creamos el log del mensaje de envío y su respuesta */
                             createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
-                            /** creamos el update de la transacción en BD */
-                            UpDateEstadoDocumento(detalletransaccion);
+
+                            if (VerificaOCExiste(result.detailOutput[0].buyOrder))
+                            {
+
+                                HttpContext.Current.Response.Write("OC número: " + result.detailOutput[0].buyOrder + "<br />");
+                                HttpContext.Current.Response.Write("Ya está autorizada. <br /> Favor de intentarlo de nuevo.<br /><br />");
+
+                                tx_step = tx_step + " Sin llamda a acknowledgeTransaction ";
+                                /** creamos el log del acknowledgeTransaction de envío y su respuesta */
+                                createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, result.detailOutput[0].buyOrder);
+
+                            }
+                            else {
+
+                                HttpContext.Current.Response.Write(message + "</br></br>");
+                                HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
+                                HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'></form>");
+
+                                tx_step = tx_step + " Con llamda a acknowledgeTransaction, toke: " + token;
+                                /** creamos el log del mensaje de envío y su respuesta */
+                                createlog(token, "", tx_step, result.detailOutput[0].buyOrder);
+
+                                /** creamos el update de la transacción en BD */
+                                UpDateEstadoDocumento(detalletransaccion);
+
+                            }
+
                         }
 
-                        HttpContext.Current.Response.Write(message + "</br></br>");
-                        HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
-                        HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'></form>");
-                        
+
 
                     }
                     catch (Exception ex)
@@ -606,7 +669,7 @@ namespace Transbank.NET
 
             //HttpContext.Current.Response.Write("</br><a href='https://operaciones.chileautos.cl/pago_v2.asp?i=0'>&laquo; volver a index</a>");
             HttpContext.Current.Response.Write("</br><a href='http://desarrollo.chileautos.cl/pago_v2.asp?i=0'>&laquo; volver a index</a>");
-            //HttpContext.Current.Response.Write("<br /><a href='http://"+ httpHost + "/default.aspx'>&laquo; volver a index</a>");
+            //HttpContext.Current.Response.Write("<br /><a href='http://"+ httpHost + "/default.aspx'>&laquo; volver al formulario de transacciones.</a>");
             HttpContext.Current.Response.Write("</div>");
             HttpContext.Current.Response.Write("</div>");
             HttpContext.Current.Response.Write("</div>");
@@ -687,6 +750,7 @@ namespace Transbank.NET
                 {
                     connection.Connection = myConnection.GetConnection();
                     connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = CONVERT(DATETIME, '" + datosupdate["fecha_f_trans"] + "', 120) WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
+                    //connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = '" + datosupdate["fecha_f_trans"] + "' WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
                     connection.ExecuteNonQuery();
                     connection.Connection.Close();
                     connection.Dispose();
@@ -711,7 +775,7 @@ namespace Transbank.NET
             {
                 /*datos formales*/
                 string emailsfrom = "ventas2@chileautos.cl";
-                string emailsdestino = "pagos@chileautos.cl,contabilidad@chileautos.cl";
+                string emailsdestino = "acooper@chileautos.cl,contabilidad@chileautos.cl";
                 string procedenciamail = "pago TBK";
 
                 /*datos de prueba*/
@@ -720,7 +784,7 @@ namespace Transbank.NET
                 string procedenciamailtest = "pago prueba TBK";
 
                 string apiPublicar = "http://dws.chileautos.cl/api-cla/EnvioCorreo/Contactenos";
-                string parametros = "Nombre=alvaro&EmailFrom="+ emailsfrom + "&EmailTo=" + emailsdestino + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamail;
+                string parametros = "Nombre=alvaro&EmailFrom="+ emailsfromtest + "&EmailTo=" + emailsdestinotest + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamailtest;
 
                 try
                 {
@@ -803,6 +867,43 @@ namespace Transbank.NET
             }
 
             return datoamensajes;
+        }
+
+        public Boolean VerificaOCExiste(string idoc)
+        {
+
+            myConnection myConnexiste = new myConnection();
+            Boolean verificaOCexiste = false;
+            //string tbk_autorizacion = "";
+
+            try { 
+                using (var connectionexisteoc = new System.Data.SqlClient.SqlCommand())
+                {
+                    connectionexisteoc.Connection = myConnection.GetConnection();
+                    connectionexisteoc.CommandText = "select TBK_CODIGO_AUTORIZACION from dbo.transbank_pagos where TBK_ORDEN_COMPRA = '"+ idoc + "' and TBK_CODIGO_AUTORIZACION != ''";
+
+                    using (var readerexiste = connectionexisteoc.ExecuteReader())
+                    {
+                        if (readerexiste.HasRows)
+                        {
+                            //tbk_autorizacion = readerexiste["TBK_CODIGO_AUTORIZACION"].ToString();
+                            verificaOCexiste = true;
+                        }
+
+                    }
+                    connectionexisteoc.Connection.Close();
+                    connectionexisteoc.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+             }
+            catch (Exception ex)
+            {
+
+                HttpContext.Current.Response.Write("Error: " + ex.Message);
+
+            }
+
+            return verificaOCexiste;
         }
 
         public string ChangeEncodingFormat(string DataChangeEnconde)

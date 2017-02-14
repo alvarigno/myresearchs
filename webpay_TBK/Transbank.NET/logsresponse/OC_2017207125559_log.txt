@@ -547,3 +547,39 @@ Log Entry : 22:41:17 jueves, 09 de febrero de 2017
   :Response
   :{"accountingDate":"0209","buyOrder":"OC_2017207125559","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":9,"sharesNumberSpecified":true,"amount":1231234,"commerceCode":"597020000541","buyOrder":"OC_2017207125559"}],"sessionId":"OC_2017207125559","transactionDate":"\/Date(1486690724628)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
 -------------------------------
+
+Log Entry : 17:33:12 martes, 14 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: eef972d91b8843044ba8ed1d6497351520e5e73019d8d5034163d7c8f81d40a7
+  :Request
+  :{"token":"eef972d91b8843044ba8ed1d6497351520e5e73019d8d5034163d7c8f81d40a7"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_2017207125559","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":7,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"OC_2017207125559"}],"sessionId":"OC_2017207125559","transactionDate":"\/Date(1487104126824)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 17:38:56 martes, 14 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e4a1dbf6a8f4e3082c3ead45bdccd1bfcf8d246f55a3617d9aad642d3cf492be"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_2017207125559","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VD","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123121,"commerceCode":"597020000541","buyOrder":"OC_2017207125559"}],"sessionId":"OC_2017207125559","transactionDate":"\/Date(1487104564967)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------
+
+Log Entry : 17:39:24 martes, 14 de febrero de 2017
+  :Get Result Sin llamda a acknowledgeTransaction 
+  :Request
+  :{"token":"e4a1dbf6a8f4e3082c3ead45bdccd1bfcf8d246f55a3617d9aad642d3cf492be"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_2017207125559","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VD","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123121,"commerceCode":"597020000541","buyOrder":"OC_2017207125559"}],"sessionId":"OC_2017207125559","transactionDate":"\/Date(1487104564967)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------
+
+Log Entry : 17:41:37 martes, 14 de febrero de 2017
+  :Get Result Sin llamda a acknowledgeTransaction 
+  :Request
+  :{"token":"ef9602e479e9a80c90f2f03d6f16207d718c37d2465f3326097ef947c1f1af81"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_2017207125559","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":8,"sharesNumberSpecified":true,"amount":1231231,"commerceCode":"597020000541","buyOrder":"OC_2017207125559"}],"sessionId":"OC_2017207125559","transactionDate":"\/Date(1487104714352)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------

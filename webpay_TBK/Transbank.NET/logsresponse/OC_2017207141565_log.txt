@@ -1,0 +1,18 @@
+
+Log Entry : 18:24:47 martes, 14 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: e93928d4f8c90300a23709dc5344a55d8adec7dae7f6e0c7964c63527feafc17
+  :Request
+  :{"token":"e93928d4f8c90300a23709dc5344a55d8adec7dae7f6e0c7964c63527feafc17"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_2017207141565","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VN","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"OC_2017207141565"}],"sessionId":"OC_2017207141565","transactionDate":"\/Date(1487107210598)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 18:25:54 martes, 14 de febrero de 2017
+  :End
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------

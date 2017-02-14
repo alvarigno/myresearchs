@@ -1,0 +1,9 @@
+
+Log Entry : 19:08:43 martes, 14 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: ecfb6a3b0f6e466771e046f9fe48087d076e6743d76b9fcb1d5dd42d88a3d8da
+  :Request
+  :ecfb6a3b0f6e466771e046f9fe48087d076e6743d76b9fcb1d5dd42d88a3d8da
+-------------------------------
+  :Response
+  :
+-------------------------------

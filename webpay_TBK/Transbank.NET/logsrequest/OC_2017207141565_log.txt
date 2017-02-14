@@ -1,0 +1,9 @@
+
+Log Entry : 18:22:50 martes, 14 de febrero de 2017
+  :Init
+  :Request
+  :{"comerceId":"597020000541","amount":"123","buyOrder":"OC_2017207141565","sessionId":"OC_2017207141565","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e93928d4f8c90300a23709dc5344a55d8adec7dae7f6e0c7964c63527feafc17","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
