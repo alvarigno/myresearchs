@@ -1,0 +1,10 @@
+
+Log Entry : 0:32:35 miércoles, 15 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"ed4b0f3ff5ae49c56336536f9ca2aadc93a2c31d36ded0e708235a510663892d"}
+-------------------------------
+  :Response
+  :El sistema no puede encontrar el archivo especificado.
+
+-------------------------------

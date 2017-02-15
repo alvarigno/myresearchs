@@ -1,0 +1,36 @@
+
+Log Entry : 21:26:06 martes, 14 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e687c79425eaf89de4ad1a7514ee6ac35def6371518603b573d2a1be0c10363b"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_20172071415661","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VD","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"OC_20172071415661"}],"sessionId":"OC_20172071415661","transactionDate":"\/Date(1487118213563)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 21:26:17 martes, 14 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: e687c79425eaf89de4ad1a7514ee6ac35def6371518603b573d2a1be0c10363b
+  :Request
+  :e687c79425eaf89de4ad1a7514ee6ac35def6371518603b573d2a1be0c10363b
+-------------------------------
+  :Response
+  :
+-------------------------------
+
+Log Entry : 21:28:12 martes, 14 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e99fb516b10721ccbce3d55011e522d11b168ab0dfd7166357ca6cf4d89b522a"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_20172071415661","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VD","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"OC_20172071415661"}],"sessionId":"OC_20172071415661","transactionDate":"\/Date(1487118340531)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------
+
+Log Entry : 21:28:31 martes, 14 de febrero de 2017
+  :Get Result Sin llamda a acknowledgeTransaction 
+  :Request
+  :{"token":"e99fb516b10721ccbce3d55011e522d11b168ab0dfd7166357ca6cf4d89b522a"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_20172071415661","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VD","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"OC_20172071415661"}],"sessionId":"OC_20172071415661","transactionDate":"\/Date(1487118340531)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------

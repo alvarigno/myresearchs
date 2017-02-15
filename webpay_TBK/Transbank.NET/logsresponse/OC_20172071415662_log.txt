@@ -1,0 +1,18 @@
+
+Log Entry : 21:32:56 martes, 14 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"ef89f59df81e132c5792940fced893b8cf3c25c68eb52092eb5ca9620c24429c"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0214","buyOrder":"OC_20172071415662","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"000000","paymentTypeCode":"VD","responseCode":-1,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":123,"commerceCode":"597020000541","buyOrder":"OC_20172071415662"}],"sessionId":"OC_20172071415662","transactionDate":"\/Date(1487118613611)\/","transactionDateSpecified":true,"urlRedirection":"http://localhost:54128/tbk-normal.aspx?action=end","VCI":"TSN"}
+-------------------------------
+
+Log Entry : 21:33:12 martes, 14 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: ef89f59df81e132c5792940fced893b8cf3c25c68eb52092eb5ca9620c24429c
+  :Request
+  :ef89f59df81e132c5792940fced893b8cf3c25c68eb52092eb5ca9620c24429c
+-------------------------------
+  :Response
+  :
+-------------------------------
