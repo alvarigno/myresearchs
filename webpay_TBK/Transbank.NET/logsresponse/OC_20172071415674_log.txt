@@ -1,0 +1,18 @@
+
+Log Entry : 11:13:30 lunes, 20 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e7f5a7eff011303747d608a6c2454e615ea7d684865ec09beeb5d28dcd6728b3"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0220","buyOrder":"OC_20172071415674","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"NC","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":4,"sharesNumberSpecified":true,"amount":1234567,"commerceCode":"597020000541","buyOrder":"OC_20172071415674"}],"sessionId":"OC_20172071415674","transactionDate":"\/Date(1487599814623)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 11:13:36 lunes, 20 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: e7f5a7eff011303747d608a6c2454e615ea7d684865ec09beeb5d28dcd6728b3
+  :Request
+  :e7f5a7eff011303747d608a6c2454e615ea7d684865ec09beeb5d28dcd6728b3
+-------------------------------
+  :Response
+  :
+-------------------------------

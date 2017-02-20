@@ -103,10 +103,10 @@
 										
                                         <INPUT TYPE="HIDDEN" NAME="TBK_URL_EXITO" class="form-control" VALUE="https://operaciones.chileautos.cl/pagoTBK/tbk-normal.aspx"> <BR>
 										<INPUT TYPE="HIDDEN" NAME="TBK_URL_FRACASO" class="form-control" VALUE="https://operaciones.chileautos.cl/pagoTBK/tbk-normal.aspx"> <BR>
-
+                                       
 										<!--
                                         <INPUT TYPE="HIDDEN" NAME="TBK_URL_EXITO" class="form-control" VALUE="http://localhost:54128/tbk-normal.aspx"> <BR>
-										<INPUT TYPE="HIDDEN" NAME="TBK_URL_FRACASO" class="form-control" VALUE="http://localhost:54128/tbk-normal.aspx"> <BR>-->
+										<INPUT TYPE="HIDDEN" NAME="TBK_URL_FRACASO" class="form-control" VALUE="http://localhost:54128/tbk-normal.aspx"> <BR> -->
                                         
                                     </div>
                                 </div>
