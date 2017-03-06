@@ -1,0 +1,63 @@
+
+Log Entry : 14:11:17 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415681","sessionId":"OC_20172071415681","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e06b00de1248e4f06763b272dc40a032f34cab66e4d135452a9cbf5c7a1dca5c","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 14:41:18 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415681","sessionId":"OC_20172071415681","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e735e14be01fbd081c7bde810934deb0f63ef91885650533aa4713de87fd5604","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 14:43:32 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415681","sessionId":"OC_20172071415681","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e2650ed1d60081cec2ae45f5d6f40c663d46a5d04ddc356e03cd06dadc60830b","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 15:04:42 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415681","sessionId":"OC_20172071415681","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e9f1d1a9e47f3db756fa516bfe26bab546f86a83b8151e643eddbb421463b20b","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 15:07:05 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415681","sessionId":"OC_20172071415681","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e5edecb617ca35b311631a42492163a01be4fd7b34c9f127eba827491d0a2126","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 15:09:10 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415681","sessionId":"OC_20172071415681","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e09f4c4858b9e084b17fbb314c9c8fb02ee5f06fe2b3ee40340fcd47f5b06505","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 15:09:49 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415681","sessionId":"OC_20172071415681","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e4ed96067e98266c38ebc14d16f508e62fce7e9494419326fa5838af068855ba","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------

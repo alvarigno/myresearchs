@@ -1,9 +1,45 @@
 
-Log Entry : 11:48:09 lunes, 20 de febrero de 2017
+Log Entry : 11:16:03 martes, 28 de febrero de 2017
   :Init
   :Request
   :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415675","sessionId":"OC_20172071415675","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
 -------------------------------
   :Response
-  :{"token":"e7ac919d699581310eec147daed2060b6b63f6f7b464fce7cb60314b02e0f8a3","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+  :{"token":"e749c3821def580cb513e1fa6bb14f14040f410608bfec4b7c46fccc556c96c7","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 11:17:46 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415675","sessionId":"OC_20172071415675","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e624d505691d1cc5e418900411c3abf9f0a70f0c409c3bf17f02ea071af5073c","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 12:50:56 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234567","buyOrder":"OC_20172071415675","sessionId":"OC_20172071415675","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"edc24be23507f51088993882ab07ddf5123fc000ec921c34a9af496d06f3522b","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
+
+Log Entry : 17:18:41 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La cadena de entrada no tiene el formato correcto.
+-------------------------------
+
+Log Entry : 17:19:07 martes, 28 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1234564","buyOrder":"OC_20172071415675","sessionId":"OC_20172071415675","urlReturn":"http://localhost:54128/tbk-normal.aspx?action=result","urlFinal":"http://localhost:54128/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
 -------------------------------

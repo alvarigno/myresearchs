@@ -1,0 +1,27 @@
+
+Log Entry : 15:07:06 lunes, 27 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e343817889d3cc4385015901cc31ff7aabae409ad47e486a1da04c12cdfb498b"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0227","buyOrder":"oc_123459","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VN","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234,"commerceCode":"597020000541","buyOrder":"oc_123459"}],"sessionId":"oc_123459","transactionDate":"\/Date(1488217918370)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 15:07:56 lunes, 27 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: e343817889d3cc4385015901cc31ff7aabae409ad47e486a1da04c12cdfb498b
+  :Request
+  :e343817889d3cc4385015901cc31ff7aabae409ad47e486a1da04c12cdfb498b
+-------------------------------
+  :Response
+  :
+-------------------------------
+
+Log Entry : 15:09:35 lunes, 27 de febrero de 2017
+  :End
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------

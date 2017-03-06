@@ -1,0 +1,9 @@
+
+Log Entry : 17:08:30 lunes, 06 de marzo de 2017
+  :Get Result
+  :Request
+  :{"token":"eecde684d83fdbeae901768205aca53879330b0e80c5e61fa183d539d0beadbb"}
+-------------------------------
+  :Response
+  :WSE910: An error happened during the processing of a response message, and you can find the error in the inner exception.  You can also find the response message in the Response property.
+-------------------------------

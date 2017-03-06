@@ -1,0 +1,9 @@
+
+Log Entry : 16:13:47 viernes, 24 de febrero de 2017
+  :Init
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La cadena de entrada no tiene el formato correcto.
+-------------------------------

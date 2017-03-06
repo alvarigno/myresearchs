@@ -33,7 +33,7 @@
 <head runat="server">
     <title></title>
 </head>
-<body>
+<body style="background: #EEEEEE url(https://webpay3g.transbank.cl/webpayserver/imagenes/background.gif);background-repeat: repeat;margin: 0;padding: 0;">
     <form id="form1" runat="server">
     <div>
 

@@ -81,8 +81,8 @@ namespace Transbank.NET
             /** Crea URL de Aplicación */
             string baseurl = "http://" + httpHost + selfURL;
 
-            //urldominio = "http://" + httpHost;
-            urldominio = "http://desarrollo.chileautos.cl";
+            urldominio = "http://" + httpHost;
+            //urldominio = "http://desarrollo.chileautos.cl";
 
             /** Crea Dictionary con descripción */
             Dictionary<string, string> description = new Dictionary<string, string>();
@@ -141,21 +141,35 @@ namespace Transbank.NET
             //Response.Write("Cetificado publico: " + configuration.PublicCert + "<br />");
             //Response.Write("Cetificado WebPay: " + configuration.WebpayCert + "<br />");
 
+            string htmlinicio = "<link rel='stylesheet' type='text/css' href='https://www.chileautos.cl/Content/assets/css/chileautos.css'>"+
+             "<div id='voucherarea' class='container' style='width:500px;height:700px;'>" +
+             "<div class='col-xs-12 col-md-12 u-bg-gray-light'>" +
+             "<div style='text-align:center;margin:0 auto;display:block;margin-bottom:15px;'>" +
+             "<img src='https://www.chileautos.cl/Content/assets/img/logos/logo-caption.svg' style='width:140px;' border='0'>" +
+             "<h3> PAGO CON TRANSBANK</h3>" +
+             "<img src='imagenes/logos/tarjetas_webpay.gif' border='0' class='' style='width:120px;'>" +
+             "<img src='imagenes/logos/WPP2.jpg' border='0' class='' style='width:70px;'>" +
+             "</div>" +
+             "<div class='col-sm-12'>" +
+            "<div class='tab-pane active fade in'>";
 
-            HttpContext.Current.Response.Write("<link rel='stylesheet' type='text/css' href='https://www.chileautos.cl/Content/assets/css/chileautos.css'>");
-            HttpContext.Current.Response.Write("<div id='voucherarea' class='container' style='width:500px;height:700px;'>");
-            HttpContext.Current.Response.Write("<div class='col-xs-12 col-md-12 u-bg-gray-light'>");
-            HttpContext.Current.Response.Write("<div style='text-align:center;margin:0 auto;display:block;margin-bottom:15px;'>");
-            HttpContext.Current.Response.Write("<img src='https://www.chileautos.cl/Content/assets/img/logos/logo-caption.svg' style='width:140px;' border='0'>");
-            HttpContext.Current.Response.Write("<h3> PAGO CON TRANSBANK</h3>");
-            HttpContext.Current.Response.Write("<img src='imagenes/logos/tarjetas_webpay.gif' border='0' class='' style='width:120px;'> ");
-            HttpContext.Current.Response.Write("<img src='imagenes/logos/WPP2.jpg' border='0' class='' style='width:70px;'>");
-            HttpContext.Current.Response.Write("</div>");
-            HttpContext.Current.Response.Write("<div class='col-sm-12'>");
-            HttpContext.Current.Response.Write("<div class='tab-pane active fade in'>");
+            //HttpContext.Current.Response.Write("</br><a href='https://operaciones.chileautos.cl/pago_v2.asp?i=0'>&laquo; volver a index</a>");
 
-            keys = Request.Form.AllKeys;
+            string htmlfin = "</br><a href='" + urldominio + "/pago_v2.asp?i=0'>&laquo; volver al formulario de transacciones.</a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>";
 
+            string stylebody = "<link rel='stylesheet' type='text/css' href='https://www.chileautos.cl/Content/assets/css/chileautos.css'>";
+
+
+             keys = Request.Form.AllKeys;
+             if (action == "init"){
+                Session["OC"] = Request.Form[keys[6]]; ;
+               
+               
+            }
             switch (action)
             {
 
@@ -165,7 +179,7 @@ namespace Transbank.NET
 
                     try
                     {
-
+                        HttpContext.Current.Response.Write(htmlinicio);
                         //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Step: " + tx_step + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Confirmar Datos</p>");
 
@@ -182,7 +196,12 @@ namespace Transbank.NET
                         HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td class='col-sm-3'><span>Nombre:</span> </td><td><strong>" + Request.Form[keys[0]] + "</strong></td></tr>");
                         HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>RUT:</span> </td><td><strong>" + Request.Form[keys[1]] + "-" + Request.Form[keys[2]] + "</strong></td></tr>");
                         HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Motivo:</span> </td><td><strong>" + Request.Form[keys[3]] + "</strong></td></tr>");
-                        HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>" + Request.Form[keys[5]] + "</strong></td></tr>");
+                        //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>" + Request.Form[keys[5]] + "</strong></td></tr>");
+
+                        decimal d = 0;
+                        decimal.TryParse(Request.Form[keys[5]], out d);
+                        HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>&#36;" + d.ToString("N0") + "</strong></td></tr>");
+
                         HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Comentario:</span> </td><td><strong>" + Request.Form[keys[4]] + "</strong></td></tr>");
                         HttpContext.Current.Response.Write("</table>");
                         HttpContext.Current.Response.Write("<br />");
@@ -247,11 +266,13 @@ namespace Transbank.NET
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
 
-                       
+                        HttpContext.Current.Response.Write(htmlfin);
 
                     }
                     catch (Exception ex)
                     {
+                        //HttpContext.Current.Response.Write(htmlinicio);
+
                         HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
                         HttpContext.Current.Response.Write("<tr><td style='color:#009933;'><h4>Error</h4></td></tr>");
                         HttpContext.Current.Response.Write("<tr><td></td></tr>");
@@ -260,6 +281,7 @@ namespace Transbank.NET
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>Descrpción</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
                         HttpContext.Current.Response.Write("Favor de completar el formulario con datos correctos.");
+                        HttpContext.Current.Response.Write(htmlfin);
                         /** creamos el log del mensaje de envío y su respuesta del error */
                         createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Form[keys[6]]);
                     }
@@ -304,12 +326,12 @@ namespace Transbank.NET
                         {
                             message = "Pago ACEPTADO por webpay (se deben guardar datos para mostrar voucher)";
 
-                            HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Resultado de Transacción</p>");
+                            //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Resultado de Transacción</p>");
 
-                            HttpContext.Current.Response.Write("<script>localStorage.setItem('authorizationCode', " + result.detailOutput[0].authorizationCode + ")</script>");
-                            HttpContext.Current.Response.Write("<script>localStorage.setItem('commercecode', " + result.detailOutput[0].commerceCode + ")</script>");
-                            HttpContext.Current.Response.Write("<script>localStorage.setItem('amount', " + result.detailOutput[0].amount + ")</script>");
-                            HttpContext.Current.Response.Write("<script>localStorage.setItem('buyOrder', " + result.detailOutput[0].buyOrder + ")</script>");
+                            //HttpContext.Current.Response.Write("<script>localStorage.setItem('authorizationCode', " + result.detailOutput[0].authorizationCode + ")</script>");
+                            //HttpContext.Current.Response.Write("<script>localStorage.setItem('commercecode', " + result.detailOutput[0].commerceCode + ")</script>");
+                            //HttpContext.Current.Response.Write("<script>localStorage.setItem('amount', " + result.detailOutput[0].amount + ")</script>");
+                            //HttpContext.Current.Response.Write("<script>localStorage.setItem('buyOrder', " + result.detailOutput[0].buyOrder + ")</script>");
 
                             //requestTBK.Add("authorizationCode", result.detailOutput[0].authorizationCode);
                             //requestTBK.Add("commercecode", result.detailOutput[0].commerceCode);
@@ -369,9 +391,24 @@ namespace Transbank.NET
 
                             if (VerificaOCExiste(result.detailOutput[0].buyOrder))
                             {
-
-                                HttpContext.Current.Response.Write("OC número: " + result.detailOutput[0].buyOrder+"<br />");
-                                HttpContext.Current.Response.Write("Ya está autorizada. <br /> Favor de intentarlo de nuevo.<br /><br />");
+                                HttpContext.Current.Response.Write(htmlinicio);
+                                
+                                HttpContext.Current.Response.Write("<div>");
+                                HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada<br /><span>Núm.Orden: </span><strong>" + result.detailOutput[0].buyOrder + "</strong></h4>");
+                                HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
+                                HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td colspan='2'><p>Las posibles causas de este rechazo son:</p>");
+                                HttpContext.Current.Response.Write("<ul><li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o Código de seguridad).</li>");
+                                HttpContext.Current.Response.Write("<li>Su tarjeta de crédito o Débito no cuenta con el cupo necesario parta cancelar la compra.</li>");
+                                HttpContext.Current.Response.Write("<li>Tarjeta aún no habilitada en el sistema financiero.</li>");
+                                HttpContext.Current.Response.Write("</ul></td></tr>");
+                                HttpContext.Current.Response.Write("<tr><td></td></tr>");
+                                HttpContext.Current.Response.Write("<tr><td><button class='btn btn-warning btn-large btn-block' onclick=\"location.href='" + urldominio + "/pago_v2.asp?i=0';\">Regresar al formulario de pago.</button></td></tr>");
+                                HttpContext.Current.Response.Write("</table>");
+                                //HttpContext.Current.Response.Write("OC número: " + result.detailOutput[0].buyOrder + "<br />");
+                                //HttpContext.Current.Response.Write("Ya está autorizada. <br /> Favor de intentarlo de nuevo.<br /><br />");
+                                HttpContext.Current.Response.Write("</div>");
+                                HttpContext.Current.Response.Write("<br />");
+                                HttpContext.Current.Response.Write(htmlfin);
 
                                 tx_step = tx_step + " Sin llamda a acknowledgeTransaction "+token;
                                 /** creamos el log del acknowledgeTransaction de envío y su respuesta */
@@ -381,9 +418,14 @@ namespace Transbank.NET
                             }
                             else {
 
-                                HttpContext.Current.Response.Write(message + "</br></br>");
+                                //HttpContext.Current.Response.Write(message + "</br></br>");
+                                HttpContext.Current.Response.Write(stylebody);
+                                HttpContext.Current.Response.Write("<div style='position:absolute; top:0; left:0; width:100%; height:100%; background:url(\'https://webpay3g.transbank.cl/webpayserver/imagenes/background.gif\');'>");
                                 HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
-                                HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'></form>");
+                                HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + ">");
+                                //HttpContext.Current.Response.Write("<input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'>");
+                                HttpContext.Current.Response.Write("</form>");
+                                HttpContext.Current.Response.Write("</div>");
 
                                 tx_step = tx_step + " Con llamda a acknowledgeTransaction, toke: "+ token;
                                 /** creamos el log del mensaje de envío y su respuesta */
@@ -397,9 +439,10 @@ namespace Transbank.NET
                         }
                         else
                         {
+                            
                             message = "Pago RECHAZADO por webpay <br />Código : " + result.detailOutput[0].responseCode + "<br /> Descripción: " + codes[result.detailOutput[0].responseCode.ToString()];
 
-                            HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Resultado de Transacción</p>");
+                            //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Resultado de Transacción</p>");
 
                             HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
                             ChCookie.Values.Add("accountingDate", result.accountingDate);
@@ -442,9 +485,24 @@ namespace Transbank.NET
 
                             if (VerificaOCExiste(result.detailOutput[0].buyOrder))
                             {
+                                HttpContext.Current.Response.Write(htmlinicio);
 
-                                HttpContext.Current.Response.Write("OC número: " + result.detailOutput[0].buyOrder + "<br />");
-                                HttpContext.Current.Response.Write("Ya está autorizada. <br /> Favor de intentarlo de nuevo.<br /><br />");
+                                HttpContext.Current.Response.Write("<div>");
+                                HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada<br /><span>Núm.Orden: </span><strong>" + result.detailOutput[0].buyOrder + "</strong></h4>");
+                                HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
+                                HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td colspan='2'><p>Las posibles causas de este rechazo son:</p>");
+                                HttpContext.Current.Response.Write("<ul><li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o Código de seguridad).</li>");
+                                HttpContext.Current.Response.Write("<li>Su tarjeta de crédito o Débito no cuenta con el cupo necesario parta cancelar la compra.</li>");
+                                HttpContext.Current.Response.Write("<li>Tarjeta aún no habilitada en el sistema financiero.</li>");
+                                HttpContext.Current.Response.Write("</ul></td></tr>");
+                                HttpContext.Current.Response.Write("<tr><td></td></tr>");
+                                HttpContext.Current.Response.Write("<tr><td><button class='btn btn-warning btn-large btn-block' onclick=\"location.href='" + urldominio + "/pago_v2.asp?i=0';\">Regresar al formulario de pago.</button></td></tr>");
+                                HttpContext.Current.Response.Write("</table>");
+                                //HttpContext.Current.Response.Write("OC número: " + result.detailOutput[0].buyOrder + "<br />");
+                                //HttpContext.Current.Response.Write("Ya está autorizada. <br /> Favor de intentarlo de nuevo.<br /><br />");
+                                HttpContext.Current.Response.Write("</div>");
+                                HttpContext.Current.Response.Write("<br />");
+                                HttpContext.Current.Response.Write(htmlfin);
 
                                 tx_step = tx_step + " Sin llamda a acknowledgeTransaction ";
                                 /** creamos el log del acknowledgeTransaction de envío y su respuesta */
@@ -453,9 +511,14 @@ namespace Transbank.NET
                             }
                             else {
 
-                                HttpContext.Current.Response.Write(message + "</br></br>");
+                                //HttpContext.Current.Response.Write(message + "</br></br>");
+                                HttpContext.Current.Response.Write(stylebody);
+                                HttpContext.Current.Response.Write("<div style='position:absolute; top:0; left:0; width:100%; height:100%; background:url(\'https://webpay3g.transbank.cl/webpayserver/imagenes/background.gif\');'>");
                                 HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['acknowledgeTransaction'].submit()}</script>");
-                                HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + "><input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'></form>");
+                                HttpContext.Current.Response.Write("<form action=" + result.urlRedirection + " name='acknowledgeTransaction' method='post'><input type='hidden' name='token_ws' value=" + token + ">");
+                                //HttpContext.Current.Response.Write("<input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'>");
+                                HttpContext.Current.Response.Write("</form>");
+                                HttpContext.Current.Response.Write("</div>");
 
                                 tx_step = tx_step + " Con llamda a acknowledgeTransaction, toke: " + token;
                                 /** creamos el log del mensaje de envío y su respuesta */
@@ -473,9 +536,9 @@ namespace Transbank.NET
                     }
                     catch (Exception ex)
                     {
-
+                        HttpContext.Current.Response.Write(htmlinicio);
                         HttpContext.Current.Response.Write("<div>");
-                        HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada</h4>");
+                        HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada<br /><span>Núm.Orden: </span><strong>" + Session["OC"] + "</strong></h4>");
                         HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
                         HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td colspan='2'><p>Las posibles causas de este rechazo son:</p>");
                         HttpContext.Current.Response.Write("<ul><li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o Código de seguridad).</li>");
@@ -487,6 +550,7 @@ namespace Transbank.NET
                         HttpContext.Current.Response.Write("</table>");
                         HttpContext.Current.Response.Write("</div>");
                         HttpContext.Current.Response.Write("<br />");
+                        HttpContext.Current.Response.Write(htmlfin);
 
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>Descripción</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
@@ -552,12 +616,21 @@ namespace Transbank.NET
 
                                 if (int.Parse(responseTBK["responseCode"]) == 0)
                                 {
+                                    HttpContext.Current.Response.Write(htmlinicio);
                                     HttpContext.Current.Response.Write("<div>");
                                     HttpContext.Current.Response.Write("<h4 style='color:#009933;'>Transacción Aprobada <br /><span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</strong></h4>");
                                     HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
                                     HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td class='col-sm-4'><span>Núm. Orden: </span></td><td><strong>" + responseTBK["buyOrder"] + "</strong></td></tr>");
                                     HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td><span>Motivo: </span></td><td><strong>" + MotivoTransaccion(responseTBK["buyOrder"]) + "</strong></td></tr>");
-                                    HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td><span>Monto: </span></td><td><strong>" + String.Format("{0:C0}", int.Parse(responseTBK["amount"])) + "</strong></td></tr>");
+
+                                    //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td><span>Monto: </span></td><td><strong>" + String.Format("{0:C0}", int.Parse(responseTBK["amount"])) + "</strong></td></tr>");
+
+                                    decimal d = 0;
+                                    decimal.TryParse(responseTBK["amount"], out d);
+                                    
+                                    HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td><span>Monto: </span></td><td><strong>&#36;" + d.ToString("N0") + "</strong></td></tr>");
+
+
                                     HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td><span>Fecha Transacción: </span></td><td><strong>" + responseTBK["transactionDate"] + "</strong></td></tr>");
                                     HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td><span>Núm. Tarjeta: </span></td><td><strong>" + responseTBK["Cardnumber"] + "</strong></td></tr>");
                                     HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td><span>Tipo Pago: </span></td><td><strong>" + codpago + "</strong></td></tr>");
@@ -573,11 +646,12 @@ namespace Transbank.NET
                                     HttpContext.Current.Response.Write("var printContents = document.getElementById(divName).innerHTML;var originalContents = document.body.innerHTML;document.body.innerHTML = printContents;window.print();");
                                     HttpContext.Current.Response.Write("document.body.innerHTML = originalContents;}</script>");
                                     enviaremail(responseTBK["buyOrder"]);
+                                    HttpContext.Current.Response.Write(htmlfin);
 
                                 }
                                 else
                                 {
-
+                                    HttpContext.Current.Response.Write(htmlinicio);
                                     HttpContext.Current.Response.Write("<div>");
                                     HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada <br /><span>Núm.Orden: </span><strong>" + responseTBK["buyOrder"] + "</strong></h4>");
                                     HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
@@ -598,6 +672,7 @@ namespace Transbank.NET
                                     HttpContext.Current.Response.Write("</table>");
                                     HttpContext.Current.Response.Write("</div>");
                                     HttpContext.Current.Response.Write("<br />");
+                                    HttpContext.Current.Response.Write(htmlfin);
                                 }
 
 
@@ -632,9 +707,9 @@ namespace Transbank.NET
                         }
                         else
                         {
-
+                            HttpContext.Current.Response.Write(htmlinicio);
                             HttpContext.Current.Response.Write("<div>");
-                            HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada </h4>");
+                            HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada<br /><span>Núm.Orden: </span><strong>" + Session["OC"] + "</strong></h4>");
                             HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
                             HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td colspan='2'><p>Las posibles causas de este rechazo son:</p>");
                             HttpContext.Current.Response.Write("<ul><li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o Código de seguridad).</li>");
@@ -647,11 +722,12 @@ namespace Transbank.NET
                             HttpContext.Current.Response.Write("</table>");
                             HttpContext.Current.Response.Write("</div>");
                             HttpContext.Current.Response.Write("<br />");
+                            HttpContext.Current.Response.Write(htmlfin);
 
                         }
                         ///
                         request.Add("", "");
-
+                        Session["OC"] = "";
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(responseTBK) + "</p>");
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.Form["token_ws"]) + "</p>");
 
@@ -662,7 +738,7 @@ namespace Transbank.NET
                     }
                     catch (Exception ex)
                     {
-
+                        HttpContext.Current.Response.Write(htmlinicio);
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>Descripción</strong></br></br> Ocurri&oacute; un error en la transacci&oacute;n (Validar correcta configuraci&oacute;n de parametros). " + ex.Message + "</p>");
 
@@ -676,7 +752,7 @@ namespace Transbank.NET
 
                             }
                         }
-                        
+                        HttpContext.Current.Response.Write(htmlfin);
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
                         ChCookie.Expires = DateTime.Now.AddDays(-1d);
                         Response.Cookies.Add(ChCookie);
@@ -741,12 +817,7 @@ namespace Transbank.NET
 
             }
 
-            //HttpContext.Current.Response.Write("</br><a href='https://operaciones.chileautos.cl/pago_v2.asp?i=0'>&laquo; volver a index</a>");
-            HttpContext.Current.Response.Write("</br><a href='"+urldominio+"/pago_v2.asp?i=0'>&laquo; volver al formulario de transacciones.</a>");
-            HttpContext.Current.Response.Write("</div>");
-            HttpContext.Current.Response.Write("</div>");
-            HttpContext.Current.Response.Write("</div>");
-            HttpContext.Current.Response.Write("</div>");
+            
 
 
 
@@ -822,8 +893,8 @@ namespace Transbank.NET
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myConnection.GetConnection();
-                    connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = CONVERT(DATETIME, '" + datosupdate["fecha_f_trans"] + "', 120) WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
-                    //connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = '" + datosupdate["fecha_f_trans"] + "' WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
+                    //connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = CONVERT(DATETIME, '" + datosupdate["fecha_f_trans"] + "', 120) WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
+                    connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = '" + datosupdate["fecha_f_trans"] + "' WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
                     connection.ExecuteNonQuery();
                     connection.Connection.Close();
                     connection.Dispose();
@@ -857,8 +928,8 @@ namespace Transbank.NET
                 string procedenciamailtest = "pago prueba TBK";
 
                 string apiPublicar = "http://dws.chileautos.cl/api-cla/EnvioCorreo/Contactenos";
-                string parametros = "Nombre="+ datoamensajes["txt_nombre"] + "&EmailFrom="+ emailsfrom + "&EmailTo=" + emailsdestino + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamailtest;
-                //string parametros = "Nombre="+ datoamensajes["txt_nombre"] + "&EmailFrom=" + emailsfromtest + "&EmailTo=" + emailsdestinotest + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamailtest;
+                //string parametros = "Nombre="+ datoamensajes["txt_nombre"] + "&EmailFrom="+ emailsfrom + "&EmailTo=" + emailsdestino + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamailtest;
+                string parametros = "Nombre="+ datoamensajes["txt_nombre"] + "&EmailFrom=" + emailsfromtest + "&EmailTo=" + emailsdestinotest + "&Comentario= Se ha informado de un pago en Chileautos.cl. <br /><br /> el sr(a). " + datoamensajes["txt_nombre"] + ", con rut: " + datoamensajes["txt_rut"] + ", efectuó una transacción con motivo de: " + datoamensajes["cmb_motivo"] + ", cuyo monto es: " + datoamensajes["TBK_MONTO2"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + ".<br /> El número de la órden de compra es:  " + datoamensajes["TBK_ORDEN_COMPRA"] + ". <br /><br /> Este fue su comentario: " + datoamensajes["txt_comentario"] + ".<br /><br />&Asunto=Pago TransBank - " + datoamensajes["TBK_ORDEN_COMPRA"] + ", realizada con " + datoamensajes["TBK_TIPO_PAGO"] + "&Pie=" + procedenciamailtest;
 
                 try
                 {
@@ -1054,7 +1125,23 @@ namespace Transbank.NET
         }
 
 
+        /**nuevo objeto serializar json*/
+        /*
+         
+                JObject googleSearch = JObject.Parse(HtmlResult);
 
+                // get JSON result objects into a list
+                IList<JToken> results = googleSearch["datosVehiculo"].Children().ToList();
+                // serialize JSON results into .NET objects
+                IList<datosVehiculo> InfodatosVehiculo = new List<datosVehiculo>();
+                foreach (JToken result in results)
+                {
+                    datosVehiculo vehiculo = JsonConvert.DeserializeObject<datosVehiculo>(result.ToString());
+                    InfodatosVehiculo.Add(vehiculo);
+
+                }
+         
+         */
 
 
 

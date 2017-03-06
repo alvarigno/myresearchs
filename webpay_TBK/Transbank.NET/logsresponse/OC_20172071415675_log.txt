@@ -1,0 +1,45 @@
+
+Log Entry : 11:18:31 martes, 28 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"e624d505691d1cc5e418900411c3abf9f0a70f0c409c3bf17f02ea071af5073c"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0228","buyOrder":"OC_20172071415675","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VN","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234567,"commerceCode":"597020000541","buyOrder":"OC_20172071415675"}],"sessionId":"OC_20172071415675","transactionDate":"\/Date(1488291359689)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 11:18:34 martes, 28 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: e624d505691d1cc5e418900411c3abf9f0a70f0c409c3bf17f02ea071af5073c
+  :Request
+  :e624d505691d1cc5e418900411c3abf9f0a70f0c409c3bf17f02ea071af5073c
+-------------------------------
+  :Response
+  :
+-------------------------------
+
+Log Entry : 11:18:40 martes, 28 de febrero de 2017
+  :End
+  :Request
+  :{}
+-------------------------------
+  :Response
+  :La clave proporcionada no se encontró en el diccionario.
+-------------------------------
+
+Log Entry : 12:51:55 martes, 28 de febrero de 2017
+  :Get Result
+  :Request
+  :{"token":"edc24be23507f51088993882ab07ddf5123fc000ec921c34a9af496d06f3522b"}
+-------------------------------
+  :Response
+  :{"accountingDate":"0228","buyOrder":"OC_20172071415675","cardDetail":{"cardNumber":"6623","cardExpirationDate":null},"detailOutput":[{"authorizationCode":"1213","paymentTypeCode":"VN","responseCode":0,"sharesAmount":0,"sharesAmountSpecified":false,"sharesNumber":0,"sharesNumberSpecified":true,"amount":1234567,"commerceCode":"597020000541","buyOrder":"OC_20172071415675"}],"sessionId":"OC_20172071415675","transactionDate":"\/Date(1488296944175)\/","transactionDateSpecified":true,"urlRedirection":"https://webpay3gint.transbank.cl/filtroUnificado/voucher.cgi","VCI":"TSY"}
+-------------------------------
+
+Log Entry : 12:51:58 martes, 28 de febrero de 2017
+  :Get Result Con llamda a acknowledgeTransaction, toke: edc24be23507f51088993882ab07ddf5123fc000ec921c34a9af496d06f3522b
+  :Request
+  :edc24be23507f51088993882ab07ddf5123fc000ec921c34a9af496d06f3522b
+-------------------------------
+  :Response
+  :
+-------------------------------

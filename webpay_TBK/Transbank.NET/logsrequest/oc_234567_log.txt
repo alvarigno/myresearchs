@@ -1,0 +1,9 @@
+
+Log Entry : 12:46:35 lunes, 27 de febrero de 2017
+  :Init
+  :Request
+  :{"wsTransactionType":"TR_NORMAL_WS","comerceId":"597020000541","amount":"1245","buyOrder":"oc_234567","sessionId":"oc_234567","urlReturn":"https://operaciones.chileautos.cl/pagoTBK/tbk-normal.aspx?action=result","urlFinal":"https://operaciones.chileautos.cl/pagoTBK/tbk-normal.aspx?action=end"}
+-------------------------------
+  :Response
+  :{"token":"e5cf6e31cd3d90d27ceb05ea7a6a9d7671c3eba35a0270f6ea9a39aa8c6effe0","url":"https://webpay3gint.transbank.cl/filtroUnificado/initTransaction"}
+-------------------------------
