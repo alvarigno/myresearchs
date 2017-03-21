@@ -243,3 +243,16 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/webpay_TBK_Post/Transbank.NET/logsresponse/OC_20172071415698_log.txt
+/webpay_TBK_Post/Transbank.NET/logsresponse/OC_20172071415697_log.txt
+/webpay_TBK_Post/Transbank.NET/logsresponse/OC_20172071415696_log.txt
+/webpay_TBK_Post/Transbank.NET/logsresponse/oc_123459_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/oc_234567_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/oc_215414_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/OC_20172071415699_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/OC_20172071415698_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/OC_20172071415697_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/OC_20172071415696_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/oc_123499_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/oc_123459_log.txt
+/webpay_TBK_Post/Transbank.NET/logsrequest/oc_123458_log.txt
