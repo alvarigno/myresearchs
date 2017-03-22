@@ -185,7 +185,14 @@ namespace Transbank.NET
                         string URLOrigen = Request.Form[keys[13]];
                         string URLDestino = Request.Form[keys[14]];
 
+                        Uri myUri = new Uri(URLDestino);
+                        string host = myUri.Host; 
+
                         if (validaurlorigen(URLOrigen) == false) {
+                            Response.Redirect("https://www.chileautos.cl/error", true);
+                        }
+
+                        if (validaurlorigen(host) == false){
                             Response.Redirect("https://www.chileautos.cl/error", true);
                         }
 
@@ -730,6 +737,7 @@ namespace Transbank.NET
 
                                     /*Form que regresa a origen*/
 
+                                    HttpContext.Current.Response.Write("<br />");
                                     HttpContext.Current.Response.Write("<div style='width:100%;'>");
                                     HttpContext.Current.Response.Write("<form action=" + urldestpost + " name='retornoorigenurl' method='post'>");
                                     HttpContext.Current.Response.Write("<input type='hidden' name='OC_TBK' value=" + responseTBK["buyOrder"] + ">");
@@ -771,6 +779,7 @@ namespace Transbank.NET
 
 
                                     /*Form que regresa a origen*/
+                                    HttpContext.Current.Response.Write("<br />");
                                     HttpContext.Current.Response.Write("<div style='width:100%;'>");
                                     HttpContext.Current.Response.Write("<form action=" + urldestpost + " name='retornoorigenurl' method='post'>");
                                     HttpContext.Current.Response.Write("<input type='hidden' name='OC_TBK' value=" + responseTBK["buyOrder"] + ">");
@@ -1319,6 +1328,8 @@ namespace Transbank.NET
 
             return urlvalida;
         }
+
+
 
         public void crearcookiedatospost(string urldestino) { 
 
