@@ -116,6 +116,23 @@
 							<div class="row">
                                 <div class="col-sm-12 form-row">
                                     <div class="form-group">
+										<nobr><INPUT TYPE="TEXT" ID="TBK_URL_ORIGEN" NAME="TBK_URL_ORIGEN" VALUE="" class="form-control" placeholder="URL Origen" ></nobr> 
+									</div>
+                                </div>
+                            </div>
+
+							<div class="row">
+                                <div class="col-sm-12 form-row">
+                                    <div class="form-group">
+										<nobr><INPUT TYPE="TEXT" ID="TBK_URL_DESTINO" NAME="TBK_URL_DESTINO" VALUE="" class="form-control" placeholder="URL Destino" ></nobr> 
+									</div>
+                                </div>
+                            </div>
+
+
+							<div class="row">
+                                <div class="col-sm-12 form-row">
+                                    <div class="form-group">
 										<INPUT TYPE="submit" VALUE="PAGAR CON REDCOMPRA o TARJETA DE CRÉDITO" SIZE="20" class="form-control" style="color:#ffffff;background-color:#003366;">
                                         
                                     </div>

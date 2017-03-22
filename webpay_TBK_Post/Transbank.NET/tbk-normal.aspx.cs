@@ -131,8 +131,6 @@ namespace Transbank.NET
             codes.Add("-7", "Excede l&iacute;mite diario por transacci&oacute;n");
             codes.Add("-8", "Rubro no autorizado");
 
-            
-
             string buyOrder;
 
             string tx_step = "";
@@ -183,7 +181,15 @@ namespace Transbank.NET
                     {
                         HttpContext.Current.Response.Write(htmlinicio);
                         //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Step: " + tx_step + "</p>");
-                        
+
+                        string URLOrigen = Request.Form[keys[13]];
+                        string URLDestino = Request.Form[keys[14]];
+
+                        if (validaurlorigen(URLOrigen) == false) {
+                            Response.Redirect("https://www.chileautos.cl/error", true);
+                        }
+
+                        crearcookiedatospost(URLDestino);
 
                         Random random = new Random();
 
@@ -225,11 +231,11 @@ namespace Transbank.NET
 
                         decimal d = 0;
                         decimal.TryParse(Request.Form[keys[5]], out d);
-                        HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>&#36;" + d.ToString("N0") + "</strong></td></tr>");
-
-                        HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Comentario:</span> </td><td><strong>" + Request.Form[keys[4]] + "</strong></td></tr>");
-                        HttpContext.Current.Response.Write("</table>");
-                        HttpContext.Current.Response.Write("<br />");
+                        //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>&#36;" + d.ToString("N0") + "</strong></td></tr>");
+                        //
+                        //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Comentario:</span> </td><td><strong>" + Request.Form[keys[4]] + "</strong></td></tr>");
+                        //HttpContext.Current.Response.Write("</table>");
+                        //HttpContext.Current.Response.Write("<br />");
                         /*Fin vista HTML*/
 
                         /** Crera y valida la OC en Base de datos **/
@@ -281,8 +287,12 @@ namespace Transbank.NET
                                     //message = "Sesion iniciada con exito en Webpay";
                                     //HttpContext.Current.Response.Write("" + message + "</br></br>");
 
-                                    //HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['procesartbkpago'].submit()}</script>");
+                                    HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['procesartbkpago'].submit()}</script>");
                                     HttpContext.Current.Response.Write("<form name='procesartbkpago' action=" + result.url + " method='post'><input type='hidden' name='token_ws' value=" + result.token + ">");
+                                    HttpContext.Current.Response.Write("<div style='text-align:center;margin:0 auto;display:block;margin-bottom:15px;'>");
+                                    HttpContext.Current.Response.Write("<img src='/imagenes/icon/procesando_solicitud.gif' style='width:50%; text-align:center;' /><br />");
+                                    HttpContext.Current.Response.Write("<span>Procesando Solicitud</span>");
+                                    HttpContext.Current.Response.Write("</div>");
                                     //HttpContext.Current.Response.Write("<input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;' />");
                                     HttpContext.Current.Response.Write("</form>");
 
@@ -631,7 +641,20 @@ namespace Transbank.NET
                         //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Step: " + tx_step + "</p>");
                         //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Fin de Proceso</p>");
 
-                        ///
+                        string urldestpost = "";
+
+                        /*Recupera la URL Retorno*/
+                        if (Request.Cookies["ChileautosUrlDestino"] != null)
+                        {
+                            if (Request.Cookies["ChileautosUrlDestino"]["URLRetorno"] != null)
+                            {
+                                urldestpost = Request.Cookies["ChileautosUrlDestino"]["URLRetorno"];
+                            }
+                        }
+
+
+
+                                ///
 
                         if (Request.Cookies["ChileautosSettingTBK"] != null)
                         {
@@ -704,6 +727,20 @@ namespace Transbank.NET
                                     HttpContext.Current.Response.Write("<script type='text/javascript'>function printDiv(divName) {");
                                     HttpContext.Current.Response.Write("var printContents = document.getElementById(divName).innerHTML;var originalContents = document.body.innerHTML;document.body.innerHTML = printContents;window.print();");
                                     HttpContext.Current.Response.Write("document.body.innerHTML = originalContents;}</script>");
+
+                                    /*Form que regresa a origen*/
+
+                                    HttpContext.Current.Response.Write("<div style='width:100%;'>");
+                                    HttpContext.Current.Response.Write("<form action=" + urldestpost + " name='retornoorigenurl' method='post'>");
+                                    HttpContext.Current.Response.Write("<input type='hidden' name='OC_TBK' value=" + responseTBK["buyOrder"] + ">");
+                                    HttpContext.Current.Response.Write("<input type='hidden' name='PLAN_TBK' value=" + MotivoTransaccion(responseTBK["buyOrder"]) + ">");
+                                    HttpContext.Current.Response.Write("<input type='hidden' name='COD_respuesta' value=" + responseTBK["responseCode"] + ">");
+                                    HttpContext.Current.Response.Write("<input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar Proceso &raquo;'>");
+                                    HttpContext.Current.Response.Write("</form>");
+                                    HttpContext.Current.Response.Write("</div>");
+                                    //HttpContext.Current.Response.Write("URL Retorno"+ urldestpost);
+                                    /*Fin Form que regresa a origen*/
+
                                     enviaremail(responseTBK["buyOrder"]);
                                     HttpContext.Current.Response.Write(htmlfin);
 
@@ -731,6 +768,21 @@ namespace Transbank.NET
                                     HttpContext.Current.Response.Write("</table>");
                                     HttpContext.Current.Response.Write("</div>");
                                     HttpContext.Current.Response.Write("<br />");
+
+
+                                    /*Form que regresa a origen*/
+                                    HttpContext.Current.Response.Write("<div style='width:100%;'>");
+                                    HttpContext.Current.Response.Write("<form action=" + urldestpost + " name='retornoorigenurl' method='post'>");
+                                    HttpContext.Current.Response.Write("<input type='hidden' name='OC_TBK' value=" + responseTBK["buyOrder"] + ">");
+                                    HttpContext.Current.Response.Write("<input type='hidden' name='PLAN_TBK' value=" + MotivoTransaccion(responseTBK["buyOrder"]) + ">");
+                                    HttpContext.Current.Response.Write("<input type='hidden' name='COD_respuesta' value=" + responseTBK["responseCode"] + ">");
+                                    HttpContext.Current.Response.Write("<input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar Proceso &raquo;'>");
+                                    HttpContext.Current.Response.Write("</form>");
+                                    HttpContext.Current.Response.Write("</div>");
+
+                                    //HttpContext.Current.Response.Write("URL Retorno" + urldestpost);
+                                    /*Fin Form que regresa a origen*/
+
                                     HttpContext.Current.Response.Write(htmlfin);
                                 }
 
@@ -1248,6 +1300,33 @@ namespace Transbank.NET
             }
 
             return revisionInsertOc;
+        }
+
+        public Boolean validaurlorigen(string urldominio) {
+
+            Boolean urlvalida = false;
+
+            /** Crea Dictionary con dominios Chileautos */
+            Dictionary<string, string> domchileautos = new Dictionary<string, string>();
+
+            domchileautos.Add("www.chileautos.cl", "Chileautos.cl");
+            domchileautos.Add("chileinformes.chileautos.cl", "Chileinformes.cl");
+
+            if (domchileautos.ContainsKey(urldominio))
+            {
+                urlvalida = true;
+            }
+
+            return urlvalida;
+        }
+
+        public void crearcookiedatospost(string urldestino) { 
+
+            /* crea cookie con datos de Post para el final*/
+            HttpCookie ChCookie = new HttpCookie("ChileautosUrlDestino");
+            ChCookie.Values.Add("URLRetorno", urldestino);
+            Response.Cookies.Add(ChCookie);
+
         }
 
         /**nuevo objeto serializar json*/
