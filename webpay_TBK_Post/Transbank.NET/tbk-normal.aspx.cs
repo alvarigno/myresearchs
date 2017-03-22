@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -166,10 +169,9 @@ namespace Transbank.NET
 
              keys = Request.Form.AllKeys;
              if (action == "init"){
-                Session["OC"] = Request.Form[keys[6]]; ;
-               
-               
+                Session["OC"] = Request.Form[keys[6]]; 
             }
+
             switch (action)
             {
 
@@ -181,7 +183,7 @@ namespace Transbank.NET
                     {
                         HttpContext.Current.Response.Write(htmlinicio);
                         //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Step: " + tx_step + "</p>");
-
+                        
 
                         Random random = new Random();
 
@@ -191,8 +193,6 @@ namespace Transbank.NET
                         //   HttpContext.Current.Response.Write(keys[i]+": "+Request.Form[keys[i]]+"<br />");
 
                         //}
-
-
 
                         /** Monto de la transacción */
                         //decimal amount = System.Convert.ToDecimal("9990");
@@ -214,59 +214,108 @@ namespace Transbank.NET
                         /** URL Final */
                         string urlFinal = baseurl + "?action=end";
 
-                        wsInitTransactionInput uno = new wsInitTransactionInput();
 
-                        tipotbk = uno.wSTransactionType.ToString();
+                        /*Vista HTML*/
+                        //HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Confirmar Datos</p>");
+                        //HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
+                        //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td class='col-sm-3'><span>Nombre:</span> </td><td><strong>" + Request.Form[keys[0]] + "</strong></td></tr>");
+                        //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>RUT:</span> </td><td><strong>" + Request.Form[keys[1]] + "-" + Request.Form[keys[2]] + "</strong></td></tr>");
+                        //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Motivo:</span> </td><td><strong>" + Request.Form[keys[3]] + "</strong></td></tr>");
+                        //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>" + Request.Form[keys[5]] + "</strong></td></tr>");
 
-                        request.Add("wsTransactionType", tipotbk);
-                        request.Add("comerceId", configuration.CommerceCode);
-                        request.Add("amount", amount.ToString());
-                        request.Add("buyOrder", buyOrder.ToString());
-                        request.Add("sessionId", sessionId.ToString());
-                        request.Add("urlReturn", urlReturn.ToString());
-                        request.Add("urlFinal", urlFinal.ToString());
+                        decimal d = 0;
+                        decimal.TryParse(Request.Form[keys[5]], out d);
+                        HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>&#36;" + d.ToString("N0") + "</strong></td></tr>");
 
-                        /** Ejecutamos metodo initTransaction desde Libreria */
-                        wsInitTransactionOutput result = webpay.getNormalTransaction().initTransaction(amount, buyOrder, sessionId, urlReturn, urlFinal);
+                        HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Comentario:</span> </td><td><strong>" + Request.Form[keys[4]] + "</strong></td></tr>");
+                        HttpContext.Current.Response.Write("</table>");
+                        HttpContext.Current.Response.Write("<br />");
+                        /*Fin vista HTML*/
 
-                        string urlrespuesta = result.url;
+                        /** Crera y valida la OC en Base de datos **/
+                        DateTime nowtest = DateTime.Now;
+                        /** Orden de compra de la tienda */
+                        string numocprueba = "OC_" + nowtest.Year + nowtest.Month + nowtest.Day + nowtest.Hour + nowtest.Minute + nowtest.Second + nowtest.Millisecond;
+                        //string numocprueba = "OC_2017322144439225";
 
-                        string PublicCertuno = configuration.PublicCert;
-                        string WebpayCertdos = configuration.WebpayCert;
+                        //HttpContext.Current.Response.Write("Oc" + numocprueba + ", existe?" + checkOcexiste(numocprueba));
+                        if (!checkOcexiste(numocprueba))
+                        {
 
-                        /** Verificamos respuesta de inicio en webpay */
-                        if (result.token != null && result.token != "" && urlrespuesta == "https://webpay3gint.transbank.cl/filtroUnificado/initTransaction")
+                            if (insertaOC(numocprueba, Request.Form[keys[0]], Request.Form[keys[1]], Request.Form[keys[2]], Request.Form[keys[3]], Request.Form[keys[4]], Request.Form[keys[5]], Request.Form[keys[5]] + "0"))
+                            {
+                                //HttpContext.Current.Response.Write("Registrada con éxito.");
+                                buyOrder = numocprueba;
+                                sessionId = numocprueba;
+                                Session["OC"] = buyOrder;
+
+                                /*inicia sesion en TBK y obtiene token*/
+                                    wsInitTransactionInput uno = new wsInitTransactionInput();
+
+                                    tipotbk = uno.wSTransactionType.ToString();
+
+                                    request.Add("wsTransactionType", tipotbk);
+                                    request.Add("comerceId", configuration.CommerceCode);
+                                    request.Add("amount", amount.ToString());
+                                    request.Add("buyOrder", buyOrder.ToString());
+                                    request.Add("sessionId", sessionId.ToString());
+                                    request.Add("urlReturn", urlReturn.ToString());
+                                    request.Add("urlFinal", urlFinal.ToString());
+
+
+                                    /** Ejecutamos metodo initTransaction desde Libreria */
+                                    wsInitTransactionOutput result = webpay.getNormalTransaction().initTransaction(amount, buyOrder, sessionId, urlReturn, urlFinal);
+
+                                    string urlrespuesta = result.url;
+
+                                    string PublicCertuno = configuration.PublicCert;
+                                    string WebpayCertdos = configuration.WebpayCert;
+                                    /** Fin Ejecutamos metodo initTransaction desde Libreria */
+
+
+
+                                    /** Verificamos respuesta de inicio en webpay */
+                                    if (result.token != null && result.token != "" && urlrespuesta == "https://webpay3gint.transbank.cl/filtroUnificado/initTransaction")
+                                    {
+
+                                    //message = "Sesion iniciada con exito en Webpay";
+                                    //HttpContext.Current.Response.Write("" + message + "</br></br>");
+
+                                    //HttpContext.Current.Response.Write("<script type='text/javascript'> window.onload = function(){document.forms['procesartbkpago'].submit()}</script>");
+                                    HttpContext.Current.Response.Write("<form name='procesartbkpago' action=" + result.url + " method='post'><input type='hidden' name='token_ws' value=" + result.token + ">");
+                                    //HttpContext.Current.Response.Write("<input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;' />");
+                                    HttpContext.Current.Response.Write("</form>");
+
+
+                                        /** creamos el log del mensaje de envío y su respuesta */
+                                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, buyOrder);
+
+                                    }
+                                    else
+                                    {
+                                        message = "webpay no disponible";
+                                        HttpContext.Current.Response.Write("" + message + "</br></br>");
+                                    }
+
+                                /*Fin inicia sesion en TBK y obtiene token*/
+
+                            }
+                            else
                             {
 
-                            HttpContext.Current.Response.Write("<p style='font-weight: bold; font-size: 150%;'>Confirmar Datos</p>");
-                            HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
-                            HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td class='col-sm-3'><span>Nombre:</span> </td><td><strong>" + Request.Form[keys[0]] + "</strong></td></tr>");
-                            HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>RUT:</span> </td><td><strong>" + Request.Form[keys[1]] + "-" + Request.Form[keys[2]] + "</strong></td></tr>");
-                            HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Motivo:</span> </td><td><strong>" + Request.Form[keys[3]] + "</strong></td></tr>");
-                            //HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>" + Request.Form[keys[5]] + "</strong></td></tr>");
-
-                            decimal d = 0;
-                            decimal.TryParse(Request.Form[keys[5]], out d);
-                            HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Monto:</span> </td><td><strong>&#36;" + d.ToString("N0") + "</strong></td></tr>");
-
-                            HttpContext.Current.Response.Write("<tr style='font-size:13px;'><td ><span>Comentario:</span> </td><td><strong>" + Request.Form[keys[4]] + "</strong></td></tr>");
-                            HttpContext.Current.Response.Write("</table>");
-                            HttpContext.Current.Response.Write("<br />");
-
-
-                            //message = "Sesion iniciada con exito en Webpay";
-                            //HttpContext.Current.Response.Write("" + message + "</br></br>");
-                            HttpContext.Current.Response.Write("<form action=" + result.url + " method='post'><input type='hidden' name='token_ws' value=" + result.token + "><input type='submit' class='btn btn-success btn-large btn-block IdClassBtnEnviar' value='Continuar &raquo;'></form>");
-
-                            /** creamos el log del mensaje de envío y su respuesta */
-                               createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result), tx_step, Request.Form[keys[6]]);
+                                HttpContext.Current.Response.Write("Oc con problemas en insertar.");
+                            }
 
                         }
                         else
                         {
-                            message = "webpay no disponible";
-                            HttpContext.Current.Response.Write("" + message + "</br></br>");
+                            HttpContext.Current.Response.Write("Núm. Orden de Compra: " + numocprueba + ", ya existe.");
+                            HttpContext.Current.Response.Write("Oc ya existe.");
+                            HttpContext.Current.Response.Write("<button class='btn btn-warning btn-large btn-block IdClassBtnEnviar' onclick='javascript:location.reload();'>Recargue el formulario</button>");
+
                         }
+                        /*Fin*/
+
 
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightyellow;'><strong>request</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request) + "</p>");
                         //HttpContext.Current.Response.Write("<p style='font-size: 100%; background-color:lightgrey;'><strong>result</strong></br></br>" + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(result) + "</p>");
@@ -279,7 +328,7 @@ namespace Transbank.NET
                         //HttpContext.Current.Response.Write(htmlinicio);
 
                         HttpContext.Current.Response.Write("<div>");
-                        HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada<br /><span>Núm.Orden: </span><strong>" + Request.Form[keys[6]] + "</strong></h4>");
+                        HttpContext.Current.Response.Write("<h4 style='color:#ff0000;'>Transacción Rechazada<br /><span>Núm.Orden: </span><strong>" + Session["OC"] + "</strong></h4>");
                         HttpContext.Current.Response.Write("<table class='table table-striped table-hover'>");
                         //HttpContext.Current.Response.Write("<tr><td style='color:#009933;'><h4>Error</h4></td></tr>");
                         //HttpContext.Current.Response.Write("<tr><td></td></tr>");
@@ -293,7 +342,7 @@ namespace Transbank.NET
                         HttpContext.Current.Response.Write("</div>");
                         HttpContext.Current.Response.Write(htmlfin);
                         /** creamos el log del mensaje de envío y su respuesta del error */
-                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Request.Form[keys[6]]);
+                        createlog(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(request), ex.Message, tx_step, Session["OC"].ToString());
                     }
 
                     break;
@@ -1134,6 +1183,72 @@ namespace Transbank.NET
             return propEncodeString;
         }
 
+        public Boolean checkOcexiste(string numoc) {
+
+            Boolean revision = false;
+
+            myConnection myConnOC = new myConnection();
+
+            try
+            {
+                using (var myConnexisteOc = new System.Data.SqlClient.SqlCommand())
+                {
+                    myConnexisteOc.Connection = myConnection.GetConnection();
+                    myConnexisteOc.CommandText = "select TBK_ORDEN_COMPRA from dbo.transbank_pagos where TBK_ORDEN_COMPRA = '" + numoc + "'";
+
+                    using (var reader = myConnexisteOc.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            revision = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                HttpContext.Current.Response.Write("Error: " + ex.Message);
+            }
+            
+            return revision;
+        }
+
+        public Boolean insertaOC(string TBK_ORDEN_COMPRA, string txt_nombre, string txt_rut, string txt_digito, string cmb_motivo, string txt_comentario, string TBK_MONTO, string TBK_MONTO2)
+        {
+
+            Boolean revisionInsertOc = false;
+
+            myConnection myConnOc = new myConnection();
+
+            try
+            {
+                using (var connectionInsertOc = new System.Data.SqlClient.SqlCommand())
+                {
+                    connectionInsertOc.Connection = myConnection.GetConnection();
+                    //connection.CommandText = "UPDATE [dbo].[transbank_pagos] SET[TBK_TIPO_TRANSACCION] = '" + datosupdate["tipo_transaccion"] + "',[TBK_RESPUESTA] = '" + datosupdate["TBK_Respuesta"] + "',[TBK_CODIGO_AUTORIZACION] = '" + datosupdate["TBK_cod_autorizacion"] + "',[TBK_FINAL_NUMERO_TARJETA] = '" + datosupdate["TBK_final_tarjeta"] + "',[TBK_FECHA_CONTABLE] = '" + datosupdate["TBK_fecha_contable"] + "',[TBK_FECHA_TRANSACCION] = '" + datosupdate["TBK_fecha_transaccion"] + "',[TBK_HORA_TRANSACCION] = '" + datosupdate["TBK_hora_transaccion"] + "',[TBK_ID_SESION] = '" + datosupdate["TBK_id_session"] + "',[TBK_ID_TRANSACCION] = '" + datosupdate["TBK_id_transaccion"] + "',[TBK_TIPO_PAGO] = '" + datosupdate["TBK_tipo_pago"] + "',[TBK_NUMERO_CUOTAS] = '" + datosupdate["TBK_numero_cuotas"] + "',[TBK_TASA_INTERES_MAX] = '" + datosupdate["TBK_tasa_interes_max"] + "',[ESTADO]= " + datoestado + " , [fecha_f_trans] = CONVERT(DATETIME, '" + datosupdate["fecha_f_trans"] + "', 120) WHERE TBK_ORDEN_COMPRA = '" + datosupdate["idOC"] + "'";
+
+                    connectionInsertOc.CommandText = "INSERT INTO [transbank_pagos]([TBK_ORDEN_COMPRA], [txt_nombre], [txt_rut], [txt_digito], [cmb_motivo], [txt_comentario], [TBK_MONTO],[TBK_MONTO2],[fecha_i_trans])";
+                    connectionInsertOc.CommandText = connectionInsertOc.CommandText + "VALUES('" + TBK_ORDEN_COMPRA + "','" + txt_nombre + "','" + txt_rut + "','" + txt_digito + "','" + cmb_motivo + "','" + txt_comentario + "','" + TBK_MONTO + "','" + TBK_MONTO2 + "',getdate())";
+
+                    connectionInsertOc.ExecuteNonQuery();
+                    connectionInsertOc.Connection.Close();
+                    connectionInsertOc.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+                revisionInsertOc = true;
+
+            }
+            catch (Exception ex)
+            {
+
+                HttpContext.Current.Response.Write("Error: " + ex.Message);
+                revisionInsertOc = false;
+            }
+
+            return revisionInsertOc;
+        }
 
         /**nuevo objeto serializar json*/
         /*

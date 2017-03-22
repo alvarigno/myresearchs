@@ -53,7 +53,8 @@
 								<div class="col-sm-12 form-row">
                                     <div class="form-group">
 										<select name="cmb_motivo" id="cmb_motivo" class="dropdown form-control">
-										   <option value="Pago 1%" selected>Pago 1%</option>
+										   <option value="Pago 1%">Pago 1%</option>
+                                           <option value="Pre-pago" selected="selected">Pre-pago</option>
 										   <option value="Pago cuota mensual automotora">Pago cuota mensual automotora</option>
 										   <option value="Destacar aviso particular">Destacar aviso particular</option>
 										   <option value="Tomar fotografias a domicilio">Tomar fotografias a domicilio</option>
@@ -105,8 +106,8 @@
 										<INPUT TYPE="HIDDEN" NAME="TBK_URL_FRACASO" class="form-control" VALUE="https://operaciones.chileautos.cl/pagoTBK/tbk-normal.aspx"> <BR>
                                         -->
 										
-                                        <INPUT TYPE="HIDDEN" NAME="TBK_URL_EXITO" class="form-control" VALUE="http://localhost:54128/tbk-normal.aspx"> <BR>
-										<INPUT TYPE="HIDDEN" NAME="TBK_URL_FRACASO" class="form-control" VALUE="http://localhost:54128/tbk-normal.aspx"> <BR>
+                                        <INPUT TYPE="HIDDEN" NAME="TBK_URL_EXITO" class="form-control" VALUE="http://localhost:54228/tbk-normal.aspx"> <BR>
+										<INPUT TYPE="HIDDEN" NAME="TBK_URL_FRACASO" class="form-control" VALUE="http://localhost:54228/tbk-normal.aspx"> <BR>
                                         
                                     </div>
                                 </div>
@@ -115,7 +116,7 @@
 							<div class="row">
                                 <div class="col-sm-12 form-row">
                                     <div class="form-group">
-										<INPUT TYPE="submit" VALUE="PAGAR CON REDCOMPRA o TARJETA DE CR�DITO" SIZE="20" class="form-control" style="color:#ffffff;background-color:#003366;">
+										<INPUT TYPE="submit" VALUE="PAGAR CON REDCOMPRA o TARJETA DE CRÉDITO" SIZE="20" class="form-control" style="color:#ffffff;background-color:#003366;">
                                         
                                     </div>
                                 </div>

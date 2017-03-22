@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Webpay.Transbank.Library.dll" />
+    <Content Include="imagenes\icon\procesando.gif" />
     <Content Include="imagenes\logos\LogoChileautos.png" />
     <Content Include="imagenes\logos\tarjetas_webpay.gif" />
     <Content Include="imagenes\logos\WPP2.jpg" />
