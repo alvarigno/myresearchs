@@ -822,6 +822,10 @@ namespace Transbank.NET
                                 ChCookie.Expires = DateTime.Now.AddDays(-1d);
                                 Response.Cookies.Add(ChCookie);
 
+                                HttpCookie ChCookieurl = new HttpCookie("ChileautosUrlDestino");
+                                ChCookieurl.Expires = DateTime.Now.AddDays(-1d);
+                                Response.Cookies.Add(ChCookieurl);
+
                             }
                             
                         }
@@ -876,6 +880,10 @@ namespace Transbank.NET
                         HttpCookie ChCookie = new HttpCookie("ChileautosSettingTBK");
                         ChCookie.Expires = DateTime.Now.AddDays(-1d);
                         Response.Cookies.Add(ChCookie);
+
+                        HttpCookie ChCookieurl = new HttpCookie("ChileautosUrlDestino");
+                        ChCookieurl.Expires = DateTime.Now.AddDays(-1d);
+                        Response.Cookies.Add(ChCookieurl);
 
                     }
 
