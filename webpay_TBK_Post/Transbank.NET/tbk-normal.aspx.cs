@@ -255,7 +255,7 @@ namespace Transbank.NET
                         if (!checkOcexiste(numocprueba))
                         {
 
-                            if (insertaOC(numocprueba, Request.Form[keys[0]], Request.Form[keys[1]], Request.Form[keys[2]], Request.Form[keys[3]], Request.Form[keys[4]], Request.Form[keys[5]], Request.Form[keys[5]] + "0"))
+                            if (insertaOC(numocprueba, Request.Form[keys[0]], Request.Form[keys[1]], Request.Form[keys[2]], Request.Form[keys[3]], Request.Form[keys[4]], Request.Form[keys[5]] + "0", Request.Form[keys[5]]))
                             {
                                 //HttpContext.Current.Response.Write("Registrada con éxito.");
                                 buyOrder = numocprueba;
