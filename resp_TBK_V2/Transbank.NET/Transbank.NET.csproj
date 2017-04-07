@@ -109,10 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="certificates\32631274\32631274.crt" />
-    <Content Include="certificates\32631274\32631274.key" />
-    <Content Include="certificates\32631274\32631274.pfx" />
-    <Content Include="certificates\32631274\tbk.pem" />
     <Content Include="certificates\597020000541\597020000541.crt" />
     <Content Include="certificates\597020000541\597020000541.key" />
     <None Include="Properties\PublishProfiles\pagoTBK-local.pubxml" />
