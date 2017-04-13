@@ -15,6 +15,8 @@ namespace ReadExcelFiles
     class Program
     {
 
+        public static string PosicionDocumento = @"C:\\Users\\Álvaro\\Desktop\\doc excel de ejemplo\\";
+
         static void Main(string[] args)
         {
 
@@ -22,9 +24,11 @@ namespace ReadExcelFiles
             try
             {
 
+                string[] filesource = Directory.GetFiles(PosicionDocumento, "*.xlsx");
+
                 //Create COM Objects. Create a COM object for everything that is referenced
                 Application xlApp = new Application();
-                Workbook xlWorkbook = xlApp.Workbooks.Open(@"C:\\Users\\Álvaro\\Desktop\\doc excel de ejemplo\\actualizacion_ditec_28-03-2017.xlsx");
+                Workbook xlWorkbook = xlApp.Workbooks.Open(filesource[0].ToString());
                 _Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Range xlRange = xlWorksheet.UsedRange;
 
@@ -97,11 +101,7 @@ namespace ReadExcelFiles
 
                                     }
 
-
-
                                 }
-
-
 
                             }
                         }
@@ -128,7 +128,9 @@ namespace ReadExcelFiles
                 //quit and release
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
-
+                Console.Write("\r\n ----------------------------------------------\r\n");
+                Console.Write("Finalización de lectura de archivo: "+ filesource[0].ToString());
+                Console.Write("\r\n ----------------------------------------------\r\n");
                 Console.ReadLine();
 
             }
