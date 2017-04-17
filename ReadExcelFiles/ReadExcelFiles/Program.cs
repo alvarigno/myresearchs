@@ -9,6 +9,8 @@ using System.Net;
 using System.IO;
 using System.Threading;
 using System.ComponentModel;
+using Transbank.NET;
+using System.Text.RegularExpressions;
 
 namespace ReadExcelFiles
 {
@@ -69,6 +71,14 @@ namespace ReadExcelFiles
                                 {
                                     Console.Write(xlRange.Cells[i, j].Value2.ToString() + "\t");
                                     Console.Write(xlRange.Cells[i, j + 1].Value2.ToString() + "\t\n");
+
+                                    if (xlRange.Cells[i, j].Value2.ToString() == "Marca") {
+
+                                        Console.Write("Cod marca: "+ GetCodMarca(xlRange.Cells[i, j + 1].Value2.ToString())+"\t\n");
+
+                                    }
+
+
                                 }
 
 
@@ -194,6 +204,54 @@ namespace ReadExcelFiles
             return cargo;
         }
 
+
+        private static int GetCodMarca(string namemarca)
+        {
+
+            int codmarca = 0;
+            myConnection myConn = new myConnection();
+
+            if (namemarca == "MERCEDES-BENZ") {
+                namemarca = Regex.Replace(namemarca, @"-", " ", RegexOptions.Multiline).Trim();
+            }
+
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myConnection.GetConnection();
+                    connection.CommandText = "select COD_MARCA from tabmarcas where DES_MARCA like '%"+ namemarca +"%'";
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+
+                            if (reader.Read())
+                            {
+
+                                codmarca = int.Parse(reader["COD_MARCA"].ToString());
+
+                            }
+
+                        }
+
+                    }
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+
+            }
+
+            return codmarca;
+        }
 
     }
 }
