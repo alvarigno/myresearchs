@@ -7,11 +7,11 @@ using System.Web;
 
 namespace Transbank.NET
 {
-    public class myConnection
+    public class myLocalConnection
     {
-        public static SqlConnection GetConnection()
+        public static SqlConnection GetLocalConnection()
         {
-            string str = "data source=172.16.0.241;initial catalog=baseprod2;user id=usrBDDesa;password=*pwdBD*;";//Base local
+            string str = "Data Source=ALVARO-PC\\SQLEXPRESS; Initial Catalog = dbo.DITEC; User ID=jesus; Password=12345";
             SqlConnection con = new SqlConnection(str);
             con.Open();
             return con;

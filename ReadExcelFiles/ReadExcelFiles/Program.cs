@@ -18,6 +18,8 @@ namespace ReadExcelFiles
     {
 
         public static string PosicionDocumento = @"C:\\Users\\Álvaro\\Desktop\\doc excel de ejemplo\\";
+        public static string listadofotos = "";
+
 
         static void Main(string[] args)
         {
@@ -37,7 +39,7 @@ namespace ReadExcelFiles
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
                 int contador = 1;
-                string listadofotos="";
+                
                 string codditect = "";
 
                 //iterate over the rows and columns and print to the console as it appears in the file
@@ -58,6 +60,39 @@ namespace ReadExcelFiles
                             {
 
                                 string nomfoto = "foto_" + contador;
+
+                                if (xlRange.Cells[i, j].Value2.ToString() == nomfoto)
+                                {
+                                    //Console.Write("\r\n");
+                                    //Console.Write(xlRange.Cells[i, j].Value2.ToString() + "\t");
+                                    //Console.Write(xlRange.Cells[i, j + 1].Value2.ToString() + "\t");
+
+
+                                    if (BtnDownload_Click(xlRange.Cells[i, j + 1].Value2.ToString(), codditect) == true)
+                                    {
+
+
+                                    }
+
+                                    contador = contador + 1;
+
+                                }
+                                else
+                                {
+
+                                    contador = 1;
+                                    if (listadofotos != "")
+                                    {
+                                        listadofotos = listadofotos.Remove(listadofotos.Length - 1);
+                                        Console.Write("Listado de fotografías: " + listadofotos + "\r\n");
+                                        listadofotos = "";
+
+                                    }
+
+
+                                }
+
+
                                 if (xlRange.Cells[i, j].Value2.ToString() == "codigo_auto_DITEC")
                                 {
                                     Console.Write("\r\n");
@@ -80,39 +115,7 @@ namespace ReadExcelFiles
 
 
                                 }
-
-
-                                if (xlRange.Cells[i, j].Value2.ToString() == nomfoto)
-                                {
-                                    //Console.Write("\r\n");
-                                    //Console.Write(xlRange.Cells[i, j].Value2.ToString() + "\t");
-                                    //Console.Write(xlRange.Cells[i, j + 1].Value2.ToString() + "\t");
-
-
-                                    if (BtnDownload_Click(xlRange.Cells[i, j + 1].Value2.ToString(), codditect) == true)
-                                    {
-
-                                        listadofotos = listadofotos + xlRange.Cells[i, j + 1].Value2.ToString() + "*";
-                                    }
-
-                                    contador = contador + 1;
-
-                                }
-                                else
-                                {
-
-                                    contador = 1;
-
-                                    if (listadofotos != "")
-                                    {
-                                        listadofotos = listadofotos.Remove(listadofotos.Length - 1);
-                                        Console.Write("Listado de fotografías: " + listadofotos + "\r\n");
-                                        listadofotos = "";
-
-                                    }
-
-                                }
-
+                                Getlocalconnect();
                             }
                         }
                     }
@@ -152,9 +155,7 @@ namespace ReadExcelFiles
             }
 
         }
-
-
-
+        
         private static Boolean BtnDownload_Click(string urlfilename, string namefolder)
         {
             Boolean cargo = false;
@@ -185,13 +186,13 @@ namespace ReadExcelFiles
                             if (e.Error == null && !e.Cancelled)
                             {
                                 Console.WriteLine("Download completed!");
-                                cargo = true;
+                                
                             }
                         });
                     //webClient.DownloadFileAsync(new System.Uri(urlfilename), pathfile + "\\" + filename);
                     webClient.DownloadFile(new System.Uri(urlfilename), pathfile + "\\" + filename);
-
-
+                    cargo = true;
+                    listadofotos = listadofotos + pathfile + "\\" + filename + "*";
                 }
 
             }
@@ -203,8 +204,7 @@ namespace ReadExcelFiles
 
             return cargo;
         }
-
-
+        
         private static int GetCodMarca(string namemarca)
         {
 
@@ -251,6 +251,50 @@ namespace ReadExcelFiles
             }
 
             return codmarca;
+        }
+
+
+        private static void Getlocalconnect()
+        {
+
+            int codmarca = 0;
+            myLocalConnection myLocalConn = new myLocalConnection();
+
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.CommandText = "select * from tabautos";
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+
+                            if (reader.Read())
+                            {
+
+                                codmarca = int.Parse(reader["COD_MARCA"].ToString());
+
+                            }
+
+                        }
+
+                    }
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+
+            }
+
         }
 
     }
