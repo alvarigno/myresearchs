@@ -11,6 +11,7 @@ using System.Threading;
 using System.ComponentModel;
 using Transbank.NET;
 using System.Text.RegularExpressions;
+using System.Security.Permissions;
 
 namespace ReadExcelFiles
 {
@@ -19,27 +20,70 @@ namespace ReadExcelFiles
 
         public static string PosicionDocumento = @"C:\\Users\\Álvaro\\Desktop\\doc excel de ejemplo\\";
         public static string listadofotos = "";
-
+        public static string resultfilename;
 
         static void Main(string[] args)
         {
+            Run();
+            Console.ReadLine();
+        }
 
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        public static void Run() {
+
+            // Create a new FileSystemWatcher and set its properties.
+            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher.Path = PosicionDocumento;
+
+            /* Watch for changes in LastAccess and LastWrite times, and the renaming of files or directories. */
+            watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+            // Only watch text files.
+            watcher.Filter = "*.xlsx";
+
+            // Add event handlers. inside of FileSystemWatcher DLL
+            //watcher.Changed += new FileSystemEventHandler(OnChanged);
+            watcher.Created += new FileSystemEventHandler(OnChanged);
+            //watcher.Deleted += new FileSystemEventHandler(OnChanged);
+            //watcher.Renamed += new RenamedEventHandler(OnRenamed);
+
+            // Begin watching.
+            watcher.EnableRaisingEvents = true;
+
+        }
+
+        // Define the event handlers.
+        private static void OnChanged(object source, FileSystemEventArgs e)
+        {
+            // Specify what is done when a file is changed, created, or deleted.
+            Console.WriteLine("File: " + e.FullPath + " " + e.ChangeType+", name file: "+e.Name);
+            resultfilename = e.FullPath;
+
+            if (resultfilename.Contains("~$")) { } else {
+                ReadExcelFile(resultfilename);
+            }
+
+
+
+        }
+
+        private static void ReadExcelFile(string pathsourcefile) {
 
             try
             {
 
-                string[] filesource = Directory.GetFiles(PosicionDocumento, "*.xlsx");
+                //string[] filesource = Directory.GetFiles(PosicionDocumento, "*.xlsx");
 
                 //Create COM Objects. Create a COM object for everything that is referenced
                 Application xlApp = new Application();
-                Workbook xlWorkbook = xlApp.Workbooks.Open(filesource[0].ToString());
+                //Workbook xlWorkbook = xlApp.Workbooks.Open(filesource[0].ToString());
+                Workbook xlWorkbook = xlApp.Workbooks.Open(pathsourcefile);
                 _Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Range xlRange = xlWorksheet.UsedRange;
 
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
                 int contador = 1;
-                
+
                 string codditect = "";
 
                 //iterate over the rows and columns and print to the console as it appears in the file
@@ -107,9 +151,10 @@ namespace ReadExcelFiles
                                     Console.Write(xlRange.Cells[i, j].Value2.ToString() + "\t");
                                     Console.Write(xlRange.Cells[i, j + 1].Value2.ToString() + "\t\n");
 
-                                    if (xlRange.Cells[i, j].Value2.ToString() == "Marca") {
+                                    if (xlRange.Cells[i, j].Value2.ToString() == "Marca")
+                                    {
 
-                                        Console.Write("Cod marca: "+ GetCodMarca(xlRange.Cells[i, j + 1].Value2.ToString())+"\t\n");
+                                        Console.Write("Cod marca: " + GetCodMarca(xlRange.Cells[i, j + 1].Value2.ToString()) + "\t\n");
 
                                     }
 
@@ -142,9 +187,10 @@ namespace ReadExcelFiles
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
                 Console.Write("\r\n ----------------------------------------------\r\n");
-                Console.Write("Finalización de lectura de archivo: "+ filesource[0].ToString());
+                //Console.Write("Finalización de lectura de archivo: " + filesource[0].ToString());
+                Console.Write("Finalización de lectura de archivo: " + pathsourcefile); 
                 Console.Write("\r\n ----------------------------------------------\r\n");
-                Console.ReadLine();
+                
 
             }
             catch (Exception ex)
@@ -155,7 +201,7 @@ namespace ReadExcelFiles
             }
 
         }
-        
+
         private static Boolean BtnDownload_Click(string urlfilename, string namefolder)
         {
             Boolean cargo = false;
