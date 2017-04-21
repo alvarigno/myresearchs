@@ -26,11 +26,13 @@ namespace ReadExcelFiles
 
         public static Dictionary<string, string> objetotipovehiculo = new Dictionary<string, string>();
 
+        public static Dictionary<string, string> objetocombustible = new Dictionary<string, string>();
+
         static void Main(string[] args)
         {
             //Diccionario DITEC
             objetoditec.Add("codigo_auto_DITEC", "");
-            objetoditec.Add("codigo_auto_chileautos", "");
+            objetoditec.Add("codigo_auto_chileautos", "0");
             objetoditec.Add("Nuevo_o_usado", "");
             objetoditec.Add("categoria", "");
             objetoditec.Add("Tipo_vehiculo", "");
@@ -39,13 +41,14 @@ namespace ReadExcelFiles
             objetoditec.Add("Modelo", "");
             objetoditec.Add("Ano", "");
             objetoditec.Add("Precio", "");
+            objetoditec.Add("Color", "");
             objetoditec.Add("KM", "");
             objetoditec.Add("motor", "");
             objetoditec.Add("combustible", "");
             objetoditec.Add("Cilindrada", "");
             objetoditec.Add("tipo_cambio", "N");
             objetoditec.Add("aire_acondicionado", "N");
-            objetoditec.Add("tipo_direccion", "N");
+            objetoditec.Add("tipo_direccion", "");
             objetoditec.Add("radio", "N");
             objetoditec.Add("alzavidrios_electricos", "N");
             objetoditec.Add("espejos_electricos", "N");
@@ -73,9 +76,15 @@ namespace ReadExcelFiles
             objetotipovehiculo.Add("Clasicos o de Coleccion", "CL");
             objetotipovehiculo.Add("Furgón", "F"); 
             objetotipovehiculo.Add("Todo Terreno", "T");
+            objetotipovehiculo.Add("SUV", "T");
             objetotipovehiculo.Add("Taxi", "TX");
             objetotipovehiculo.Add("Van", "V");
 
+            //Diccionario de Combustible
+            objetocombustible.Add("GASOLINA","1");
+            objetocombustible.Add("DIESEL", "2");
+            objetocombustible.Add("Gasolina", "1");
+            objetocombustible.Add("Diesel", "2");
 
             Run();
             Console.ReadLine();
@@ -181,7 +190,33 @@ namespace ReadExcelFiles
                                         listadofotos = listadofotos.Remove(listadofotos.Length - 1);
                                         //Console.Write("Listado de fotografías: " + listadofotos + "\r\n");
                                         objetoditec["fotos"] = listadofotos;
+                                        if (objetoditec["KM"] == "") { objetoditec["KM"] = "0"; }
                                         showdata();
+                                        if (ConsultaSiIdDitecExiste(int.Parse(objetoditec["codigo_auto_DITEC"]))) {
+
+                                            if (updatedataditec(int.Parse(objetoditec["codigo_auto_DITEC"]))) {
+
+                                                Console.Write("Proceso de Actualización, funcionó!!!");
+                                                ClearDictionary();
+
+                                            } else {
+
+                                                Console.Write("Proceso de Actualización, No funcionó!!!");
+                                                ClearDictionary();
+
+                                            }
+
+                                        } else if (insertdataditec()) {
+
+                                            Console.Write("Proceso de inserción, funcionó!!!");
+                                            ClearDictionary();
+
+                                        }
+                                        else {
+
+                                            Console.Write("Proceso de inserción o actualización, No funcionó!!!");
+                                            ClearDictionary();
+                                        }
                                         //Console.Write("Listado de fotografías diccionario: " + objetoditec["fotos"]+"\r\n");
                                         listadofotos = "";
 
@@ -210,7 +245,11 @@ namespace ReadExcelFiles
 
                                     if (xlRange.Cells[i, j].Value2.ToString() == "codigo_auto_chileautos")
                                     {
-                                        objetoditec["codigo_auto_chileautos"] = xlRange.Cells[i, j + 1].Value2.ToString();
+                                        if (xlRange.Cells[i, j + 1].Value2.ToString() == "")
+                                        {
+                                            objetoditec["codigo_auto_chileautos"] = "0";
+                                        }
+                                        else { objetoditec["codigo_auto_chileautos"] = xlRange.Cells[i, j + 1].Value2.ToString();  }
                                         //Console.Write("codigo_auto_chileautos: " + objetoditec["codigo_auto_chileautos"] + "\t\n");
 
                                     }
@@ -222,10 +261,10 @@ namespace ReadExcelFiles
 
                                     }
 
-                                    if (xlRange.Cells[i, j].Value2.ToString() == "Tipo_vehiculo" && objetotipovehiculo.ContainsKey(xlRange.Cells[i, j + 1].Value2.ToString()))
+                                    if (xlRange.Cells[i, j].Value2.ToString() == "Tipo_vehiculo")
                                     {
-                                        int codigo = GetCategoriaId(objetotipovehiculo[xlRange.Cells[i, j + 1].Value2.ToString()]);
-                                        objetoditec["Tipo_vehiculo"] = objetotipovehiculo[xlRange.Cells[i, j + 1].Value2.ToString()];
+                                        int codigo = GetCategoriaId(xlRange.Cells[i, j + 1].Value2.ToString());
+                                        objetoditec["Tipo_vehiculo"] = xlRange.Cells[i, j + 1].Value2.ToString();
                                         objetoditec["categoria"] = codigo.ToString();
                                         //Console.Write("Tipo_vehiculo: " + objetoditec["Tipo_vehiculo"] + ", Cat. Vehículo: "+ objetoditec["categoria"] + "\t\n");
 
@@ -233,7 +272,8 @@ namespace ReadExcelFiles
 
                                     if (xlRange.Cells[i, j].Value2.ToString() == "Carroceria")
                                     {
-                                        objetoditec["Carroceria"] = xlRange.Cells[i, j + 1].Value2.ToString();
+
+                                        objetoditec["Carroceria"] = GetCodCarroceria(xlRange.Cells[i, j + 1].Value2.ToString(), int.Parse(objetoditec["categoria"]));
                                         //Console.Write("Carroceria: " + objetoditec["Carroceria"] + "\t\n");
 
                                     }
@@ -241,8 +281,8 @@ namespace ReadExcelFiles
                                     if (xlRange.Cells[i, j].Value2.ToString() == "Marca")
                                     {
 
-                                        objetoditec["Marca"] = xlRange.Cells[i, j + 1].Value2.ToString();
-                                        //Console.Write("Marca: " + objetoditec["Marca"] + ", cod: "+ GetCodMarca(objetoditec["Marca"]) + "\t\n");
+                                        objetoditec["Marca"] = GetCodMarca(xlRange.Cells[i, j + 1].Value2.ToString()).ToString();
+                                        //Console.Write("Marca: " + xlRange.Cells[i, j + 1].Value2.ToString() + ", cod: "+ objetoditec["Marca"] + "\t\n");
 
                                     }
 
@@ -271,9 +311,17 @@ namespace ReadExcelFiles
 
                                     }
 
-                                    if (xlRange.Cells[i, j].Value2.ToString() == "KM")
+                                    if (xlRange.Cells[i, j].Value2.ToString() == "Color")
                                     {
 
+                                        objetoditec["Color"] = xlRange.Cells[i, j + 1].Value2.ToString();
+                                        //Console.Write("Color: " + objetoditec["Color"] + "\t\n");
+
+                                    }
+
+                                    if (xlRange.Cells[i, j].Value2.ToString() == "KM")
+                                    {
+                                        objetoditec["KM"] = "";
                                         objetoditec["KM"] = xlRange.Cells[i, j + 1].Value2.ToString();
                                         //Console.Write("KM: " + objetoditec["KM"] + "\t\n");
 
@@ -289,8 +337,12 @@ namespace ReadExcelFiles
 
                                     if (xlRange.Cells[i, j].Value2.ToString() == "combustible")
                                     {
+                                        if (objetocombustible.ContainsKey(xlRange.Cells[i, j + 1].Value2.ToString())) {
 
-                                        objetoditec["combustible"] = xlRange.Cells[i, j + 1].Value2.ToString();
+                                            objetoditec["combustible"] = objetocombustible[xlRange.Cells[i, j + 1].Value2.ToString()];
+
+                                        }
+                                        
                                         //Console.Write("combustible: " + objetoditec["combustible"] + "\t\n");
 
                                     }
@@ -590,7 +642,7 @@ namespace ReadExcelFiles
 
                                     
                                 }
-                               // Getlocalconnect();
+                               
                             }
                         }
                     }
@@ -730,26 +782,24 @@ namespace ReadExcelFiles
             return codmarca;
         }
 
-
-        private static void Getlocalconnect()
+        private static string GetCodCarroceria(string namecarroceria, int codcategoria)
         {
 
-            int codmarca = 0;
-            myLocalConnection myLocalConn = new myLocalConnection();
+            string codcarroceria = "";
+            myConnection myConn = new myConnection();
+
+            if (namecarroceria == "Sedan")
+            {
+                namecarroceria = "Sedán";
+            }
 
             try
             {
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
-                    connection.Connection = myLocalConnection.GetLocalConnection();
-
-                    /*insert on tabautos local DB*/
-                    connection.CommandText = "INSERT INTO[dbo].[tabautos] ([COD_DITEC],[fecha_toma_foto],[fotografo],[digitador],[fecha_ingreso],[COD_CLIENTE],[nuevo],[Tipoveh],[Carroceria],[COD_MARCA],[MODELO],[Version],[ANO],[valor_ref],[PESOS],[Pesosdos],[Potencia],[color],[km],[milla],[motor],[combustible],[Cilindrada],[foto_chica],[foto_grande],[tipo_cambio],[aire_acondicionado],[tipo_direccion],[radio],[alzavidrios_electricos],[espejos_electricos],[frenos_ABS],[airbag],[unico_dueno],[cierre_centralizado],[catalitico],[fwd],[Llantas],[Puertas],[Alarma],[Techo],[otros],[pass],[nom],[emailpart],[ciudapart],[Convenio],[destacado],[patente],[contauto],[fotos],[vendido],[falso],[reemplazo],[financiamiento],[seguro],[transferencia],[horario],[nomauto],[fonauto],[cod_auto_ant],[cod_modelo],[cod_version],[publishedDate],[fechaRepublicado],[fecha_i_data],[fecha_update_data])";
-                    connection.CommandText = connection.CommandText + "value()";
-
-
-//                    connection.CommandText = "select * from tabautos";
-
+                    connection.Connection = myConnection.GetConnection();
+                    connection.CommandText = "select t2.inicarr as codcarroceria from tabcarroceria t1, tabcarroceriasXCategoria t2 where t2.inicarr = t1.inicarr and t2.idCategoria = "+ codcategoria + " and t1.carroceria = '"+ namecarroceria + "'";
+                    
                     using (var reader = connection.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -758,7 +808,7 @@ namespace ReadExcelFiles
                             if (reader.Read())
                             {
 
-                                codmarca = int.Parse(reader["COD_MARCA"].ToString());
+                                codcarroceria = reader["codcarroceria"].ToString();
 
                             }
 
@@ -778,6 +828,7 @@ namespace ReadExcelFiles
 
             }
 
+            return codcarroceria;
         }
 
         private static int GetCategoriaId(string tipovehiculo) {
@@ -835,6 +886,147 @@ namespace ReadExcelFiles
 
         }
 
+        private static Boolean insertdataditec()
+        {
+            Boolean inserto = false;
+            myLocalConnection myLocalConn = new myLocalConnection();
+            
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.CommandText = "INSERT INTO[dbo].[tabautosDITEC]([codigo_auto_DITEC] ,[codigo_auto_chileautos] ,[Nuevo_o_usado] ,[categoria] ,[Tipo_vehiculo] ,[Carroceria] ,[Marca] ,[Modelo] ,[Ano] ,[Precio] ,[Color], [KM] ,[motor] ,[combustible] ,[Cilindrada] ,[tipo_cambio] ,[aire_acondicionado] ,[tipo_direccion] ,[radio] ,[alzavidrios_electricos] ,[espejos_electricos] ,[frenos_ABS] ,[airbag] ,[unico_dueno] ,[cierre_centralizado] ,[catalitico] ,[fwd] ,[Llantas] ,[Puertas] ,[Alarma] ,[Techo] ,[comentarios] ,[patente] ,[fotos] ,[fecha_i_data],[fecha_update_data])";
+                    connection.CommandText = connection.CommandText + "VALUES("+ objetoditec["codigo_auto_DITEC"] +", "+ objetoditec["codigo_auto_chileautos"] + ",'" + objetoditec["Nuevo_o_usado"]+"',"+ objetoditec["categoria"] +",'"+ objetoditec["Tipo_vehiculo"] +"','"+ objetoditec["Carroceria"]+"' ,"+ int.Parse(objetoditec["Marca"])+" ,'"+ objetoditec["Modelo"]+"' ,"+ objetoditec["Ano"]+" ,"+ objetoditec["Precio"]+" ,'"+ objetoditec["Color"] + "',"+ int.Parse(objetoditec["KM"])+" ,'"+ objetoditec["motor"]+"' ,'"+ objetoditec["combustible"]+"' ,'"+ objetoditec["Cilindrada"]+"' ,'"+ objetoditec["tipo_cambio"]+"' ,'"+ objetoditec["aire_acondicionado"]+"' ,'"+ objetoditec["tipo_direccion"]+"' ,'"+ objetoditec["radio"]+ "','"+ objetoditec["alzavidrios_electricos"]+"' ,'"+ objetoditec["espejos_electricos"]+"' ,'"+ objetoditec["frenos_ABS"]+"' ,'"+ objetoditec["airbag"]+"' ,'"+ objetoditec["unico_dueno"]+"' ,'"+ objetoditec["cierre_centralizado"]+"' ,'"+ objetoditec["catalitico"]+"' ,'"+ objetoditec["fwd"]+"' ,'"+ objetoditec["Llantas"]+"' ,'"+ objetoditec["Puertas"]+"' ,'"+ objetoditec["Alarma"]+"' ,'"+ objetoditec["Techo"]+"' ,'"+ objetoditec["comentarios"]+"' ,'"+ objetoditec["patente"]+"' ,'"+ objetoditec["fotos"]+ "' ,getdate(),'' )";
+                    
+                    connection.ExecuteNonQuery();
+
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+                inserto = true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+            }
+
+            return inserto;
+        }
+
+        private static Boolean updatedataditec(int codigoditec)
+        {
+            Boolean actualizo = false;
+            myLocalConnection myLocalConn = new myLocalConnection();
+
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.CommandText = "UPDATE[dbo].[tabautosDITEC] SET[codigo_auto_chileautos] = " + objetoditec["codigo_auto_chileautos"] + ", [Nuevo_o_usado] ='" + objetoditec["Nuevo_o_usado"] + "',[categoria] = " + objetoditec["categoria"] + ",[Tipo_vehiculo] = '" + objetoditec["Tipo_vehiculo"] + "', [Carroceria] ='" + objetoditec["Carroceria"] + "' ,[Marca] = " + int.Parse(objetoditec["Marca"]) + " ,[Modelo] = '" + objetoditec["Modelo"] + "' ,[Ano] = " + objetoditec["Ano"] + " ,[Precio] = " + objetoditec["Precio"] + " ,[Color] = '" + objetoditec["Color"] + "',[KM] = " + int.Parse(objetoditec["KM"]) + " ,[motor] = '" + objetoditec["motor"] + "' ,[combustible] = '" + objetoditec["combustible"] + "' ,[Cilindrada] = '" + objetoditec["Cilindrada"] + "' ,[tipo_cambio] = '" + objetoditec["tipo_cambio"] + "' ,[aire_acondicionado] = '" + objetoditec["aire_acondicionado"] + "' ,[tipo_direccion] = '" + objetoditec["tipo_direccion"] + "' ,[radio] = '" + objetoditec["radio"] + "',[alzavidrios_electricos] = '" + objetoditec["alzavidrios_electricos"] + "' ,[espejos_electricos] = '" + objetoditec["espejos_electricos"] + "' ,[frenos_ABS] = '" + objetoditec["frenos_ABS"] + "' ,[airbag] = '" + objetoditec["airbag"] + "' ,[unico_dueno] = '" + objetoditec["unico_dueno"] + "' ,[cierre_centralizado] = '" + objetoditec["cierre_centralizado"] + "' ,[catalitico] = '" + objetoditec["catalitico"] + "' ,[fwd] = '" + objetoditec["fwd"] + "' ,[Llantas] = '" + objetoditec["Llantas"] + "' ,[Puertas] = '" + objetoditec["Puertas"] + "' ,[Alarma] = '" + objetoditec["Alarma"] + "' ,[Techo] = '" + objetoditec["Techo"] + "' ,[comentarios] = '" + objetoditec["comentarios"] + "' ,[patente] = '" + objetoditec["patente"] + "' ,[fotos] = '" + objetoditec["fotos"] + "' ,[fecha_update_data] = getdate() WHERE codigo_auto_DITEC = "+ codigoditec + "";
+
+                    connection.ExecuteNonQuery();
+
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+                actualizo = true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+            }
+
+            return actualizo;
+        }
+
+        private static Boolean ConsultaSiIdDitecExiste(int codditec)
+        {
+
+            Boolean existe = false;
+            myLocalConnection myLocalConn = new myLocalConnection();
+
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.CommandText = "select * from [tabautosDITEC] where codigo_auto_DITEC = "+ codditec + "";
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            existe = true;
+                        }
+
+                    }
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+
+            }
+
+            return existe;
+
+
+        }
+
+        private static void ClearDictionary() {
+
+            //Diccionario DITEC
+            objetoditec["codigo_auto_DITEC"] = "";
+            objetoditec["codigo_auto_chileautos"] = "0";
+            objetoditec["Nuevo_o_usado"] = "";
+            objetoditec["categoria"] = "";
+            objetoditec["Tipo_vehiculo"] = "";
+            objetoditec["Carroceria"] = "";
+            objetoditec["Marca"] = "";
+            objetoditec["Modelo"] = "";
+            objetoditec["Ano"] = "";
+            objetoditec["Precio"] = "";
+            objetoditec["Color"] = "";
+            objetoditec["KM"] = "";
+            objetoditec["motor"] = "";
+            objetoditec["combustible"] = "";
+            objetoditec["Cilindrada"] = "";
+            objetoditec["tipo_cambio"] = "N";
+            objetoditec["aire_acondicionado"] = "N";
+            objetoditec["tipo_direccion"] = "";
+            objetoditec["radio"] = "N";
+            objetoditec["alzavidrios_electricos"] = "N";
+            objetoditec["espejos_electricos"] = "N";
+            objetoditec["frenos_ABS"] = "N";
+            objetoditec["airbag"] = "N";
+            objetoditec["unico_dueno"] = "N";
+            objetoditec["cierre_centralizado"] = "N";
+            objetoditec["catalitico"] = "N";
+            objetoditec["fwd"] = "N";
+            objetoditec["Llantas"] = "N";
+            objetoditec["Puertas"] = "N";
+            objetoditec["Alarma"] = "N";
+            objetoditec["Techo"] = "";
+            objetoditec["comentarios"] = "";
+            objetoditec["patente"] = "";
+            objetoditec["fotos"] = "";
+            objetoditec["fecha_i_data"] = "";
+            objetoditec["fecha_update_data"] = "";
+
+        }
 
     }
 }
