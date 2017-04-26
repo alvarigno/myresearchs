@@ -798,8 +798,9 @@ namespace ReadExcelFiles
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myConnection.GetConnection();
-                    connection.CommandText = "select t2.inicarr as codcarroceria from tabcarroceria t1, tabcarroceriasXCategoria t2 where t2.inicarr = t1.inicarr and t2.idCategoria = "+ codcategoria + " and t1.carroceria = '"+ namecarroceria + "'";
-                    
+                    //connection.CommandText = "select t2.inicarr as codcarroceria from tabcarroceria t1, tabcarroceriasXCategoria t2 where t2.inicarr = t1.inicarr and t2.idCategoria = "+ codcategoria + " and t1.carroceria = '"+ namecarroceria + "'";
+                    connection.CommandText = "SELECT RTRIM(t1.uid_car) AS[codcarroceria] FROM bdTools.dbo.tbl_carrocerias_local_categoria t1 JOIN bdTools.dbo.tbl_carrocerias_local t2 ON(t1.uid_car = t2.uid_car) WHERE t1.idCategoria = " + codcategoria + " and t2.nom_car = '" + namecarroceria + "' ORDER BY t2.nom_car";
+
                     using (var reader = connection.ExecuteReader())
                     {
                         if (reader.HasRows)
