@@ -81,39 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbToolsModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\patentesModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>patentesModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\patentesModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>patentesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\patentesModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>patentesModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SP_GetAgnosXMarcaModelo_Result.cs">
-      <DependentUpon>patentesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SP_GetDatosXPatente_Result.cs">
-      <DependentUpon>patentesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SP_GetMarcas_Result.cs">
-      <DependentUpon>patentesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SP_GetModelosXMarca_Result.cs">
-      <DependentUpon>patentesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SP_GetPreciosPromedio_Result.cs">
-      <DependentUpon>patentesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SP_GetVehxMMA_Result.cs">
-      <DependentUpon>patentesModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\SP_PublicarAviso_Automotoras_Result.cs">
       <DependentUpon>baseprodModel.tt</DependentUpon>
     </Compile>
@@ -140,13 +107,6 @@
     <None Include="Data\dbToolsModel.edmx.diagram">
       <DependentUpon>dbToolsModel.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Data\patentesModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>patentesModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\patentesModel.edmx.diagram">
-      <DependentUpon>patentesModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -169,16 +129,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbToolsModel.edmx</DependentUpon>
       <LastGenOutput>dbToolsModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\patentesModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>patentesModel.edmx</DependentUpon>
-      <LastGenOutput>patentesModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\patentesModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>patentesModel.edmx</DependentUpon>
-      <LastGenOutput>patentesModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

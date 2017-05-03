@@ -158,9 +158,9 @@ namespace PublicarDITEC
                 datopublicacion.datosEquipamiento.fotos = datos[i].fotos;
                 datopublicacion.datosEquipamiento.plataforma = "DTC";
 
+                var result = publicaavisoautomotora(datopublicacion);
 
-
-                Console.WriteLine("Codigo jato: " + codigo);
+                Console.WriteLine("Codigo jato: " + codigo+", resultado"+result.ToString());
 
 
             } catch(Exception e) { Console.WriteLine("Error: " + e.Message); }
@@ -170,88 +170,12 @@ namespace PublicarDITEC
 
         public static int getCodigoJajoNoJato(string marca, string modelo,  string version,  string carroceria,  int puertas, int ano,  string transmision, int combustible, string edicion, int categoria) {
 
-            int codigo = 0;
 
-            bdToolsEntities bdTools = new bdToolsEntities();
-
-            var uidJato = bdTools.bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(marca, modelo, version, carroceria, puertas, ano, transmision, edicion);
-
-            codigo = uidJato;
-
-            if (uidJato == null) { 
-                uidJato = bdTools.SP_bdj_getNonJatoID(categoria, marca, modelo, ano, carroceria, transmision, combustible.ToString());
-                codigo = uidJato;
-            }
-
-            return codigo;
-        }
-
-        public static int codigojato(string marca, string modelo, string version, string carroceria, int puertas, int ano, string transmision, string edicion) {
-            
-            int codjato = 0;
-
-            if (edicion == "") {
+            if (edicion == "")
+            {
 
                 edicion = "-";
             }
-
-            if (transmision == "S")
-            {
-
-                transmision = "A";
-
-            }
-            else {
-
-                transmision = "M";
-
-            }
-
-            try {
-
-                myConnection myConn = new myConnection();
-
-                using (var connection = new System.Data.SqlClient.SqlCommand())
-                {
-                    connection.Connection = myConnection.GetConnection();
-                    connection.CommandText = "with c as (";
-                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJato_NSCRCH_CS2002.dbo.version";
-                    connection.CommandText = connection.CommandText + "union";
-                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJato_SSCRCH_CS2002.dbo.version";
-                    connection.CommandText = connection.CommandText + "union";
-                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJatoH_NSCRCH_CS2002.dbo.version";
-                    connection.CommandText = connection.CommandText + "union";
-                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJatoH_SSCRCH_CS2002.dbo.version)";
-                    connection.CommandText = connection.CommandText + "select min(vehicle_id) as idjato from c WHERE Ch_make = '"+marca+"' AND Ch_model = '"+modelo+"' AND id_302 = '"+version+"' AND id_603 = '"+carroceria+"' AND id_602 = "+puertas+" AND id_108 = "+ano+" AND id_20602 = '"+transmision+"' AND id_404 = '"+edicion+"'";
-
-                    using (var reader = connection.ExecuteReader())
-                    {
-                        while (reader.HasRows)
-                        {
-                            if (reader.Read()) {
-
-                                codjato = int.Parse(reader["c"].ToString());
-
-                            }
-                        }
-                    }
-                }
-
-
-            } catch (Exception e) {
-
-                Console.WriteLine("Error: "+e.Message);
-
-            }
-            
-            return codjato;
-
-        }
-
-        public static int codigoNonjato(string marca, string modelo, string carroceria, int ano, string transmision, int combustible, int categoria )
-        {
-
-            int codNojato = 0;
 
             if (transmision == "S")
             {
@@ -266,128 +190,28 @@ namespace PublicarDITEC
 
             }
 
-            try
-            {
-                myConnection myConn = new myConnection();
 
-                using (var connection = new System.Data.SqlClient.SqlCommand())
-                {
-                    connection.Connection = myConnection.GetConnection();
-                    connection.CommandText = "SELECT nj_id FROM [bdTools].[dbo].[tbl_NONJato] WHERE marca = '" + marca+"' and modelo = '"+modelo+"' and ano = "+ano+" and(trans = '"+transmision+"' OR '"+transmision+"' IS NULL) and(carr = '"+carroceria+"' OR '"+carroceria+"' IS NULL) and comb = ISNULL("+combustible+", 10)  and idCat = " +categoria;
+            bdToolsEntities bdTools = new bdToolsEntities();
 
-                    using (var reader = connection.ExecuteReader())
-                    {
-                        while (reader.HasRows)
-                        {
-                            if (reader.Read())
-                            {
-                                codNojato = int.Parse(reader["c"].ToString());
-                            }
-                        }
-                    }
+            var uidJato = bdTools.bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(marca, modelo, version, carroceria, puertas, ano, transmision, edicion);
 
-                }
+            int codigo = uidJato;
 
-
-            } catch (Exception e) {
-
-                Console.WriteLine("Error: "+e.Message);
-
+            if (uidJato == null) { 
+                uidJato = bdTools.SP_bdj_getNonJatoID(categoria, marca, modelo, ano, carroceria, transmision, combustible.ToString());
+                codigo = uidJato;
             }
 
-
-
-            return codNojato;
-
+            return codigo;
         }
 
+        public static object publicaavisoautomotora(PublicacionChileautos dato) {
+            
+            baseprodEntities baseprod = new baseprodEntities();
 
-        public static int GetIdeAutomotora() {
+            var logrado = baseprod.SP_PublicarAviso_Automotoras(dato.codCliente, dato.ip, dato.datosVehiculo.patente, dato.datosVehiculo.tipo, dato.datosVehiculo.marca, dato.datosVehiculo.modelo, dato.datosVehiculo.ano, dato.datosVehiculo.version, dato.datosVehiculo.carroceria, dato.datosVehiculo.puertas, dato.datosVehiculo.tipoDireccion, dato.datosVehiculo.precio, dato.datosVehiculo.cilindrada, dato.datosVehiculo.potencia, dato.datosVehiculo.color, dato.datosVehiculo.kilom, dato.datosVehiculo.motor, dato.datosVehiculo.techo, dato.datosVehiculo.combustible, dato.datosVehiculo.comentario, dato.datosVehiculo.uidJato, dato.datosEquipamiento.airbag, dato.datosEquipamiento.aireAcon, dato.datosEquipamiento.alarma, dato.datosEquipamiento.alzaVidrios, dato.datosEquipamiento.nuevo, dato.datosEquipamiento.transmision, dato.datosEquipamiento.radio, dato.datosEquipamiento.espejos, dato.datosEquipamiento.frenosAbs, dato.datosEquipamiento.unicoDueno, dato.datosEquipamiento.cierreCentral, dato.datosEquipamiento.catalitico, dato.datosEquipamiento.fwd, dato.datosEquipamiento.llantas, dato.datosEquipamiento.fotos, dato.datosEquipamiento.plataforma);
 
-            int idclient = 0;
-
-         //   select* from Tabclientes where nombre_fantasia like '%ditec%'
-
-
-            return idclient;
-        }
-
-        public static Boolean InserTtblJatoTabautos() {
-
-            Boolean proceso = false;
-
-
-                //        INSERT INTO tbl_jato_tabautos(cod_auto, uidJato, uidnonJato, ope) VALUES(@codAuto, @uidJato, 0, @plataforma)
-                //
-                //    
-                //        INSERT INTO tbl_jato_tabautos(cod_auto, uidJato, uidnonJato, ope) VALUES(@codAuto, 0, @uidJato, @plataforma)
-                //
-            return proceso;
-
-        }
-
-
-        public static Boolean PublicaAviso()
-        {
-
-            Boolean publico = false;
-
-//                    INSERT INTO tabautos(
-//                fecha_ingreso,
-//                cod_cliente, nuevo, tipoveh, carroceria, cod_marca, modelo, version,
-//                ano, pesos, potencia, color, km, milla, motor, cilindrada,
-//                foto_chica, foto_grande, tipo_cambio, aire_acondicionado, tipo_direccion,
-//                radio, alzavidrios_electricos, espejos_electricos, frenos_ABS, airbag, unico_dueno,
-//                cierre_centralizado, catalitico, fwd, llantas, puertas, combustible, alarma, techo,
-//                otros, patente, destacado) VALUES(
-//               GETDATE(),
-//               @codCliente, @nuevo, @tipo, @carroceria, @marca, @modelo, @version,
-//               @ano, @precio, @potencia, @color, @kilom, @milla, @motor, @cilindrada,
-//               @foto, @foto, @transmision, @aireAcon, @tipoDireccion,
-//               @radio, @alzaVidrios, @espejos, @frenosAbs, @airbag, @unicoDueno,
-//               @cierreCentral, @catalitico, @fwd, @llantas, @puertas, @combustible, @alarma, @techo,
-//               @comentario, @patente, 'N'
-//                           );
-//            SELECT @codAuto = SCOPE_IDENTITY();
-
-
-            return publico;
-        }
-
-
-        public static Boolean InsertaFotos() {
-
-            Boolean insertofotos = false;
-
-          //  DECLARE @tmp TABLE(orden INT IDENTITY, foto VARCHAR(100));
-          //  INSERT INTO @tmp SELECT* FROM dbo.fn_Split(@listaFotos, ',');
-          //  INSERT INTO tbl_fotosNuevoServer SELECT @codAuto, foto, orden FROM @tmp;
-
-
-            return insertofotos;
-
-        }
-
-        public static Boolean accionescv() {
-
-            Boolean inserto = false;
-
-//            SELECT @accioncvId = (SELECT MAX(accioncv) + 1 FROM accionescv)
-//				SELECT @actcv = ISNULL((SELECT actop FROM operaciones WHERE clieop = @codCliente), 0)
-//				SET @tipocv = 1
-//
-//                INSERT INTO accionescv(
-//                    accioncv, codautocv, codclientecv, fechacv,
-//                    tipocv, actcv, marcacv, modelocv,
-//                    anocv, preciocv, ipcv, patentecv, versioncv
-//                ) VALUES(
-//                    @accioncvId, @codAuto, @codCliente, GETDATE(),
-//                    @tipocv, @actcv, @marca, @modelo,
-//                    @ano, @precio, @ip, @patente, @version
-//                )
-
-            return inserto;
-
+            return logrado;
         }
 
         private static string GetDescMarca(int namemarca)
