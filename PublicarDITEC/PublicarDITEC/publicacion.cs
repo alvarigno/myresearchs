@@ -16,6 +16,7 @@ namespace PublicarDITEC
         public string Carroceria { get; set; }
         public int Marca { get; set; }
         public string Modelo { get; set; }
+        public string Version { get; set; }
         public int Ano { get; set; }
         public int Precio { get; set; }
         public string Color { get; set; }

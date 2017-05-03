@@ -39,6 +39,7 @@ namespace ReadExcelFiles
             objetoditec.Add("Carroceria", "");
             objetoditec.Add("Marca", "");
             objetoditec.Add("Modelo", "");
+            objetoditec.Add("Version", "");
             objetoditec.Add("Ano", "");
             objetoditec.Add("Precio", "");
             objetoditec.Add("Color", "");
@@ -291,6 +292,14 @@ namespace ReadExcelFiles
 
                                         objetoditec["Modelo"] = xlRange.Cells[i, j + 1].Value2.ToString();
                                         //Console.Write("Modelo: " + objetoditec["Modelo"] + "\t\n");
+
+                                    }
+
+                                    if (xlRange.Cells[i, j].Value2.ToString() == "Version")
+                                    {
+
+                                        objetoditec["Version"] = xlRange.Cells[i, j + 1].Value2.ToString();
+                                        //Console.Write("Modelo: " + objetoditec["Version"] + "\t\n");
 
                                     }
 
@@ -897,8 +906,8 @@ namespace ReadExcelFiles
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myLocalConnection.GetLocalConnection();
-                    connection.CommandText = "INSERT INTO[dbo].[tabautosDITEC]([codigo_auto_DITEC] ,[codigo_auto_chileautos] ,[Nuevo_o_usado] ,[categoria] ,[Tipo_vehiculo] ,[Carroceria] ,[Marca] ,[Modelo] ,[Ano] ,[Precio] ,[Color], [KM] ,[motor] ,[combustible] ,[Cilindrada] ,[tipo_cambio] ,[aire_acondicionado] ,[tipo_direccion] ,[radio] ,[alzavidrios_electricos] ,[espejos_electricos] ,[frenos_ABS] ,[airbag] ,[unico_dueno] ,[cierre_centralizado] ,[catalitico] ,[fwd] ,[Llantas] ,[Puertas] ,[Alarma] ,[Techo] ,[comentarios] ,[patente] ,[fotos] ,[fecha_i_data],[fecha_update_data])";
-                    connection.CommandText = connection.CommandText + "VALUES("+ objetoditec["codigo_auto_DITEC"] +", "+ objetoditec["codigo_auto_chileautos"] + ",'" + objetoditec["Nuevo_o_usado"]+"',"+ objetoditec["categoria"] +",'"+ objetoditec["Tipo_vehiculo"] +"','"+ objetoditec["Carroceria"]+"' ,"+ int.Parse(objetoditec["Marca"])+" ,'"+ objetoditec["Modelo"]+"' ,"+ objetoditec["Ano"]+" ,"+ objetoditec["Precio"]+" ,'"+ objetoditec["Color"] + "',"+ int.Parse(objetoditec["KM"])+" ,'"+ objetoditec["motor"]+"' ,'"+ objetoditec["combustible"]+"' ,'"+ objetoditec["Cilindrada"]+"' ,'"+ objetoditec["tipo_cambio"]+"' ,'"+ objetoditec["aire_acondicionado"]+"' ,'"+ objetoditec["tipo_direccion"]+"' ,'"+ objetoditec["radio"]+ "','"+ objetoditec["alzavidrios_electricos"]+"' ,'"+ objetoditec["espejos_electricos"]+"' ,'"+ objetoditec["frenos_ABS"]+"' ,'"+ objetoditec["airbag"]+"' ,'"+ objetoditec["unico_dueno"]+"' ,'"+ objetoditec["cierre_centralizado"]+"' ,'"+ objetoditec["catalitico"]+"' ,'"+ objetoditec["fwd"]+"' ,'"+ objetoditec["Llantas"]+"' ,'"+ objetoditec["Puertas"]+"' ,'"+ objetoditec["Alarma"]+"' ,'"+ objetoditec["Techo"]+"' ,'"+ objetoditec["comentarios"]+"' ,'"+ objetoditec["patente"]+"' ,'"+ objetoditec["fotos"]+ "' ,getdate(),'' )";
+                    connection.CommandText = "INSERT INTO[dbo].[tabautosDITEC]([codigo_auto_DITEC] ,[codigo_auto_chileautos] ,[Nuevo_o_usado] ,[categoria] ,[Tipo_vehiculo] ,[Carroceria] ,[Marca] ,[Modelo] ,[Version] ,[Ano] ,[Precio] ,[Color], [KM] ,[motor] ,[combustible] ,[Cilindrada] ,[tipo_cambio] ,[aire_acondicionado] ,[tipo_direccion] ,[radio] ,[alzavidrios_electricos] ,[espejos_electricos] ,[frenos_ABS] ,[airbag] ,[unico_dueno] ,[cierre_centralizado] ,[catalitico] ,[fwd] ,[Llantas] ,[Puertas] ,[Alarma] ,[Techo] ,[comentarios] ,[patente] ,[fotos] ,[fecha_i_data],[fecha_update_data])";
+                    connection.CommandText = connection.CommandText + "VALUES("+ objetoditec["codigo_auto_DITEC"] +", "+ objetoditec["codigo_auto_chileautos"] + ",'" + objetoditec["Nuevo_o_usado"]+"',"+ objetoditec["categoria"] +",'"+ objetoditec["Tipo_vehiculo"] +"','"+ objetoditec["Carroceria"]+"' ,"+ int.Parse(objetoditec["Marca"])+" ,'"+ objetoditec["Modelo"]+ "' ,'" + objetoditec["Version"] + "' ," + objetoditec["Ano"]+" ,"+ objetoditec["Precio"]+" ,'"+ objetoditec["Color"] + "',"+ int.Parse(objetoditec["KM"])+" ,'"+ objetoditec["motor"]+"' ,'"+ objetoditec["combustible"]+"' ,'"+ objetoditec["Cilindrada"]+"' ,'"+ objetoditec["tipo_cambio"]+"' ,'"+ objetoditec["aire_acondicionado"]+"' ,'"+ objetoditec["tipo_direccion"]+"' ,'"+ objetoditec["radio"]+ "','"+ objetoditec["alzavidrios_electricos"]+"' ,'"+ objetoditec["espejos_electricos"]+"' ,'"+ objetoditec["frenos_ABS"]+"' ,'"+ objetoditec["airbag"]+"' ,'"+ objetoditec["unico_dueno"]+"' ,'"+ objetoditec["cierre_centralizado"]+"' ,'"+ objetoditec["catalitico"]+"' ,'"+ objetoditec["fwd"]+"' ,'"+ objetoditec["Llantas"]+"' ,'"+ objetoditec["Puertas"]+"' ,'"+ objetoditec["Alarma"]+"' ,'"+ objetoditec["Techo"]+"' ,'"+ objetoditec["comentarios"]+"' ,'"+ objetoditec["patente"]+"' ,'"+ objetoditec["fotos"]+ "' ,getdate(),'' )";
                     
                     connection.ExecuteNonQuery();
 
@@ -928,7 +937,7 @@ namespace ReadExcelFiles
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myLocalConnection.GetLocalConnection();
-                    connection.CommandText = "UPDATE[dbo].[tabautosDITEC] SET[codigo_auto_chileautos] = " + objetoditec["codigo_auto_chileautos"] + ", [Nuevo_o_usado] ='" + objetoditec["Nuevo_o_usado"] + "',[categoria] = " + objetoditec["categoria"] + ",[Tipo_vehiculo] = '" + objetoditec["Tipo_vehiculo"] + "', [Carroceria] ='" + objetoditec["Carroceria"] + "' ,[Marca] = " + int.Parse(objetoditec["Marca"]) + " ,[Modelo] = '" + objetoditec["Modelo"] + "' ,[Ano] = " + objetoditec["Ano"] + " ,[Precio] = " + objetoditec["Precio"] + " ,[Color] = '" + objetoditec["Color"] + "',[KM] = " + int.Parse(objetoditec["KM"]) + " ,[motor] = '" + objetoditec["motor"] + "' ,[combustible] = '" + objetoditec["combustible"] + "' ,[Cilindrada] = '" + objetoditec["Cilindrada"] + "' ,[tipo_cambio] = '" + objetoditec["tipo_cambio"] + "' ,[aire_acondicionado] = '" + objetoditec["aire_acondicionado"] + "' ,[tipo_direccion] = '" + objetoditec["tipo_direccion"] + "' ,[radio] = '" + objetoditec["radio"] + "',[alzavidrios_electricos] = '" + objetoditec["alzavidrios_electricos"] + "' ,[espejos_electricos] = '" + objetoditec["espejos_electricos"] + "' ,[frenos_ABS] = '" + objetoditec["frenos_ABS"] + "' ,[airbag] = '" + objetoditec["airbag"] + "' ,[unico_dueno] = '" + objetoditec["unico_dueno"] + "' ,[cierre_centralizado] = '" + objetoditec["cierre_centralizado"] + "' ,[catalitico] = '" + objetoditec["catalitico"] + "' ,[fwd] = '" + objetoditec["fwd"] + "' ,[Llantas] = '" + objetoditec["Llantas"] + "' ,[Puertas] = '" + objetoditec["Puertas"] + "' ,[Alarma] = '" + objetoditec["Alarma"] + "' ,[Techo] = '" + objetoditec["Techo"] + "' ,[comentarios] = '" + objetoditec["comentarios"] + "' ,[patente] = '" + objetoditec["patente"] + "' ,[fotos] = '" + objetoditec["fotos"] + "' ,[fecha_update_data] = getdate() WHERE codigo_auto_DITEC = "+ codigoditec + "";
+                    connection.CommandText = "UPDATE[dbo].[tabautosDITEC] SET[codigo_auto_chileautos] = " + objetoditec["codigo_auto_chileautos"] + ", [Nuevo_o_usado] ='" + objetoditec["Nuevo_o_usado"] + "',[categoria] = " + objetoditec["categoria"] + ",[Tipo_vehiculo] = '" + objetoditec["Tipo_vehiculo"] + "', [Carroceria] ='" + objetoditec["Carroceria"] + "' ,[Marca] = " + int.Parse(objetoditec["Marca"]) + " ,[Modelo] = '" + objetoditec["Modelo"] + "',[Version] = '" + objetoditec["Version"] + "' ,[Ano] = " + objetoditec["Ano"] + " ,[Precio] = " + objetoditec["Precio"] + " ,[Color] = '" + objetoditec["Color"] + "',[KM] = " + int.Parse(objetoditec["KM"]) + " ,[motor] = '" + objetoditec["motor"] + "' ,[combustible] = '" + objetoditec["combustible"] + "' ,[Cilindrada] = '" + objetoditec["Cilindrada"] + "' ,[tipo_cambio] = '" + objetoditec["tipo_cambio"] + "' ,[aire_acondicionado] = '" + objetoditec["aire_acondicionado"] + "' ,[tipo_direccion] = '" + objetoditec["tipo_direccion"] + "' ,[radio] = '" + objetoditec["radio"] + "',[alzavidrios_electricos] = '" + objetoditec["alzavidrios_electricos"] + "' ,[espejos_electricos] = '" + objetoditec["espejos_electricos"] + "' ,[frenos_ABS] = '" + objetoditec["frenos_ABS"] + "' ,[airbag] = '" + objetoditec["airbag"] + "' ,[unico_dueno] = '" + objetoditec["unico_dueno"] + "' ,[cierre_centralizado] = '" + objetoditec["cierre_centralizado"] + "' ,[catalitico] = '" + objetoditec["catalitico"] + "' ,[fwd] = '" + objetoditec["fwd"] + "' ,[Llantas] = '" + objetoditec["Llantas"] + "' ,[Puertas] = '" + objetoditec["Puertas"] + "' ,[Alarma] = '" + objetoditec["Alarma"] + "' ,[Techo] = '" + objetoditec["Techo"] + "' ,[comentarios] = '" + objetoditec["comentarios"] + "' ,[patente] = '" + objetoditec["patente"] + "' ,[fotos] = '" + objetoditec["fotos"] + "' ,[fecha_update_data] = getdate() WHERE codigo_auto_DITEC = "+ codigoditec + "";
 
                     connection.ExecuteNonQuery();
 
@@ -998,6 +1007,7 @@ namespace ReadExcelFiles
             objetoditec["Carroceria"] = "";
             objetoditec["Marca"] = "";
             objetoditec["Modelo"] = "";
+            objetoditec["Version"] = "";
             objetoditec["Ano"] = "";
             objetoditec["Precio"] = "";
             objetoditec["Color"] = "";

@@ -50,6 +50,7 @@ namespace PublicarDITEC
                                     datosavisos.Carroceria = reader["Carroceria"].ToString();
                                     datosavisos.Marca = int.Parse(reader["Marca"].ToString());
                                     datosavisos.Modelo = reader["Modelo"].ToString();
+                                    datosavisos.Version = reader["Version"].ToString();
                                     datosavisos.Ano = int.Parse(reader["Ano"].ToString());
                                     datosavisos.Precio = int.Parse(reader["Precio"].ToString());
                                     datosavisos.Color = reader["Color"].ToString();
@@ -109,7 +110,8 @@ namespace PublicarDITEC
             try {
                 
                     Console.WriteLine("Num. " + i + ", Listado: " + datos[i].codigo_auto_DITEC);
-
+                    int codigo = getCodigoJajoNoJato(GetDescMarca(datos[i].Marca), datos[i].Modelo, datos[i].Version, datos[i].Carroceria, int.Parse(datos[i].Puertas), datos[i].Ano, datos[i].tipo_cambio, datos[i].combustible, "", datos[i].categoria);
+                    Console.WriteLine("Codigo jato: " + codigo);
 
 
             } catch(Exception e) { Console.WriteLine("Error: " + e.Message); }
@@ -117,9 +119,268 @@ namespace PublicarDITEC
         }
 
 
-        public static void getcodnonjto() {
+        public static int getCodigoJajoNoJato(string marca, string modelo,  string version,  string carroceria,  int puertas, int ano,  string transmision, int combustible, string edicion, int categoria) {
+
+            int codigo = 0;
+
+            codigo = codigojato(marca, modelo, version, carroceria, puertas, ano, transmision, edicion);
+
+            if ( codigo == 0)
+            {
+
+                codigo = codigoNonjato(marca, modelo, carroceria, ano, transmision, combustible, categoria);
+
+            }
+
+            return codigo;
+        }
+
+        public static int codigojato(string marca, string modelo, string version, string carroceria, int puertas, int ano, string transmision, string edicion) {
+            
+            int codjato = 0;
+
+            if (edicion == "") {
+
+                edicion = "-";
+            }
+
+            if (transmision == "S")
+            {
+
+                transmision = "A";
+
+            }
+            else {
+
+                transmision = "M";
+
+            }
+
+            try {
+
+                myConnection myConn = new myConnection();
+
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myConnection.GetConnection();
+                    connection.CommandText = "with c as (";
+                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJato_NSCRCH_CS2002.dbo.version";
+                    connection.CommandText = connection.CommandText + "union";
+                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJato_SSCRCH_CS2002.dbo.version";
+                    connection.CommandText = connection.CommandText + "union";
+                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJatoH_NSCRCH_CS2002.dbo.version";
+                    connection.CommandText = connection.CommandText + "union";
+                    connection.CommandText = connection.CommandText + "select id_108, id_111, id_112, id_302, id_404, id_602, id_603, id_20602, vehicle_id, Ch_make, Ch_model from bdJatoH_SSCRCH_CS2002.dbo.version)";
+                    connection.CommandText = connection.CommandText + "select min(vehicle_id) as idjato from c WHERE Ch_make = '"+marca+"' AND Ch_model = '"+modelo+"' AND id_302 = '"+version+"' AND id_603 = '"+carroceria+"' AND id_602 = "+puertas+" AND id_108 = "+ano+" AND id_20602 = '"+transmision+"' AND id_404 = '"+edicion+"'";
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        while (reader.HasRows)
+                        {
+                            if (reader.Read()) {
+
+                                codjato = int.Parse(reader["c"].ToString());
+
+                            }
+                        }
+                    }
+                }
 
 
+            } catch (Exception e) {
+
+                Console.WriteLine("Error: "+e.Message);
+
+            }
+            
+            return codjato;
+
+        }
+
+        public static int codigoNonjato(string marca, string modelo, string carroceria, int ano, string transmision, int combustible, int categoria )
+        {
+
+            int codNojato = 0;
+
+            if (transmision == "S")
+            {
+
+                transmision = "A";
+
+            }
+            else
+            {
+
+                transmision = "M";
+
+            }
+
+            try
+            {
+                myConnection myConn = new myConnection();
+
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myConnection.GetConnection();
+                    connection.CommandText = "SELECT nj_id FROM [bdTools].[dbo].[tbl_NONJato] WHERE marca = '" + marca+"' and modelo = '"+modelo+"' and ano = "+ano+" and(trans = '"+transmision+"' OR '"+transmision+"' IS NULL) and(carr = '"+carroceria+"' OR '"+carroceria+"' IS NULL) and comb = ISNULL("+combustible+", 10)  and idCat = " +categoria;
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        while (reader.HasRows)
+                        {
+                            if (reader.Read())
+                            {
+                                codNojato = int.Parse(reader["c"].ToString());
+                            }
+                        }
+                    }
+
+                }
+
+
+            } catch (Exception e) {
+
+                Console.WriteLine("Error: "+e.Message);
+
+            }
+
+
+
+            return codNojato;
+
+        }
+
+
+        public static int GetIdeAutomotora() {
+
+            int idclient = 0;
+
+         //   select* from Tabclientes where nombre_fantasia like '%ditec%'
+
+
+            return idclient;
+        }
+
+        public static Boolean InserTtblJatoTabautos() {
+
+            Boolean proceso = false;
+
+
+                //        INSERT INTO tbl_jato_tabautos(cod_auto, uidJato, uidnonJato, ope) VALUES(@codAuto, @uidJato, 0, @plataforma)
+                //
+                //    
+                //        INSERT INTO tbl_jato_tabautos(cod_auto, uidJato, uidnonJato, ope) VALUES(@codAuto, 0, @uidJato, @plataforma)
+                //
+            return proceso;
+
+        }
+
+
+        public static Boolean PublicaAviso()
+        {
+
+            Boolean publico = false;
+
+//                    INSERT INTO tabautos(
+//                fecha_ingreso,
+//                cod_cliente, nuevo, tipoveh, carroceria, cod_marca, modelo, version,
+//                ano, pesos, potencia, color, km, milla, motor, cilindrada,
+//                foto_chica, foto_grande, tipo_cambio, aire_acondicionado, tipo_direccion,
+//                radio, alzavidrios_electricos, espejos_electricos, frenos_ABS, airbag, unico_dueno,
+//                cierre_centralizado, catalitico, fwd, llantas, puertas, combustible, alarma, techo,
+//                otros, patente, destacado) VALUES(
+//               GETDATE(),
+//               @codCliente, @nuevo, @tipo, @carroceria, @marca, @modelo, @version,
+//               @ano, @precio, @potencia, @color, @kilom, @milla, @motor, @cilindrada,
+//               @foto, @foto, @transmision, @aireAcon, @tipoDireccion,
+//               @radio, @alzaVidrios, @espejos, @frenosAbs, @airbag, @unicoDueno,
+//               @cierreCentral, @catalitico, @fwd, @llantas, @puertas, @combustible, @alarma, @techo,
+//               @comentario, @patente, 'N'
+//                           );
+//            SELECT @codAuto = SCOPE_IDENTITY();
+
+
+            return publico;
+        }
+
+
+        public static Boolean InsertaFotos() {
+
+            Boolean insertofotos = false;
+
+          //  DECLARE @tmp TABLE(orden INT IDENTITY, foto VARCHAR(100));
+          //  INSERT INTO @tmp SELECT* FROM dbo.fn_Split(@listaFotos, ',');
+          //  INSERT INTO tbl_fotosNuevoServer SELECT @codAuto, foto, orden FROM @tmp;
+
+
+            return insertofotos;
+
+        }
+
+        public static Boolean accionescv() {
+
+            Boolean inserto = false;
+
+//            SELECT @accioncvId = (SELECT MAX(accioncv) + 1 FROM accionescv)
+//				SELECT @actcv = ISNULL((SELECT actop FROM operaciones WHERE clieop = @codCliente), 0)
+//				SET @tipocv = 1
+//
+//                INSERT INTO accionescv(
+//                    accioncv, codautocv, codclientecv, fechacv,
+//                    tipocv, actcv, marcacv, modelocv,
+//                    anocv, preciocv, ipcv, patentecv, versioncv
+//                ) VALUES(
+//                    @accioncvId, @codAuto, @codCliente, GETDATE(),
+//                    @tipocv, @actcv, @marca, @modelo,
+//                    @ano, @precio, @ip, @patente, @version
+//                )
+
+            return inserto;
+
+        }
+
+        private static string GetDescMarca(int namemarca)
+        {
+
+            string descmarca = "";
+            myConnection myConn = new myConnection();
+
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myConnection.GetConnection();
+                    connection.CommandText = "select DES_MARCA from tabmarcas where cod_marca=" + namemarca;
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+
+                            if (reader.Read())
+                            {
+
+                                descmarca = reader["DES_MARCA"].ToString();
+
+                            }
+
+                        }
+
+                    }
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+
+            }
+
+            return descmarca;
         }
 
     }
