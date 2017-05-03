@@ -11,10 +11,7 @@ namespace PublicarDITEC
 {
     class myConnection
     {
-
-
-
-
+        
         public static SqlConnection GetConnection()
         {
             string str = "data source=172.16.0.241;initial catalog=baseprod2;user id=usrBDDesa;password=*pwdBD*;";//Base local
