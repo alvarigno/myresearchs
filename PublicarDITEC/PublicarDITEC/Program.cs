@@ -32,8 +32,8 @@ namespace PublicarDITEC
                     using (var connection = new System.Data.SqlClient.SqlCommand())
                     {
                         connection.Connection = myLocalConnection.GetLocalConnection();
-                    //connection.CommandText = "select * from tabautosDITEC";
-                    connection.CommandText = "select * from tabautosDITEC where cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  ";
+                    connection.CommandText = "select * from tabautosDITEC";
+                    //connection.CommandText = "select * from tabautosDITEC where cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  ";
 
                         using (var reader = connection.ExecuteReader())
                         {
@@ -167,8 +167,11 @@ namespace PublicarDITEC
                     datopublicacion.datosEquipamiento.fotos = datos[i].fotos;
                     datopublicacion.datosEquipamiento.plataforma = "DTC";
 
-                    var result = publicaavisoautomotora(datopublicacion);
-                    if (updateregistro(datos[i].codigo_auto_DITEC, codigo))
+                    var vars = publicaavisoautomotora(datopublicacion);
+
+                    SP_PublicarAviso_Automotoras_Result result = (SP_PublicarAviso_Automotoras_Result)vars;
+
+                    if (updateregistro(datos[i].codigo_auto_DITEC, (int)result.codauto))
                     {
 
                         Console.WriteLine("ingreso codigo chileautos");
@@ -289,14 +292,16 @@ namespace PublicarDITEC
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myLocalConnection.GetLocalConnection();
-                    connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec + "";
+                    connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec + " and cod_auto is not null";
 
                     using (var reader = connection.ExecuteReader())
                     {
                         if (reader.HasRows)
                         {
-                            existe = true;
-                        }
+
+                                    existe = true;
+
+                            }
 
                     }
                     connection.Connection.Close();
@@ -334,9 +339,10 @@ namespace PublicarDITEC
                     connection.Connection.Close();
                     connection.Connection.Dispose();
                     System.Data.SqlClient.SqlConnection.ClearAllPools();
+                    actualizo = true;
                 }
 
-                actualizo = true;
+                
 
             }
             catch (Exception ex)
