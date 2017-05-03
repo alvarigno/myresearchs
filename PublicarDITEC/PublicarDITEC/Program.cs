@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PublicarDITEC.Data;
 
 namespace PublicarDITEC
 {
@@ -123,13 +124,15 @@ namespace PublicarDITEC
 
             int codigo = 0;
 
-            codigo = codigojato(marca, modelo, version, carroceria, puertas, ano, transmision, edicion);
+            bdToolsEntities bdTools = new bdToolsEntities();
 
-            if ( codigo == 0)
-            {
+            var uidJato = bdTools.bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(marca, modelo, version, carroceria, puertas, ano, transmision, edicion);
 
-                codigo = codigoNonjato(marca, modelo, carroceria, ano, transmision, combustible, categoria);
+            codigo = uidJato;
 
+            if (uidJato == null) { 
+                uidJato = bdTools.SP_bdj_getNonJatoID(categoria, marca, modelo, ano, carroceria, transmision, combustible.ToString());
+                codigo = uidJato;
             }
 
             return codigo;

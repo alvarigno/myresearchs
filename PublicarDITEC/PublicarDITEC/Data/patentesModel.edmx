@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="patentesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SP_GetAgnosXMarcaModelo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codMarca" Type="int" Mode="In" />
+          <Parameter Name="codModelo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetDatosXPatente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ppu" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetIdmarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="marca" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetMarcas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="top" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetModelosXMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codMarca" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetPreciosPromedio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codMarca" Type="int" Mode="In" />
+          <Parameter Name="codModelo" Type="int" Mode="In" />
+          <Parameter Name="modelo" Type="nvarchar" Mode="In" />
+          <Parameter Name="agno" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetVehxMMA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codMarca" Type="int" Mode="In" />
+          <Parameter Name="codModelo" Type="int" Mode="In" />
+          <Parameter Name="agno" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="patentesModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="patentesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="patentesEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="SP_GetAgnosXMarcaModelo" ReturnType="Collection(patentesModel.SP_GetAgnosXMarcaModelo_Result)">
+            <Parameter Name="codMarca" Mode="In" Type="Int32" />
+            <Parameter Name="codModelo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetDatosXPatente" ReturnType="Collection(patentesModel.SP_GetDatosXPatente_Result)">
+            <Parameter Name="ppu" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetIdmarca" ReturnType="Collection(Int32)">
+            <Parameter Name="marca" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetMarcas" ReturnType="Collection(patentesModel.SP_GetMarcas_Result)">
+            <Parameter Name="top" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetModelosXMarca" ReturnType="Collection(patentesModel.SP_GetModelosXMarca_Result)">
+            <Parameter Name="codMarca" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetPreciosPromedio" ReturnType="Collection(patentesModel.SP_GetPreciosPromedio_Result)">
+            <Parameter Name="codMarca" Mode="In" Type="Int32" />
+            <Parameter Name="codModelo" Mode="In" Type="Int32" />
+            <Parameter Name="modelo" Mode="In" Type="String" />
+            <Parameter Name="agno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetVehxMMA" ReturnType="Collection(patentesModel.SP_GetVehxMMA_Result)">
+            <Parameter Name="codMarca" Mode="In" Type="Int32" />
+            <Parameter Name="codModelo" Mode="In" Type="Int32" />
+            <Parameter Name="agno" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_GetAgnosXMarcaModelo_Result">
+          <Property Type="Int32" Name="valor" Nullable="true" />
+          <Property Type="Int32" Name="opcion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GetDatosXPatente_Result">
+          <Property Type="String" Name="ppu" Nullable="true" MaxLength="6" />
+          <Property Type="Int32" Name="marca" Nullable="true" />
+          <Property Type="Int32" Name="modelo" Nullable="true" />
+          <Property Type="String" Name="mod" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="idprom" Nullable="true" />
+          <Property Type="Int32" Name="idprom2" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GetMarcas_Result">
+          <Property Type="Int32" Name="codMarca" Nullable="true" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="top" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_GetModelosXMarca_Result">
+          <Property Type="Int32" Name="valor" Nullable="true" />
+          <Property Type="String" Name="opcion" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_GetPreciosPromedio_Result">
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Modelo" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="precio" Nullable="false" />
+          <Property Type="Int32" Name="anio" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GetVehxMMA_Result">
+          <Property Type="String" Name="ppu" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="modelo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="glosamodelo" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="String" Name="patenteacc" Nullable="true" MaxLength="6" />
+          <Property Type="Int32" Name="precioacc" Nullable="true" />
+          <Property Type="DateTime" Name="fechaac" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="patentesModelStoreContainer" CdmEntityContainer="patentesEntities" >
+          <FunctionImportMapping FunctionImportName="SP_GetAgnosXMarcaModelo" FunctionName="patentesModel.Store.SP_GetAgnosXMarcaModelo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="patentesModel.SP_GetAgnosXMarcaModelo_Result">
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="opcion" ColumnName="opcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetDatosXPatente" FunctionName="patentesModel.Store.SP_GetDatosXPatente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="patentesModel.SP_GetDatosXPatente_Result">
+                <ScalarProperty Name="ppu" ColumnName="ppu" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="mod" ColumnName="mod" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="idprom" ColumnName="idprom" />
+                <ScalarProperty Name="idprom2" ColumnName="idprom2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetIdmarca" FunctionName="patentesModel.Store.SP_GetIdmarca" />
+          <FunctionImportMapping FunctionImportName="SP_GetMarcas" FunctionName="patentesModel.Store.SP_GetMarcas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="patentesModel.SP_GetMarcas_Result">
+                <ScalarProperty Name="codMarca" ColumnName="codMarca" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="top" ColumnName="top" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetModelosXMarca" FunctionName="patentesModel.Store.SP_GetModelosXMarca">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="patentesModel.SP_GetModelosXMarca_Result">
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="opcion" ColumnName="opcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetPreciosPromedio" FunctionName="patentesModel.Store.SP_GetPreciosPromedio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="patentesModel.SP_GetPreciosPromedio_Result">
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetVehxMMA" FunctionName="patentesModel.Store.SP_GetVehxMMA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="patentesModel.SP_GetVehxMMA_Result">
+                <ScalarProperty Name="ppu" ColumnName="ppu" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="glosamodelo" ColumnName="glosamodelo" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="patenteacc" ColumnName="patenteacc" />
+                <ScalarProperty Name="precioacc" ColumnName="precioacc" />
+                <ScalarProperty Name="fechaac" ColumnName="fechaac" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

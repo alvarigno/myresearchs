@@ -32,8 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +51,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\baseprodModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>baseprodModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\baseprodModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>baseprodModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\baseprodModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>baseprodModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\dbToolsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbToolsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\dbToolsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbToolsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\dbToolsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbToolsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\patentesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>patentesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\patentesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>patentesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\patentesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>patentesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_GetAgnosXMarcaModelo_Result.cs">
+      <DependentUpon>patentesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_GetDatosXPatente_Result.cs">
+      <DependentUpon>patentesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_GetMarcas_Result.cs">
+      <DependentUpon>patentesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_GetModelosXMarca_Result.cs">
+      <DependentUpon>patentesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_GetPreciosPromedio_Result.cs">
+      <DependentUpon>patentesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_GetVehxMMA_Result.cs">
+      <DependentUpon>patentesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_PublicarAviso_Automotoras_Result.cs">
+      <DependentUpon>baseprodModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="myLocalConnection.cs" />
     <Compile Include="myConnection.cs" />
     <Compile Include="Program.cs" />
@@ -51,6 +126,63 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Data\baseprodModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>baseprodModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\baseprodModel.edmx.diagram">
+      <DependentUpon>baseprodModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Data\dbToolsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbToolsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\dbToolsModel.edmx.diagram">
+      <DependentUpon>dbToolsModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Data\patentesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>patentesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\patentesModel.edmx.diagram">
+      <DependentUpon>patentesModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\baseprodModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>baseprodModel.edmx</DependentUpon>
+      <LastGenOutput>baseprodModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\baseprodModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>baseprodModel.edmx</DependentUpon>
+      <LastGenOutput>baseprodModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\dbToolsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbToolsModel.edmx</DependentUpon>
+      <LastGenOutput>dbToolsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\dbToolsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbToolsModel.edmx</DependentUpon>
+      <LastGenOutput>dbToolsModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\patentesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>patentesModel.edmx</DependentUpon>
+      <LastGenOutput>patentesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\patentesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>patentesModel.edmx</DependentUpon>
+      <LastGenOutput>patentesModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
