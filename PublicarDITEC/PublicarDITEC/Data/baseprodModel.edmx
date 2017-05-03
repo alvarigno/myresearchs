@@ -4,7 +4,11 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SP_apiCLA_ActualizaFotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codAuto" Type="int" Mode="In" />
+          <Parameter Name="listaFotos" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_PublicarAviso_Automotoras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codCliente" Type="int" Mode="In" />
           <Parameter Name="ip" Type="varchar" Mode="In" />
@@ -45,8 +49,7 @@
           <Parameter Name="plataforma" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="baseprod2ModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="baseprod2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -90,6 +93,10 @@
             <Parameter Name="listaFotos" Mode="In" Type="String" />
             <Parameter Name="plataforma" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_apiCLA_ActualizaFotos">
+            <Parameter Name="codAuto" Mode="In" Type="Int32" />
+            <Parameter Name="listaFotos" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_PublicarAviso_Automotoras_Result">
           <Property Type="Int32" Name="codauto" Nullable="true" />
@@ -109,6 +116,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_ActualizaFotos" FunctionName="baseprod2Model.Store.SP_apiCLA_ActualizaFotos" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

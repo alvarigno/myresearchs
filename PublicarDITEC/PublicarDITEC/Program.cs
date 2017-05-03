@@ -32,7 +32,8 @@ namespace PublicarDITEC
                     using (var connection = new System.Data.SqlClient.SqlCommand())
                     {
                         connection.Connection = myLocalConnection.GetLocalConnection();
-                        connection.CommandText = "select * from tabautosDITEC";
+                    //connection.CommandText = "select * from tabautosDITEC";
+                    connection.CommandText = "select * from tabautosDITEC where cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  ";
 
                         using (var reader = connection.ExecuteReader())
                         {
@@ -112,56 +113,75 @@ namespace PublicarDITEC
                 
                 Console.WriteLine("Num. " + i + ", Listado: " + datos[i].codigo_auto_DITEC);
 
-                PublicacionChileautos datopublicacion = new PublicacionChileautos();
+                if (ConsultaEstadoActualizacion(datos[i].codigo_auto_DITEC))
+                {
 
-                int codigo = getCodigoJajoNoJato(GetDescMarca(datos[i].Marca), datos[i].Modelo, datos[i].Version, datos[i].Carroceria, int.Parse(datos[i].Puertas), datos[i].Ano, datos[i].tipo_cambio, datos[i].combustible, "", datos[i].categoria);
 
-                //Datos del vehículo
 
-                datopublicacion.codCliente = 1028;
-                datopublicacion.ip = "localhost";
-                datopublicacion.datosVehiculo.patente = datos[i].patente;
-                datopublicacion.datosVehiculo.tipo = datos[i].Tipo_vehiculo;
-                datopublicacion.datosVehiculo.marca = datos[i].Marca;
-                datopublicacion.datosVehiculo.modelo = datos[i].Modelo;
-                datopublicacion.datosVehiculo.ano = datos[i].Ano;
-                datopublicacion.datosVehiculo.version = datos[i].Version;
-                datopublicacion.datosVehiculo.carroceria = datos[i].Carroceria;
-                datopublicacion.datosVehiculo.puertas = int.Parse(datos[i].Puertas);
-                datopublicacion.datosVehiculo.tipoDireccion = datos[i].tipo_direccion;
-                datopublicacion.datosVehiculo.precio = datos[i].Precio;
-                datopublicacion.datosVehiculo.cilindrada = datos[i].Cilindrada;
-                datopublicacion.datosVehiculo.potencia = "";
-                datopublicacion.datosVehiculo.color = datos[i].Color;
-                datopublicacion.datosVehiculo.kilom = datos[i].KM;
-                datopublicacion.datosVehiculo.motor = datos[i].motor;
-                datopublicacion.datosVehiculo.techo = datos[i].Techo;
-                datopublicacion.datosVehiculo.combustible = datos[i].combustible;
-                datopublicacion.datosVehiculo.comentario = datos[i].comentarios;
-                datopublicacion.datosVehiculo.uidJato = codigo;
+                }
+                else { 
+                    
+                    PublicacionChileautos datopublicacion = new PublicacionChileautos();
 
-                //datos equipamiento
-                datopublicacion.datosEquipamiento.airbag = datos[i].airbag;
-                datopublicacion.datosEquipamiento.aireAcon = datos[i].aire_acondicionado;
-                datopublicacion.datosEquipamiento.alarma = datos[i].Alarma;
-                datopublicacion.datosEquipamiento.alzaVidrios = datos[i].alzavidrios_electricos;
-                datopublicacion.datosEquipamiento.nuevo = datos[i].Nuevo_o_usado;
-                datopublicacion.datosEquipamiento.transmision = datos[i].tipo_cambio;
-                datopublicacion.datosEquipamiento.radio = datos[i].radio;
-                datopublicacion.datosEquipamiento.espejos = datos[i].espejos_electricos;
-                datopublicacion.datosEquipamiento.frenosAbs = datos[i].frenos_ABS;
-                datopublicacion.datosEquipamiento.unicoDueno = datos[i].unico_dueno;
-                datopublicacion.datosEquipamiento.cierreCentral = datos[i].cierre_centralizado;
-                datopublicacion.datosEquipamiento.catalitico = datos[i].catalitico;
-                datopublicacion.datosEquipamiento.fwd = datos[i].fwd;
-                datopublicacion.datosEquipamiento.llantas = datos[i].Llantas;
-                datopublicacion.datosEquipamiento.fotos = datos[i].fotos;
-                datopublicacion.datosEquipamiento.plataforma = "DTC";
+                    int codigo = getCodigoJajoNoJato(GetDescMarca(datos[i].Marca), datos[i].Modelo, datos[i].Version, datos[i].Carroceria, int.Parse(datos[i].Puertas), datos[i].Ano, datos[i].tipo_cambio, datos[i].combustible, "", datos[i].categoria);
 
-                var result = publicaavisoautomotora(datopublicacion);
+                    //Datos del vehículo
 
-                Console.WriteLine("Codigo jato: " + codigo+", resultado"+result.ToString());
+                    datopublicacion.codCliente = 1028;
+                    datopublicacion.ip = "localhost";
+                    datopublicacion.datosVehiculo.patente = datos[i].patente;
+                    datopublicacion.datosVehiculo.tipo = datos[i].Tipo_vehiculo;
+                    datopublicacion.datosVehiculo.marca = datos[i].Marca;
+                    datopublicacion.datosVehiculo.modelo = datos[i].Modelo;
+                    datopublicacion.datosVehiculo.ano = datos[i].Ano;
+                    datopublicacion.datosVehiculo.version = datos[i].Version;
+                    datopublicacion.datosVehiculo.carroceria = datos[i].Carroceria;
+                    datopublicacion.datosVehiculo.puertas = int.Parse(datos[i].Puertas);
+                    datopublicacion.datosVehiculo.tipoDireccion = datos[i].tipo_direccion;
+                    datopublicacion.datosVehiculo.precio = datos[i].Precio;
+                    datopublicacion.datosVehiculo.cilindrada = datos[i].Cilindrada;
+                    datopublicacion.datosVehiculo.potencia = "";
+                    datopublicacion.datosVehiculo.color = datos[i].Color;
+                    datopublicacion.datosVehiculo.kilom = datos[i].KM;
+                    datopublicacion.datosVehiculo.motor = datos[i].motor;
+                    datopublicacion.datosVehiculo.techo = datos[i].Techo;
+                    datopublicacion.datosVehiculo.combustible = datos[i].combustible;
+                    datopublicacion.datosVehiculo.comentario = datos[i].comentarios;
+                    datopublicacion.datosVehiculo.uidJato = codigo;
 
+                    //datos equipamiento
+                    datopublicacion.datosEquipamiento.airbag = datos[i].airbag;
+                    datopublicacion.datosEquipamiento.aireAcon = datos[i].aire_acondicionado;
+                    datopublicacion.datosEquipamiento.alarma = datos[i].Alarma;
+                    datopublicacion.datosEquipamiento.alzaVidrios = datos[i].alzavidrios_electricos;
+                    datopublicacion.datosEquipamiento.nuevo = datos[i].Nuevo_o_usado;
+                    datopublicacion.datosEquipamiento.transmision = datos[i].tipo_cambio;
+                    datopublicacion.datosEquipamiento.radio = datos[i].radio;
+                    datopublicacion.datosEquipamiento.espejos = datos[i].espejos_electricos;
+                    datopublicacion.datosEquipamiento.frenosAbs = datos[i].frenos_ABS;
+                    datopublicacion.datosEquipamiento.unicoDueno = datos[i].unico_dueno;
+                    datopublicacion.datosEquipamiento.cierreCentral = datos[i].cierre_centralizado;
+                    datopublicacion.datosEquipamiento.catalitico = datos[i].catalitico;
+                    datopublicacion.datosEquipamiento.fwd = datos[i].fwd;
+                    datopublicacion.datosEquipamiento.llantas = datos[i].Llantas;
+                    datopublicacion.datosEquipamiento.fotos = datos[i].fotos;
+                    datopublicacion.datosEquipamiento.plataforma = "DTC";
+
+                    var result = publicaavisoautomotora(datopublicacion);
+                    if (updateregistro(datos[i].codigo_auto_DITEC, codigo))
+                    {
+
+                        Console.WriteLine("ingreso codigo chileautos");
+
+                    }
+                    else {
+
+                        Console.WriteLine("Falló el ingreso código chileautos");
+
+                    }
+
+                    Console.WriteLine("Codigo jato: " + codigo+", resultado"+result.ToString());
+                }
 
             } catch(Exception e) { Console.WriteLine("Error: " + e.Message); }
 
@@ -256,6 +276,76 @@ namespace PublicarDITEC
             }
 
             return descmarca;
+        }
+
+        private static Boolean ConsultaEstadoActualizacion(int codditec)
+        {
+
+            Boolean existe = false;
+            myLocalConnection myLocalConn = new myLocalConnection();
+
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec + "";
+
+                    using (var reader = connection.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            existe = true;
+                        }
+
+                    }
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+
+            }
+
+            return existe;
+
+
+        }
+
+        private static Boolean updateregistro(int codditec, int cod_auto) {
+
+            Boolean actualizo = false;
+            myLocalConnection myLocalConn = new myLocalConnection();
+
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlCommand())
+                {
+                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.CommandText = "UPDATE[dbo].[tabautosDITEC] SET[cod_auto] = " + cod_auto + " WHERE codigo_auto_DITEC = " + codditec + "";
+
+                    connection.ExecuteNonQuery();
+
+                    connection.Connection.Close();
+                    connection.Connection.Dispose();
+                    System.Data.SqlClient.SqlConnection.ClearAllPools();
+                }
+
+                actualizo = true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error: " + ex.Message);
+            }
+
+            return actualizo;
+
         }
 
     }

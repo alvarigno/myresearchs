@@ -180,5 +180,18 @@ namespace PublicarDITEC.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PublicarAviso_Automotoras_Result>("SP_PublicarAviso_Automotoras", codClienteParameter, ipParameter, patenteParameter, tipoParameter, marcaParameter, modeloParameter, anoParameter, versionParameter, carroceriaParameter, puertasParameter, tipoDireccionParameter, precioParameter, cilindradaParameter, potenciaParameter, colorParameter, kilomParameter, motorParameter, techoParameter, combustibleParameter, comentarioParameter, uidJatoParameter, airbagParameter, aireAconParameter, alarmaParameter, alzaVidriosParameter, nuevoParameter, transmisionParameter, radioParameter, espejosParameter, frenosAbsParameter, unicoDuenoParameter, cierreCentralParameter, cataliticoParameter, fwdParameter, llantasParameter, listaFotosParameter, plataformaParameter);
         }
+    
+        public virtual int SP_apiCLA_ActualizaFotos(Nullable<int> codAuto, string listaFotos)
+        {
+            var codAutoParameter = codAuto.HasValue ?
+                new ObjectParameter("codAuto", codAuto) :
+                new ObjectParameter("codAuto", typeof(int));
+    
+            var listaFotosParameter = listaFotos != null ?
+                new ObjectParameter("listaFotos", listaFotos) :
+                new ObjectParameter("listaFotos", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_ActualizaFotos", codAutoParameter, listaFotosParameter);
+        }
     }
 }
