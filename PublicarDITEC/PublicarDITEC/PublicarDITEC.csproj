@@ -121,8 +121,8 @@
     <Compile Include="myConnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="publicacion.cs" />
-    <Compile Include="PublicacionChileautos.cs" />
+    <Compile Include="Models\publicacion.cs" />
+    <Compile Include="Models\PublicacionChileautos.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

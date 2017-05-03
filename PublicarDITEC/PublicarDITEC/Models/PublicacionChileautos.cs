@@ -11,29 +11,10 @@ namespace PublicarDITEC
     public class PublicacionChileautos
     {
 
-        public int codAuto { get; set; }
-        public datosUsuario datosUsuario { get; set; }
+        public int codCliente { get; set; }
+        public string ip { get; set; }
         public datosVehiculo datosVehiculo { get; set; }
         public datosEquipamiento datosEquipamiento { get; set; }
-
-    }
-
-    public class datosUsuario
-    {
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public string fonos { get; set; }
-        public string email { get; set; }
-        public string rut { get; set; }
-        public string clave { get; set; }
-        public int codCliente { get; set; }
-        public int region { get; set; }
-        public string nomRegion { get; set; }
-        public string direccion { get; set; }
-        public string comuna { get; set; }
-        public string nomComuna { get; set; }
-        public int ciudad { get; set; }
-        public string nomCiudad { get; set; }
 
     }
 
@@ -43,7 +24,6 @@ namespace PublicarDITEC
         public string patente { get; set; }
         public string tipo { get; set; }
         public int marca { get; set; }
-        public string nomMarca { get; set; }
         public string modelo { get; set; }
         public int ano { get; set; }
         public string version { get; set; }
@@ -57,15 +37,9 @@ namespace PublicarDITEC
         public int kilom { get; set; }
         public string motor { get; set; }
         public string techo { get; set; }
-        public string combustible { get; set; }
+        public int combustible { get; set; }
         public string comentario { get; set; }
-        public List<String> fotos { get; set; }
-        public string video { get; set; }
-        public int idCategoria { get; set; }
-        public string categoria { get; set; }
-        public bool esJato { get; set; }
-        public long uid { get; set; }
-        public string edicion { get; set; }
+        public long uidJato { get; set; }
 
     }
     public class datosEquipamiento
@@ -98,6 +72,12 @@ namespace PublicarDITEC
         public string fwd { get; set; }
 
         public string llantas { get; set; }
+
+        public String fotos { get; set; }
+
+        public string plataforma { get; set; } //DATO DE PROCEDENCIA DE LA INSERCCIÓN - APPDESTOCKditec
+
+
 
 
     }
