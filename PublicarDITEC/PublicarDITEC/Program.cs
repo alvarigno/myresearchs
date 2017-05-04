@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PublicarDITEC.Data;
+using PublicarDITEC.Models;
 
 namespace PublicarDITEC
 {
     class Program
     {
+
+        public static string _urlPhotoServer = "https://staging-chileautos.li.csnstatic.com/chileautos/";
+        public static string _urlPhotoServerFinal = "https://chileautos.li.csnstatic.com/chileautos/";
 
         public static List<publicacion> listOfDatos = new List<publicacion>();
         static int count = 0;
@@ -145,24 +149,24 @@ namespace PublicarDITEC
                     PublicacionChileautos datoparapublicacion = new PublicacionChileautos();
 
                     datoparapublicacion = llenaavisoautomotora(datos,i);
+                                        
+                    datoparapublicacion.datosEquipamiento.fotos = subefotos(datos[i].codigo_auto_DITEC, datos[i].categoria.ToString(), datoparapublicacion.codCliente.ToString());
 
                     var vars = publicaavisoautomotora(datoparapublicacion);
-
-                    SP_PublicarAviso_Automotoras_Result result = (SP_PublicarAviso_Automotoras_Result)vars;
-
-                    if (updateregistro(datos[i].codigo_auto_DITEC, (int)result.codauto))
-                    {
-
-                        Console.WriteLine("ingreso codigo chileautos");
-
-                    }
-                    else {
-
-                        Console.WriteLine("Falló el ingreso código chileautos");
-
-                    }
-
-                    Console.WriteLine("Codigo jato: " + datoparapublicacion.datosVehiculo.uidJato+", resultado: "+result.error);
+                    
+                   // if (updateregistro(datos[i].codigo_auto_DITEC, (int)vars.codauto))
+                   // {
+                   // 
+                   //     Console.WriteLine("ingreso codigo chileautos");
+                   // 
+                   // }
+                   // else {
+                   // 
+                   //     Console.WriteLine("Falló el ingreso código chileautos");
+                   // 
+                   // }
+                   // 
+                   // Console.WriteLine("Codigo jato: " + datoparapublicacion.datosVehiculo.uidJato+", resultado: "+vars.error+", cod_auto: "+ (int)vars.codauto);
                 }
 
             } catch(Exception e) {
@@ -172,7 +176,17 @@ namespace PublicarDITEC
         }
 
 
+        public static string subefotos(int codigoditec, string categoria, string vendedor) {
 
+
+            Upload subeimg = new Upload();
+
+           var uno = subeimg.Uploadimage(codigoditec, categoria, vendedor);
+
+           string listadofotos = string.Join("*", uno);
+
+            return listadofotos;
+        }
 
         public static PublicacionChileautos llenaavisoautomotora(List<publicacion> datos, int i) {
 
@@ -180,8 +194,8 @@ namespace PublicarDITEC
             datosVehiculo dv = new datosVehiculo();
             datosEquipamiento de = new datosEquipamiento();
 
-            int codigo = getCodigoJajoNoJato(GetDescMarca(datos[i].Marca), datos[i].Modelo, datos[i].Version, datos[i].Carroceria, int.Parse(datos[i].Puertas), datos[i].Ano, datos[i].tipo_cambio, datos[i].combustible, "", datos[i].categoria);
-
+            long codigo = getCodigoJajoNoJato(GetDescMarca(datos[i].Marca), datos[i].Modelo, datos[i].Version, datos[i].Carroceria, int.Parse(datos[i].Puertas), datos[i].Ano, datos[i].tipo_cambio, datos[i].combustible, "", datos[i].categoria);
+            //long codigo =1;
             //Datos del vehículo
 
             datopublicacion.codCliente = 1028;
@@ -233,7 +247,9 @@ namespace PublicarDITEC
         }
 
 
-        public static int getCodigoJajoNoJato(string marca, string modelo,  string version,  string carroceria,  int puertas, int ano,  string transmision, int combustible, string edicion, int categoria) {
+        public static long getCodigoJajoNoJato(string marca, string modelo,  string version,  string carroceria,  int puertas, int ano,  string transmision, int combustible, string edicion, int categoria) {
+
+            long uidJatorespuesta = 0;
 
             if (edicion == "")
             {
@@ -254,40 +270,50 @@ namespace PublicarDITEC
 
             }
 
-            int uid =0;
+            
             try {
 
                 bdToolsEntities bdTools = new bdToolsEntities();
 
-                var uidJato = bdTools.bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(marca, modelo, version, carroceria, puertas, ano, transmision, edicion);
+                var uidJato = bdTools.bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(marca, modelo, version, carroceria, puertas, ano, transmision, edicion).FirstOrDefault();
 
-                uid = (int)uidJato;
-
-                if (uidJato == null || uidJato == -1)
+                if (uidJato == null)
                 {
-                    uidJato = bdTools.SP_bdj_getNonJatoID(categoria, marca, modelo, ano, carroceria, transmision, combustible.ToString());
-                    uid = (int)uidJato;
+                   uidJato = bdTools.SP_bdj_getNonJatoID(categoria, marca, modelo, ano, carroceria, transmision, combustible.ToString()).FirstOrDefault();
+
                 }
+
+                uidJatorespuesta = (long)uidJato;
 
             } catch (Exception e) {
 
-                Console.WriteLine("Erro: "+ e.Message);
+                  Console.WriteLine("Erro: "+ e.Message);
 
             }
 
-            return uid;
+            return uidJatorespuesta;
         }
 
-        public static object publicaavisoautomotora(PublicacionChileautos dato) {
+        public static Object publicaavisoautomotora(PublicacionChileautos dato) {
             
             baseprodEntities baseprod = new baseprodEntities();
+            var logrado =0;
 
-            //var logrado = baseprod.SP_PublicarAviso_Automotoras(dato.codCliente, dato.ip, dato.datosVehiculo.patente, dato.datosVehiculo.tipo, dato.datosVehiculo.marca, dato.datosVehiculo.modelo, dato.datosVehiculo.ano, dato.datosVehiculo.version, dato.datosVehiculo.carroceria, dato.datosVehiculo.puertas, dato.datosVehiculo.tipoDireccion, dato.datosVehiculo.precio, dato.datosVehiculo.cilindrada, dato.datosVehiculo.potencia, dato.datosVehiculo.color, dato.datosVehiculo.kilom, dato.datosVehiculo.motor, dato.datosVehiculo.techo, dato.datosVehiculo.combustible, dato.datosVehiculo.comentario, dato.datosVehiculo.uidJato, dato.datosEquipamiento.airbag, dato.datosEquipamiento.aireAcon, dato.datosEquipamiento.alarma, dato.datosEquipamiento.alzaVidrios, dato.datosEquipamiento.nuevo, dato.datosEquipamiento.transmision, dato.datosEquipamiento.radio, dato.datosEquipamiento.espejos, dato.datosEquipamiento.frenosAbs, dato.datosEquipamiento.unicoDueno, dato.datosEquipamiento.cierreCentral, dato.datosEquipamiento.catalitico, dato.datosEquipamiento.fwd, dato.datosEquipamiento.llantas, dato.datosEquipamiento.fotos, dato.datosEquipamiento.plataforma);
+
+            try
+            {
+                baseprod.SP_PublicarAviso_Automotoras(dato.codCliente, dato.ip, dato.datosVehiculo.patente, dato.datosVehiculo.tipo, dato.datosVehiculo.marca, dato.datosVehiculo.modelo, dato.datosVehiculo.ano, dato.datosVehiculo.version, dato.datosVehiculo.carroceria, dato.datosVehiculo.puertas, dato.datosVehiculo.tipoDireccion, dato.datosVehiculo.precio, dato.datosVehiculo.cilindrada, dato.datosVehiculo.potencia, dato.datosVehiculo.color, dato.datosVehiculo.kilom, dato.datosVehiculo.motor, dato.datosVehiculo.techo, dato.datosVehiculo.combustible, dato.datosVehiculo.comentario, dato.datosVehiculo.uidJato, dato.datosEquipamiento.airbag, dato.datosEquipamiento.aireAcon, dato.datosEquipamiento.alarma, dato.datosEquipamiento.alzaVidrios, dato.datosEquipamiento.nuevo, dato.datosEquipamiento.transmision, dato.datosEquipamiento.radio, dato.datosEquipamiento.espejos, dato.datosEquipamiento.frenosAbs, dato.datosEquipamiento.unicoDueno, dato.datosEquipamiento.cierreCentral, dato.datosEquipamiento.catalitico, dato.datosEquipamiento.fwd, dato.datosEquipamiento.llantas, dato.datosEquipamiento.fotos, dato.datosEquipamiento.plataforma);
+            } catch (Exception e) {
+
+                Console.WriteLine("error: "+e.Message);
+
+            }
             //objeto de prueba
-            SP_PublicarAviso_Automotoras_Result prueba = new SP_PublicarAviso_Automotoras_Result();
-            prueba.codauto = 12345600;
-            prueba.error = 1;
-            var logrado = prueba; 
+            //SP_PublicarAviso_Automotoras_Result prueba = new SP_PublicarAviso_Automotoras_Result();
+            //prueba.codauto = 12345600;
+            //prueba.error = 1;
+            //var logrado = prueba; 
+
             return logrado;
         }
 

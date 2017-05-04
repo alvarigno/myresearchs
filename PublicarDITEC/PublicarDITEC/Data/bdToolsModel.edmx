@@ -31,7 +31,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="bdToolsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="bdToolsEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl">
+          <FunctionImport Name="bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl" ReturnType="Collection(Int64)">
             <Parameter Name="marca" Mode="In" Type="String" />
             <Parameter Name="modelo" Mode="In" Type="String" />
             <Parameter Name="version" Mode="In" Type="String" />

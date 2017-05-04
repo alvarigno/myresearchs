@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -66,33 +67,37 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>baseprodModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\dbToolsModel.Context.cs">
+    <Compile Include="Data\bdToolsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbToolsModel.Context.tt</DependentUpon>
+      <DependentUpon>bdToolsModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\dbToolsModel.cs">
+    <Compile Include="Data\bdToolsModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbToolsModel.tt</DependentUpon>
+      <DependentUpon>bdToolsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\dbToolsModel.Designer.cs">
+    <Compile Include="Data\bdToolsModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbToolsModel.edmx</DependentUpon>
+      <DependentUpon>bdToolsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Data\SP_PublicarAviso_Automotoras_Result.cs">
       <DependentUpon>baseprodModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatosPublicacion.cs" />
     <Compile Include="myLocalConnection.cs" />
     <Compile Include="myConnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\publicacion.cs" />
     <Compile Include="Models\PublicacionChileautos.cs" />
+    <Compile Include="Upload.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Data\baseprodModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>baseprodModel.Designer.cs</LastGenOutput>
@@ -100,12 +105,12 @@
     <None Include="Data\baseprodModel.edmx.diagram">
       <DependentUpon>baseprodModel.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Data\dbToolsModel.edmx">
+    <EntityDeploy Include="Data\bdToolsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbToolsModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>bdToolsModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Data\dbToolsModel.edmx.diagram">
-      <DependentUpon>dbToolsModel.edmx</DependentUpon>
+    <None Include="Data\bdToolsModel.edmx.diagram">
+      <DependentUpon>bdToolsModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -120,15 +125,15 @@
       <DependentUpon>baseprodModel.edmx</DependentUpon>
       <LastGenOutput>baseprodModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Data\dbToolsModel.Context.tt">
+    <Content Include="Data\bdToolsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbToolsModel.edmx</DependentUpon>
-      <LastGenOutput>dbToolsModel.Context.cs</LastGenOutput>
+      <DependentUpon>bdToolsModel.edmx</DependentUpon>
+      <LastGenOutput>bdToolsModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Data\dbToolsModel.tt">
+    <Content Include="Data\bdToolsModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbToolsModel.edmx</DependentUpon>
-      <LastGenOutput>dbToolsModel.cs</LastGenOutput>
+      <DependentUpon>bdToolsModel.edmx</DependentUpon>
+      <LastGenOutput>bdToolsModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

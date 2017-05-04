@@ -28,7 +28,7 @@ namespace PublicarDITEC.Data
         }
     
     
-        public virtual Nullable<int> bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(string marca, string modelo, string version, string carroceria, Nullable<decimal> ptas, Nullable<decimal> ano, string trans, string ltl)
+        public virtual ObjectResult<Nullable<long>> bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(string marca, string modelo, string version, string carroceria, Nullable<decimal> ptas, Nullable<decimal> ano, string trans, string ltl)
         {
             var marcaParameter = marca != null ?
                 new ObjectParameter("marca", marca) :
@@ -62,10 +62,10 @@ namespace PublicarDITEC.Data
                 new ObjectParameter("ltl", ltl) :
                 new ObjectParameter("ltl", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl", marcaParameter, modeloParameter, versionParameter, carroceriaParameter, ptasParameter, anoParameter, transParameter, ltlParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl", marcaParameter, modeloParameter, versionParameter, carroceriaParameter, ptasParameter, anoParameter, transParameter, ltlParameter);
         }
     
-        public virtual Nullable<int> SP_bdj_getNonJatoID(Nullable<decimal> idCategoria, string marca, string modelo, Nullable<decimal> ano, string carroceria, string trans, string combustible)
+        public virtual ObjectResult<Nullable<int>> SP_bdj_getNonJatoID(Nullable<decimal> idCategoria, string marca, string modelo, Nullable<decimal> ano, string carroceria, string trans, string combustible)
         {
             var idCategoriaParameter = idCategoria.HasValue ?
                 new ObjectParameter("idCategoria", idCategoria) :
@@ -95,7 +95,7 @@ namespace PublicarDITEC.Data
                 new ObjectParameter("combustible", combustible) :
                 new ObjectParameter("combustible", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_bdj_getNonJatoID", idCategoriaParameter, marcaParameter, modeloParameter, anoParameter, carroceriaParameter, transParameter, combustibleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_bdj_getNonJatoID", idCategoriaParameter, marcaParameter, modeloParameter, anoParameter, carroceriaParameter, transParameter, combustibleParameter);
         }
     }
 }
