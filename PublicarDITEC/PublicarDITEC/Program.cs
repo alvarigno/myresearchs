@@ -116,64 +116,18 @@ namespace PublicarDITEC
                 if (ConsultaEstadoActualizacion(datos[i].codigo_auto_DITEC))
                 {
 
+                    PublicacionChileautos datoparaactualizar = new PublicacionChileautos();
 
+                    datoparaactualizar = llenaavisoautomotora(datos, i);
 
                 }
-                else { 
-                    
-                    PublicacionChileautos datopublicacion = new PublicacionChileautos();
-                    datosVehiculo dv = new datosVehiculo();
-                    datosEquipamiento de = new datosEquipamiento();
+                else {
 
-                    int codigo = getCodigoJajoNoJato(GetDescMarca(datos[i].Marca), datos[i].Modelo, datos[i].Version, datos[i].Carroceria, int.Parse(datos[i].Puertas), datos[i].Ano, datos[i].tipo_cambio, datos[i].combustible, "", datos[i].categoria);
+                    PublicacionChileautos datoparapublicacion = new PublicacionChileautos();
 
-                    //Datos del vehículo
+                    datoparapublicacion = llenaavisoautomotora(datos,i);
 
-                    datopublicacion.codCliente = 1028;
-                    datopublicacion.ip = "localhost";
-                    dv.patente = datos[i].patente;
-                    dv.tipo = datos[i].Tipo_vehiculo;
-                    dv.marca = datos[i].Marca;
-                    dv.modelo = datos[i].Modelo;
-                    dv.ano = datos[i].Ano;
-                    dv.version = datos[i].Version;
-                    dv.carroceria = datos[i].Carroceria;
-                    dv.puertas = int.Parse(datos[i].Puertas);
-                    dv.tipoDireccion = datos[i].tipo_direccion;
-                    dv.precio = datos[i].Precio;
-                    dv.cilindrada = datos[i].Cilindrada;
-                    dv.potencia = "";
-                    dv.color = datos[i].Color;
-                    dv.kilom = datos[i].KM;
-                    dv.motor = datos[i].motor;
-                    dv.techo = datos[i].Techo;
-                    dv.combustible = datos[i].combustible;
-                    dv.comentario = datos[i].comentarios;
-                    dv.uidJato = codigo;
-
-                    datopublicacion.datosVehiculo = dv;
-
-                    //datos equipamiento
-                    de.airbag = datos[i].airbag;
-                    de.aireAcon = datos[i].aire_acondicionado;
-                    de.alarma = datos[i].Alarma;
-                    de.alzaVidrios = datos[i].alzavidrios_electricos;
-                    de.nuevo = datos[i].Nuevo_o_usado;
-                    de.transmision = datos[i].tipo_cambio;
-                    de.radio = datos[i].radio;
-                    de.espejos = datos[i].espejos_electricos;
-                    de.frenosAbs = datos[i].frenos_ABS;
-                    de.unicoDueno = datos[i].unico_dueno;
-                    de.cierreCentral = datos[i].cierre_centralizado;
-                    de.catalitico = datos[i].catalitico;
-                    de.fwd = datos[i].fwd;
-                    de.llantas = datos[i].Llantas;
-                    de.fotos = datos[i].fotos;
-                    de.plataforma = "DTC";
-
-                    datopublicacion.datosEquipamiento = de;
-
-                    var vars = publicaavisoautomotora(datopublicacion);
+                    var vars = publicaavisoautomotora(datoparapublicacion);
 
                     SP_PublicarAviso_Automotoras_Result result = (SP_PublicarAviso_Automotoras_Result)vars;
 
@@ -189,13 +143,74 @@ namespace PublicarDITEC
 
                     }
 
-                    Console.WriteLine("Codigo jato: " + codigo+", resultado: "+result.error);
+                    Console.WriteLine("Codigo jato: " + datoparapublicacion.datosVehiculo.uidJato+", resultado: "+result.error);
                 }
 
             } catch(Exception e) {
                 Console.WriteLine("Error: " + e.Message);
             }
 
+        }
+
+
+
+
+        public static PublicacionChileautos llenaavisoautomotora(List<publicacion> datos, int i) {
+
+            PublicacionChileautos datopublicacion = new PublicacionChileautos();
+            datosVehiculo dv = new datosVehiculo();
+            datosEquipamiento de = new datosEquipamiento();
+
+            int codigo = getCodigoJajoNoJato(GetDescMarca(datos[i].Marca), datos[i].Modelo, datos[i].Version, datos[i].Carroceria, int.Parse(datos[i].Puertas), datos[i].Ano, datos[i].tipo_cambio, datos[i].combustible, "", datos[i].categoria);
+
+            //Datos del vehículo
+
+            datopublicacion.codCliente = 1028;
+            datopublicacion.ip = "localhost";
+            dv.patente = datos[i].patente;
+            dv.tipo = datos[i].Tipo_vehiculo;
+            dv.marca = datos[i].Marca;
+            dv.modelo = datos[i].Modelo;
+            dv.ano = datos[i].Ano;
+            dv.version = datos[i].Version;
+            dv.carroceria = datos[i].Carroceria;
+            dv.puertas = int.Parse(datos[i].Puertas);
+            dv.tipoDireccion = datos[i].tipo_direccion;
+            dv.precio = datos[i].Precio;
+            dv.cilindrada = datos[i].Cilindrada;
+            dv.potencia = "";
+            dv.color = datos[i].Color;
+            dv.kilom = datos[i].KM;
+            dv.motor = datos[i].motor;
+            dv.techo = datos[i].Techo;
+            dv.combustible = datos[i].combustible;
+            dv.comentario = datos[i].comentarios;
+            dv.uidJato = codigo;
+
+            datopublicacion.datosVehiculo = dv;
+
+            //datos equipamiento
+            de.airbag = datos[i].airbag;
+            de.aireAcon = datos[i].aire_acondicionado;
+            de.alarma = datos[i].Alarma;
+            de.alzaVidrios = datos[i].alzavidrios_electricos;
+            de.nuevo = datos[i].Nuevo_o_usado;
+            de.transmision = datos[i].tipo_cambio;
+            de.radio = datos[i].radio;
+            de.espejos = datos[i].espejos_electricos;
+            de.frenosAbs = datos[i].frenos_ABS;
+            de.unicoDueno = datos[i].unico_dueno;
+            de.cierreCentral = datos[i].cierre_centralizado;
+            de.catalitico = datos[i].catalitico;
+            de.fwd = datos[i].fwd;
+            de.llantas = datos[i].Llantas;
+            de.fotos = datos[i].fotos;
+            de.plataforma = "DTC";
+
+            datopublicacion.datosEquipamiento = de;
+
+
+            return datopublicacion;
         }
 
 
