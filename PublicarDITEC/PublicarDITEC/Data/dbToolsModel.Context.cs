@@ -28,7 +28,7 @@ namespace PublicarDITEC.Data
         }
     
     
-        public virtual int bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(string marca, string modelo, string version, string carroceria, Nullable<decimal> ptas, Nullable<decimal> ano, string trans, string ltl)
+        public virtual Nullable<int> bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(string marca, string modelo, string version, string carroceria, Nullable<decimal> ptas, Nullable<decimal> ano, string trans, string ltl)
         {
             var marcaParameter = marca != null ?
                 new ObjectParameter("marca", marca) :
@@ -65,7 +65,7 @@ namespace PublicarDITEC.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl", marcaParameter, modeloParameter, versionParameter, carroceriaParameter, ptasParameter, anoParameter, transParameter, ltlParameter);
         }
     
-        public virtual int SP_bdj_getNonJatoID(Nullable<decimal> idCategoria, string marca, string modelo, Nullable<decimal> ano, string carroceria, string trans, string combustible)
+        public virtual Nullable<int> SP_bdj_getNonJatoID(Nullable<decimal> idCategoria, string marca, string modelo, Nullable<decimal> ano, string carroceria, string trans, string combustible)
         {
             var idCategoriaParameter = idCategoria.HasValue ?
                 new ObjectParameter("idCategoria", idCategoria) :
