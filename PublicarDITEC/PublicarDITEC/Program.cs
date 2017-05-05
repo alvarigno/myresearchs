@@ -384,7 +384,7 @@ namespace PublicarDITEC
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myLocalConnection.GetLocalConnection();
-                    connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec + " and cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  and cod_auto is not null";
+                    connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec;
 
                     using (var reader = connection.ExecuteReader())
                     {
