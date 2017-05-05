@@ -16,6 +16,7 @@ namespace PublicarDITEC
 
         public static List<publicacion> listOfDatos = new List<publicacion>();
         static int count = 0;
+        static int codautoRegistrado = 0;
 
         static void Main(string[] args)
         {
@@ -83,7 +84,6 @@ namespace PublicarDITEC
                                     datosavisos.comentarios = reader["comentarios"].ToString();
                                     datosavisos.patente = reader["patente"].ToString();
                                     datosavisos.fotos = reader["fotos"].ToString();
-                                    datosavisos.cod_auto = int.Parse(reader["cod_auto"].ToString());
                                     listOfDatos.Add(datosavisos);
                                     muestralista(listOfDatos, count);
 
@@ -127,7 +127,7 @@ namespace PublicarDITEC
                   
                     datoparaactualizar.datosEquipamiento.fotos = subefotos(datos[i].codigo_auto_DITEC, datos[i].categoria.ToString(), datoparaactualizar.codCliente.ToString());
                   
-                    var result = (SP_ActualizarAviso_Automotoras_Result)actualizaavisoautomotora(datoparaactualizar, datos[i].cod_auto);// cambiar a update
+                    var result = (SP_ActualizarAviso_Automotoras_Result)actualizaavisoautomotora(datoparaactualizar, codautoRegistrado);// cambiar a update
                   
                     if (updateregistro(datos[i].codigo_auto_DITEC, (int)result.codauto))
                     {
@@ -381,19 +381,34 @@ namespace PublicarDITEC
 
             try
             {
+
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myLocalConnection.GetLocalConnection();
-                    connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec;
+                    connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec+" and cod_auto is not null";
 
                     using (var reader = connection.ExecuteReader())
                     {
                         if (reader.HasRows)
                         {
 
+                            if (reader.Read())
+                            {
+                                if (reader["cod_auto"].ToString() != null)
+                                {
+
+                                    codautoRegistrado = int.Parse(reader["cod_auto"].ToString());
                                     existe = true;
+                                }
+                            }
+                            else {
+
+                                Console.Write("funciona?");
 
                             }
+
+                        }
+
 
                     }
                     connection.Connection.Close();

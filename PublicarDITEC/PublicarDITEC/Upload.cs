@@ -35,6 +35,9 @@ namespace PublicarDITEC
         public List<string> Uploadimage(int codditec, string categoria, string vendedor)
         {
 
+            categoria = "auto";
+            vendedor = "automotora";
+
             String searchFolder = @"C:\Users\Álvaro\Source\Repos\myresearchs\ReadExcelFiles\ReadExcelFiles\bin\Debug\carga\"+ codditec;
             var filters = new String[] { "jpg"};
             var files = GetFilesImages(searchFolder, filters, false);
