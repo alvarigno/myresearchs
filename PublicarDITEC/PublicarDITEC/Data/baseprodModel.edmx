@@ -5,9 +5,45 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <Function Name="SP_apiCLA_ActualizaFotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="codAuto" Type="int" Mode="In" />
+        <Function Name="SP_ActualizarAviso_Automotoras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigoauto" Type="int" Mode="In" />
+          <Parameter Name="codCliente" Type="int" Mode="In" />
+          <Parameter Name="ip" Type="varchar" Mode="In" />
+          <Parameter Name="patente" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="marca" Type="int" Mode="In" />
+          <Parameter Name="modelo" Type="varchar" Mode="In" />
+          <Parameter Name="ano" Type="int" Mode="In" />
+          <Parameter Name="version" Type="varchar" Mode="In" />
+          <Parameter Name="carroceria" Type="varchar" Mode="In" />
+          <Parameter Name="puertas" Type="int" Mode="In" />
+          <Parameter Name="tipoDireccion" Type="varchar" Mode="In" />
+          <Parameter Name="precio" Type="int" Mode="In" />
+          <Parameter Name="cilindrada" Type="int" Mode="In" />
+          <Parameter Name="potencia" Type="varchar" Mode="In" />
+          <Parameter Name="color" Type="varchar" Mode="In" />
+          <Parameter Name="kilom" Type="int" Mode="In" />
+          <Parameter Name="motor" Type="varchar" Mode="In" />
+          <Parameter Name="techo" Type="varchar" Mode="In" />
+          <Parameter Name="combustible" Type="int" Mode="In" />
+          <Parameter Name="comentario" Type="varchar" Mode="In" />
+          <Parameter Name="uidJato" Type="bigint" Mode="In" />
+          <Parameter Name="airbag" Type="varchar" Mode="In" />
+          <Parameter Name="aireAcon" Type="varchar" Mode="In" />
+          <Parameter Name="alarma" Type="varchar" Mode="In" />
+          <Parameter Name="alzaVidrios" Type="varchar" Mode="In" />
+          <Parameter Name="nuevo" Type="varchar" Mode="In" />
+          <Parameter Name="transmision" Type="varchar" Mode="In" />
+          <Parameter Name="radio" Type="varchar" Mode="In" />
+          <Parameter Name="espejos" Type="varchar" Mode="In" />
+          <Parameter Name="frenosAbs" Type="varchar" Mode="In" />
+          <Parameter Name="unicoDueno" Type="varchar" Mode="In" />
+          <Parameter Name="cierreCentral" Type="varchar" Mode="In" />
+          <Parameter Name="catalitico" Type="varchar" Mode="In" />
+          <Parameter Name="fwd" Type="varchar" Mode="In" />
+          <Parameter Name="llantas" Type="varchar" Mode="In" />
           <Parameter Name="listaFotos" Type="varchar" Mode="In" />
+          <Parameter Name="plataforma" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_PublicarAviso_Automotoras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codCliente" Type="int" Mode="In" />
@@ -93,12 +129,52 @@
             <Parameter Name="listaFotos" Mode="In" Type="String" />
             <Parameter Name="plataforma" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SP_apiCLA_ActualizaFotos">
-            <Parameter Name="codAuto" Mode="In" Type="Int32" />
+          <FunctionImport Name="SP_ActualizarAviso_Automotoras" ReturnType="Collection(baseprod2Model.SP_ActualizarAviso_Automotoras_Result)">
+            <Parameter Name="codigoauto" Mode="In" Type="Int32" />
+            <Parameter Name="codCliente" Mode="In" Type="Int32" />
+            <Parameter Name="ip" Mode="In" Type="String" />
+            <Parameter Name="patente" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="marca" Mode="In" Type="Int32" />
+            <Parameter Name="modelo" Mode="In" Type="String" />
+            <Parameter Name="ano" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="String" />
+            <Parameter Name="carroceria" Mode="In" Type="String" />
+            <Parameter Name="puertas" Mode="In" Type="Int32" />
+            <Parameter Name="tipoDireccion" Mode="In" Type="String" />
+            <Parameter Name="precio" Mode="In" Type="Int32" />
+            <Parameter Name="cilindrada" Mode="In" Type="Int32" />
+            <Parameter Name="potencia" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="kilom" Mode="In" Type="Int32" />
+            <Parameter Name="motor" Mode="In" Type="String" />
+            <Parameter Name="techo" Mode="In" Type="String" />
+            <Parameter Name="combustible" Mode="In" Type="Int32" />
+            <Parameter Name="comentario" Mode="In" Type="String" />
+            <Parameter Name="uidJato" Mode="In" Type="Int64" />
+            <Parameter Name="airbag" Mode="In" Type="String" />
+            <Parameter Name="aireAcon" Mode="In" Type="String" />
+            <Parameter Name="alarma" Mode="In" Type="String" />
+            <Parameter Name="alzaVidrios" Mode="In" Type="String" />
+            <Parameter Name="nuevo" Mode="In" Type="String" />
+            <Parameter Name="transmision" Mode="In" Type="String" />
+            <Parameter Name="radio" Mode="In" Type="String" />
+            <Parameter Name="espejos" Mode="In" Type="String" />
+            <Parameter Name="frenosAbs" Mode="In" Type="String" />
+            <Parameter Name="unicoDueno" Mode="In" Type="String" />
+            <Parameter Name="cierreCentral" Mode="In" Type="String" />
+            <Parameter Name="catalitico" Mode="In" Type="String" />
+            <Parameter Name="fwd" Mode="In" Type="String" />
+            <Parameter Name="llantas" Mode="In" Type="String" />
             <Parameter Name="listaFotos" Mode="In" Type="String" />
+            <Parameter Name="plataforma" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_PublicarAviso_Automotoras_Result">
+          <Property Type="Int32" Name="codauto" Nullable="true" />
+          <Property Type="Int32" Name="error" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_ActualizarAviso_Automotoras_Result">
           <Property Type="Int32" Name="codauto" Nullable="true" />
           <Property Type="Int32" Name="error" Nullable="false" />
         </ComplexType>
@@ -116,7 +192,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_apiCLA_ActualizaFotos" FunctionName="baseprod2Model.Store.SP_apiCLA_ActualizaFotos" />
+          <FunctionImportMapping FunctionImportName="SP_ActualizarAviso_Automotoras" FunctionName="baseprod2Model.Store.SP_ActualizarAviso_Automotoras">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="baseprod2Model.SP_ActualizarAviso_Automotoras_Result">
+                <ScalarProperty Name="codauto" ColumnName="codauto" />
+                <ScalarProperty Name="error" ColumnName="error" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

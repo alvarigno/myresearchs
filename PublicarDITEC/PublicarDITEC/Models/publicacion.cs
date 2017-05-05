@@ -43,6 +43,7 @@ namespace PublicarDITEC
         public string comentarios { get; set; }
         public string patente { get; set; }
         public string fotos { get; set; }
+        public int cod_auto { get; set; }
 
     }
 }

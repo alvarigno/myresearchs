@@ -82,6 +82,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>bdToolsModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\SP_ActualizarAviso_Automotoras_Result.cs">
+      <DependentUpon>baseprodModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\SP_PublicarAviso_Automotoras_Result.cs">
       <DependentUpon>baseprodModel.tt</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <EntityDeploy Include="Data\bdToolsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>bdToolsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <EntityDeploy Include="Data\baseprodModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>baseprodModel.Designer.cs</LastGenOutput>
@@ -105,10 +112,6 @@
     <None Include="Data\baseprodModel.edmx.diagram">
       <DependentUpon>baseprodModel.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Data\bdToolsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>bdToolsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Data\bdToolsModel.edmx.diagram">
       <DependentUpon>bdToolsModel.edmx</DependentUpon>
     </None>
