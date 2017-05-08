@@ -37,8 +37,8 @@ namespace PublicarDITEC
                     using (var connection = new System.Data.SqlClient.SqlCommand())
                     {
                         connection.Connection = myLocalConnection.GetLocalConnection();
-                    connection.CommandText = "select * from tabautosDITEC";
-                    //connection.CommandText = "select * from tabautosDITEC where cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  ";
+                        connection.CommandText = "select * from tabautosDITEC where sucursal is not null";
+                        //connection.CommandText = "select * from tabautosDITEC where cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  ";
 
                         using (var reader = connection.ExecuteReader())
                         {
@@ -84,6 +84,7 @@ namespace PublicarDITEC
                                     datosavisos.comentarios = reader["comentarios"].ToString();
                                     datosavisos.patente = reader["patente"].ToString();
                                     datosavisos.fotos = reader["fotos"].ToString();
+                                    datosavisos.sucursal = int.Parse(reader["sucursal"].ToString());
                                     listOfDatos.Add(datosavisos);
                                     muestralista(listOfDatos, count);
 
@@ -118,7 +119,7 @@ namespace PublicarDITEC
                 
                 Console.WriteLine("Num. " + i + ", Listado: " + datos[i].codigo_auto_DITEC);
                 Console.WriteLine("-------------------------------------------------------");
-                if (ConsultaEstadoActualizacion(datos[i].codigo_auto_DITEC))
+                if (ConsultaEstadoActualizacion(datos[i].codigo_auto_DITEC, datos[i].sucursal ))
                 {
 
                     PublicacionChileautos datoparaactualizar = new PublicacionChileautos();
@@ -200,7 +201,7 @@ namespace PublicarDITEC
             //long codigo =1;
             //Datos del vehículo
 
-            datopublicacion.codCliente = 1028;
+            datopublicacion.codCliente = datos[i].sucursal;
             datopublicacion.ip = "localhost";
             dv.patente = datos[i].patente;
             dv.tipo = datos[i].Tipo_vehiculo;
@@ -373,7 +374,7 @@ namespace PublicarDITEC
             return descmarca;
         }
 
-        private static Boolean ConsultaEstadoActualizacion(int codditec)
+        private static Boolean ConsultaEstadoActualizacion(int codditec, int sucursal)
         {
 
             Boolean existe = false;
