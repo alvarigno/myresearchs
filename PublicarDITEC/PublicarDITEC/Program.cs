@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PublicarDITEC.Data;
 using PublicarDITEC.Models;
+using System.Threading;
 
 namespace PublicarDITEC
 {
@@ -24,7 +25,9 @@ namespace PublicarDITEC
 
             consultadatos();
             
-            Console.Read();
+            //Console.Read();
+
+
         }
 
 
@@ -37,15 +40,15 @@ namespace PublicarDITEC
                     using (var connection = new System.Data.SqlClient.SqlCommand())
                     {
                         connection.Connection = myLocalConnection.GetLocalConnection();
-                        connection.CommandText = "select * from tabautosDITEC where sucursal is not null";
+                        connection.CommandText = "select * from tabautosDITEC where sucursal is not null and publicado = 'false'";
                         //connection.CommandText = "select * from tabautosDITEC where cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  ";
 
                         using (var reader = connection.ExecuteReader())
                         {
-                            while (reader.HasRows)
+                            if (reader.HasRows)
                             {
 
-                                if (reader.Read()) {
+                                while (reader.Read()) {
 
                                     //Console.Write(reader["codigo_auto_DITEC"] +"\t\n");
 
@@ -87,22 +90,26 @@ namespace PublicarDITEC
                                     datosavisos.sucursal = int.Parse(reader["sucursal"].ToString());
                                     listOfDatos.Add(datosavisos);
                                     muestralista(listOfDatos, count);
-
+                                    count = count + 1;
                                 }
 
-                                count = count + 1;
+                                
                             //Console.WriteLine("Cuenta: "+ listOfDatos.Count);
-                        }
+                            }
 
                         }
                         connection.Connection.Close();
                         connection.Connection.Dispose();
                         System.Data.SqlClient.SqlConnection.ClearAllPools();
+
+                    Console.WriteLine("Programa ha terminado.");
+                    Thread.Sleep(5000);
+                    System.Environment.Exit(1);
                     }
 
-                
 
-            }
+
+                }
                 catch (Exception ex)
                 {
                     Console.Write("Error: " + ex.Message);
@@ -440,7 +447,7 @@ namespace PublicarDITEC
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
                     connection.Connection = myLocalConnection.GetLocalConnection();
-                    connection.CommandText = "UPDATE[dbo].[tabautosDITEC] SET[cod_auto] = " + cod_auto + " WHERE codigo_auto_DITEC = " + codditec + "";
+                    connection.CommandText = "UPDATE[dbo].[tabautosDITEC] SET[cod_auto] = " + cod_auto + ", [publicado] = 'true' WHERE codigo_auto_DITEC = " + codditec + "";
 
                     connection.ExecuteNonQuery();
 
