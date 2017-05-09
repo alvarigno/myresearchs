@@ -33,13 +33,13 @@ namespace PublicarDITEC
 
         public static void consultadatos() {
 
-             myLocalConnection myLocalConn = new myLocalConnection();
+             myConnection myConn = new myConnection();
 
                 try
                 {
                     using (var connection = new System.Data.SqlClient.SqlCommand())
                     {
-                        connection.Connection = myLocalConnection.GetLocalConnection();
+                        connection.Connection = myConnection.GetConnection();
                         connection.CommandText = "select * from tabautosDITEC where sucursal is not null and publicado = 'false'";
                         //connection.CommandText = "select * from tabautosDITEC where cast(fecha_update_data as date) = CONVERT (date, SYSDATETIMEOFFSET())  ";
 
@@ -385,14 +385,14 @@ namespace PublicarDITEC
         {
 
             Boolean existe = false;
-            myLocalConnection myLocalConn = new myLocalConnection();
+            myConnection myConn = new myConnection();
 
             try
             {
 
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
-                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.Connection = myConnection.GetConnection();
                     connection.CommandText = "select [cod_auto] from [tabautosDITEC] where codigo_auto_DITEC = " + codditec+" and cod_auto is not null";
 
                     using (var reader = connection.ExecuteReader())
@@ -440,13 +440,13 @@ namespace PublicarDITEC
         private static Boolean updateregistro(int codditec, int cod_auto) {
 
             Boolean actualizo = false;
-            myLocalConnection myLocalConn = new myLocalConnection();
+            myConnection myConn = new myConnection();
 
             try
             {
                 using (var connection = new System.Data.SqlClient.SqlCommand())
                 {
-                    connection.Connection = myLocalConnection.GetLocalConnection();
+                    connection.Connection = myConnection.GetConnection();
                     connection.CommandText = "UPDATE[dbo].[tabautosDITEC] SET[cod_auto] = " + cod_auto + ", [publicado] = 'true' WHERE codigo_auto_DITEC = " + codditec + "";
 
                     connection.ExecuteNonQuery();
