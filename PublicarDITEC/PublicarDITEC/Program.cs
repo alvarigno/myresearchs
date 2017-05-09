@@ -45,10 +45,10 @@ namespace PublicarDITEC
 
                         using (var reader = connection.ExecuteReader())
                         {
-                            if (reader.HasRows)
+                            while (reader.HasRows)
                             {
 
-                                while (reader.Read()) {
+                                if (reader.Read()) {
 
                                     //Console.Write(reader["codigo_auto_DITEC"] +"\t\n");
 
@@ -90,11 +90,10 @@ namespace PublicarDITEC
                                     datosavisos.sucursal = int.Parse(reader["sucursal"].ToString());
                                     listOfDatos.Add(datosavisos);
                                     muestralista(listOfDatos, count);
-                                    count = count + 1;
-                                }
 
-                                
-                            //Console.WriteLine("Cuenta: "+ listOfDatos.Count);
+                                }
+                                count = count + 1;
+                                //Console.WriteLine("Cuenta: "+ listOfDatos.Count);
                             }
 
                         }
@@ -102,9 +101,9 @@ namespace PublicarDITEC
                         connection.Connection.Dispose();
                         System.Data.SqlClient.SqlConnection.ClearAllPools();
 
-                    Console.WriteLine("Programa ha terminado.");
-                    Thread.Sleep(5000);
-                    System.Environment.Exit(1);
+                        Console.WriteLine("Programa ha terminado.");
+                        Thread.Sleep(5000);
+                        System.Environment.Exit(1);
                     }
 
 
