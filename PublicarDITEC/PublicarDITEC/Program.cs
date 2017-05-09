@@ -24,7 +24,9 @@ namespace PublicarDITEC
             Console.WriteLine("Espera de script de ejecución");
 
             consultadatos();
-            
+
+            CerrarPrograma();
+
             //Console.Read();
 
 
@@ -45,54 +47,55 @@ namespace PublicarDITEC
 
                         using (var reader = connection.ExecuteReader())
                         {
-                            while (reader.HasRows)
+                            if (reader.HasRows)
                             {
 
-                                if (reader.Read()) {
+                            while (reader.Read())
+                            {
 
-                                    //Console.Write(reader["codigo_auto_DITEC"] +"\t\n");
+                                //Console.Write(reader["codigo_auto_DITEC"] +"\t\n");
 
-                                    var datosavisos = new publicacion();
-                                    datosavisos.codigo_auto_DITEC = int.Parse(reader["codigo_auto_DITEC"].ToString());
-                                    datosavisos.Nuevo_o_usado = reader["Nuevo_o_usado"].ToString();
-                                    datosavisos.categoria = int.Parse(reader["categoria"].ToString());
-                                    datosavisos.Tipo_vehiculo = reader["Tipo_vehiculo"].ToString();
-                                    datosavisos.Carroceria = reader["Carroceria"].ToString();
-                                    datosavisos.Marca = int.Parse(reader["Marca"].ToString());
-                                    datosavisos.Modelo = reader["Modelo"].ToString();
-                                    datosavisos.Version = reader["Version"].ToString();
-                                    datosavisos.Ano = int.Parse(reader["Ano"].ToString());
-                                    datosavisos.Precio = int.Parse(reader["Precio"].ToString());
-                                    datosavisos.Color = reader["Color"].ToString();
-                                    datosavisos.KM = int.Parse(reader["KM"].ToString());
-                                    datosavisos.motor = reader["motor"].ToString();
-                                    datosavisos.combustible = int.Parse(reader["combustible"].ToString());
-                                    datosavisos.Cilindrada = int.Parse(reader["Cilindrada"].ToString());
-                                    datosavisos.tipo_cambio = reader["tipo_cambio"].ToString();
-                                    datosavisos.aire_acondicionado = reader["aire_acondicionado"].ToString();
-                                    datosavisos.tipo_direccion = reader["tipo_direccion"].ToString();
-                                    datosavisos.radio = reader["radio"].ToString();
-                                    datosavisos.alzavidrios_electricos = reader["alzavidrios_electricos"].ToString();
-                                    datosavisos.espejos_electricos = reader["espejos_electricos"].ToString();
-                                    datosavisos.frenos_ABS = reader["frenos_ABS"].ToString();
-                                    datosavisos.airbag = reader["airbag"].ToString();
-                                    datosavisos.unico_dueno = reader["unico_dueno"].ToString();
-                                    datosavisos.cierre_centralizado = reader["cierre_centralizado"].ToString();
-                                    datosavisos.catalitico = reader["catalitico"].ToString();
-                                    datosavisos.fwd = reader["fwd"].ToString();
-                                    datosavisos.Llantas = reader["Llantas"].ToString();
-                                    datosavisos.Puertas = reader["Puertas"].ToString();
-                                    datosavisos.Alarma = reader["Alarma"].ToString();
-                                    datosavisos.Techo = reader["Techo"].ToString();
-                                    datosavisos.comentarios = reader["comentarios"].ToString();
-                                    datosavisos.patente = reader["patente"].ToString();
-                                    datosavisos.fotos = reader["fotos"].ToString();
-                                    datosavisos.sucursal = int.Parse(reader["sucursal"].ToString());
-                                    listOfDatos.Add(datosavisos);
-                                    muestralista(listOfDatos, count);
-
-                                }
+                                var datosavisos = new publicacion();
+                                datosavisos.codigo_auto_DITEC = int.Parse(reader["codigo_auto_DITEC"].ToString());
+                                datosavisos.Nuevo_o_usado = reader["Nuevo_o_usado"].ToString();
+                                datosavisos.categoria = int.Parse(reader["categoria"].ToString());
+                                datosavisos.Tipo_vehiculo = reader["Tipo_vehiculo"].ToString();
+                                datosavisos.Carroceria = reader["Carroceria"].ToString();
+                                datosavisos.Marca = int.Parse(reader["Marca"].ToString());
+                                datosavisos.Modelo = reader["Modelo"].ToString();
+                                datosavisos.Version = reader["Version"].ToString();
+                                datosavisos.Ano = int.Parse(reader["Ano"].ToString());
+                                datosavisos.Precio = int.Parse(reader["Precio"].ToString());
+                                datosavisos.Color = reader["Color"].ToString();
+                                datosavisos.KM = int.Parse(reader["KM"].ToString());
+                                datosavisos.motor = reader["motor"].ToString();
+                                datosavisos.combustible = int.Parse(reader["combustible"].ToString());
+                                datosavisos.Cilindrada = int.Parse(reader["Cilindrada"].ToString());
+                                datosavisos.tipo_cambio = reader["tipo_cambio"].ToString();
+                                datosavisos.aire_acondicionado = reader["aire_acondicionado"].ToString();
+                                datosavisos.tipo_direccion = reader["tipo_direccion"].ToString();
+                                datosavisos.radio = reader["radio"].ToString();
+                                datosavisos.alzavidrios_electricos = reader["alzavidrios_electricos"].ToString();
+                                datosavisos.espejos_electricos = reader["espejos_electricos"].ToString();
+                                datosavisos.frenos_ABS = reader["frenos_ABS"].ToString();
+                                datosavisos.airbag = reader["airbag"].ToString();
+                                datosavisos.unico_dueno = reader["unico_dueno"].ToString();
+                                datosavisos.cierre_centralizado = reader["cierre_centralizado"].ToString();
+                                datosavisos.catalitico = reader["catalitico"].ToString();
+                                datosavisos.fwd = reader["fwd"].ToString();
+                                datosavisos.Llantas = reader["Llantas"].ToString();
+                                datosavisos.Puertas = reader["Puertas"].ToString();
+                                datosavisos.Alarma = reader["Alarma"].ToString();
+                                datosavisos.Techo = reader["Techo"].ToString();
+                                datosavisos.comentarios = reader["comentarios"].ToString();
+                                datosavisos.patente = reader["patente"].ToString();
+                                datosavisos.fotos = reader["fotos"].ToString();
+                                datosavisos.sucursal = int.Parse(reader["sucursal"].ToString());
+                                listOfDatos.Add(datosavisos);
+                                muestralista(listOfDatos, count);
                                 count = count + 1;
+                            }
+                                
                                 //Console.WriteLine("Cuenta: "+ listOfDatos.Count);
                             }
 
@@ -101,9 +104,6 @@ namespace PublicarDITEC
                         connection.Connection.Dispose();
                         System.Data.SqlClient.SqlConnection.ClearAllPools();
 
-                        Console.WriteLine("Programa ha terminado.");
-                        Thread.Sleep(5000);
-                        System.Environment.Exit(1);
                     }
 
 
@@ -466,6 +466,17 @@ namespace PublicarDITEC
             }
 
             return actualizo;
+
+        }
+
+
+        public static void CerrarPrograma() {
+
+
+            Console.WriteLine("Programa ha terminado.");
+            Thread.Sleep(5000);
+            System.Environment.Exit(1);
+
 
         }
 
