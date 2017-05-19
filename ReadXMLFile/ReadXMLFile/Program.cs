@@ -21,35 +21,7 @@ namespace ReadXMLFile
 
             XDocument main = XDocument.Load(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)+"\\xml\\base.xml");
 
-
-            //var results = (from e in main.Root.("publicacion")
-            //               .Select(x => new PublicacionModel
-            //           {
-            //               codCliente = (string)x.Document.Root.Attribute("id"),
-            //               XMLData = x.Value
-            //           }).FirstOrDefault();
-
-
-            //            var results = (from e in main.Descendants("publicacion")
-            //                             select new PublicacionModel
-            //                             {
-            //                                 codCliente = int.Parse((string)e.("listado").ElementsAfterSelf("sucursal").Attributes("id")),
-            //                                 ip = (string)e.Attribute("localhost:8080"),
-            //                                 dfotos = e.Elements("aviso")
-            //                                               .Select(r => new fotos
-            //                                               {
-            //                                                   url = (string)r.Element("vehiculo").Attribute("source")
-            //
-            //                                               }).ToList()
-            //                             }).ToList();
-
-            Console.WriteLine("Revisión de Avisos ");
-
-            // foreach (var result in results)
-            // {
-            //     Console.WriteLine("{0}, {1}", result.dVehiculo.carroceria, result.dEquipamiento.radio, result.dfotos[0].url);
-            // }
-
+            Console.WriteLine("Revisión de Avisos");
 
             var identificacion = main.Descendants("publicacion")
                 .Descendants("identificacion")
@@ -58,82 +30,9 @@ namespace ReadXMLFile
                 });
 
             foreach (var result in identificacion)
+            {
                 Console.WriteLine(" x-Key de validación: {0}", result.xkey);
-            // Console.ReadLine();
-
-
-            //    var results = main.Descendants("listado")
-            //          .Descendants("vehiculo")
-            //          .Select(e => new {
-            //              sucursal = e.Descendants("sucursal").Attributes("id").FirstOrDefault().Value,
-            //              tipo = e.Descendants("tipo").FirstOrDefault().Value,
-            //              txmarca = e.Descendants("marca").FirstOrDefault().Value,
-            //              marca = e.Descendants("marca").Attributes("id").FirstOrDefault().Value,
-            //              modelo = e.Descendants("modelo").FirstOrDefault().Value,
-            //              version = e.Descendants("version").FirstOrDefault().Value,
-            //              carroceria = e.Descendants("carroceria").FirstOrDefault().Value,
-            //              ano = e.Descendants("ano").FirstOrDefault().Value,
-            //              precio = e.Descendants("precio").FirstOrDefault().Value,
-            //              color = e.Descendants("color").FirstOrDefault().Value,
-            //              km = e.Descendants("km").FirstOrDefault().Value,
-            //              motor = e.Descendants("motor").FirstOrDefault().Value,
-            //              potencia = e.Descendants("potencia").FirstOrDefault().Value,
-            //              combustible = e.Descendants("combustible").FirstOrDefault().Value,
-            //              cilindrada = e.Descendants("cilindrada").FirstOrDefault().Value,
-            //              tipodireccion = e.Descendants("tipodireccion").FirstOrDefault().Value,
-            //              techo = e.Descendants("techo").FirstOrDefault().Value,
-            //              puertas = e.Descendants("puertas").FirstOrDefault().Value,
-            //              comentarios = e.Descendants("comentarios").FirstOrDefault().Value });
-            //    
-            //      foreach (var result2 in results) {
-            //         Console.WriteLine("{0}, {1}, {2}, {3}", result2.sucursal, result2.tipo, result2.marca, result2.txmarca);
-            //    }
-            //Console.ReadLine();
-
-
-            //            var result3 = main.Root
-            //                             .Element("listado")
-            //                             .Elements()
-            //                             .Select(x => x.Name);
-
-            //     var result3 = main.Root
-            //                      .Descendants("listado")
-            //                      .Descendants()
-            //                      .Select(x => new {
-            //
-            //                          title = x.Name,
-            //                          value = x.Value
-            //                         
-            //
-            //                      });
-            //
-            //     foreach (var resultado in result3)
-            //
-            //         Console.WriteLine("{0}, {1}", resultado.title, resultado.value);
-
-            // Console.WriteLine(resultado.LocalName.FirstOrDefault());
-
-            //List<string> img = new List<string>();
-
-            /*Algoritmo BASE Funcionanado*/
-
-            //var query = from t in main.Descendants("aviso")
-            //            select new
-            //            {
-            //                idaviso = t.Attribute("id").Value,
-            //                valor = t.Element("vehiculo").Descendants("tipo").FirstOrDefault().Value,
-            //                Price = t.Element("vehiculo").Descendants("sucursal").FirstOrDefault().Value,
-            //                img = from im in t.Descendants("fotos").Elements("image") select new { source = im.Attribute("source").Value, name = im.Value }
-            //            };
-            //
-            //
-            //foreach (var item in query)
-            //{
-            //    Console.WriteLine("* ID: {0}, Title: {1}, Price: {2}",
-            //    item.ID, item.Title, item.Price);
-            //    foreach (var list in item.img) { Console.WriteLine("img: {0}, name: {1}", list.source, list.name); }
-            //}
-
+            }
 
             var query = from t in main.Descendants("aviso")
                         select new
