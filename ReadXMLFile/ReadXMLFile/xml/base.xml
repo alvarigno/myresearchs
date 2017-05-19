@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<publicacion>
+    <identificacion name="portillo s.a." fecha-creacion="2017-01-12 01:03:21">
+        <x-key>FGRT43432432KGFR454564664PP</x-key>
+    </identificacion>
+    <listado>
+      <publicaciones>10</publicaciones>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="0">nombre de sucursal</sucursal>  
+              <tipo id="1">automovil</tipo>
+              <marca id="5">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="1">nombre de sucursal</sucursal> 
+              <tipo id="1">automovil</tipo>
+              <marca id="3">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="2">nombre de sucursal</sucursal> 
+              <tipo id="1">automovil</tipo>
+              <marca id="1">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="0">nombre de sucursal</sucursal>  
+              <tipo id="1">automovil</tipo>
+              <marca id="5">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="1">nombre de sucursal</sucursal> 
+              <tipo id="1">automovil</tipo>
+              <marca id="3">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="2">nombre de sucursal</sucursal> 
+              <tipo id="1">automovil</tipo>
+              <marca id="1">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="0">nombre de sucursal</sucursal>  
+              <tipo id="1">automovil</tipo>
+              <marca id="5">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="1">nombre de sucursal</sucursal> 
+              <tipo id="1">automovil</tipo>
+              <marca id="3">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="2">nombre de sucursal</sucursal> 
+              <tipo id="1">automovil</tipo>
+              <marca id="1">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>
+      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+          <vehiculo>
+              <sucursal id="2">nombre de sucursal</sucursal> 
+              <tipo id="1">automovil</tipo>
+              <marca id="1">VOLVO</marca>
+              <modelo>modelo</modelo>
+              <version>version</version>
+              <carroceria id="carroceria">SUV</carroceria>  
+              <ano>1789</ano>
+              <precio>23456789</precio>
+              <color>blanco</color>
+              <km>234567</km>
+              <motor>V16</motor>
+              <potencia>v16</potencia>
+              <combustible id="combustible">Diesel</combustible>
+              <cilindrada>1600</cilindrada>
+              <tipodireccion id="tipodir">asistida</tipodireccion>
+              <techo id="tipotecho">panoramico</techo>
+              <puertas>4</puertas>
+              <comentarios>Prueba</comentarios>
+          </vehiculo>
+          <equipamiento>
+              <nuevo>N</nuevo>
+              <transmision>S</transmision>
+              <aireacondicionado>N</aireacondicionado>
+              <radio>S</radio>
+              <alzavidrios>S</alzavidrios>
+              <espejoselectricos>S</espejoselectricos>
+              <frenosabs>S</frenosabs>
+              <airbag>S</airbag>
+              <unicodueno>N</unicodueno>
+              <cierrecentralizado>S</cierrecentralizado>
+              <catalitico>S</catalitico>
+              <fwd>N</fwd>
+              <llantas>S</llantas>
+              <alarma>S</alarma>
+          </equipamiento>
+          <fotos cantidad="3">
+              <image source="http://wwww.dominio.cl/img/imgagen_01.jpg">imgagen_01.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_02.jpg">imgagen_02.jpg</image>
+              <image source="http://wwww.dominio.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
+          </fotos>
+      </aviso>    
+    </listado>
+</publicacion>
