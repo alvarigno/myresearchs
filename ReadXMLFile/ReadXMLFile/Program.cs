@@ -60,7 +60,10 @@ namespace ReadXMLFile
                             puertas = t.Element("vehiculo").Descendants("puertas").FirstOrDefault().Value,
                             comentarios = t.Element("vehiculo").Descendants("comentarios").FirstOrDefault().Value,
                             equi = t.Descendants("equipamiento").Elements().Select( q => new { q.Name, q.Value }),
-                            img = from im in t.Descendants("fotos").Elements("image") select new { source = im.Attribute("source").Value, name = im.Value }
+                            img = from im in t.Descendants("fotos").Elements("image")
+                                  select new {
+                                      source = im.Attribute("source").Value, name = im.Value
+                                  }
 
                         };
 
