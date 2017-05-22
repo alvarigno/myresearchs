@@ -10,8 +10,8 @@
               <sucursal id="0">nombre de sucursal</sucursal>  
               <tipo id="1">automovil</tipo>
               <marca id="5">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -19,10 +19,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -53,8 +53,8 @@
               <sucursal id="1">nombre de sucursal</sucursal> 
               <tipo id="1">automovil</tipo>
               <marca id="3">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -62,10 +62,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -96,8 +96,8 @@
               <sucursal id="2">nombre de sucursal</sucursal> 
               <tipo id="1">automovil</tipo>
               <marca id="1">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -105,10 +105,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -139,8 +139,8 @@
               <sucursal id="0">nombre de sucursal</sucursal>  
               <tipo id="1">automovil</tipo>
               <marca id="5">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -148,10 +148,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -182,8 +182,8 @@
               <sucursal id="1">nombre de sucursal</sucursal> 
               <tipo id="1">automovil</tipo>
               <marca id="3">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -191,10 +191,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -225,8 +225,8 @@
               <sucursal id="2">nombre de sucursal</sucursal> 
               <tipo id="1">automovil</tipo>
               <marca id="1">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -234,10 +234,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -268,8 +268,8 @@
               <sucursal id="0">nombre de sucursal</sucursal>  
               <tipo id="1">automovil</tipo>
               <marca id="5">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -277,10 +277,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <tipodireccion id="as">asistida</tipodireccion>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -311,8 +311,8 @@
               <sucursal id="1">nombre de sucursal</sucursal> 
               <tipo id="1">automovil</tipo>
               <marca id="3">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -320,10 +320,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -354,8 +354,8 @@
               <sucursal id="2">nombre de sucursal</sucursal> 
               <tipo id="1">automovil</tipo>
               <marca id="1">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -363,10 +363,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>
@@ -397,8 +397,8 @@
               <sucursal id="2">nombre de sucursal</sucursal> 
               <tipo id="1">automovil</tipo>
               <marca id="1">VOLVO</marca>
-              <modelo>modelo</modelo>
-              <version>version</version>
+              <modelo>S60</modelo>
+              <version>NC</version>
               <carroceria id="carroceria">SUV</carroceria>  
               <ano>1789</ano>
               <precio>23456789</precio>
@@ -406,10 +406,10 @@
               <km>234567</km>
               <motor>V16</motor>
               <potencia>v16</potencia>
-              <combustible id="combustible">Diesel</combustible>
+              <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
               <tipodireccion id="tipodir">asistida</tipodireccion>
-              <techo id="tipotecho">panoramico</techo>
+              <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
           </vehiculo>

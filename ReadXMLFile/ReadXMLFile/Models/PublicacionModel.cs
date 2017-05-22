@@ -10,7 +10,9 @@ namespace ReadXMLFile.Models
     {
 
         public int codCliente { get; set; }
+        public int idfuente { get; set; }
         public string ip { get; set; }
+        public string revision { get; set; }
         public datosVehiculo dVehiculo { get; set; }
         public datosEquipamiento dEquipamiento { get; set; }
         public List<fotos> dfotos { get; set; }
@@ -23,6 +25,7 @@ namespace ReadXMLFile.Models
         public string patente { get; set; }
         public string tipo { get; set; }
         public int marca { get; set; }
+        public string txtmarca { get; set; }
         public string modelo { get; set; }
         public string version { get; set; }
         public string carroceria { get; set; }
@@ -38,6 +41,8 @@ namespace ReadXMLFile.Models
         public string techo { get; set; }
         public int combustible { get; set; }
         public string comentario { get; set; }
+        public fotos[] listadofotos { get; set; }
+        public string plataforma { get; set; } //DATO DE PROCEDENCIA DE LA INSERCCIÓN - APPDESTOCKditec
         public long uidJato { get; set; }
 
     }
@@ -72,15 +77,12 @@ namespace ReadXMLFile.Models
 
         public string llantas { get; set; }
 
-        public string fotos { get; set; }
-
-        public string plataforma { get; set; } //DATO DE PROCEDENCIA DE LA INSERCCIÓN - APPDESTOCKditec
-
     }
 
     public class fotos {
 
         public string url { get; set; }
+        public string name { get; set; }
 
     }
 
