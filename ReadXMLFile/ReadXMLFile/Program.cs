@@ -29,15 +29,12 @@ namespace ReadXMLFile
 
             if (revisaxkey(main))
             {
-
                 List<PublicacionModel> query = ExtraeDataXml(main);
                 MuestraRegistros(query);
-
             }
-            else {
-
+            else
+            {
                 Console.WriteLine("X-Key no valido");
-
             }
 
             Console.ReadLine();
