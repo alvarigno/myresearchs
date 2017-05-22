@@ -298,12 +298,18 @@ namespace ReadXMLFile
 
                 Console.WriteLine("\n >listado imagenes<");
 
+                int largo = data.dVehiculo.listadofotos.Length;
+               string[] listimg = new string[largo];// Load arrar data
+                int num = 0;
                 foreach (var image in data.dVehiculo.listadofotos)
                 {
 
                     Console.WriteLine("  surce: " + image.url + ", nombre: " + image.name);
-
+                    listimg[num] = image.url;
+                    num = num + 1;
                 }
+
+                string prova = string.Join("*", listimg);// array string into string
                 Console.WriteLine("---------------------------------------------------------------------------------------\n");
                 count3 = count3 + 1;
             }
