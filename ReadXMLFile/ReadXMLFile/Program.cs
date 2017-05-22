@@ -148,7 +148,6 @@ namespace ReadXMLFile
 
                 foreach (var list in item.equi)
                 {
-
                     if (list.Name == "airbag")
                     {
                         dEquipamiento.airbag = list.Value;
@@ -192,7 +191,6 @@ namespace ReadXMLFile
                     if (list.Name == "fwd")
                     {
                         dEquipamiento.fwd = list.Value;
-
                     }
 
                     if (list.Name == "llantas")
@@ -219,8 +217,6 @@ namespace ReadXMLFile
                     {
                         dEquipamiento.unicoDueno = list.Value;
                     }
-
-
                 }
 
                 foreach (var list in item.img)
