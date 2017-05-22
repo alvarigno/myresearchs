@@ -11,9 +11,7 @@ namespace ReadXMLFile
 {
     class Program
     {
-        string img = "";
         static int count = 1;
-        static int count2array = 0;
         public List<string> imagenes = new List<string>();
         static PublicacionModel datapublicacion = new PublicacionModel();
         static datosVehiculo datavehiculo = new datosVehiculo();
@@ -48,26 +46,40 @@ namespace ReadXMLFile
 
         public static Boolean revisaxkey(XDocument main) {
 
-            Boolean revision = true;
+            Boolean revision = false;
 
             //identifica el x-key
             var identificacion = main.Descendants("publicacion")
                 .Descendants("identificacion")
                 .Select(e => new {
-                    xkey = e.Descendants("x-key").FirstOrDefault().Value
+                    xkey = e.Descendants("x-key").FirstOrDefault().Value,
+                    name = e.Attributes("name").FirstOrDefault().Value,
+                    fechacreacion = e.Attributes("fecha-creacion").FirstOrDefault().Value,
                 });
 
             //muestra el x-key
             foreach (var result in identificacion)
             {
+
                 Console.WriteLine(" x-Key de validación: {0}", result.xkey);
+                Console.WriteLine(" nombre automotora: {0}", result.name);
+                Console.WriteLine(" Fecha de Creación: {0}", result.fechacreacion);
+
+                if ( result.xkey == "FGRT43432432KGFR454564664PP") {
+
+                    Console.WriteLine("La X-key es válida");
+                    revision = true;
+
+                }
+
             }
+
+
 
             return revision;
 
         }
-
-
+        
         public static List<PublicacionModel> ExtraeDataXml(XDocument main) {
 
             //recuepra toda la información de cada nodo del XML que está procesando.
@@ -274,7 +286,7 @@ namespace ReadXMLFile
                 Console.WriteLine("  Tipo: " + data.dVehiculo.tipo);
                 Console.WriteLine("  Tipo Dirección: " + data.dVehiculo.tipoDireccion);
                 Console.WriteLine("  uid Jato: " + data.dVehiculo.uidJato);
-
+                
                 Console.WriteLine("\n >listado Equipamiento< ");
                 Console.WriteLine("  AirBag: " + data.dEquipamiento.airbag);
                 Console.WriteLine("  Aire Acondicionado: " + data.dEquipamiento.aireAcon);
@@ -293,12 +305,12 @@ namespace ReadXMLFile
 
                 Console.WriteLine("\n >listado imagenes<");
 
-              foreach (var image in data.dVehiculo.listadofotos)
-              {
+                foreach (var image in data.dVehiculo.listadofotos)
+                {
 
-                  Console.WriteLine("  surce: " + image.url + ", nombre: " + image.name);
+                    Console.WriteLine("  surce: " + image.url + ", nombre: " + image.name);
 
-              }
+                }
                 Console.WriteLine("---------------------------------------------------------------------------------------\n");
                 count3 = count3 + 1;
             }
