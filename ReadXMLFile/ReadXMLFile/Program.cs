@@ -253,7 +253,6 @@ namespace ReadXMLFile
             foreach (var data in listado)
             {
 
-
                 Console.WriteLine("\n registro Nº: " + count3);
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 Console.WriteLine("  Cod. Cliente (Sucursal): " + data.codCliente + ", Patente: " + data.dVehiculo.patente + ", ID registro automotora: " + data.idfuente + ", ip: " + data.ip + ", Revisión Diccionario: " + data.revision);
