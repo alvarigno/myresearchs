@@ -62,7 +62,7 @@ namespace ReadXMLFile
                 Console.WriteLine(" nombre automotora: {0}", result.name);
                 Console.WriteLine(" Fecha de Creación: {0}", result.fechacreacion);
 
-                if ( result.xkey == "FGRT43432432KGFR454564664PP") {
+                if ( result.xkey == "1CFB4B7E387C773858EAAA1CB4AE56A8") {
 
                     Console.WriteLine("La X-key es válida");
                     revision = true;
