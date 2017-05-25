@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using ReadXMLFile.Models;
+using DataAccess;
 
 namespace ReadXMLFile
 {
@@ -62,8 +63,12 @@ namespace ReadXMLFile
                 Console.WriteLine(" nombre automotora: {0}", result.name);
                 Console.WriteLine(" Fecha de Creación: {0}", result.fechacreacion);
 
-                if ( result.xkey == "1CFB4B7E387C773858EAAA1CB4AE56A8") {
+                string[] verifica = DataAccess.Program.VerificaXkey(result.xkey);
 
+                if (Boolean.Parse(verifica[0]))
+                {
+
+                    Console.WriteLine("Nombre de usuario: "+verifica[1]);
                     Console.WriteLine("La X-key es válida");
                     revision = true;
 

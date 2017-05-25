@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{16AB936A-B23F-4717-9370-2CAFD560B19F}</ProjectGuid>
+    <ProjectGuid>{B5110659-3C2E-462D-9A4A-4B4F1522E9B7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ReadXMLFile</RootNamespace>
-    <AssemblyName>ReadXMLFile</AssemblyName>
+    <RootNamespace>DataAccess</RootNamespace>
+    <AssemblyName>DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -41,6 +41,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,22 +51,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\PublicacionModel.cs" />
+    <Compile Include="Data\BaseprodModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseprodModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BaseprodModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseprodModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BaseprodModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseprodModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Data\BaseprodModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BaseprodModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\BaseprodModel.edmx.diagram">
+      <DependentUpon>BaseprodModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="xml\base.xml" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{b5110659-3c2e-462d-9a4a-4b4f1522e9b7}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
+    <Content Include="Data\BaseprodModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseprodModel.edmx</DependentUpon>
+      <LastGenOutput>BaseprodModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\BaseprodModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseprodModel.edmx</DependentUpon>
+      <LastGenOutput>BaseprodModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
