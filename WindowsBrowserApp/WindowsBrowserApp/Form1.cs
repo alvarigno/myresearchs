@@ -149,7 +149,7 @@ namespace WindowsBrowserApp
                         textBox2.Text = datainto;
 
                         HtmlDocument doc2 = this.webBrowser2.Document;
-                        doc2.GetElementById("Nombre").SetAttribute("Value", idinto);
+                        doc2.GetElementById("Nombre").SetAttribute("Value", datainto);
 
                     }
                     break;
