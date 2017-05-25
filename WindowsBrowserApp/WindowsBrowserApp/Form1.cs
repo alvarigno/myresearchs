@@ -127,6 +127,15 @@ namespace WindowsBrowserApp
                     //    elem = null;
                     //}
 
+                    //switch (e.MouseButtonsPressed)
+                    //{
+                    //    case MouseButtons.Left:
+                    //        HtmlElement element = this._browser.Document.GetElementFromPoint(e.ClientMousePosition);
+                    //        if (element != null && "submit".Equals(element.GetAttribute("type"), StringComparison.OrdinalIgnoreCase)
+                    //        {
+                    //        }
+                    //        break;
+                    //}
 
                     HtmlElement element = this.webBrowser1.Document.GetElementFromPoint(e.ClientMousePosition);
                     // if (element != null && "input".Equals(element.GetAttribute("value"), StringComparison.OrdinalIgnoreCase))
