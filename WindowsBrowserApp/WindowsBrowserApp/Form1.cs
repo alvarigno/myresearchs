@@ -21,12 +21,15 @@ namespace WindowsBrowserApp
             InitializeComponent();
             this.webBrowser1.ObjectForScripting = new MyScript();
             this.webBrowser1.DocumentCompleted+= new WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
+            this.webBrowser2.ObjectForScripting = new MyScript();
+            this.webBrowser2.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             webBrowser1.Navigate("https://www.chileautos.cl/publicar/paso1");
+            webBrowser2.Navigate("https://www.chileautos.cl/publicar/paso1");
             //textBox2.Text = webBrowser1.Document.GetElementsByTagName("label")[0].OuterHtml;
         }
 
@@ -137,11 +140,17 @@ namespace WindowsBrowserApp
                     //        break;
                     //}
 
+                    //revisar img de regedit // 11001 - cod-emulate Ie edge 11
                     HtmlElement element = this.webBrowser1.Document.GetElementFromPoint(e.ClientMousePosition);
-                    // if (element != null && "input".Equals(element.GetAttribute("value"), StringComparison.OrdinalIgnoreCase))
                     if (element != null)
                     {
-                        textBox2.Text = element.GetAttribute("value");;
+                        string idinto = element.GetAttribute("id");
+                        string datainto = element.GetAttribute("value");
+                        textBox2.Text = datainto;
+
+                        HtmlDocument doc2 = this.webBrowser2.Document;
+                        doc2.GetElementById("Nombre").SetAttribute("Value", idinto);
+
                     }
                     break;
             }
@@ -162,5 +171,9 @@ namespace WindowsBrowserApp
 
         }
 
+        private void webBrowser2_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
     }
 }
