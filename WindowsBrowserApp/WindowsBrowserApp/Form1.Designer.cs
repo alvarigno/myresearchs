@@ -85,7 +85,8 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 138);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(586, 328);
+            this.tabControl1.Size = new System.Drawing.Size(586, 494);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
@@ -94,7 +95,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(578, 302);
+            this.tabPage1.Size = new System.Drawing.Size(578, 468);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -105,12 +106,12 @@
             this.webBrowser1.Location = new System.Drawing.Point(3, 3);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(572, 296);
+            this.webBrowser1.Size = new System.Drawing.Size(572, 462);
             this.webBrowser1.TabIndex = 0;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(16, 466);
+            this.textBox2.Location = new System.Drawing.Point(12, 638);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(582, 20);
             this.textBox2.TabIndex = 6;
@@ -128,10 +129,10 @@
             // 
             // webBrowser2
             // 
-            this.webBrowser2.Location = new System.Drawing.Point(659, 163);
+            this.webBrowser2.Location = new System.Drawing.Point(701, 163);
             this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser2.Name = "webBrowser2";
-            this.webBrowser2.Size = new System.Drawing.Size(721, 323);
+            this.webBrowser2.Size = new System.Drawing.Size(679, 462);
             this.webBrowser2.TabIndex = 8;
             this.webBrowser2.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser2_DocumentCompleted);
             // 
