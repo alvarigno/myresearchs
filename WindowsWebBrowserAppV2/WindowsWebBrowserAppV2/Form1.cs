@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace WindowsWebBrowserAppV2
 {
@@ -22,7 +24,7 @@ namespace WindowsWebBrowserAppV2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            chromeBrowser.ShowDevTools();
         }
 
         public ChromiumWebBrowser chromeBrowser;
