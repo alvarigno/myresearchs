@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
-using System.Runtime.InteropServices;
-using System.IO;
 
 namespace WindowsWebBrowserAppV2
 {
@@ -24,7 +22,7 @@ namespace WindowsWebBrowserAppV2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chromeBrowser.ShowDevTools();
+
         }
 
         public ChromiumWebBrowser chromeBrowser;
@@ -35,7 +33,7 @@ namespace WindowsWebBrowserAppV2
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
             // Create a browser component
-            chromeBrowser = new ChromiumWebBrowser("http://ourcodeworld.com");
+            chromeBrowser = new ChromiumWebBrowser("http://www.demotores.cl/");
             // Add it to the form and fill it to the form window.
             this.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
