@@ -29,7 +29,7 @@ namespace WindowsBrowserApp
         private void Form1_Load(object sender, EventArgs e)
         {
             webBrowser1.Navigate("https://www.chileautos.cl/publicar/paso1");
-            webBrowser2.Navigate("https://www.chileautos.cl/publicar/paso1");
+            webBrowser2.Navigate("http://www.demotores.cl/frontend/publicacion.html?execution=e1s3");
             //textBox2.Text = webBrowser1.Document.GetElementsByTagName("label")[0].OuterHtml;
         }
 
@@ -149,7 +149,7 @@ namespace WindowsBrowserApp
                         textBox2.Text = datainto;
 
                         HtmlDocument doc2 = this.webBrowser2.Document;
-                        doc2.GetElementById("Nombre").SetAttribute("Value", datainto);
+                        doc2.GetElementById("newDocumentNumber").SetAttribute("Value", datainto);
 
                     }
                     break;
@@ -172,6 +172,11 @@ namespace WindowsBrowserApp
         }
 
         private void webBrowser2_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
         {
 
         }
