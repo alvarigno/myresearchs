@@ -101,7 +101,7 @@ namespace publicaCA_DM
             //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('licensePlate').value='" + strPatente + "'");
             
 
-            if (urlbr1 != "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp" && urlbr2 == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2")
+            if (urlbr1 == "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp" && urlbr2 == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2")
              {
 
                 string strPatente = frmCA.chromeBrowser.EvaluateScriptAsync("document.getElementById('patente').value();").ToString();
@@ -115,6 +115,8 @@ namespace publicaCA_DM
              //MessageBox.Show(frmCA.browserCA.URL.ToString());
         }
 
+
+        //Obtienen las ULR de cada objeto browser.
         private static void ChromeBrowser2_AddressChanged(object sender, AddressChangedEventArgs b)
         {
             //urlbr2 = frmDM.chromeBrowser2.Address.ToString();

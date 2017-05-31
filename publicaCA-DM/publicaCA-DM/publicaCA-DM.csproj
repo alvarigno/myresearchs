@@ -57,14 +57,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetBrowser, Version=1.10.0.0, Culture=neutral, PublicKeyToken=b0b5aaca9c95c84e, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetBrowser.1.10\lib\DotNetBrowser.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DotNetBrowser.Chromium, Version=1.10.0.0, Culture=neutral, PublicKeyToken=b0b5aaca9c95c84e, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetBrowser.1.10\lib\DotNetBrowser.Chromium.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
