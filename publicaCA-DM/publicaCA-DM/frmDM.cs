@@ -21,60 +21,6 @@ namespace publicaCA_DM
             InitializeComponent();
             InitializeChromium();
 
-            //browserDM = BrowserFactory.Create();
-            //BrowserView browserView = new WinFormsBrowserView(browserDM);
-            //Controls.Add((Control)browserView);
-            //
-            //ManualResetEvent waitEvent = new ManualResetEvent(false);
-            //browserDM.FinishLoadingFrameEvent += delegate (object sender, FinishLoadingEventArgs e)
-            //{
-            //    // Wait until main document of the web page is loaded completely.
-            //    if (e.IsMainFrame)
-            //    {
-            //        waitEvent.Set();
-            //    }
-            //};
-            //
-            //browserDM.LoadURL("http://autos.demotores.cl/");
-            //waitEvent.WaitOne();
-            //
-            //browserDM.ExecuteJavaScript("showLoginModal();");
-            //
-            //browserDM.ExecuteJavaScript("document.getElementById('email').value = 'iduprueba@dm.cl'");
-            //browserDM.ExecuteJavaScript("document.getElementById('Password').value = 'demotores2017'");
-            //
-            //var strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
-            //strJavascript +="nouEvent.initMouseEvent('click', true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);";
-            //strJavascript += "var objecte = document.getElementById('enterAjaxLogin');";
-            //strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
-            //browserDM.ExecuteJavaScript(strJavascript);
-            ////waitEvent.WaitOne();
-            //
-            //strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
-            //strJavascript +=
-            //    "nouEvent.initMouseEvent('click', true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);";
-            //strJavascript += "var objecte = document.getElementById('sellLink');";
-            //strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
-            //browserDM.ExecuteJavaScript(strJavascript);
-            ////waitEvent.WaitOne();
-            //
-            //strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
-            //strJavascript +=
-            //    "nouEvent.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
-            //strJavascript += "var objecte = document.getElementById('selectVehicleType');";
-            //strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
-            //browserDM.ExecuteJavaScript(strJavascript);
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            ////browser.ExecuteJavaScript("document.getElementById('moto').checked = true;");
-            ////
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -83,7 +29,7 @@ namespace publicaCA_DM
 
         }
 
-        public ChromiumWebBrowser chromeBrowser2;
+        public static ChromiumWebBrowser chromeBrowser2;
 
 
         public void InitializeChromium()
@@ -94,7 +40,9 @@ namespace publicaCA_DM
             // Create a browser component
             chromeBrowser2 = new ChromiumWebBrowser("http://autos.demotores.cl/");
             // Add it to the form and fill it to the form window.
+            browserDM = chromeBrowser2;
             this.Controls.Add(chromeBrowser2);
+            
             chromeBrowser2.Dock = DockStyle.Fill;
             chromeBrowser2.FrameLoadEnd += (sender, args) =>
             {

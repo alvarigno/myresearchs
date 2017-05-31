@@ -17,6 +17,7 @@ namespace publicaCA_DM
     public partial class frmCA : Form
     {
         public static ChromiumWebBrowser browserCA;
+
         public frmCA()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace publicaCA_DM
 
         }
 
-        private void frmCA_Load(object sender, EventArgs e)
+        public void frmCA_Load(object sender, EventArgs e)
         {
 
         }
