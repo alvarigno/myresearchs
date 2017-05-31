@@ -127,7 +127,7 @@ namespace publicaCA_DM
 
                 string strPatente = "";
                 string script = "(function() {return document.getElementById('patente').value;})();";
-
+                
                 var task = frmCA.chromeBrowser.EvaluateScriptAsync(script);
                 task.ContinueWith(t =>
                 {
