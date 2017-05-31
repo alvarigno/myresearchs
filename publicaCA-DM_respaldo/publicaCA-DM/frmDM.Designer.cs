@@ -1,6 +1,6 @@
 ﻿namespace publicaCA_DM
 {
-    partial class frmCA
+    partial class frmDM
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // frmCA
+            // frmDM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "frmCA";
-            this.Text = "frmCA";
-            this.Load += new System.EventHandler(this.frmCA_Load);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(335, 299);
+            this.Name = "frmDM";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "Demotores";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

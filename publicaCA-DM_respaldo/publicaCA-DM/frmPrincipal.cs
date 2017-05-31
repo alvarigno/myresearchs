@@ -85,13 +85,13 @@ namespace publicaCA_DM
 
         private void patenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        //    if ((frmCA.browserCA.Url.browserCA.URL.ToString() ==
-        //        "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp") && ( frmDM .browserDM.URL.ToString() == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2"))
-        //    {
-         //       string strPatente = frmCA.browserCA.ExecuteJavaScriptAndReturnValue("document.getElementById('patente').value").ToString();
-         //       frmDM.browserDM.ExecuteJavaScript("document.getElementById('licensePlate').value='" + strPatente + "'");
-        //    }
-         //   MessageBox.Show(frmCA.browserCA.URL.ToString());
+            if ((frmCA.browserCA.URL.ToString() ==
+                "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp") && (frmDM.browserDM.URL.ToString() == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2"))
+            {
+                string strPatente = frmCA.browserCA.ExecuteJavaScriptAndReturnValue("document.getElementById('patente').value").ToString();
+                frmDM.browserDM.ExecuteJavaScript("document.getElementById('licensePlate').value='" + strPatente + "'");
+            }
+            MessageBox.Show(frmCA.browserCA.URL.ToString());
         }
     }
 }
