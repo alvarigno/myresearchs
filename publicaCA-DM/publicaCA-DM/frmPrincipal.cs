@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CefSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,10 @@ namespace publicaCA_DM
 {
     public partial class frmPrincipal : Form
     {
+
+        public static string urlbr1 = "";
+        public static string urlbr2 = "";
+
         public frmPrincipal()
         {
             InitializeComponent();
@@ -85,13 +90,37 @@ namespace publicaCA_DM
 
         private void patenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        //    if ((frmCA.browserCA.Url.browserCA.URL.ToString() ==
-        //        "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp") && ( frmDM .browserDM.URL.ToString() == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2"))
-        //    {
-         //       string strPatente = frmCA.browserCA.ExecuteJavaScriptAndReturnValue("document.getElementById('patente').value").ToString();
-         //       frmDM.browserDM.ExecuteJavaScript("document.getElementById('licensePlate').value='" + strPatente + "'");
-        //    }
-         //   MessageBox.Show(frmCA.browserCA.URL.ToString());
+         
+            frmCA.chromeBrowser.AddressChanged += ChromeBrowser_AddressChanged;
+            frmDM.chromeBrowser2.AddressChanged += ChromeBrowser2_AddressChanged;
+
+            string strPatente = frmCA.chromeBrowser.EvaluateScriptAsync("document.getElementById('patente').value();").ToString();
+            frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('licensePlate').value='" + strPatente + "'");
+
+            if (urlbr1 ==
+                 "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp" && urlbr2 == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2")
+             {
+
+               // string strPatente = frmCA.chromeBrowser.EvaluateScriptAsync("document.getElementById('patente').value();").ToString();
+               // frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('licensePlate').value='" + strPatente + "'");
+
+                // string strPatente = frmCA.browserCA.ExecuteJavaScriptAndReturnValue("document.getElementById('patente').value").ToString();
+                // frmDM.browserDM.ExecuteJavaScript("document.getElementById('licensePlate').value='" + strPatente + "'");
+            }
+
+            MessageBox.Show(urlbr1);
+             //MessageBox.Show(frmCA.browserCA.URL.ToString());
+        }
+
+        private void ChromeBrowser2_AddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            urlbr2 = e.Address.ToString();
+        }
+
+        private static void ChromeBrowser_AddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            urlbr1 = e.Address.ToString();
+
         }
     }
 }

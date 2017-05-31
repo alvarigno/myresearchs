@@ -30,7 +30,7 @@ namespace publicaCA_DM
 
         }
 
-        public ChromiumWebBrowser chromeBrowser;
+        public static ChromiumWebBrowser chromeBrowser;
 
 
         public void InitializeChromium()
