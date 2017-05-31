@@ -124,7 +124,6 @@ namespace publicaCA_DM
             if (urlbr1 == "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp" && urlbr2 == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2")
              {
 
-
                 string strPatente = "";
                 string script = "(function() {return document.getElementById('patente').value;})();";
                 

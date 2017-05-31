@@ -32,7 +32,6 @@
             this.chileautosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.demotoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.patenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,18 +63,10 @@
             // 
             // copiarToolStripMenuItem
             // 
-            this.copiarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.patenteToolStripMenuItem});
             this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
             this.copiarToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.copiarToolStripMenuItem.Text = "Copiar";
-            // 
-            // patenteToolStripMenuItem
-            // 
-            this.patenteToolStripMenuItem.Name = "patenteToolStripMenuItem";
-            this.patenteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.patenteToolStripMenuItem.Text = "patente";
-            this.patenteToolStripMenuItem.Click += new System.EventHandler(this.patenteToolStripMenuItem_Click);
+            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -102,6 +93,5 @@
         private System.Windows.Forms.ToolStripMenuItem chileautosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem demotoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem patenteToolStripMenuItem;
     }
 }
