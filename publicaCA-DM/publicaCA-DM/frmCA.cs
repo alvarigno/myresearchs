@@ -73,6 +73,13 @@ namespace publicaCA_DM
 
         }
 
+        private void ExitMenuItemClick(object sender, EventArgs e)
+        {
+            chromeBrowser.Dispose();
+            Cef.Shutdown();
+            Close();
+        }
+
 
     }
 }
