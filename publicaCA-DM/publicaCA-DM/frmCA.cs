@@ -37,7 +37,8 @@ namespace publicaCA_DM
         {
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
-            ///////Cef.Initialize(settings);
+            if (!Cef.IsInitialized)
+                Cef.Initialize(settings);
             // Create a browser component
             chromeBrowser = new ChromiumWebBrowser("http://desarrollofotos.chileautos.cl/actualizadores/login.asp");
             // Add it to the form and fill it to the form window.

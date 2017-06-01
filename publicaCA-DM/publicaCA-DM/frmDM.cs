@@ -36,7 +36,8 @@ namespace publicaCA_DM
         {
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
-            ///////Cef.Initialize(settings);
+            if(!Cef.IsInitialized)
+                Cef.Initialize(settings);
             // Create a browser component
             chromeBrowser2 = new ChromiumWebBrowser("http://autos.demotores.cl/");
             // Add it to the form and fill it to the form window.

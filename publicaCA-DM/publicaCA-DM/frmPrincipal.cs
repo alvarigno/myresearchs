@@ -98,35 +98,17 @@ namespace publicaCA_DM
             urlbr1 = frmCA.chromeBrowser.Address.ToString();
             urlbr2 = frmDM.chromeBrowser2.Address.ToString();
 
-            //string strPatente = "";
-
-            //string script = "(function() {return document.getElementById('patente').value;})();";
-            //string returnValue = "";
-            //
-            //var task = frmCA.chromeBrowser.EvaluateScriptAsync(script);
-            //task.ContinueWith(t =>
-            //{
-            //    if (!t.IsFaulted)
-            //    {
-            //        var response = t.Result;
-            //
-            //        if (response.Success && response.Result != null)
-            //        {
-            //            strPatente = response.Result.ToString();
-            //        }
-            //    }
-            //});
-
-
-            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('licensePlate').value='" + strPatente + "'");
-
-
             if (urlbr1 == "http://desarrollofotos.chileautos.cl/actualizadores/paginas/chileautos/opciones.asp" && urlbr2 == "http://www.demotores.cl/frontend/publicacion.html?execution=e1s2")
              {
 
                 string strPatente = "";
+                string strMarca = "";
+                string strModelo = "";
                 string script = "(function() {return document.getElementById('patente').value;})();";
-                
+                string marca = "(function(){ var e = document.getElementById('cod_marca');return e.options[e.selectedIndex].text;})();";
+                string modelo = "(function(){ var e = document.getElementById('modelo');return e.options[e.selectedIndex].text;})();";
+
+
                 var task = frmCA.chromeBrowser.EvaluateScriptAsync(script);
                 task.ContinueWith(t =>
                 {
@@ -140,11 +122,85 @@ namespace publicaCA_DM
                         }
                     }
                 });
-                
+
+                var taskmarca = frmCA.chromeBrowser.EvaluateScriptAsync(marca);
+                taskmarca.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strMarca = response.Result.ToString();
+                            frmDM.chromeBrowser2.ExecuteScriptAsync("var textToFind = '" + strMarca + "';var dd = document.getElementById('brands');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}");
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('brands');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript, TimeSpan.FromSeconds(1));
+
+                        }
+                    }
+                });
+
+                var taskmodelo = frmCA.chromeBrowser.EvaluateScriptAsync(modelo);
+                taskmodelo.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+
+                            strModelo = response.Result.ToString();
+                            strModelo = strModelo.ToLower();
+                            strModelo = strModelo.First().ToString().ToUpper()+ strModelo.Substring(1);
+                            //selecciono el modelo en demotores
+                            string strJavascript2 = " var modeloEncontrado = false; for (var i = 0; i < document.getElementById('models').length; i++) {";
+                            strJavascript2 += " if (document.getElementById('models').options[i].text == '" + strModelo + "') {";
+                            strJavascript2 += "  modeloEncontrado = true; document.getElementById('models').options[i].selected = true;";
+                            strJavascript2 += "}"; //del if
+                            strJavascript2 += "}"; // del for
+                            strJavascript2 += " if (modeloEncontrado ==  true){ document.getElementById('msj-models-error').className = 'correct';}";
+                            strJavascript2 += " else{ document.getElementById('msj-models-error').className = 'msj-error';}";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript2, TimeSpan.FromSeconds(1));
+                            frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('models').onchange();", TimeSpan.FromSeconds(1));
+
+                            // Lanzo el evento onchange del modelo en demotores para que se carguen las versiones
+                            string strJavascript3 = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript3 += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript3 += "var objecte = document.getElementById('models');";
+                            strJavascript3 += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript3);
+
+                            //strModelo = response.Result.ToString();
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("var textToFind = '" + strModelo + "';var dd = document.getElementById('models');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}");
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('models').onchange();", TimeSpan.FromSeconds(1));
+                            
+                            
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            //string strJavascript2 = "var nouEvent = document.createEvent('MouseEvents');";
+                            //strJavascript2 += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            //strJavascript2 += "var objecte = document.getElementById('models');";
+                            //strJavascript2 += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript2);
+
+                           
+
+                        }
+                        MessageBox.Show(strModelo + "-" + urlbr1 + "-" + urlbr2);
+                    }
+                });
+
+
+               
 
             }
 
-            //MessageBox.Show(urlbr1+"-"+urlbr2);
+            
         }
 
 

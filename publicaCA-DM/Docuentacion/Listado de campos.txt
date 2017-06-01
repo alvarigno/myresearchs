@@ -1,0 +1,332 @@
+
+AUTOMOVIL/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+radio button
+vehicleData.isNewVehicle
+
+id="nuevos"
+id="ocasion"
+
+Select Marca
+id="brands"
+
+Select Modelo
+id="models"
+
+Select Version
+id="versions"
+
+Select Años
+id="years"
+
+Select Combusible
+id="fuels"
+
+Select Transmisión
+id="transmissions"
+
+Select Dirección
+id="steerings"
+
+Select Puertas
+id="doors"
+
+Select Carroceria
+id="segments"
+
+Select Colores
+id="colors"
+
+input text
+id="km"
+
+Select precio CL y US
+id="currencies"
+
+input text
+id="price"
+
+input text
+id="licensePlate"
+
+check unico dueño
+id="uniqueOwner"
+
+check taxi
+id="cab"
+
+check Clasico
+id="classic"
+
+//////////////////////////////////////////////////////////////
+
+Confort
+			  
+                <input id="features7" name="features" type="checkbox" value="7"><label for="features7">Aire acondicionado</label>
+                
+                <input id="features99" name="features" type="checkbox" value="99"><label for="features99">Alarma de luces encendidas</label>
+                
+                <input id="features13" name="features" type="checkbox" value="13"><label for="features13">Alzavidrios eléctricos delanteros</label>
+                
+                <input id="features107" name="features" type="checkbox" value="107"><label for="features107">Alzavidrios eléctricos delanteros y traseros</label>
+                
+                <input id="features100" name="features" type="checkbox" value="100"><label for="features100">Apertura remota de maleta</label>
+                
+                <input id="features8" name="features" type="checkbox" value="8"><label for="features8">Asiento conductor regulable en altura</label>
+                
+                <input id="features101" name="features" type="checkbox" value="101"><label for="features101">Asiento trasero abatible</label>
+                
+                <input id="features102" name="features" type="checkbox" value="102"><label for="features102">Asientos eléctricos</label>
+                
+                <input id="features10" name="features" type="checkbox" value="10"><label for="features10">Cierre centralizado</label>
+                
+                <input id="features103" name="features" type="checkbox" value="103"><label for="features103">Cierre centralizado con mando a distancia</label>
+                
+                <input id="features11" name="features" type="checkbox" value="11"><label for="features11">Climatizador automático</label>
+                
+                <input id="features36" name="features" type="checkbox" value="36"><label for="features36">Computador de abordo</label>
+                
+                <input id="features12" name="features" type="checkbox" value="12"><label for="features12">Control de velocidad crucero</label>
+                
+                <input id="features32" name="features" type="checkbox" value="32"><label for="features32">Espejos exteriores eléctricos</label>
+                
+                <input id="features105" name="features" type="checkbox" value="105"><label for="features105">Focos regulables desde el interior</label>
+                
+                <input id="features17" name="features" type="checkbox" value="17"><label for="features17">Tapizado de cuero</label>
+                
+                <input id="features106" name="features" type="checkbox" value="106"><label for="features106">Techo descapotable</label>
+                
+                <input id="features108" name="features" type="checkbox" value="108"><label for="features108">Volante regulable</label>
+
+	  
+//////////////////////////////////////////////////////////////
+Seguridad
+
+                <input id="features109" name="features" type="checkbox" value="109"><label for="features109">Airbag acompañante</label>
+
+                <input id="features110" name="features" type="checkbox" value="110"><label for="features110">Airbag conductor</label>
+
+                <input id="features111" name="features" type="checkbox" value="111"><label for="features111">Airbag de cortina</label>
+
+                <input id="features112" name="features" type="checkbox" value="112"><label for="features112">Airbag laterales</label>
+
+                <input id="features113" name="features" type="checkbox" value="113"><label for="features113">Airbag trasero</label>
+
+                <input id="features22" name="features" type="checkbox" value="22"><label for="features22">Alarma</label>
+
+                <input id="features114" name="features" type="checkbox" value="114"><label for="features114">Apoya cabeza en asientos traseros</label>
+
+                <input id="features46" name="features" type="checkbox" value="46"><label for="features46">Blindado</label>
+
+                <input id="features115" name="features" type="checkbox" value="115"><label for="features115">Cierre de puertas automático en movimiento</label>
+
+                <input id="features23" name="features" type="checkbox" value="23"><label for="features23">Control de estabilidad (ESP)</label>
+
+                <input id="features24" name="features" type="checkbox" value="24"><label for="features24">Control de tracción</label>
+
+                <input id="features19" name="features" type="checkbox" value="19"><label for="features19">Doble tracción</label>
+
+                <input id="features20" name="features" type="checkbox" value="20"><label for="features20">Frenos ABS</label>
+
+                <input id="features117" name="features" type="checkbox" value="117"><label for="features117">Inmovilizador de motor</label>
+
+                <input id="features131" name="features" type="checkbox" value="131"><label for="features131">Isofix</label>
+
+                <input id="features25" name="features" type="checkbox" value="25"><label for="features25">Luces antiniebla delanteras</label>
+
+                <input id="features116" name="features" type="checkbox" value="116"><label for="features116">Luces antiniebla traseras</label>
+
+                <input id="features26" name="features" type="checkbox" value="26"><label for="features26">Regulador de velocidad</label>
+
+                <input id="features118" name="features" type="checkbox" value="118"><label for="features118">Repartidor electrónico de frenado</label>
+
+                <input id="features14" name="features" type="checkbox" value="14"><label for="features14">Sensor de estacionamiento</label>
+
+                <input id="features15" name="features" type="checkbox" value="15"><label for="features15">Sensor de lluvia</label>
+
+                <input id="features16" name="features" type="checkbox" value="16"><label for="features16">Sensor de luz</label>
+
+                <input id="features27" name="features" type="checkbox" value="27"><label for="features27">Tercer luz de stop</label>
+
+
+//////////////////////////////////////////////////////////////
+Exterior
+			  
+                    <input id="features28" name="features" type="checkbox" value="28"><label for="features28">Ampolletas de xenón</label>
+                    
+                    <input id="features119" name="features" type="checkbox" value="119"><label for="features119">Barra porta maletas</label>
+                    
+                    <input id="features29" name="features" type="checkbox" value="29"><label for="features29">Limpia parabrisas traseros</label>
+                    
+                    <input id="features30" name="features" type="checkbox" value="30"><label for="features30">Llantas de aleación</label>
+                    
+                    <input id="features120" name="features" type="checkbox" value="120"><label for="features120">Parachoques color carrocería</label>
+                    
+                    <input id="features31" name="features" type="checkbox" value="31"><label for="features31">Vidrios polarizados</label>
+	  
+//////////////////////////////////////////////////////////////
+Multimedia y Audio
+
+                    <input id="features33" name="features" type="checkbox" value="33"><label for="features33">Bluetooth</label>
+
+                    <input id="features121" name="features" type="checkbox" value="121"><label for="features121">Cargador de CD</label>
+
+                    <input id="features38" name="features" type="checkbox" value="38"><label for="features38">Cassetera en estéreo</label>
+
+                    <input id="features122" name="features" type="checkbox" value="122"><label for="features122">Comando satelital de stereo</label>
+
+                    <input id="features123" name="features" type="checkbox" value="123"><label for="features123">Entrada auxiliar</label>
+
+                    <input id="features34" name="features" type="checkbox" value="34"><label for="features34">Entrada USB</label>
+
+                    <input id="features35" name="features" type="checkbox" value="35"><label for="features35">GPS</label>
+
+                    <input id="features126" name="features" type="checkbox" value="126"><label for="features126">Manos libres</label>
+
+                    <input id="features37" name="features" type="checkbox" value="37"><label for="features37">Radio AM/FM</label>
+
+                    <input id="features39" name="features" type="checkbox" value="39"><label for="features39">Reproduce CD</label>
+
+                    <input id="features40" name="features" type="checkbox" value="40"><label for="features40">Reproduce DVD</label>
+
+                    <input id="features41" name="features" type="checkbox" value="41"><label for="features41">Reproduce MP3</label>
+
+                    <input id="features125" name="features" type="checkbox" value="125"><label for="features125">Tarjeta SD</label>
+
+                    <input id="features42" name="features" type="checkbox" value="42"><label for="features42">Volante multi-función</label>
+			  
+
+
+/////////////////////////////////////////////
+TextArea
+id="moreInfo-area"
+
+
+
+MOTO/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Select motor
+id="engineTypes"
+
+Input text Cilindrada
+id="engineSize-input"
+
+
+CAMIONES/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+input tex motor
+id="engine"
+
+input text Frenos
+id="brakes"
+
+input text capacidad de lastre
+id="ballast"
+
+input text capacidad de Carga
+id="loadCapacity"
+
+input text potencia máxima
+id="enginePower"
+
+input text medida del neumático
+id="wheels"
+	  
+		
+//////////////////////////////////////		
+Confort
+
+				<input id="features49" name="features" type="checkbox" value="49"><label for="features49">Aire acondicionado</label>
+			  
+				<input id="features50" name="features" type="checkbox" value="50"><label for="features50">Alarma de luces encendidas</label>
+			  
+				<input id="features58" name="features" type="checkbox" value="58"><label for="features58">Alzavidrios eléctricos</label>
+			  
+				<input id="features51" name="features" type="checkbox" value="51"><label for="features51">Asiento conductor regulable en altura</label>
+			  			  
+				<input id="features52" name="features" type="checkbox" value="52"><label for="features52">Asientos eléctricos</label>
+			  
+				<input id="features54" name="features" type="checkbox" value="54"><label for="features54">Cierre centralizado</label>
+			  
+				<input id="features53" name="features" type="checkbox" value="53"><label for="features53">Cierre centralizado con mando a distancia</label>
+			  
+				<input id="features55" name="features" type="checkbox" value="55"><label for="features55">Control de velocidad crucero</label>
+			  
+				<input id="features56" name="features" type="checkbox" value="56"><label for="features56">Espejos exteriores eléctricos</label>
+			  
+				<input id="features57" name="features" type="checkbox" value="57"><label for="features57">Focos regulables desde el interior</label>
+			  
+	  
+//////////////////////////////////////				
+Seguridad
+
+				<input id="features59" name="features" type="checkbox" value="59"><label for="features59">Airbag</label>
+			  
+				<input id="features60" name="features" type="checkbox" value="60"><label for="features60">Alarma</label>
+			  
+				<input id="features61" name="features" type="checkbox" value="61"><label for="features61">Blindado</label>
+
+				<input id="features129" name="features" type="checkbox" value="129"><label for="features129">Inmovilizador de motor</label>
+			  
+				<input id="features62" name="features" type="checkbox" value="62"><label for="features62">Luces antiniebla delanteras</label>
+			  			  
+				<input id="features63" name="features" type="checkbox" value="63"><label for="features63">Luces antiniebla traseras</label>
+			  
+				<input id="features130" name="features" type="checkbox" value="130"><label for="features130">Repartidor electrónico de frenado</label>
+			  		
+		
+//////////////////////////////////////				
+Exterior
+
+				<input id="features64" name="features" type="checkbox" value="64"><label for="features64">Ampolletas de xenón</label>
+			  
+				<input id="features66" name="features" type="checkbox" value="66"><label for="features66">Parachoques color carrocería</label>
+			  
+				<input id="features67" name="features" type="checkbox" value="67"><label for="features67">Vidrios polarizados</label>
+		
+//////////////////////////////////////		
+Multimedia y Audio
+
+				<input id="features69" name="features" type="checkbox" value="69"><label for="features69">Cassetera en estéreo</label>
+			  
+				<input id="features68" name="features" type="checkbox" value="68"><label for="features68">Comando satelital de stereo</label>
+			  
+				<input id="features70" name="features" type="checkbox" value="70"><label for="features70">Radio AM/FM</label>
+			  
+				<input id="features71" name="features" type="checkbox" value="71"><label for="features71">Reproduce CD</label>
+			  
+				<input id="features72" name="features" type="checkbox" value="72"><label for="features72">Reproduce DVD</label>
+			  
+				<input id="features73" name="features" type="checkbox" value="73"><label for="features73">Reproduce MP3</label>
+			  
+
+CASA RODANTE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+input text alto
+id="height-input"
+
+input text ancho
+id="width-input"
+
+input text largo
+id="length-input"
+
+
+
+EMBARCACION/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+input text propulsión
+id="propellent"
+
+input text eslora
+id="length-input"
+
+input text manga
+id="breadth-input"
+
+input text puntal
+id="draft-input"
+
+
+
