@@ -219,13 +219,14 @@ namespace publicaCA_DM
                         {
 
                             string strVersion = response3.Result.ToString();
-                            strVersion = strVersion.ToLower();
-                            strVersion = strVersion.First().ToString().ToUpper() + strVersion.Substring(1);
+                            //strVersion = strVersion.ToLower();
+                            //strVersion = strVersion.First().ToString().ToUpper() + strVersion.Substring(1);
                             //selecciono el modelo en demotores
                             //MessageBox.Show("cargando Modelos");
-                            int milliseconds = 4000;
+                            int milliseconds = 10000;
                             Thread.Sleep(milliseconds);
-                            string strJavascript2 = "var x = document.getElementById('versions').options.length;alert('version'+x);<function cargamodelo(){ var modeloEncontrado = false; var datomodelo = '" + strVersion + "'; var textToFind2 = datomodelo;var dd = document.getElementById('versions'); for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind2){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}}setTimeout('cargamodelo()',1000);";
+                            //var x = document.getElementById('versions').options.length;alert('version'+x);function cargaversion(){ var versionEncontrado = false; var datoversion = 'Hola'; var textToFind2 = datoversion;var dd = document.getElementById('versions'); for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind2){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;} if (dd.options[i].text === 'Otra Versión'){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}}setTimeout('cargaversion()',1000);
+                            string strJavascript2 = "var x = document.getElementById('versions').options.length;function cargaversion(){ alert('largo'+x);var versionEncontrado = false; var datoversion = '" + strVersion +"'; var textToFind2 = datoversion;var dd = document.getElementById('versions'); for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind2){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;} if (dd.options[i].text === 'Otra Versión'){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}}setTimeout('cargaversion()',1000);";
 
                             frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript2);
 
