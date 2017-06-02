@@ -18,10 +18,23 @@ namespace publicaCA_DM
 
         public static string urlbr1 = "";
         public static string urlbr2 = "";
+        public static Dictionary<string, string> DicCarrocerias = new Dictionary<string, string>();
 
         public frmPrincipal()
         {
             InitializeComponent();
+
+            //Diccionario DicCarrocerias
+            DicCarrocerias.Add("Camioneta", "Camioneta");
+            DicCarrocerias.Add("Convertible", "Convertible");
+            DicCarrocerias.Add("Coupé", "Coupé");
+            DicCarrocerias.Add("Familiar", "StationWagon");
+            DicCarrocerias.Add("Hatchback", "Hatchback");
+            DicCarrocerias.Add("Monovolumen", "Monovolumen");
+            DicCarrocerias.Add("Pick Up", "Pick");
+            DicCarrocerias.Add("Sedan", "Sedán");
+            DicCarrocerias.Add("Utilitario", "Utilitario");
+            DicCarrocerias.Add("Micro Car", "Hatchback");
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)
@@ -105,10 +118,26 @@ namespace publicaCA_DM
                 string strPatente = "";
                 string strMarca = "";
                 string strModelo = "";
+                string strAno = "";
+                string strCombustible = "";
+                string strTransmision = "";
+                string strtipo_direccion = "";
+                string strpuertas = "";
+                string strdistancia = "";
+                string strpesos = "";
+                string strcarroceria = "";
                 string script = "(function() {return document.getElementById('patente').value;})();";
                 string marca = "(function(){ var e = document.getElementById('cod_marca');return e.options[e.selectedIndex].text;})();";
                 string modelo = "(function(){ var e = document.getElementById('modelo');return e.options[e.selectedIndex].text;})();";
                 string version = "(function(){ var e = document.getElementById('version');return e.options[e.selectedIndex].text;})();";
+                string ano = "(function(){ var e = document.getElementById('anoIng');return e.options[e.selectedIndex].text;})();";
+                string combustible = "(function(){ var e = document.getElementById('combustible');return e.options[e.selectedIndex].text;})();";
+                string transmision = "(function(){ var e = document.getElementById('transmisionwl');return e.options[e.selectedIndex].text;})();";
+                string tipo_direccion = "(function(){ var e = document.getElementById('tipo_direccion');return e.options[e.selectedIndex].text;})();";
+                string puertas = "(function(){ var e = document.getElementById('puertas');return e.options[e.selectedIndex].text;})();";
+                string distancia = "(function(){ return document.getElementById('distancia').value;})();";
+                string pesos = "(function(){ return document.getElementById('pesos').value;})();";
+                string carroceria = "(function(){ var e = document.getElementById('carroceria');return e.options[e.selectedIndex].text;})();";
 
 
                 var task = frmCA.chromeBrowser.EvaluateScriptAsync(script);
@@ -151,6 +180,227 @@ namespace publicaCA_DM
                         }
                     }
                     taskmarca.Dispose();
+                });
+
+                //carga de años
+                var taskano = frmCA.chromeBrowser.EvaluateScriptAsync(ano);
+                taskano.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strAno = response.Result.ToString();
+                            string strscriptmarca = "var textToFind = '" + strAno + "';var dd = document.getElementById('years');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                            //MessageBox.Show(strscriptmarca);
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('versions');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript);
+
+                        }
+                    }
+                    taskano.Dispose();
+                });
+
+                ////fuels
+                //carga de combustible
+                var taskcombustible = frmCA.chromeBrowser.EvaluateScriptAsync(combustible);
+                taskcombustible.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strCombustible = response.Result.ToString();
+                            if (strCombustible == "Diesel (Petroleo)") { strCombustible = "Diesel"; }
+                            if (strCombustible == "Gas") { strCombustible = "Gas / Bencina"; }
+                            if (strCombustible == "Híbrido") { strCombustible = "Eléctrico / Híbrido"; }
+                            if (strCombustible == "Eléctrico") { strCombustible = "Eléctrico / Híbrido"; }
+                            if (strCombustible == "Otro") { strCombustible = "Otros"; }
+                            string strscriptmarca = "var textToFind = '" + strCombustible + "';var dd = document.getElementById('fuels');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                            //MessageBox.Show(strscriptmarca);
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('versions');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript);
+
+                        }
+                    }
+                    taskcombustible.Dispose();
+                });
+
+                //carga de transmissions
+                var tasktransmision = frmCA.chromeBrowser.EvaluateScriptAsync(transmision);
+                tasktransmision.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strTransmision = response.Result.ToString();
+                            if (strTransmision == "Automatica") { strTransmision = "Automática";  }
+                            string strscriptmarca = "var textToFind = '" + strTransmision + "';var dd = document.getElementById('transmissions');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                            //MessageBox.Show(strscriptmarca);
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('versions');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript);
+
+                        }
+                    }
+                    tasktransmision.Dispose();
+                });
+
+                //carga de tipo dirección
+                var tasktipo_direccion = frmCA.chromeBrowser.EvaluateScriptAsync(tipo_direccion);
+                tasktipo_direccion.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strtipo_direccion = response.Result.ToString();
+                            if (strtipo_direccion == "Hidraulica") { strtipo_direccion = "Hidráulica"; }
+                            if (strtipo_direccion == "Mecanica") { strtipo_direccion = "Mecánica"; }
+                            string strscriptmarca = "var textToFind = '" + strtipo_direccion + "';var dd = document.getElementById('steerings');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                            //MessageBox.Show(strscriptmarca);
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('versions');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript);
+
+                        }
+                    }
+                    tasktipo_direccion.Dispose();
+                });
+
+                // carga doors
+                var taskpuertas = frmCA.chromeBrowser.EvaluateScriptAsync(puertas);
+                taskpuertas.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strpuertas = response.Result.ToString();
+                            if (strpuertas == "5") { strpuertas = "5 o más"; }
+                            string strscriptmarca = "var textToFind = '" + strpuertas + "';var dd = document.getElementById('doors');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                            //MessageBox.Show(strscriptmarca);
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('versions');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript);
+
+                        }
+                    }
+                    taskpuertas.Dispose();
+                });
+
+                //distancia
+                var taskdistancia = frmCA.chromeBrowser.EvaluateScriptAsync(distancia);
+                taskdistancia.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strdistancia = response.Result.ToString();
+                            string strscriptmarca = "document.getElementById('km').value='" + strdistancia + "'";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+
+                        }
+                    }
+                    taskdistancia.Dispose();
+                });
+
+                //pesos
+                var taskpesos = frmCA.chromeBrowser.EvaluateScriptAsync(pesos);
+                taskpesos.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strpesos = response.Result.ToString();
+                            string strscriptmarca = "document.getElementById('price').value='" + strpesos + "'";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+
+                        }
+                    }
+                    taskpesos.Dispose();
+                });
+
+                // carga carrocerias
+                var taskcarroceria = frmCA.chromeBrowser.EvaluateScriptAsync(carroceria);
+                taskcarroceria.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strcarroceria = response.Result.ToString();
+                            if (DicCarrocerias.ContainsKey(strcarroceria))
+                            {
+
+                                strcarroceria = DicCarrocerias[strcarroceria];
+
+                            }
+
+                            string strscriptmarca = "var textToFind = '" + strcarroceria + "';var dd = document.getElementById('segments');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                            //MessageBox.Show(strscriptmarca);
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('versions');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript);
+
+                        }
+                    }
+                    taskcarroceria.Dispose();
                 });
 
                 var taskmodelo = frmCA.chromeBrowser.EvaluateScriptAsync(modelo);
@@ -236,9 +486,7 @@ namespace publicaCA_DM
                             strJavascript3 += "var objecte = document.getElementById('versions');";
                             strJavascript3 += "var canceled = !objecte.dispatchEvent(nouEvent);";
                             frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript3);
-
-
-
+                            
                         }
                         // MessageBox.Show(strModelo + "-" + urlbr1 + "-" + urlbr2);
                     }
