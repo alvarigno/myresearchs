@@ -57,7 +57,7 @@ namespace publicaCA_DM
                     var response = EvaluateScript(login(), TimeSpan.FromSeconds(1));
 
                     args.Frame.ExecuteJavaScriptAsync(segundo());
-                    args.Frame.ExecuteJavaScriptAsync(tercero());
+                    //args.Frame.ExecuteJavaScriptAsync(tercero());
 
                 }
 

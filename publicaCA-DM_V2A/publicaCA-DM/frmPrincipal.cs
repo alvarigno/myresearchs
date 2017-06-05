@@ -19,12 +19,13 @@ namespace publicaCA_DM
         public static string urlbr1 = "";
         public static string urlbr2 = "";
         public static Dictionary<string, string> DicCarrocerias = new Dictionary<string, string>();
+        public static Dictionary<string, string> DicCarroceriasMotos = new Dictionary<string, string>();
 
         public frmPrincipal()
         {
             InitializeComponent();
 
-            //Diccionario DicCarrocerias
+            //Diccionario DicCarrocerias autos
             DicCarrocerias.Add("Camioneta", "Camioneta");
             DicCarrocerias.Add("Convertible", "Convertible");
             DicCarrocerias.Add("Coupé", "Coupé");
@@ -35,6 +36,21 @@ namespace publicaCA_DM
             DicCarrocerias.Add("Sedan", "Sedán");
             DicCarrocerias.Add("Utilitario", "Utilitario");
             DicCarrocerias.Add("Micro Car", "Hatchback");
+
+            //Diccionario DicCarrocerias Motos
+            DicCarroceriasMotos.Add("Chopper", "Custom y Choppers");
+            DicCarroceriasMotos.Add("Cuadrimoto", "Cuatriciclos y Triciclos");
+            DicCarroceriasMotos.Add("Custom", "Custom y Choppers");
+            DicCarroceriasMotos.Add("Deportivas", "Deportivas");
+            DicCarroceriasMotos.Add("Enduro - cross", "Cross y Enduro");
+            DicCarroceriasMotos.Add("Moto de nieve", "Motos de Nieve");
+            DicCarroceriasMotos.Add("Racing", "Touring y Trails");
+            DicCarroceriasMotos.Add("Retro", "Custom y Choppers");
+            DicCarroceriasMotos.Add("Scooter", "Scooters y Ciclomotores");
+            DicCarroceriasMotos.Add("Sport calle - urbanas", "");
+            DicCarroceriasMotos.Add("Todo terrenos", "Touring y Trails");
+            DicCarroceriasMotos.Add("Trabajo - calle", "Calle y Naked");
+
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)
@@ -126,6 +142,7 @@ namespace publicaCA_DM
                 string strdistancia = "";
                 string strpesos = "";
                 string strcarroceria = "";
+                string strotros = "";
                 string script = "(function() {return document.getElementById('patente').value;})();";
                 string marca = "(function(){ var e = document.getElementById('cod_marca');return e.options[e.selectedIndex].text;})();";
                 string modelo = "(function(){ var e = document.getElementById('modelo');return e.options[e.selectedIndex].text;})();";
@@ -138,7 +155,7 @@ namespace publicaCA_DM
                 string distancia = "(function(){ return document.getElementById('distancia').value;})();";
                 string pesos = "(function(){ return document.getElementById('pesos').value;})();";
                 string carroceria = "(function(){ var e = document.getElementById('carroceria');return e.options[e.selectedIndex].text;})();";
-
+                string otros = "(function(){ return document.getElementById('txtOtros').value;})();";
 
                 var task = frmCA.chromeBrowser.EvaluateScriptAsync(script);
                 task.ContinueWith(t =>
@@ -383,13 +400,17 @@ namespace publicaCA_DM
 
                                 strcarroceria = DicCarrocerias[strcarroceria];
 
+                                string strscriptmarca = "var textToFind = '" + strcarroceria + "';var dd = document.getElementById('segments');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                                //MessageBox.Show(strscriptmarca);
+                                frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+
                             }
+                            else if (DicCarroceriasMotos.ContainsKey(strcarroceria)){
 
-                            string strscriptmarca = "var textToFind = '" + strcarroceria + "';var dd = document.getElementById('segments');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
-                            //MessageBox.Show(strscriptmarca);
-                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
-                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
-
+                                strcarroceria = DicCarroceriasMotos[strcarroceria];
+                                string strscriptmarca = "var textToFind = '" + strcarroceria + "';var dd = document.getElementById('categories');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                                frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            }
 
                             // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
                             string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
@@ -401,6 +422,24 @@ namespace publicaCA_DM
                         }
                     }
                     taskcarroceria.Dispose();
+                });
+
+                //Otros
+                var taskotros = frmCA.chromeBrowser.EvaluateScriptAsync(otros);
+                taskotros.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strotros = response.Result.ToString();
+                            string strscriptmarca = "document.getElementById('moreInfo-area').value='" + strotros + "'";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+
+                        }
+                    }
+                    taskotros.Dispose();
                 });
 
                 var taskmodelo = frmCA.chromeBrowser.EvaluateScriptAsync(modelo);
