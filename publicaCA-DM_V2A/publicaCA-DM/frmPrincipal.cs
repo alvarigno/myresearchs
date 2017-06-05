@@ -144,6 +144,8 @@ namespace publicaCA_DM
                 string strcarroceria = "";
                 string strotros = "";
                 string striconoprecio = "";
+                string strcilindrada = "";
+                string strcolor = "";
                 string script = "(function() {return document.getElementById('patente').value;})();";
                 string marca = "(function(){ var e = document.getElementById('cod_marca');return e.options[e.selectedIndex].text;})();";
                 string modelo = "(function(){ var e = document.getElementById('modelo');return e.options[e.selectedIndex].text;})();";
@@ -158,7 +160,9 @@ namespace publicaCA_DM
                 string carroceria = "(function(){ var e = document.getElementById('carroceria');return e.options[e.selectedIndex].text;})();";
                 string otros = "(function(){ return document.getElementById('txtOtros').value;})();";
                 string iconoprecio = "(function(){ var e = document.getElementById('tipomoneda');return e.options[e.selectedIndex].text;})();";
-                
+                string cilindrada = "(function(){ var e = document.getElementById('cilindrada');return e.options[e.selectedIndex].text;})();";
+                string color = "(function(){ return document.getElementById('color').value;})();";
+
                 var task = frmCA.chromeBrowser.EvaluateScriptAsync(script);
                 task.ContinueWith(t =>
                 {
@@ -369,6 +373,24 @@ namespace publicaCA_DM
                     taskdistancia.Dispose();
                 });
 
+                //Cilindrada - engineSize
+                var taskcilindrada = frmCA.chromeBrowser.EvaluateScriptAsync(cilindrada);
+                taskcilindrada.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+                            strcilindrada = response.Result.ToString();
+                            string strscriptmarca = "document.getElementById('engineSize-input').value='" + strcilindrada + "'";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+
+                        }
+                    }
+                    taskcilindrada.Dispose();
+                });
+
                 //Tipo moneda - currencies
                 var tasktipomoneda = frmCA.chromeBrowser.EvaluateScriptAsync(iconoprecio);
                 tasktipomoneda.ContinueWith(t =>
@@ -451,6 +473,38 @@ namespace publicaCA_DM
                         }
                     }
                     taskcarroceria.Dispose();
+                });
+
+                // carga color
+                var taskcolor = frmCA.chromeBrowser.EvaluateScriptAsync(color);
+                taskcolor.ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        var response = t.Result;
+                        if (response.Success && response.Result != null)
+                        {
+
+                            strcolor = response.Result.ToString();
+                            if (strcolor == "") { strcolor = "Otro Color"; }
+                            strcolor = strcolor.ToLower();
+                            strcolor = strcolor.First().ToString().ToUpper() + strcolor.Substring(1);
+                            string strscriptmarca = "var textToFind = '" + strcolor + "';var dd = document.getElementById('colors');for (var i = 0; i < dd.options.length; i++){if (dd.options[i].text === textToFind){dd.selectedIndex = i;dd.options[i].setAttribute('selected', 'selected');break;}}";
+                            //MessageBox.Show(strscriptmarca);
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strscriptmarca);
+                            //frmDM.chromeBrowser2.ExecuteScriptAsync("document.getElementById('brands').onchange();", TimeSpan.FromSeconds(1));
+
+
+                            // Lanzo el evento onchange de la marca en demotores para que se carguen los modelos
+                            string strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                            strJavascript += "nouEvent.initMouseEvent('change', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                            strJavascript += "var objecte = document.getElementById('versions');";
+                            strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                            frmDM.chromeBrowser2.ExecuteScriptAsync(strJavascript);
+
+                        }
+                    }
+                    taskcolor.Dispose();
                 });
 
                 //Otros
