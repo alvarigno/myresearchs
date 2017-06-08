@@ -4,5 +4,6 @@
     {
         public string patente { get; set; }
         public bool nuevo { get; set; }
+        public int distancia { get; set; }
     }
 }
