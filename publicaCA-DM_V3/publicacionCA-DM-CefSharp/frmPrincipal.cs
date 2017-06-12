@@ -24,8 +24,8 @@ namespace publicacionCA_DM_CefSharp
         private readonly Dictionary<string, int> _dictionaryTransmision = new Dictionary<string, int>();
         private readonly Dictionary<string, int> _dictionaryDireccion = new Dictionary<string, int>();
         private readonly Dictionary<string, int> _dictionaryTipoMoneda = new Dictionary<string, int>();
-        public static Dictionary<string, string> DicCarrocerias = new Dictionary<string, string>();
-        public static Dictionary<string, string> DicCarroceriasMotos = new Dictionary<string, string>();
+        public readonly Dictionary<string, string> DicCarrocerias = new Dictionary<string, string>();
+        public readonly Dictionary<string, string> DicCarroceriasMotos = new Dictionary<string, string>();
 
 
         public frmPrincipal()
@@ -188,7 +188,7 @@ namespace publicacionCA_DM_CefSharp
                 //MessageBox.Show("The user selected some text [" + nautomotora + "]");
                 frmDM BDM = new frmDM();
                 BDM.SetAutoMotora(nautomotora);
-
+                //frmDM.browserDM.Load("http://www.demotores.cl/frontend/logout");
             }
            
         }
@@ -628,6 +628,7 @@ namespace publicacionCA_DM_CefSharp
                        * Observación: Si el modelo no se encuentra el select se transforma en un input
                     */
             script = "(function() {return document.getElementById('modelo').value;})();";
+            Thread.Sleep(2500);
             var taskModelo = frmCA.browserCA.EvaluateScriptAsync(script);
             taskModelo.Wait();
             var responseModelo = taskModelo.Result;

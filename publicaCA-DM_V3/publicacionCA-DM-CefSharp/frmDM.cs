@@ -47,27 +47,21 @@ namespace publicacionCA_DM_CefSharp
             browserSettings.FileAccessFromFileUrls = CefState.Enabled;
             browserSettings.UniversalAccessFromFileUrls = CefState.Enabled;
             browserDM.BrowserSettings = browserSettings;
+            int count = 0;
 
             browserDM.LoadingStateChanged += (sender, args) =>
             {
+                
                 //Wait for the Page to finish loading
                 if (args.IsLoading == false)
                 {
                     MapAuto.MapAutomotoras();
+
                     string prova = MapAuto.EncuentraAutomotora(nombreautomotora);
-
-
                     string[] DAccess = AccesoDatos.Form1.GetDataAccess(prova);
-
                     MapAuto.resetdiccionary();
                     string us = DAccess[0].ToString();
                     string pass = DAccess[1].ToString();
-                    if (us == "false" && pass=="false")
-                    {
-                        us = "";
-                        pass = "";
-
-                    }
 
                     if (!browserDM.CanExecuteJavascriptInMainFrame) return;
                     browserDM.ExecuteScriptAsync("document.getElementById('email').value = '"+us+"';");
@@ -77,19 +71,27 @@ namespace publicacionCA_DM_CefSharp
                     strJavascript += "var objecte = document.getElementById('enterAjaxLogin');";
                     strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
                     browserDM.ExecuteScriptAsync(strJavascript);
-
+                    
                     strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
                     strJavascript += "nouEvent.initMouseEvent('click', true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);";
                     strJavascript += "var objecte = document.getElementById('sellLink');";
                     strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
                     browserDM.ExecuteScriptAsync(strJavascript);
 
-                   // strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
-                   // strJavascript +=
-                   //     "nouEvent.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
-                   // strJavascript += "var objecte = document.getElementById('selectVehicleType');";
-                   // strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
-                   // browserDM.ExecuteScriptAsync(strJavascript);
+                    if (prova == "" && count == 0)
+                    {
+
+                        browserDM.Load("http://www.demotores.cl/frontend/logout");
+
+                    }
+                    count = count + 1;
+
+                    // strJavascript = "var nouEvent = document.createEvent('MouseEvents');";
+                    // strJavascript +=
+                    //     "nouEvent.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);";
+                    // strJavascript += "var objecte = document.getElementById('selectVehicleType');";
+                    // strJavascript += "var canceled = !objecte.dispatchEvent(nouEvent);";
+                    // browserDM.ExecuteScriptAsync(strJavascript);
                 }
             };
         }
