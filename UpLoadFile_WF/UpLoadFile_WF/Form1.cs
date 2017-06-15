@@ -186,15 +186,6 @@ namespace UpLoadFile_WF
                     countbutton = countbutton + 1;
                 }
 
-             //   foreach (PictureBox c in ctrls)
-             //   {
-             //       if (countbutton <= 20) { 
-             //       string imagePath = (string)c.Tag;
-             //       listadoimg.Add(imagePath+countbutton);
-             //       }
-             //       countbutton = countbutton + 1;
-             //   }
-
                 foreach (string Txt in listadoimg)
                 {
 
@@ -205,19 +196,6 @@ namespace UpLoadFile_WF
 
                 MessageBox.Show("listado: "+ listadoimg+" - "+listado);
                 listadoimg.Clear();
-                //  List<Control> listControls = new List<Control>();
-                //
-                //  foreach (Control control in p.Controls)
-                //  {
-                //      listControls.Add(control);
-                //  }
-                //
-                //  foreach (Control control in listControls)
-                //  {
-                //      flowLayoutPanel.Controls.Remove(control);
-                //      //control.Dispose();
-                //  }
-
 
             }
         }
