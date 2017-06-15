@@ -19,7 +19,7 @@ namespace UpLoadFile_WF
     {
         private readonly MaterialSkinManager materialSkinManager;
         PictureBox pb;
-        int countbutton = 1;
+        int countbutton = 0;
         public static string item;
         public static List<string> listadoimg = new List<string>();
 
@@ -37,9 +37,7 @@ namespace UpLoadFile_WF
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             // Set the file dialog to filter for graphics files.
-            this.openFileDialog1.Filter =
-                "Images (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" +
-                "All files (*.*)|*.*";
+            this.openFileDialog1.Filter ="Images (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF| All files (*.*)|*.*";
 
             // Allow the user to select multiple images.
             this.openFileDialog1.Multiselect = true;
@@ -175,18 +173,27 @@ namespace UpLoadFile_WF
         public void button2_Click(object sender, EventArgs e)
         {
             string listado = "";
-
-            listadoimg.Clear();
+            countbutton = 0;
+            
             if (pb != null) { 
+
                 Control[] ctrls = flowLayoutPanel.Controls.Find(pb.Name, true);
-                foreach (PictureBox c in ctrls)
+
+                foreach (Control c in ChildControls(flowLayoutPanel))
                 {
-                    if (countbutton <= 20) { 
                     string imagePath = (string)c.Tag;
-                    listadoimg.Add(imagePath+countbutton);
-                    }
+                    listadoimg.Add(imagePath + countbutton);
                     countbutton = countbutton + 1;
                 }
+
+             //   foreach (PictureBox c in ctrls)
+             //   {
+             //       if (countbutton <= 20) { 
+             //       string imagePath = (string)c.Tag;
+             //       listadoimg.Add(imagePath+countbutton);
+             //       }
+             //       countbutton = countbutton + 1;
+             //   }
 
                 foreach (string Txt in listadoimg)
                 {
@@ -197,23 +204,33 @@ namespace UpLoadFile_WF
                 if (listado != "") { listado = listado.Remove(listado.Length - 1); }
 
                 MessageBox.Show("listado: "+ listadoimg+" - "+listado);
-
-
-                List<Control> listControls = new List<Control>();
-
-                foreach (Control control in flowLayoutPanel.Controls)
-                {
-                    listControls.Add(control);
-                }
-
-                foreach (Control control in listControls)
-                {
-                    flowLayoutPanel.Controls.Remove(control);
-                    control.Dispose();
-                }
+                listadoimg.Clear();
+                //  List<Control> listControls = new List<Control>();
+                //
+                //  foreach (Control control in p.Controls)
+                //  {
+                //      listControls.Add(control);
+                //  }
+                //
+                //  foreach (Control control in listControls)
+                //  {
+                //      flowLayoutPanel.Controls.Remove(control);
+                //      //control.Dispose();
+                //  }
 
 
             }
+        }
+
+        private IEnumerable<Control> ChildControls(Control parent)
+        {
+            List<Control> controls = new List<Control>();
+            controls.Add(parent);
+            foreach (Control ctrl in parent.Controls)
+            {
+                controls.AddRange(ChildControls(ctrl));
+            }
+            return controls;
         }
 
         private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
