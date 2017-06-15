@@ -67,6 +67,8 @@ namespace UpLoadFile_WF
                         pb.Height = 100;
                         pb.Width = 100;
                         pb.Image = loadedImage;
+                        pb.Tag = file;
+                        pb.Name = "cajaimg";
 
                         pb.MouseDown += new MouseEventHandler(pbox_MouseDown);
                         pb.DragOver += new DragEventHandler(pbox_DragOver);
@@ -170,8 +172,8 @@ namespace UpLoadFile_WF
                 PictureBox q = (PictureBox)e.Data.GetData(typeof(PictureBox));
                 p.Controls.SetChildIndex(q, myIndex);
 
-                item = listadoimg[myIndex];
-                myIndex = p.Controls.GetChildIndex((sender as PictureBox));
+                //item = listadoimg[myIndex];
+                //myIndex = p.Controls.GetChildIndex((sender as PictureBox));
                 //                listadoimg.RemoveAt(myIndex);
                 //
                 //                listadoimg.Insert(myIndex, item);
@@ -191,12 +193,24 @@ namespace UpLoadFile_WF
         public void button2_Click(object sender, EventArgs e)
         {
 
-            var idx = listadoimg.FindIndex(x => x == Form1.item);
-            var item = listadoimg[idx];
-            listadoimg.Remove(item);
-            listadoimg.Insert(myIndex, item);
+            //  var idx = listadoimg.FindIndex(x => x == Form1.item);
+            //  var item = listadoimg[idx];
+            //  listadoimg.Remove(item);
+            //  listadoimg.Insert(myIndex, item);
 
-            MessageBox.Show("listado: "+ listadoimg+""+ myIndex);
+            listadoimg.Clear();
+            if (pb != null) { 
+                Control[] ctrls = flowLayoutPanel.Controls.Find(pb.Name, true);
+                foreach (PictureBox c in ctrls)
+                {
+                    string imagePath = (string)c.Tag;
+                    listadoimg.Add(imagePath);
+
+                }
+                //MessageBox.Show("listado: "+ listadoimg);
+            }
         }
-    }
+
+
+}
 }
