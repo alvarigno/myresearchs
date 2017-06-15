@@ -192,6 +192,7 @@ namespace UpLoadFile_WF
 
         public void button2_Click(object sender, EventArgs e)
         {
+            string listado = "";
 
             //  var idx = listadoimg.FindIndex(x => x == Form1.item);
             //  var item = listadoimg[idx];
@@ -207,7 +208,16 @@ namespace UpLoadFile_WF
                     listadoimg.Add(imagePath);
 
                 }
-                //MessageBox.Show("listado: "+ listadoimg);
+
+                foreach (string Txt in listadoimg)
+
+                {
+
+                    listado = listado + Txt+",";
+                    
+                }
+                listado = listado.Remove(listado.Length - 1);
+                MessageBox.Show("listado: "+ listadoimg+" - "+listado);
             }
         }
 
