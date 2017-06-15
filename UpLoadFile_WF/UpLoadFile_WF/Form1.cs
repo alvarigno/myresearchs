@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace UpLoadFile_WF
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MaterialForm
     {
+        private readonly MaterialSkinManager materialSkinManager;
         PictureBox pb;
         int myIndex;
          public static string item;
@@ -23,6 +26,11 @@ namespace UpLoadFile_WF
         public Form1()
         {
             InitializeComponent();
+
+            materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
         }
 
@@ -221,6 +229,10 @@ namespace UpLoadFile_WF
             }
         }
 
+        private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
 
-}
+        }
+
+    }
 }
