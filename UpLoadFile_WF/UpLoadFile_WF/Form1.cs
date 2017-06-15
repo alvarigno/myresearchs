@@ -62,15 +62,6 @@ namespace UpLoadFile_WF
                     {
                         pb = new PictureBox();
                         Image loadedImage = Image.FromFile(file);
-                        //pb.Height = loadedImage.Height;
-                        //pb.Width = loadedImage.Width;
-
-                        ///////////////////////////////////mini image///////////////////////////////////////
-                        //Image.GetThumbnailImageAbort myCallback =
-                        //new Image.GetThumbnailImageAbort(ThumbnailCallback);
-                        //Bitmap myBitmap = new Bitmap(loadedImage);
-                        //Image myThumbnail = myBitmap.GetThumbnailImage(100, 100, myCallback, IntPtr.Zero);
-                        ///////////////////////////////////Fin mini image///////////////////////////////////////
 
                         pb.Height = 100;
                         pb.Width = 100;
@@ -83,13 +74,6 @@ namespace UpLoadFile_WF
                         pb.DragOver += new DragEventHandler(pbox_DragOver);
                         pb.AllowDrop = true;
                         pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                        System.Windows.Forms.Button borrar = new System.Windows.Forms.Button();
-                        borrar.Parent = this.pb;
-                        borrar.Name = "btn" + countbutton;
-                        borrar.Click += Borrar_Click;
-                        borrar.Location = new Point(1, 2);      // or whatever you want!!
-                        pb.Location = new Point(3, 4);
 
                         flowLayoutPanel.Controls.Add(pb);
 
@@ -112,48 +96,10 @@ namespace UpLoadFile_WF
 
 
                 }
-            }
-
-            //Random R = new Random();
-            //
-            //    panel1.AutoScroll = true;
-            //    pictureBox1.Parent = panel1;
-            //    pictureBox1.Location = Point.Empty;
-            //    pictureBox1.Image = new Bitmap(3000, 500);
-            //    pictureBox1.ClientSize = pictureBox1.Image.Size;
-            //
-            //    var imgFiles = openFileDialog1.FileNames;
-            //    foreach (string file in imgFiles)
-            //    {
-            //        using (Graphics G = Graphics.FromImage(pictureBox1.Image))
-            //        using (Bitmap bmp = new Bitmap(file))
-            //        {
-            //            if (bmp.Size.Width < 4000)
-            //            {
-            //                for (int i = 0; i < 10; i++)
-            //                    G.DrawImage(bmp, R.Next(100), R.Next(100));
-            //            }
-            //        }
-            //    }
-            
+            }            
 
         }
 
-        private void Borrar_Click(object sender, EventArgs e)
-        {
-            // flowLayoutPanel.Controls.Remove(this.pb); this.pb.Dispose();
-            // if (flowLayoutPanel.Controls.Contains(pb))
-            // {
-            //     this.pb.Click -= new System.EventHandler(this.Borrar_Click);
-            //     flowLayoutPanel.Controls.Remove(this.pb);
-            //     this.pb.Dispose();
-            // 
-            // }
-
-            int posicion = flowLayoutPanel.Controls.IndexOf(pb);
-            MessageBox.Show("posicion: "+ this.pb.Tag+", lugar: "+posicion);
-
-        }
 
         public bool ThumbnailCallback()
         {
@@ -187,14 +133,6 @@ namespace UpLoadFile_WF
                 PictureBox q = (PictureBox)e.Data.GetData(typeof(PictureBox));
                 p.Controls.SetChildIndex(q, myIndex);
 
-                //item = listadoimg[myIndex];
-                //myIndex = p.Controls.GetChildIndex((sender as PictureBox));
-                //                listadoimg.RemoveAt(myIndex);
-                //
-                //                listadoimg.Insert(myIndex, item);
-
-                //listadoimg.Insert(myIndex, q.Image.ToString());
-                //listadoimg.RemoveAt(myIndex);
             }
         }
         void pbox_MouseDown(object sender, MouseEventArgs e)
@@ -218,7 +156,6 @@ namespace UpLoadFile_WF
                 foreach (Control control in listControls)
                 {
                     flowLayoutPanel.Controls.Remove(control);
-               //     control.Dispose();
                 }
                 
                 listControls.RemoveAt(myIndex);
@@ -238,13 +175,6 @@ namespace UpLoadFile_WF
         public void button2_Click(object sender, EventArgs e)
         {
             string listado = "";
-
-            //  var idx = listadoimg.FindIndex(x => x == Form1.item);
-            //  var item = listadoimg[idx];
-            //  listadoimg.Remove(item);
-            //  listadoimg.Insert(myIndex, item);
-
-
 
             listadoimg.Clear();
             if (pb != null) { 
