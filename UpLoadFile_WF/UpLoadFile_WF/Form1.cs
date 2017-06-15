@@ -52,6 +52,7 @@ namespace UpLoadFile_WF
             DialogResult dr = this.openFileDialog1.ShowDialog();
             if (dr == System.Windows.Forms.DialogResult.OK)
             {
+                int countbutton = 0;
                 // Read the files
                 foreach (String file in openFileDialog1.FileNames)
                 {
@@ -77,19 +78,20 @@ namespace UpLoadFile_WF
                         pb.Image = loadedImage;
                         pb.Tag = file;
                         pb.Name = "cajaimg";
+                        pb.Visible = true;
 
                         pb.MouseDown += new MouseEventHandler(pbox_MouseDown);
                         pb.DragOver += new DragEventHandler(pbox_DragOver);
                         pb.AllowDrop = true;
                         pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
+                        
                         System.Windows.Forms.Button borrar = new System.Windows.Forms.Button();
-                        borrar.Parent = pb;
-                        borrar.Click += this.Borrar_Click;
+                        borrar.Parent = this.pb;
+                        borrar.Name = "btn" + countbutton;
+                        borrar.Click += Borrar_Click;
                         borrar.Location = new Point(1, 2);      // or whatever you want!!
                         pb.Location = new Point(3, 4);
 
-                        listadoimg.Add(file);
                         flowLayoutPanel.Controls.Add(pb);
 
                     }
@@ -108,6 +110,8 @@ namespace UpLoadFile_WF
                             + ". You may not have permission to read the file, or " +
                             "it may be corrupt.\n\nReported error: " + ex.Message);
                     }
+
+                    countbutton++;
                 }
             }
 
@@ -136,16 +140,20 @@ namespace UpLoadFile_WF
 
         }
 
-        void Borrar_Click(object sender, EventArgs e)
+        private void Borrar_Click(object sender, EventArgs e)
         {
+            flowLayoutPanel.Controls.Remove(this.pb); this.pb.Dispose();
+            //if (flowLayoutPanel.Controls.Contains(pb))
+            //{
+            //    this.pb.Click -= new System.EventHandler(this.Borrar_Click);
+            //    flowLayoutPanel.Controls.Remove(this.pb);
+            //    this.pb.Dispose();
+            //
+            //}
 
-            if (flowLayoutPanel.Controls.Contains(pb))
-            {
-                this.pb.Click -= new System.EventHandler(this.Borrar_Click);
-                flowLayoutPanel.Controls.Remove(pb);
-                pb.Dispose();
-            }
-            //throw new NotImplementedException();
+            int posicion = flowLayoutPanel.Controls.IndexOf(pb);
+            MessageBox.Show("posicion: "+ this.pb.Tag+", lugar: "+posicion);
+
         }
 
         public bool ThumbnailCallback()
@@ -195,6 +203,27 @@ namespace UpLoadFile_WF
             base.OnMouseDown(e);
             DoDragDrop(sender, DragDropEffects.All);
 
+            ///////////////////////////////////////////Detected positon and click right button on mouse event
+           // if (e.Button == System.Windows.Forms.MouseButtons.Right)
+           // {
+           //     MessageBox.Show("back item is clicked");
+           //
+           //    // if (this.pb.Image != null)
+           //    // {
+           //    //     this.pb.Image.Dispose();
+           //    //     //pb.Parent.Controls.Remove(this.pb);
+           //    // }
+           //    //FlowLayoutPanel p = (FlowLayoutPanel)(sender as PictureBox).Parent;
+           //    //myIndex = p.Controls.GetChildIndex((sender as PictureBox));
+           //    //int uno = this.flowLayoutPanel.Controls.IndexOf(pb);
+           //    //this.pb.Controls.Remove(pb);
+           //
+           // }
+           // else
+           // {
+           //     MessageBox.Show("I will come back.");
+           //     //do your return things here.
+           // }
 
         }
 
