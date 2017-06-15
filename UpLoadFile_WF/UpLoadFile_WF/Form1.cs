@@ -19,7 +19,6 @@ namespace UpLoadFile_WF
     {
         private readonly MaterialSkinManager materialSkinManager;
         PictureBox pb;
-        int myIndex;
         int countbutton = 1;
         public static string item;
         public static List<string> listadoimg = new List<string>();
@@ -51,7 +50,7 @@ namespace UpLoadFile_WF
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = this.openFileDialog1.ShowDialog();
-            if (dr == System.Windows.Forms.DialogResult.OK && countbutton < 21)
+            if (dr == System.Windows.Forms.DialogResult.OK)
             {
 
                 // Read the files
@@ -113,11 +112,6 @@ namespace UpLoadFile_WF
 
 
                 }
-            }
-            else {
-
-                MessageBox.Show("Ya utilizó el máximo de fotografías disponibles");
-
             }
 
             //Random R = new Random();
@@ -186,7 +180,7 @@ namespace UpLoadFile_WF
             {
                 FlowLayoutPanel p = (FlowLayoutPanel)(sender as PictureBox).Parent;
                 //Current Position             
-                myIndex = p.Controls.GetChildIndex((sender as PictureBox));
+                int myIndex = p.Controls.GetChildIndex((sender as PictureBox));
 
 
                 //Dragged to control to location of next picturebox
@@ -208,30 +202,36 @@ namespace UpLoadFile_WF
             base.OnMouseDown(e);
             DoDragDrop(sender, DragDropEffects.All);
 
-            ///////////////////////////////////////////Detected positon and click right button on mouse event
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                MessageBox.Show("back item is clicked");
+            FlowLayoutPanel p = (FlowLayoutPanel)(sender as PictureBox).Parent;
+            int myIndex = p.Controls.GetChildIndex((sender as PictureBox));
 
-                //int posicion = flowLayoutPanel.Controls.IndexOf(pb);
-                //flowLayoutPanel.Controls[posicion].Dispose();
+            if (e.Button == System.Windows.Forms.MouseButtons.Right) {
 
-                // if (this.pb.Image != null)
-                // {
-                //     this.pb.Image.Dispose();
-                //     //pb.Parent.Controls.Remove(this.pb);
-                // }
-                //FlowLayoutPanel p = (FlowLayoutPanel)(sender as PictureBox).Parent;
-                //myIndex = p.Controls.GetChildIndex((sender as PictureBox));
-                //int uno = this.flowLayoutPanel.Controls.IndexOf(pb);
-                //this.pb.Controls.Remove(pb);
+                List<Control> listControls = new List<Control>();
+
+                foreach (Control control in p.Controls)
+                {
+                    listControls.Add(control);
+                    
+                }
+
+                foreach (Control control in listControls)
+                {
+                    flowLayoutPanel.Controls.Remove(control);
+               //     control.Dispose();
+                }
+                
+                listControls.RemoveAt(myIndex);
+
+                foreach (Control control in listControls)
+                {
+                   flowLayoutPanel.Controls.Add(control);
+
+                }
+                listControls.Clear();
 
             }
-            else
-            {
-                MessageBox.Show("I will come back.");
-                //do your return things here.
-            }
+
 
         }
 
@@ -243,6 +243,8 @@ namespace UpLoadFile_WF
             //  var item = listadoimg[idx];
             //  listadoimg.Remove(item);
             //  listadoimg.Insert(myIndex, item);
+
+
 
             listadoimg.Clear();
             if (pb != null) { 
@@ -262,8 +264,25 @@ namespace UpLoadFile_WF
                     listado = listado + Txt+",";
                     
                 }
-                listado = listado.Remove(listado.Length - 1);
+                if (listado != "") { listado = listado.Remove(listado.Length - 1); }
+
                 MessageBox.Show("listado: "+ listadoimg+" - "+listado);
+
+
+                List<Control> listControls = new List<Control>();
+
+                foreach (Control control in flowLayoutPanel.Controls)
+                {
+                    listControls.Add(control);
+                }
+
+                foreach (Control control in listControls)
+                {
+                    flowLayoutPanel.Controls.Remove(control);
+                    control.Dispose();
+                }
+
+
             }
         }
 
