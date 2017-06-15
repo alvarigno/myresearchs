@@ -16,6 +16,8 @@ namespace UpLoadFile_WF
     public partial class Form1 : Form
     {
         PictureBox pb;
+        int myIndex;
+         public static string item;
         public static List<string> listadoimg = new List<string>();
 
         public Form1()
@@ -55,21 +57,21 @@ namespace UpLoadFile_WF
                         //pb.Height = loadedImage.Height;
                         //pb.Width = loadedImage.Width;
 
-                        /////////////////////////////////mini image///////////////////////////////////////
-                        Image.GetThumbnailImageAbort myCallback =
-                        new Image.GetThumbnailImageAbort(ThumbnailCallback);
-                        Bitmap myBitmap = new Bitmap(loadedImage);
-                        Image myThumbnail = myBitmap.GetThumbnailImage(100, 100, myCallback, IntPtr.Zero);
-                        /////////////////////////////////Fin mini image///////////////////////////////////////
+                       ///////////////////////////////////mini image///////////////////////////////////////
+                       //Image.GetThumbnailImageAbort myCallback =
+                       //new Image.GetThumbnailImageAbort(ThumbnailCallback);
+                       //Bitmap myBitmap = new Bitmap(loadedImage);
+                       //Image myThumbnail = myBitmap.GetThumbnailImage(100, 100, myCallback, IntPtr.Zero);
+                       ///////////////////////////////////Fin mini image///////////////////////////////////////
 
                         pb.Height = 100;
                         pb.Width = 100;
-                        pb.Image = myThumbnail;
+                        pb.Image = loadedImage;
 
                         pb.MouseDown += new MouseEventHandler(pbox_MouseDown);
                         pb.DragOver += new DragEventHandler(pbox_DragOver);
                         pb.AllowDrop = true;
-
+                        pb.SizeMode = PictureBoxSizeMode.StretchImage;
 
                         System.Windows.Forms.Button borrar = new System.Windows.Forms.Button();
                         borrar.Parent = pb;
@@ -153,7 +155,7 @@ namespace UpLoadFile_WF
             //throw new NotImplementedException();
         }
 
-        void pbox_DragOver(object sender, DragEventArgs e)
+        public void pbox_DragOver(object sender, DragEventArgs e)
         {
             base.OnDragOver(e);
             // is another dragable
@@ -161,12 +163,21 @@ namespace UpLoadFile_WF
             {
                 FlowLayoutPanel p = (FlowLayoutPanel)(sender as PictureBox).Parent;
                 //Current Position             
-                int myIndex = p.Controls.GetChildIndex((sender as PictureBox));
+                myIndex = p.Controls.GetChildIndex((sender as PictureBox));
+
 
                 //Dragged to control to location of next picturebox
                 PictureBox q = (PictureBox)e.Data.GetData(typeof(PictureBox));
                 p.Controls.SetChildIndex(q, myIndex);
 
+                item = listadoimg[myIndex];
+                myIndex = p.Controls.GetChildIndex((sender as PictureBox));
+                //                listadoimg.RemoveAt(myIndex);
+                //
+                //                listadoimg.Insert(myIndex, item);
+
+                //listadoimg.Insert(myIndex, q.Image.ToString());
+                //listadoimg.RemoveAt(myIndex);
             }
         }
         void pbox_MouseDown(object sender, MouseEventArgs e)
@@ -177,5 +188,15 @@ namespace UpLoadFile_WF
 
         }
 
+        public void button2_Click(object sender, EventArgs e)
+        {
+
+            var idx = listadoimg.FindIndex(x => x == Form1.item);
+            var item = listadoimg[idx];
+            listadoimg.Remove(item);
+            listadoimg.Insert(myIndex, item);
+
+            MessageBox.Show("listado: "+ listadoimg+""+ myIndex);
+        }
     }
 }
