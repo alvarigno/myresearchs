@@ -20,7 +20,8 @@ namespace UpLoadFile_WF
         private readonly MaterialSkinManager materialSkinManager;
         PictureBox pb;
         int myIndex;
-         public static string item;
+        int countbutton = 1;
+        public static string item;
         public static List<string> listadoimg = new List<string>();
 
         public Form1()
@@ -50,14 +51,13 @@ namespace UpLoadFile_WF
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = this.openFileDialog1.ShowDialog();
-            if (dr == System.Windows.Forms.DialogResult.OK)
+            if (dr == System.Windows.Forms.DialogResult.OK && countbutton < 21)
             {
-                int countbutton = 0;
+
                 // Read the files
                 foreach (String file in openFileDialog1.FileNames)
                 {
 
-                    
                     // Create a PictureBox.
                     try
                     {
@@ -66,12 +66,12 @@ namespace UpLoadFile_WF
                         //pb.Height = loadedImage.Height;
                         //pb.Width = loadedImage.Width;
 
-                       ///////////////////////////////////mini image///////////////////////////////////////
-                       //Image.GetThumbnailImageAbort myCallback =
-                       //new Image.GetThumbnailImageAbort(ThumbnailCallback);
-                       //Bitmap myBitmap = new Bitmap(loadedImage);
-                       //Image myThumbnail = myBitmap.GetThumbnailImage(100, 100, myCallback, IntPtr.Zero);
-                       ///////////////////////////////////Fin mini image///////////////////////////////////////
+                        ///////////////////////////////////mini image///////////////////////////////////////
+                        //Image.GetThumbnailImageAbort myCallback =
+                        //new Image.GetThumbnailImageAbort(ThumbnailCallback);
+                        //Bitmap myBitmap = new Bitmap(loadedImage);
+                        //Image myThumbnail = myBitmap.GetThumbnailImage(100, 100, myCallback, IntPtr.Zero);
+                        ///////////////////////////////////Fin mini image///////////////////////////////////////
 
                         pb.Height = 100;
                         pb.Width = 100;
@@ -84,7 +84,7 @@ namespace UpLoadFile_WF
                         pb.DragOver += new DragEventHandler(pbox_DragOver);
                         pb.AllowDrop = true;
                         pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                        
+
                         System.Windows.Forms.Button borrar = new System.Windows.Forms.Button();
                         borrar.Parent = this.pb;
                         borrar.Name = "btn" + countbutton;
@@ -111,8 +111,13 @@ namespace UpLoadFile_WF
                             "it may be corrupt.\n\nReported error: " + ex.Message);
                     }
 
-                    countbutton++;
+
                 }
+            }
+            else {
+
+                MessageBox.Show("Ya utilizó el máximo de fotografías disponibles");
+
             }
 
             //Random R = new Random();
@@ -142,14 +147,14 @@ namespace UpLoadFile_WF
 
         private void Borrar_Click(object sender, EventArgs e)
         {
-            flowLayoutPanel.Controls.Remove(this.pb); this.pb.Dispose();
-            //if (flowLayoutPanel.Controls.Contains(pb))
-            //{
-            //    this.pb.Click -= new System.EventHandler(this.Borrar_Click);
-            //    flowLayoutPanel.Controls.Remove(this.pb);
-            //    this.pb.Dispose();
-            //
-            //}
+            // flowLayoutPanel.Controls.Remove(this.pb); this.pb.Dispose();
+            // if (flowLayoutPanel.Controls.Contains(pb))
+            // {
+            //     this.pb.Click -= new System.EventHandler(this.Borrar_Click);
+            //     flowLayoutPanel.Controls.Remove(this.pb);
+            //     this.pb.Dispose();
+            // 
+            // }
 
             int posicion = flowLayoutPanel.Controls.IndexOf(pb);
             MessageBox.Show("posicion: "+ this.pb.Tag+", lugar: "+posicion);
@@ -204,26 +209,29 @@ namespace UpLoadFile_WF
             DoDragDrop(sender, DragDropEffects.All);
 
             ///////////////////////////////////////////Detected positon and click right button on mouse event
-           // if (e.Button == System.Windows.Forms.MouseButtons.Right)
-           // {
-           //     MessageBox.Show("back item is clicked");
-           //
-           //    // if (this.pb.Image != null)
-           //    // {
-           //    //     this.pb.Image.Dispose();
-           //    //     //pb.Parent.Controls.Remove(this.pb);
-           //    // }
-           //    //FlowLayoutPanel p = (FlowLayoutPanel)(sender as PictureBox).Parent;
-           //    //myIndex = p.Controls.GetChildIndex((sender as PictureBox));
-           //    //int uno = this.flowLayoutPanel.Controls.IndexOf(pb);
-           //    //this.pb.Controls.Remove(pb);
-           //
-           // }
-           // else
-           // {
-           //     MessageBox.Show("I will come back.");
-           //     //do your return things here.
-           // }
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                MessageBox.Show("back item is clicked");
+
+                //int posicion = flowLayoutPanel.Controls.IndexOf(pb);
+                //flowLayoutPanel.Controls[posicion].Dispose();
+
+                // if (this.pb.Image != null)
+                // {
+                //     this.pb.Image.Dispose();
+                //     //pb.Parent.Controls.Remove(this.pb);
+                // }
+                //FlowLayoutPanel p = (FlowLayoutPanel)(sender as PictureBox).Parent;
+                //myIndex = p.Controls.GetChildIndex((sender as PictureBox));
+                //int uno = this.flowLayoutPanel.Controls.IndexOf(pb);
+                //this.pb.Controls.Remove(pb);
+
+            }
+            else
+            {
+                MessageBox.Show("I will come back.");
+                //do your return things here.
+            }
 
         }
 
@@ -241,13 +249,14 @@ namespace UpLoadFile_WF
                 Control[] ctrls = flowLayoutPanel.Controls.Find(pb.Name, true);
                 foreach (PictureBox c in ctrls)
                 {
+                    if (countbutton <= 20) { 
                     string imagePath = (string)c.Tag;
-                    listadoimg.Add(imagePath);
-
+                    listadoimg.Add(imagePath+countbutton);
+                    }
+                    countbutton = countbutton + 1;
                 }
 
                 foreach (string Txt in listadoimg)
-
                 {
 
                     listado = listado + Txt+",";
