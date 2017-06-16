@@ -145,21 +145,6 @@ namespace UpLoadFile_WF
 
                 List<Control> listControls = new List<Control>();
 
-                // ContextMenu mnuContextMenu = new ContextMenu();
-                // MenuItem mnuItemNew = new MenuItem();
-                // MenuItem mnuItemOpen = new MenuItem();
-                // mnuItemNew.Text = "&New";
-                // mnuItemOpen.Text = "&Open";
-                // mnuContextMenu.MenuItems.Add(mnuItemNew);
-                // mnuContextMenu.MenuItems.Add(mnuItemOpen);
-                // MenuItem mnuItemOpenWith = new MenuItem();
-                // mnuItemOpenWith.Text = "Open &With...";
-                // mnuItemOpen.MenuItems.Add(mnuItemOpenWith);
-                // mnuContextMenu.MenuItems.Add("&Close");
-                // pb.ContextMenu = mnuContextMenu;
-
-               // MessageBox.Show("Botón derecho elimina la selección");
-
                  foreach (Control control in p.Controls)
                  {
                      listControls.Add(control);
