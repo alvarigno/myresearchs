@@ -264,8 +264,10 @@ namespace UpLoadFile_WF
                     listadoimg.Add(imagePath + countbutton);
                     countbutton = countbutton + 1;
                 }
-
-                foreach (string Txt in listadoimg)
+                listadoimg.RemoveAt(0);
+                String[] myArray = listadoimg.ToArray();
+                //carga listado en string
+                foreach (string Txt in myArray)
                 {
 
                     listado = listado + Txt+",";
