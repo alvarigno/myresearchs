@@ -158,7 +158,7 @@ namespace UpLoadFile_WF
                 // mnuContextMenu.MenuItems.Add("&Close");
                 // pb.ContextMenu = mnuContextMenu;
 
-                MessageBox.Show("Botón derecho elimina la selección");
+               // MessageBox.Show("Botón derecho elimina la selección");
 
                  foreach (Control control in p.Controls)
                  {
