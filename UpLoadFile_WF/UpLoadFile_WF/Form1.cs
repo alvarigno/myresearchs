@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using System.IO;
 
 namespace UpLoadFile_WF
 {
@@ -32,6 +33,66 @@ namespace UpLoadFile_WF
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
+            ///inicializa las propiedades de drag and drop
+            flowLayoutPanel.AllowDrop = true;
+            flowLayoutPanel.DragEnter += new DragEventHandler(Form1_DragEnter);
+            flowLayoutPanel.DragDrop += new DragEventHandler(Form1_DragDrop);
+
+        }
+
+        /// <summary>
+        /// Funciones de drag and drop
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Move;
+        }
+
+        void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files) {
+
+                // Create a PictureBox.
+                try
+                {
+                    pb = new PictureBox();
+                    Image loadedImage = Image.FromFile(file);
+
+                    pb.Height = 100;
+                    pb.Width = 100;
+                    pb.Image = loadedImage;
+                    pb.Tag = file;
+                    pb.Name = "cajaimg";
+                    pb.Visible = true;
+
+                    pb.MouseDown += new MouseEventHandler(pbox_MouseDown);
+                    pb.DragOver += new DragEventHandler(pbox_DragOver);
+                    pb.AllowDrop = true;
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                    flowLayoutPanel.Controls.Add(pb);
+
+                }
+                catch (SecurityException ex)
+                {
+                    // The user lacks appropriate permissions to read files, discover paths, etc.
+                    MessageBox.Show("Security error. Please contact your administrator for details.\n\n" +
+                        "Error message: " + ex.Message + "\n\n" +
+                        "Details (send to Support):\n\n" + ex.StackTrace
+                    );
+                }
+                catch (Exception ex)
+                {
+                    // Could not load the image - probably related to Windows file system permissions.
+                    MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\'))
+                        + ". You may not have permission to read the file, or " +
+                        "it may be corrupt.\n\nReported error: " + ex.Message);
+                }
+
+            }
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -45,6 +106,11 @@ namespace UpLoadFile_WF
 
         }
 
+        /// <summary>
+        /// Función que ejecuta la vista browser de dialogo de carga de archivos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = this.openFileDialog1.ShowDialog();
@@ -98,7 +164,10 @@ namespace UpLoadFile_WF
 
         }
 
-
+        /// <summary>
+        /// Generación del atributo de vista en miniatura de la imagen.
+        /// </summary>
+        /// <returns></returns>
         public bool ThumbnailCallback()
         {
             return false;
@@ -116,6 +185,11 @@ namespace UpLoadFile_WF
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// funciones de drag and drop dentro del panel de carga de picturebox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void pbox_DragOver(object sender, DragEventArgs e)
         {
             base.OnDragOver(e);
@@ -170,6 +244,11 @@ namespace UpLoadFile_WF
 
         }
 
+        /// <summary>
+        /// Función de botón de carga de objetos en varios contenedores.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void button2_Click(object sender, EventArgs e)
         {
             string listado = "";
@@ -200,6 +279,11 @@ namespace UpLoadFile_WF
             }
         }
 
+        /// <summary>
+        /// Función que busca de forma recursiva todos los picturebox dentro de flowlayerpanel.
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <returns></returns>
         private IEnumerable<Control> ChildControls(Control parent)
         {
             List<Control> controls = new List<Control>();
