@@ -261,8 +261,8 @@ namespace UpLoadFile_WF
                 foreach (Control c in ChildControls(flowLayoutPanel))
                 {
                     string imagePath = (string)c.Tag;
-                    listadoimg.Add(imagePath + countbutton);
-                    countbutton = countbutton + 1;
+                    listadoimg.Add(imagePath);
+                    
                 }
                 listadoimg.RemoveAt(0);
                 String[] myArray = listadoimg.ToArray();
@@ -270,8 +270,8 @@ namespace UpLoadFile_WF
                 foreach (string Txt in myArray)
                 {
 
-                    listado = listado + Txt+",";
-                    
+                    listado = listado + Txt+"("+countbutton+"),";
+                    countbutton = countbutton + 1;
                 }
                 if (listado != "") { listado = listado.Remove(listado.Length - 1); }
 
