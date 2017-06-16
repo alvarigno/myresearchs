@@ -71,7 +71,7 @@ namespace UpLoadFile_WF
                         pb.MouseDown += new MouseEventHandler(pbox_MouseDown);
                         pb.DragOver += new DragEventHandler(pbox_DragOver);
                         pb.AllowDrop = true;
-                        pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pb.SizeMode = PictureBoxSizeMode.StretchImage;                        
 
                         flowLayoutPanel.Controls.Add(pb);
 
@@ -145,25 +145,40 @@ namespace UpLoadFile_WF
 
                 List<Control> listControls = new List<Control>();
 
-                foreach (Control control in p.Controls)
-                {
-                    listControls.Add(control);
-                    
-                }
+               // ContextMenu mnuContextMenu = new ContextMenu();
+               // MenuItem mnuItemNew = new MenuItem();
+               // MenuItem mnuItemOpen = new MenuItem();
+               // mnuItemNew.Text = "&New";
+               // mnuItemOpen.Text = "&Open";
+               // mnuContextMenu.MenuItems.Add(mnuItemNew);
+               // mnuContextMenu.MenuItems.Add(mnuItemOpen);
+               // MenuItem mnuItemOpenWith = new MenuItem();
+               // mnuItemOpenWith.Text = "Open &With...";
+               // mnuItemOpen.MenuItems.Add(mnuItemOpenWith);
+               // mnuContextMenu.MenuItems.Add("&Close");
+               // pb.ContextMenu = mnuContextMenu;
 
-                foreach (Control control in listControls)
-                {
-                    flowLayoutPanel.Controls.Remove(control);
-                }
                 
-                listControls.RemoveAt(myIndex);
 
-                foreach (Control control in listControls)
-                {
-                   flowLayoutPanel.Controls.Add(control);
-
-                }
-                listControls.Clear();
+                 foreach (Control control in p.Controls)
+                 {
+                     listControls.Add(control);
+                     
+                 }
+                
+                 foreach (Control control in listControls)
+                 {
+                     flowLayoutPanel.Controls.Remove(control);
+                 }
+                 
+                 listControls.RemoveAt(myIndex);
+                
+                 foreach (Control control in listControls)
+                 {
+                    flowLayoutPanel.Controls.Add(control);
+                
+                 }
+                 listControls.Clear();
 
             }
 
@@ -210,6 +225,7 @@ namespace UpLoadFile_WF
             }
             return controls;
         }
+
 
         private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
