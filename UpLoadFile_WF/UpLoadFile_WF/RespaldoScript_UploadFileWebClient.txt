@@ -1,0 +1,169 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UpLoadFile_WF
+{
+    class RespaldoScript_UploadFileWebClient
+    {
+        public List<string> Uploadimage(String[] imglist)
+        {
+            uploadfile(imglist);
+            var filters = new String[] { "jpg" };
+            var files = imglist;
+            List<string> fotos = new List<string>();
+
+            try
+            {
+
+                string urlUploadPhotoServer = "http://www.demotores.cl/frontend/upload";
+
+                foreach (var img in files)
+                {
+
+
+
+
+
+
+                    byte[] image = imgToByteArray(img);
+
+
+                    using (var client = new HttpClient())
+                    {
+
+
+
+
+
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        Uri uri = new Uri(img);
+                        string filename = System.IO.Path.GetFileName(uri.LocalPath);
+
+                        var content = new MultipartFormDataContent();
+                        var imageContent = new ByteArrayContent(image);
+
+                        //content.Add(imageContent, Path.GetFileName(img), filename);
+                        //imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+                        //imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                        // imageContent.Headers.ContentType = MediaTypeWithQualityHeaderValue.Parse("multipart/form-data");
+                        System.Net.ServicePointManager.Expect100Continue = false;
+
+
+                        //var requestContent = new MultipartFormDataContent();
+                        //    here you can specify boundary if you need---^
+                        //var imageContent = new ByteArrayContent(ImageData);
+                        imageContent.Headers.ContentType = MediaTypeWithQualityHeaderValue.Parse("multipart/form-data");
+                        //                            MediaTypeHeaderValue.Parse("image/jpeg");
+
+                        content.Add(imageContent, Path.GetFileName(img), filename);
+
+                        //return client.PostAsync(url, requestContent);
+
+
+                        //  using (var response = client.PostAsync(urlUploadPhotoServer, content).Result)
+                        //  {
+                        //      if (response.IsSuccessStatusCode)
+                        //      {
+                        //          var csnFile = response.Content.ReadAsStringAsync().Result;
+                        //          fotos.Add(csnFile);
+                        //      }
+                        //  }
+
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                        using (var content2 = new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture)))
+                        {
+                            content2.Add(new StreamContent(new MemoryStream(image)), Path.GetFileName(img), filename);
+
+                            using (var message = client.PostAsync(urlUploadPhotoServer, content2).Result)
+                            {
+                                string input = message.Content.ReadAsStringAsync().Result;
+
+                                // return !string.IsNullOrWhiteSpace(input) ? Regex.Match(input, @"http://\w*\.directupload\.net/images/\d*/\w*\.[a-z]{3}").Value : null;
+                            }
+                        }
+
+
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        //HttpContent stringContent = new StringContent("multipart/form-data");
+                        //HttpContent fileStreamContent = new StreamContent(imageContent);
+                        //HttpContent bytesContent = new ByteArrayContent(paramFileBytes);
+                        ////using (var client = new HttpClient())
+                        //using (var formData = new MultipartFormDataContent())
+                        //{
+                        //    formData.Add(stringContent, "param1", "param1");
+                        //    formData.Add(fileStreamContent, "file1", "file1");
+                        //    formData.Add(bytesContent, "file2", "file2");
+                        //    var response = client.PostAsync(urlUploadPhotoServer, formData).Result;
+                        //    if (!response.IsSuccessStatusCode)
+                        //    {
+                        //        var csnFile = response.Content.ReadAsStringAsync().Result;
+                        //        fotos.Add(csnFile);
+                        //    }
+                        //
+                        //}
+
+                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //   client.DefaultRequestHeaders.Add("Content-Type", "multipart/form-data");
+                        //
+                        //   using (var response = client.PostAsync(urlUploadPhotoServer, content).Result)
+                        //   {
+                        //       if (response.IsSuccessStatusCode)
+                        //       {
+                        //           var csnFile = response.Content.ReadAsStringAsync().Result;
+                        //           fotos.Add(csnFile);
+                        //       }
+                        //   }
+
+
+                        //  HttpClient wc = new HttpClient();
+                        //  wc.BaseAddress = new Uri(urlUploadPhotoServer);
+                        //  wc.DefaultRequestHeaders
+                        //        .Accept
+                        //        .Add(new MediaTypeWithQualityHeaderValue("multipart/form-data"));//ACCEPT header
+                        //
+                        //  HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "upload");
+                        //  request.Content = content;
+                        //
+                        //  wc.SendAsync(request)
+                        //        .ContinueWith(responseTask =>
+                        //        {
+                        //            Console.WriteLine("Response: {0}", responseTask.Result);
+                        //        });
+
+
+                        //  using (var wc = new WebClient())
+                        //  {
+                        //    string carga =  wc.UploadData(urlUploadPhotoServer, "POST", image).ToString();
+                        //  }
+
+                    }
+
+
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine("error: " + e.Message);
+
+            }
+
+            fotos = uploadfile(imglist);
+
+            return fotos;
+        }
+
+
+    }
+
+}
