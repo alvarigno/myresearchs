@@ -24,6 +24,8 @@ namespace UpLoadFile_WF
         public static string item;
         public static List<string> listadoimg = new List<string>();
         public static String[] listadoimagenes;
+        public static String[] myImagenesArray;
+        public static List<string> imgcargadasenservidor = new List<string>();
 
         public Form1()
         {
@@ -266,16 +268,16 @@ namespace UpLoadFile_WF
                     
                 }
                 listadoimg.RemoveAt(0);
-                String[] myArray = CargaArreglo(listadoimg);
+                myImagenesArray = CargaArreglo(listadoimg);
                 //carga listado en string
-                foreach (string Txt in myArray)
+                foreach (string Txt in myImagenesArray)
                 {
 
                     listado = listado + Txt+"("+countbutton+"),";
                     countbutton = countbutton + 1;
                 }
                 if (listado != "") { listado = listado.Remove(listado.Length - 1); }
-
+                EnviaImgToDMImgServer();
                 MessageBox.Show("listado: "+ listadoimg+" - "+listado);
                 listadoimg.Clear();
 
@@ -328,6 +330,27 @@ namespace UpLoadFile_WF
 
         }
 
+
+
+        public void EnviaImgToDMImgServer()
+        {
+
+            DM_ImgUploadServer uploadserver = new DM_ImgUploadServer();
+
+            //carga Var Global con listado de nombres de imagenes en servidor de DM//
+            imgcargadasenservidor = uploadserver.Uploadimage(myImagenesArray);
+
+            string txt = "";
+
+            foreach (var file in imgcargadasenservidor) {
+
+                txt = txt + file+" - ";
+
+            }
+
+            MessageBox.Show("cargados: "+txt);
+
+        }
 
         /*
                private void subirImágenesToolStripMenuItem_Click(object sender, EventArgs e)
