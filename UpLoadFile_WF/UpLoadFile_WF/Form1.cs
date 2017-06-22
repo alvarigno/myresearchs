@@ -23,6 +23,7 @@ namespace UpLoadFile_WF
         int countbutton = 0;
         public static string item;
         public static List<string> listadoimg = new List<string>();
+        public static String[] listadoimagenes;
 
         public Form1()
         {
@@ -265,7 +266,7 @@ namespace UpLoadFile_WF
                     
                 }
                 listadoimg.RemoveAt(0);
-                String[] myArray = listadoimg.ToArray();
+                String[] myArray = CargaArreglo(listadoimg);
                 //carga listado en string
                 foreach (string Txt in myArray)
                 {
@@ -312,5 +313,49 @@ namespace UpLoadFile_WF
         {
 
         }
+
+        public String[] CargaArreglo(List<string> data) {
+
+            listadoimagenes = data.ToArray();
+
+            return listadoimagenes;
+        }
+
+        public String[] retornaArray() {
+
+            String[] dataarray = listadoimagenes;
+            return dataarray;
+
+        }
+
+
+        /*
+               private void subirImágenesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            using (var f = new UpLoadFile_WF.Form1() { Owner = this })
+            {
+                f.ShowDialog();
+                myImagenesArray = UpLoadFile_WF.Form1.listadoimagenes;
+            }
+
+            string dataimg = "";
+            if (myImagenesArray != null) {
+
+                foreach (String txt in myImagenesArray)
+                {
+
+                    dataimg = dataimg + txt + ";";
+                }
+
+                if (dataimg != "") { dataimg = dataimg.Remove(dataimg.Length - 1); }
+
+                MessageBox.Show("Listado de imágenes: " + dataimg);
+
+            }
+
+        }
+         */
+
     }
 }
