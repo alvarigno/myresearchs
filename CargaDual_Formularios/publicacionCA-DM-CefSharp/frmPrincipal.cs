@@ -25,7 +25,8 @@ namespace publicacionCA_DM_CefSharp
         public static Dictionary<string, string> DicCarroceriasMotos = new Dictionary<string, string>();
         public static bool ScriptCargado = false;
         public static String[] myImagenesArray;
-        public static List<string> imgcargadasenservidor = new List<string>();
+        public static List<string> imgcargadasenservidordm = new List<string>();
+        public static List<string> imgcargadasenservidorca = new List<string>();
 
 
         public frmPrincipal()
@@ -187,21 +188,38 @@ namespace publicacionCA_DM_CefSharp
             */
             if (ScriptCargado == false) //Si no se ha cargado
             {
-                ////Carga img dentro de formulario via JQuery
-                if (imgcargadasenservidor != null) {
+                ////Carga img dentro del formulario DeMotores via JQuery
+                if (imgcargadasenservidordm != null) {
 
-                    string scriptcompelto = "";
-                    foreach (var fname in imgcargadasenservidor)
+                    string scriptcompeltodm = "";
+                    foreach (var fname in imgcargadasenservidordm)
                     {
 
-                        scriptcompelto = scriptcompelto + "<div class='item-desarrollofotos' style='width:90px;height:85px;float:left;margin:2px 2px;'><img style='width:100%;height:80%;' src='http://images.demotores.cl/post/tmp/siteposting/"+fname+"'><div class='del-item-foto' style='margin-top: -12px;' onclick='eliminar(this)'>eliminar</div></div>";
+                        scriptcompeltodm = scriptcompeltodm + "<div class='item-desarrollofotos' style='width:90px;height:85px;float:left;margin:2px 2px;'><img style='width:100%;height:80%;' src='http://images.demotores.cl/post/tmp/siteposting/"+fname+"'><div class='del-item-foto' style='margin-top: -12px;' onclick='eliminar(this)'>eliminar</div></div>";
                     
 
                     }
                     string adddiv = "<div id='wrap-fotos'></div>";
-                    frmDM.browserDM.ExecuteScriptAsync("$('#fotos').append(\""+adddiv+"\");$('#wrap-fotos').append(\"" + scriptcompelto+ "\");$('#wrap-fotos').sortable({cursor: 'move',items: 'div',start: function(event, ui) {},stop : function(event, ui) {actualizaFotos();},placeholder : 'placeholder'});function actualizaFotos() { var aImg = [], tot = 0;$.each($('#fotos').find('img'), function(i, e) {if (tot < 24){ aImg.push($(e).attr('src').replace('http://images.demotores.cl/post/tmp/siteposting/', ''));tot++;} });$('#returnedFilesNames').val(aImg.join(','));$('#returnedFiles').val(aImg.join(','));}");
+                    frmDM.browserDM.ExecuteScriptAsync("$('#fotos').append(\""+adddiv+"\");$('#wrap-fotos').append(\"" + scriptcompeltodm+ "\");$('#wrap-fotos').sortable({cursor: 'move',items: 'div',start: function(event, ui) {},stop : function(event, ui) {actualizaFotos();},placeholder : 'placeholder'});function actualizaFotos() { var aImg = [], tot = 0;$.each($('#fotos').find('img'), function(i, e) {if (tot < 24){ aImg.push($(e).attr('src').replace('http://images.demotores.cl/post/tmp/siteposting/', ''));tot++;} });$('#returnedFilesNames').val(aImg.join(','));$('#returnedFiles').val(aImg.join(','));}");
                 }
 
+                //Carga dimg dentro del formulario de Chileautos via JQuery
+
+                
+
+                if (imgcargadasenservidorca != null) {
+
+                    string scriptcompletoca = "";
+                    foreach (var fname in imgcargadasenservidorca) {
+
+                        scriptcompletoca = scriptcompletoca + "<div class='claUpload-imgPreview'><input type='hidden' class='hiddenNameImg' value='"+fname+"'><div class='claUpload-btnCloseImg' title='Borrar foto'></div><img src='"+fname+"' style='height:100%; width: 100%;'></div>";
+
+                    }
+                    frmCA.browserCA.ExecuteScriptAsync("$('#claUpload-photos').append(\""+scriptcompletoca+"\")");
+                }
+
+
+                
                 frmDM.browserDM.ExecuteScriptAsync(@"var totFiles = 0;
                    $('#noflash').remove();
                    $('#SWFUploaderDiv').remove();
@@ -1124,6 +1142,7 @@ namespace publicacionCA_DM_CefSharp
 
                 if (dataimg != "") { dataimg = dataimg.Remove(dataimg.Length - 1); }
                 EnviaImgToDMImgServer();
+                EnviaImgToCAImgServer();
                 MessageBox.Show("Listado de imágenes: " + dataimg);
 
             }
@@ -1140,14 +1159,32 @@ namespace publicacionCA_DM_CefSharp
             }
         }
 
+        /// <summary>
+        /// Sube listado de array into DeMotores ImageServer
+        /// </summary>
         public void EnviaImgToDMImgServer() {
 
             DM_ImgUploadServer uploadserver = new DM_ImgUploadServer();
 
             //carga Var Global con listado de nombres de imagenes en servidor de DM//
-            imgcargadasenservidor = uploadserver.Uploadimage(myImagenesArray);
+            imgcargadasenservidordm = uploadserver.Uploadimage(myImagenesArray);
 
         }
+
+        /// <summary>
+        /// Sube listado de array into Chileautos ImageServer
+        /// </summary>
+        public void EnviaImgToCAImgServer()
+        {
+
+            CA_ImgUploadServer uploadserver = new CA_ImgUploadServer();
+
+            //carga Var Global con listado de nombres de imagenes en servidor de DM//
+            imgcargadasenservidorca = uploadserver.Uploadimage(myImagenesArray);
+
+        }
+
+        
 
     }
 }
