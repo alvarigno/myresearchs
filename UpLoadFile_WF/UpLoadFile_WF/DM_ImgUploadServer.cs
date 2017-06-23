@@ -30,15 +30,13 @@ namespace UpLoadFile_WF
 
 
 
-        public List<string> Uploadimage(String[] files)
-        {
+        public List<string> Uploadimage(String[] files) {
 
 
             string urlUploadPhotoServer = "http://www.demotores.cl/frontend/upload";
             List<string> fotos = new List<string>();
             WebResponse response = null;
-            foreach (var filePath in files)
-            {
+            foreach (var filePath in files) {
 
                 byte[] image = imgToByteArray(filePath);
 
@@ -59,7 +57,7 @@ namespace UpLoadFile_WF
         public static string HttpUploadFile(string url, string file, string paramName, string contentType, NameValueCollection nvc)
         {
             string result;
-            string retorno = "";
+            string retorno ="";
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
 
