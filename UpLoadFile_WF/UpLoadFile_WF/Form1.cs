@@ -256,7 +256,11 @@ namespace UpLoadFile_WF
         {
             string listado = "";
             countbutton = 0;
-            
+
+            Form2 form2 = new Form2();
+
+            form2.ShowDialog();
+
             if (pb != null) { 
 
                 Control[] ctrls = flowLayoutPanel.Controls.Find(pb.Name, true);
