@@ -12,8 +12,13 @@ namespace UpLoadFile_WF
     public class CA_ImgUploadServer
     {
 
-        public string _urlPhotoServer = "https://staging-chileautos.li.csnstatic.com/chileautos/";
+
+
+        public string _urlPhotoServer = "https://upLoad-chileautos.li.csnstatic.com/chileautos/";
         public string _urlPhotoServerFinal = "https://chileautos.li.csnstatic.com/chileautos/";
+
+        //public string _urlPhotoServer = "https://staging-chileautos.li.csnstatic.com/chileautos/";
+        //public string _urlPhotoServerFinal = "https://staging-chileautos.li.csnstatic.com/chileautos/";
 
         public byte[] imgToByteArray(string inImg)
         {
@@ -30,7 +35,7 @@ namespace UpLoadFile_WF
 
             string categoria = "auto";
             string vendedor = "automotora";
-            
+
             List<string> fotos = new List<string>();
 
             try
@@ -49,8 +54,12 @@ namespace UpLoadFile_WF
 
                     using (var client = new HttpClient())
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages-stg@chileautos.cl");
-                        client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "UdDX6eTJejSYBvTm7CMl");
+                        //client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages-stg@chileautos.cl");
+                        //client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "UdDX6eTJejSYBvTm7CMl");
+
+                        client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages@chileautos.cl");
+                        client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "13Hq0hMLVYweN4bNJVVf");
+
 
                         Uri uri = new Uri(img);
                         string filename = System.IO.Path.GetFileName(uri.LocalPath);
