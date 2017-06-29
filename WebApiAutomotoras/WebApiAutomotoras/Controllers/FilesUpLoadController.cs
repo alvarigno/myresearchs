@@ -18,11 +18,8 @@ namespace WebApiAutomotoras.Controllers
 
         string nombrearchivosubido;
         int sitioprocedencia;
-        string nombrearchivo2;
         string nombrerealarchivo;
-        string uploadFolderPath = "C:\\Users\\Álvaro\\Source\\Repos\\myresearchs\\WebApiAutomotoras\\WebApiAutomotoras\\fileLoaded\\";
-
-        private const string UploadFolder = "uploads";
+        string uploadFolderPath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded\\";
 
         [HttpPost]
         [Route("")]
@@ -109,10 +106,6 @@ namespace WebApiAutomotoras.Controllers
             }
         }
 
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
     }
 }
