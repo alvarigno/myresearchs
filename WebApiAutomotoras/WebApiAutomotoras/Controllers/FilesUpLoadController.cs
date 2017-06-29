@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Http;
 using WebApiAutomotoras.Infrastructure;
 using UpLoadServicesRestWebApiModel;
+using WebApiAutomotoras.App_Code;
+
 
 namespace WebApiAutomotoras.Controllers
 {
@@ -23,9 +25,10 @@ namespace WebApiAutomotoras.Controllers
 
         [HttpPost]
         [Route("")]
+        [CustomCheckLogin]
         public Task<IQueryable<FilesUpLoad>> Post(string nombrearchivo, int sitio)
         {
-
+            string hash = Util.getValueFromHeader("X-KEY");
             nombrearchivosubido = nombrearchivo;
             sitioprocedencia = sitio;
 
