@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SP_apiCLA_CompruebaLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="varchar" Mode="In" />
+          <Parameter Name="esValido" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="SP_apiCLA_LoginModificacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rut" Type="varchar" Mode="In" />
+          <Parameter Name="clave" Type="varchar" Mode="In" />
+          <Parameter Name="key" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_Valida_xKey_Acceso_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="xkey" Type="varchar" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
+          <Parameter Name="nombre" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="baseprod2ModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="baseprod2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="baseprod2Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="SP_Valida_xKey_Acceso_Usuario">
+            <Parameter Name="xkey" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="nombre" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_apiCLA_LoginModificacion">
+            <Parameter Name="rut" Mode="In" Type="String" />
+            <Parameter Name="clave" Mode="In" Type="String" />
+            <Parameter Name="key" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_apiCLA_CompruebaLogin">
+            <Parameter Name="key" Mode="In" Type="String" />
+            <Parameter Name="esValido" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="baseprod2ModelStoreContainer" CdmEntityContainer="baseprod2Entities" >
+          <FunctionImportMapping FunctionImportName="SP_Valida_xKey_Acceso_Usuario" FunctionName="baseprod2Model.Store.SP_Valida_xKey_Acceso_Usuario" />
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_LoginModificacion" FunctionName="baseprod2Model.Store.SP_apiCLA_LoginModificacion" />
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_CompruebaLogin" FunctionName="baseprod2Model.Store.SP_apiCLA_CompruebaLogin" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
