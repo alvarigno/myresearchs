@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Upload</h2>
+<form>
+
+    <input type="file" id="upload" />
+    <input type="text" id="Rut" value=""/>
+    <input type="text" id="PassWord" value="" />
+    <input type="button" value="cargar" id="IdEnviar" />
+    <div id="IdProcesando" class="hidden">cargando...</div>
+</form>
+
+@section Scripts
+{
+<script>
+        $('#IdEnviar').click(function(){
+                // debugger;
+                var rut = $("#Rut").val();
+                var clave = $("#PassWord").val();
+                var hola = { 'rut': '+rut+', 'clave': '+clave+' };
+                $.ajax({
+                    url: "http://localhost:55823/API-CLAAutomotora/Login",
+                    type: "POST",
+                    ContentType: "application/json",
+                    data: hola,
+                    success: function (data) {
+
+                        alert('Exito, posee la siguiente x-key: ' + data.key);
+                        var xkay = data.key;
+                        if (xkay != "") {
+                            //alert("funciona?" + valorretorno);
+                            $("#IdProcesando").removeClass("hidden");
+                            $("#IdEnviar").addClass("hidden");
+                           
+                        }
+                    },
+                    error: function (msg) { alert("Error: Datos ingresados no son válidos, favor de verificar."); }
+                });
+
+        });
+</script>
+}
