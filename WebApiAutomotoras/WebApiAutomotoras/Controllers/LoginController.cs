@@ -27,9 +27,13 @@ namespace WebApiAutomotoras.Controllers
                 database.SP_apiCLA_LoginModificacion(param.rut, param.clave, keyParam);
 
                 if (keyParam.Value.ToString() == "notfound")
+                {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, new { msg = "No existen registros con esos datos" });
+                }
+                else { 
 
-                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Exito", key = keyParam.Value.ToString() });
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Exito", key = keyParam.Value.ToString() });
+                }
             }
             catch (Exception)
             {

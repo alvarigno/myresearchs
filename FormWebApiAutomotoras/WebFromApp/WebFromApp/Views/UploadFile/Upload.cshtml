@@ -6,12 +6,17 @@
 
 <h2>Upload</h2>
 <form>
-
-    <input type="file" id="upload" />
-    <input type="text" id="Rut" value=""/>
-    <input type="text" id="PassWord" value="" />
-    <input type="button" value="cargar" id="IdEnviar" />
-    <div id="IdProcesando" class="hidden">cargando...</div>
+    <div id="idPanelLogin">
+        <input type="text" id="Rut" value=""/>
+        <input type="password" id="PassWord" value="" />
+        <input type="button" value="Acceder" id="IdEnviar" />
+    </div>
+    <div id="IdProcesando" class="hidden">Procesando...</div>
+    <div id="idKey" class="hidden">
+        <div class="datakey"></div>
+        <input type="file" id="fileUpload" />
+        <input type="button" value="cargar archivo" id="IdUpload" />
+    </div>
 </form>
 
 @section Scripts
@@ -21,7 +26,9 @@
                 // debugger;
                 var rut = $("#Rut").val();
                 var clave = $("#PassWord").val();
-                var hola = { 'rut': '+rut+', 'clave': '+clave+' };
+                var hola = { rut: rut, clave: clave };
+                $("#IdProcesando").removeClass("hidden");
+                $("#IdEnviar").addClass("hidden");
                 $.ajax({
                     url: "http://localhost:55823/API-CLAAutomotora/Login",
                     type: "POST",
@@ -29,18 +36,100 @@
                     data: hola,
                     success: function (data) {
 
-                        alert('Exito, posee la siguiente x-key: ' + data.key);
+                        //alert('Exito, posee la siguiente x-key: ' + data.key);
                         var xkay = data.key;
                         if (xkay != "") {
                             //alert("funciona?" + valorretorno);
-                            $("#IdProcesando").removeClass("hidden");
-                            $("#IdEnviar").addClass("hidden");
-                           
+                            $("#IdProcesando").addClass("hidden");
+                            $('#idPanelLogin').addClass("hidden");
+                            $('#idKey').removeClass("hidden");
+                            $('#idKey div.datakey').append("Su x-Key: <span>"+xkay+"</span>");                        
                         }
                     },
                     error: function (msg) { alert("Error: Datos ingresados no son válidos, favor de verificar."); }
                 });
 
+    });
+
+
+    // Variable to store your files
+    var files;
+
+    // Add events
+    $('input[type=file]').on('change', prepareUpload);
+
+    // Grab the files and set them to our variable
+    function prepareUpload(event) {
+        files = event.target.files;
+    }
+
+   // $('#IdUpload').click(function () {
+
+   //     var dataxkey = $('.datakey > span').text();
+   //     var file = $('#upload').val();
+   //     var filename = file.replace(/C:\\fakepath\\/i, '');
+   //
+   //     var data2 = new FormData();
+   //     $.each(files, function (key, value) {
+   //         data2.name = 'file';
+   //         data2.append(key, value);
+   //
+   //         $.ajax({
+   //             url: 'http://localhost:55823/API-CLAAutomotora/Upload?nombrearchivo='+filename+'&sitio=1',
+   //             type: 'POST',
+   //             data: data2,
+   //             contentType: false,
+   //             processData: false,
+   //             headers: {
+   //                 "x-key": dataxkey
+   //             }
+   //         }).success(function (data) {
+   //
+   //             alert('respuesta: ');
+   //
+   //         });
+   //
+   //     });
+
+        $(document).ready(function () {
+
+            $('#IdUpload').on('click', function () {
+
+
+        var dataxkey = $('.datakey > span').text();
+        var file = $('#fileUpload').val();
+        var filename = file.replace(/C:\\fakepath\\/i, '');
+
+                var data = new FormData();
+
+                var files = $("#fileUpload").get(0).files;
+
+                // Add the uploaded image content to the form data collection
+                if (files.length > 0) {
+                    data.append("UploadedImage", files[0]);
+                }
+
+                // Make Ajax request with the contentType = false, and procesDate = false
+                var ajaxRequest = $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:55823/API-CLAAutomotora/Upload?nombrearchivo=' + filename + '&sitio=1',
+                    contentType: false,
+                    processData: false,
+                    headers: { 'x-key': dataxkey },
+                    data: data
+                });
+
+                ajaxRequest.done(function (xhr, textStatus) {
+                    // Do other operation
+                });
+            });
         });
+
+  //  });
+
+
+
+
+
 </script>
 }
