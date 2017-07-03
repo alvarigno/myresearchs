@@ -21,7 +21,7 @@
 
 @section Scripts
 {
-<script>
+<script type="text/javascript">
         $('#IdEnviar').click(function(){
                 // debugger;
                 var rut = $("#Rut").val();
@@ -30,7 +30,7 @@
                 $("#IdProcesando").removeClass("hidden");
                 $("#IdEnviar").addClass("hidden");
                 $.ajax({
-                    url: "http://localhost:55823/API-CLAAutomotora/Login",
+                    url: "http://localhost:9030/API-CLAAutomotora/Login",
                     type: "POST",
                     ContentType: "application/json",
                     data: hola,
@@ -52,83 +52,39 @@
     });
 
 
-    // Variable to store your files
-    var files;
+    $('#fileUpload').change(function (e) {
+        alert(e.target.files);
+        for (var i = 0, len = e.target.files.length; i < len; i++) {
 
-    // Add events
-    $('input[type=file]').on('change', prepareUpload);
+                    var dataxkey = $('.datakey > span').text();
+                    var file = $('#fileUpload').val();
+                    var filename = file.replace(/C:\\fakepath\\/i, '');
+            
+                    fileData = document.getElementById('fileUpload').files[0];
+                    var data = new FormData();
+                    var endpoint = "http://localhost:9030/API-CLAAutomotora/Upload?nombrearchivo=" + fileData.name + "&sitio=1";
 
-    // Grab the files and set them to our variable
-    function prepareUpload(event) {
-        files = event.target.files;
-    }
+                    data.append('file', fileData);
 
-   // $('#IdUpload').click(function () {
-
-   //     var dataxkey = $('.datakey > span').text();
-   //     var file = $('#upload').val();
-   //     var filename = file.replace(/C:\\fakepath\\/i, '');
-   //
-   //     var data2 = new FormData();
-   //     $.each(files, function (key, value) {
-   //         data2.name = 'file';
-   //         data2.append(key, value);
-   //
-   //         $.ajax({
-   //             url: 'http://localhost:55823/API-CLAAutomotora/Upload?nombrearchivo='+filename+'&sitio=1',
-   //             type: 'POST',
-   //             data: data2,
-   //             contentType: false,
-   //             processData: false,
-   //             headers: {
-   //                 "x-key": dataxkey
-   //             }
-   //         }).success(function (data) {
-   //
-   //             alert('respuesta: ');
-   //
-   //         });
-   //
-   //     });
-
-        $(document).ready(function () {
-
-            $('#IdUpload').on('click', function () {
-
-
-        var dataxkey = $('.datakey > span').text();
-        var file = $('#fileUpload').val();
-        var filename = file.replace(/C:\\fakepath\\/i, '');
-
-                var data = new FormData();
-
-                var files = $("#fileUpload").get(0).files;
-
-                // Add the uploaded image content to the form data collection
-                if (files.length > 0) {
-                    data.append("UploadedImage", files[0]);
-                }
-
-                // Make Ajax request with the contentType = false, and procesDate = false
-                var ajaxRequest = $.ajax({
-                    type: "POST",
-                    url: 'http://localhost:55823/API-CLAAutomotora/Upload?nombrearchivo=' + filename + '&sitio=1',
-                    contentType: false,
-                    processData: false,
-                    headers: { 'x-key': dataxkey },
-                    data: data
+                    $.ajax({
+                        type: "POST",
+                        url: endpoint,
+                        headers: { 'x-key': dataxkey },
+                        contentType: 'multipart/form-data',
+                        processData: false,
+                        data: data,
+                        cache: false,
+                        success: function (message) {
+                            alert('Exito' + message);
+                        },
+                        error: function (message) {
+                            alert('Error: ' + message.response);
+                        }
                 });
-
-                ajaxRequest.done(function (xhr, textStatus) {
-                    // Do other operation
-                });
-            });
-        });
-
-  //  });
-
-
-
+            
+            }
+    });
+                
 
 
 </script>

@@ -10,10 +10,12 @@ using System.Web.Http;
 using WebApiAutomotoras.Infrastructure;
 using UpLoadServicesRestWebApiModel;
 using WebApiAutomotoras.App_Code;
+using System.Web.Http.Cors;
 
 
 namespace WebApiAutomotoras.Controllers
 {
+    
     [RoutePrefix("API-CLAAutomotora/Upload")]
     public class FilesUpLoadController : ApiController
     {
@@ -26,7 +28,7 @@ namespace WebApiAutomotoras.Controllers
         [HttpPost]
         [Route("")]
         [CustomCheckLogin]
-        public Task<IQueryable<FilesUpLoad>> Post(string nombrearchivo, int sitio)
+        public Task<IQueryable<FilesUpLoad>> Upload(string nombrearchivo, int sitio)
         {
             string hash = Util.getValueFromHeader("X-KEY");
             nombrearchivosubido = nombrearchivo;
