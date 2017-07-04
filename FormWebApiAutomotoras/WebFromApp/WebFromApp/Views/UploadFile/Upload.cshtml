@@ -30,7 +30,7 @@
                 $("#IdProcesando").removeClass("hidden");
                 $("#IdEnviar").addClass("hidden");
                 $.ajax({
-                    url: "http://localhost:55823/API-CLAAutomotora/Login",
+                    url: "http://localhost:9030/API-CLAAutomotora/Login",
                     type: "POST",
                     ContentType: "application/json",
                     data: hola,
@@ -73,7 +73,7 @@
         formData.append('file', file);
         $.ajax({
             type: "POST",
-            url: "http://localhost:55823/API-CLAAutomotora/Upload?nombrearchivo=" + filename + "&sitio=1",
+            url: "http://localhost:9030/API-CLAAutomotora/Upload?nombrearchivo=" + filename + "&sitio=1",
             headers: headers,
             data: formData,
             dataType: 'json',
