@@ -30,7 +30,7 @@
                 $("#IdProcesando").removeClass("hidden");
                 $("#IdEnviar").addClass("hidden");
                 $.ajax({
-                    url: "http://localhost:9030/API-CLAAutomotora/Login",
+                    url: "http://localhost:55823/API-CLAAutomotora/Login",
                     type: "POST",
                     ContentType: "application/json",
                     data: hola,
@@ -43,7 +43,7 @@
                             $("#IdProcesando").addClass("hidden");
                             $('#idPanelLogin').addClass("hidden");
                             $('#idKey').removeClass("hidden");
-                            $('#idKey div.datakey').append("Su x-Key: <span>"+xkay+"</span>");                        
+                            $('#idKey div.datakey').append("Su x-Key: <span>"+xkay+"</span>");
                         }
                     },
                     error: function (msg) { alert("Error: Datos ingresados no son válidos, favor de verificar."); }
@@ -52,39 +52,41 @@
     });
 
 
-    $('#fileUpload').change(function (e) {
-        alert(e.target.files);
-        for (var i = 0, len = e.target.files.length; i < len; i++) {
+    $('#IdUpload').click(function() {
 
-                    var dataxkey = $('.datakey > span').text();
-                    var file = $('#fileUpload').val();
-                    var filename = file.replace(/C:\\fakepath\\/i, '');
-            
-                    fileData = document.getElementById('fileUpload').files[0];
-                    var data = new FormData();
-                    var endpoint = "http://localhost:9030/API-CLAAutomotora/Upload?nombrearchivo=" + fileData.name + "&sitio=1";
+        SubmitButtonOnclick();
 
-                    data.append('file', fileData);
-
-                    $.ajax({
-                        type: "POST",
-                        url: endpoint,
-                        headers: { 'x-key': dataxkey },
-                        contentType: 'multipart/form-data',
-                        processData: false,
-                        data: data,
-                        cache: false,
-                        success: function (message) {
-                            alert('Exito' + message);
-                        },
-                        error: function (message) {
-                            alert('Error: ' + message.response);
-                        }
-                });
-            
-            }
     });
-                
+
+    function SubmitButtonOnclick() {
+
+        var dataxkey = $('.datakey > span').text();
+        var file01 = $('#fileUpload').val();
+        var filename = file01.replace(/C:\\fakepath\\/i, '');
+
+        var headers = new Array();
+        headers["x-key"] = dataxkey;
+        headers["contentType"] = "application/json; charset=UTF-8";
+
+        var formData = new FormData();
+        var file = document.getElementById("fileUpload").files[0];
+        formData.append('file', file);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:55823/API-CLAAutomotora/Upload?nombrearchivo=" + filename + "&sitio=1",
+            headers: headers,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                alert("Éxito, archivo subido de forma correcta.");
+            },
+            error: function (error) {
+                alert("Error al subir archivo, posiblemente nombre de archivo ya existe.");
+            }
+        });
+    }
 
 
 </script>
