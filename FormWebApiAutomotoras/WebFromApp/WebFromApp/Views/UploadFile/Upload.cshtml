@@ -7,8 +7,8 @@
 <h2>Upload</h2>
 <form>
     <div id="idPanelLogin">
-        <input type="text" id="Rut" value=""/>
-        <input type="password" id="PassWord" value="" />
+        <input type="text" id="Rut" value="" placeholder="ej.:122345648"/>
+        <input type="password" id="PassWord" value="" placeholder="su clave de acceso" />
         <input type="button" value="Acceder" id="IdEnviar" />
     </div>
     <div id="IdProcesando" class="hidden">Procesando...</div>
@@ -17,6 +17,8 @@
         <input type="file" id="fileUpload" />
         <input type="button" value="cargar archivo" id="IdUpload" />
     </div>
+
+    @ViewBag.ip
 </form>
 
 @section Scripts
@@ -38,7 +40,7 @@
 
                         //alert('Exito, posee la siguiente x-key: ' + data.key);
                         var xkay = data.key;
-                        if (xkay != "") {
+                        if (xkay != null) {
                             //alert("funciona?" + valorretorno);
                             $("#IdProcesando").addClass("hidden");
                             $('#idPanelLogin').addClass("hidden");
@@ -46,7 +48,11 @@
                             $('#idKey div.datakey').append("Su x-Key: <span>"+xkay+"</span>");
                         }
                     },
-                    error: function (msg) { alert("Error: Datos ingresados no son válidos, favor de verificar."); }
+                    error: function (msg) {
+                        alert("Error: Datos ingresados no son válidos, favor de verificar.");
+                        $("#IdProcesando").addClass("hidden");
+                        $("#IdEnviar").removeClass("hidden");
+                    }
                 });
 
     });
