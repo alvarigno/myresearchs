@@ -14,6 +14,11 @@
           <Parameter Name="clave" Type="varchar" Mode="In" />
           <Parameter Name="key" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="SP_Valida_ip_x_xkey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="xkey" Type="varchar" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
+          <Parameter Name="ipaddress" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="SP_Valida_xKey_Acceso_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="xkey" Type="varchar" Mode="In" />
           <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
@@ -39,6 +44,11 @@
             <Parameter Name="key" Mode="In" Type="String" />
             <Parameter Name="esValido" Mode="InOut" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="SP_Valida_ip_x_xkey">
+            <Parameter Name="xkey" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="ipaddress" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -49,6 +59,7 @@
           <FunctionImportMapping FunctionImportName="SP_Valida_xKey_Acceso_Usuario" FunctionName="baseprod2Model.Store.SP_Valida_xKey_Acceso_Usuario" />
           <FunctionImportMapping FunctionImportName="SP_apiCLA_LoginModificacion" FunctionName="baseprod2Model.Store.SP_apiCLA_LoginModificacion" />
           <FunctionImportMapping FunctionImportName="SP_apiCLA_CompruebaLogin" FunctionName="baseprod2Model.Store.SP_apiCLA_CompruebaLogin" />
+          <FunctionImportMapping FunctionImportName="SP_Valida_ip_x_xkey" FunctionName="baseprod2Model.Store.SP_Valida_ip_x_xkey" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

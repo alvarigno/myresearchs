@@ -58,5 +58,14 @@ namespace WebApiAutomotoras.Datos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_CompruebaLogin", keyParameter, esValido);
         }
+    
+        public virtual int SP_Valida_ip_x_xkey(string xkey, ObjectParameter respuesta, ObjectParameter ipaddress)
+        {
+            var xkeyParameter = xkey != null ?
+                new ObjectParameter("xkey", xkey) :
+                new ObjectParameter("xkey", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Valida_ip_x_xkey", xkeyParameter, respuesta, ipaddress);
+        }
     }
 }

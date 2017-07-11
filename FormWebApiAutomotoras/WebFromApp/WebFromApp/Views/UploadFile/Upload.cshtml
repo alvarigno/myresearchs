@@ -18,7 +18,7 @@
         <input type="button" value="cargar archivo" id="IdUpload" />
     </div>
 
-    @ViewBag.ip
+   
 </form>
 
 @section Scripts
@@ -32,7 +32,7 @@
                 $("#IdProcesando").removeClass("hidden");
                 $("#IdEnviar").addClass("hidden");
                 $.ajax({
-                    url: "http://localhost:9030/API-CLAAutomotora/Login",
+                    url: "http://172.16.0.93:9030/API-CLAAutomotora/Login",
                     type: "POST",
                     ContentType: "application/json",
                     data: hola,
@@ -79,7 +79,7 @@
         formData.append('file', file);
         $.ajax({
             type: "POST",
-            url: "http://localhost:9030/API-CLAAutomotora/Upload?nombrearchivo=" + filename + "&sitio=1",
+            url: "http://172.16.0.93:9030/API-CLAAutomotora/Upload?nombrearchivo=" + filename + "&sitio=1",
             headers: headers,
             data: formData,
             dataType: 'json',
@@ -89,7 +89,7 @@
                 alert("Éxito, archivo subido de forma correcta.");
             },
             error: function (error) {
-                alert("Error al subir archivo, posiblemente nombre de archivo ya existe.");
+                alert("Error al subir archivo, posiblemente nombre de archivo ya existe o ip de acceso no está registrada.");
             }
         });
     }

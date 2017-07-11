@@ -11,7 +11,8 @@ using WebApiAutomotoras.Infrastructure;
 using UpLoadServicesRestWebApiModel;
 using WebApiAutomotoras.App_Code;
 using System.Web.Http.Cors;
-
+using WebApiAutomotoras.Datos;
+using System.Data.Entity.Core.Objects;
 
 namespace WebApiAutomotoras.Controllers
 {
@@ -31,53 +32,64 @@ namespace WebApiAutomotoras.Controllers
         public Task<IQueryable<FilesUpLoad>> Upload(string nombrearchivo, int sitio)
         {
             string hash = Util.getValueFromHeader("X-KEY");
+            string ipregistrada = VerificaIpAddress(hash);
+            string ipqueaccesa = GetIPAddress();
             nombrearchivosubido = nombrearchivo;
             sitioprocedencia = sitio;
 
-            try
+            if (ipqueaccesa == ipregistrada)
             {
 
-                if (Request.Content.IsMimeMultipartContent())
+                try
                 {
-                    var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
 
-                    var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
+                    if (Request.Content.IsMimeMultipartContent())
                     {
-                        if (t.IsFaulted || t.IsCanceled)
-                        {
-                            throw new HttpResponseException(HttpStatusCode.InternalServerError);
-                        }
+                        var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
 
-                        var fileInfo = streamProvider.FileData.Select(i =>
+                        var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
                         {
-                            var info = new FileInfo(i.LocalFileName);
-                            //var info = new FileInfo(i.Headers.ContentDisposition.FileName);
-                            nombrerealarchivo = info.Name;
-                            Rename(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
-                            string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                            return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
+                            if (t.IsFaulted || t.IsCanceled)
+                            {
+                                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                            }
+
+                            var fileInfo = streamProvider.FileData.Select(i =>
+                            {
+                                var info = new FileInfo(i.LocalFileName);
+                                //var info = new FileInfo(i.Headers.ContentDisposition.FileName);
+                                nombrerealarchivo = info.Name;
+                                Rename(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
+                                string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
+                                return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
+
+                            });
+
+                            return fileInfo.AsQueryable();
 
                         });
 
-                        return fileInfo.AsQueryable();
+                        return task;
+                    }
+                    else
+                    {
+                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "This request is not properly formatted"));
+                    }
 
-                    });
 
-                    return task;
                 }
-                else
+                catch (Exception ex)
                 {
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "This request is not properly formatted"));
+                    //log.Error(ex);
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
                 }
 
+            }
+            else {
+
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "This request is not properly formatted"));
 
             }
-            catch (Exception ex)
-            {
-                //log.Error(ex);
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
-            }
-
         }
 
         public void Rename(string direarchivo, string nombrearchivo, int sitio)
@@ -111,6 +123,46 @@ namespace WebApiAutomotoras.Controllers
             }
         }
 
+        public string VerificaIpAddress(string token) {
+
+            Object ip = "0";
+
+            baseprod2Entities database = new baseprod2Entities();
+            
+            ObjectParameter respuestaParam = new ObjectParameter("respuesta", typeof(bool));
+            ObjectParameter ipaddressParam = new ObjectParameter("ipaddress", typeof(string));
+            database.SP_Valida_ip_x_xkey(token, respuestaParam, ipaddressParam);
+
+            if (Boolean.Parse(respuestaParam.Value.ToString()) == true)
+            {
+                ip = ipaddressParam.Value;
+            }
+            else
+            {
+                HttpContext.Current.Response.AddHeader("authenticationToken", token);
+                HttpContext.Current.Response.AddHeader("authenticationTokenStatus", "NotAuthorized");
+                ip = "0";
+            }
+
+            return ip.ToString();
+        }
+
+        protected string GetIPAddress()
+        {
+            System.Web.HttpContext context = System.Web.HttpContext.Current;
+            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
+                {
+                    return addresses[0];
+                }
+            }
+
+            return context.Request.ServerVariables["REMOTE_ADDR"];
+        }
 
     }
 }
