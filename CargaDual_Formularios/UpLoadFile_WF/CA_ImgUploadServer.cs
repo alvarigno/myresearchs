@@ -12,8 +12,13 @@ namespace UpLoadFile_WF
     public class CA_ImgUploadServer
     {
 
-        public string _urlPhotoServer = "https://staging-chileautos.li.csnstatic.com/chileautos/";
+        
+
+        public string _urlPhotoServer = "https://upLoad-chileautos.li.csnstatic.com/chileautos/";
         public string _urlPhotoServerFinal = "https://chileautos.li.csnstatic.com/chileautos/";
+
+        //public string _urlPhotoServer = "https://staging-chileautos.li.csnstatic.com/chileautos/";
+        //public string _urlPhotoServerFinal = "https://staging-chileautos.li.csnstatic.com/chileautos/";
 
         public byte[] imgToByteArray(string inImg)
         {
@@ -27,7 +32,7 @@ namespace UpLoadFile_WF
 
         public List<string> Uploadimage(String[] files)
         {
-
+            int count = 1;
             string categoria = "auto";
             string vendedor = "automotora";
             
@@ -46,31 +51,37 @@ namespace UpLoadFile_WF
 
                     byte[] image = imgToByteArray(img);
 
-
-                    using (var client = new HttpClient())
-                    {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages-stg@chileautos.cl");
-                        client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "UdDX6eTJejSYBvTm7CMl");
-
-                        Uri uri = new Uri(img);
-                        string filename = System.IO.Path.GetFileName(uri.LocalPath);
-
-                        var content = new MultipartFormDataContent();
-                        var imageContent = new ByteArrayContent(image);
-
-                        content.Add(imageContent, Path.GetFileName(img), filename);
-                        imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
-
-                        using (var response = client.PostAsync(urlUploadPhotoServer + DateTime.Now.ToFileTime() + ".jpg", content).Result)
+                    if (count <= 20) { 
+                        using (var client = new HttpClient())
                         {
-                            if (response.IsSuccessStatusCode)
-                            {
-                                var csnFile = response.Content.ReadAsStringAsync().Result;
-                                fotos.Add(string.Concat(_urlPhotoServerFinal, csnFile));
-                            }
-                        }
+                            //client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages-stg@chileautos.cl");
+                            //client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "UdDX6eTJejSYBvTm7CMl");
 
+                            client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages@chileautos.cl");
+                            client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "13Hq0hMLVYweN4bNJVVf");
+                        
+
+                            Uri uri = new Uri(img);
+                            string filename = System.IO.Path.GetFileName(uri.LocalPath);
+
+                            var content = new MultipartFormDataContent();
+                            var imageContent = new ByteArrayContent(image);
+
+                            content.Add(imageContent, Path.GetFileName(img), filename);
+                            imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+
+                            using (var response = client.PostAsync(urlUploadPhotoServer + DateTime.Now.ToFileTime() + ".jpg", content).Result)
+                            {
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    var csnFile = response.Content.ReadAsStringAsync().Result;
+                                    fotos.Add(string.Concat(_urlPhotoServerFinal, csnFile));
+                                }
+                            }
+
+                        }
                     }
+                    count = count + 1;
 
 
                 }

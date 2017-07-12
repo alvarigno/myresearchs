@@ -32,22 +32,24 @@ namespace UpLoadFile_WF
 
         public List<string> Uploadimage(String[] files) {
 
-
+            int count = 1;
             string urlUploadPhotoServer = "http://www.demotores.cl/frontend/upload";
             List<string> fotos = new List<string>();
             WebResponse response = null;
             foreach (var filePath in files) {
 
-                byte[] image = imgToByteArray(filePath);
+                if(count <= 24) { 
+                    byte[] image = imgToByteArray(filePath);
 
-                string filedir = filePath.ToString();
-                NameValueCollection nvc = new NameValueCollection();
+                    string filedir = filePath.ToString();
+                    NameValueCollection nvc = new NameValueCollection();
 
-                nvc.Add("parm1", "value1");
-                nvc.Add("parm2", "value2");
-                nvc.Add("parm3", "value3");
-                fotos.Add(HttpUploadFile(urlUploadPhotoServer, @filedir, "file", "text/html", nvc));
-
+                    nvc.Add("parm1", "value1");
+                    nvc.Add("parm2", "value2");
+                    nvc.Add("parm3", "value3");
+                    fotos.Add(HttpUploadFile(urlUploadPhotoServer, @filedir, "file", "text/html", nvc));
+                }
+                count = count + 1;
             }
 
             return fotos;
