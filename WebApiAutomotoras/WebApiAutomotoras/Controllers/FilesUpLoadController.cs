@@ -57,7 +57,6 @@ namespace WebApiAutomotoras.Controllers
                             var fileInfo = streamProvider.FileData.Select(i =>
                             {
                                 var info = new FileInfo(i.LocalFileName);
-                                //var info = new FileInfo(i.Headers.ContentDisposition.FileName);
                                 nombrerealarchivo = info.Name;
                                 Rename(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                 string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
