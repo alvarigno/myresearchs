@@ -40,47 +40,69 @@ namespace WebApiAutomotoras.Controllers
             if (ipqueaccesa == ipregistrada)
             {
 
-                try
+                if (validaextension(nombrearchivo))
                 {
 
-                    if (Request.Content.IsMimeMultipartContent())
-                    {
-                        var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
+                    /** validación que archivo.xml sea distinto **/
+                    string rutadirectaarchivo = uploadFolderPath + nombrearchivo;
 
-                        var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
+                    if (!File.Exists(rutadirectaarchivo))
+                    {
+                        try
                         {
-                            if (t.IsFaulted || t.IsCanceled)
+
+                            if (Request.Content.IsMimeMultipartContent())
                             {
-                                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                                var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
+
+                                var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
+                                {
+                                    if (t.IsFaulted || t.IsCanceled)
+                                    {
+                                        throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                                    }
+
+                                    var fileInfo = streamProvider.FileData.Select(i =>
+                                    {
+                                        var info = new FileInfo(i.LocalFileName);
+                                        nombrerealarchivo = info.Name;
+                                        Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
+                                        string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
+                                        return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
+
+                                    });
+
+                                    return fileInfo.AsQueryable();
+
+                                });
+
+                                return task;
+                            }
+                            else
+                            {
+                                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
                             }
 
-                            var fileInfo = streamProvider.FileData.Select(i =>
-                            {
-                                var info = new FileInfo(i.LocalFileName);
-                                nombrerealarchivo = info.Name;
-                                Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
-                                string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
 
-                            });
+                        }
+                        catch (Exception ex)
+                        {
 
-                            return fileInfo.AsQueryable();
+                            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                        }
 
-                        });
-
-                        return task;
                     }
                     else
                     {
-                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "This request is not properly formatted"));
+
+                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", ya existe."));
+
                     }
 
+                } else {
 
-                }
-                catch (Exception ex)
-                {
-                    //log.Error(ex);
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", debe ser extensión '.xml'."));
+
                 }
 
             }
@@ -91,6 +113,13 @@ namespace WebApiAutomotoras.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Modifica el nombre del archivo obtenido del directorio temp de windows.
+        /// </summary>
+        /// <param name="direarchivo"></param>
+        /// <param name="nombrearchivo"></param>
+        /// <param name="sitio"></param>
         public void Renombra(string direarchivo, string nombrearchivo, int sitio)
         {
 
@@ -110,6 +139,7 @@ namespace WebApiAutomotoras.Controllers
 
         }
 
+
         public bool validaextension(string fileName)
         {
             if (fileName.Contains(".xml"))
@@ -121,6 +151,7 @@ namespace WebApiAutomotoras.Controllers
                 return false;
             }
         }
+
         /// <summary>
         /// obtiene la ip registrada en base de datos a través del SP_Valida_ip_x_xkey 
         /// </summary>
@@ -150,6 +181,10 @@ namespace WebApiAutomotoras.Controllers
             return ip.ToString();
         }
 
+        /// <summary>
+        /// obtiene la ip del cliente que accesa al servicio.
+        /// </summary>
+        /// <returns></returns>
         protected string GetIPAddress()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
