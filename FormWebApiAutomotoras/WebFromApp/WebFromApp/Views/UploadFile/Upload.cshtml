@@ -88,8 +88,8 @@
             success: function (data) {
                 alert("Éxito, archivo subido de forma correcta.");
             },
-            error: function (error) {
-                alert("Error al subir archivo, posiblemente nombre de archivo ya existe o ip de acceso no está registrada.");
+            error: function (data) {
+                alert("Error: " + data.responseText);
             }
         });
     }
