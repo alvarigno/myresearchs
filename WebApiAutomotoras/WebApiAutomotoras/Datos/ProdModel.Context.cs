@@ -28,15 +28,6 @@ namespace WebApiAutomotoras.Datos
         }
     
     
-        public virtual int SP_Valida_xKey_Acceso_Usuario(string xkey, ObjectParameter respuesta, ObjectParameter nombre)
-        {
-            var xkeyParameter = xkey != null ?
-                new ObjectParameter("xkey", xkey) :
-                new ObjectParameter("xkey", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Valida_xKey_Acceso_Usuario", xkeyParameter, respuesta, nombre);
-        }
-    
         public virtual int SP_apiCLA_LoginModificacion(string rut, string clave, ObjectParameter key)
         {
             var rutParameter = rut != null ?
@@ -59,13 +50,22 @@ namespace WebApiAutomotoras.Datos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_CompruebaLogin", keyParameter, esValido);
         }
     
-        public virtual int SP_Valida_ip_x_xkey(string xkey, ObjectParameter respuesta, ObjectParameter ipaddress)
+        public virtual int SPR_Valida_ip_x_xkey(string xkey, ObjectParameter respuesta, ObjectParameter ipaddress)
         {
             var xkeyParameter = xkey != null ?
                 new ObjectParameter("xkey", xkey) :
                 new ObjectParameter("xkey", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Valida_ip_x_xkey", xkeyParameter, respuesta, ipaddress);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Valida_ip_x_xkey", xkeyParameter, respuesta, ipaddress);
+        }
+    
+        public virtual int SPR_Valida_xKey_Acceso_Usuario(string xkey, ObjectParameter respuesta, ObjectParameter nombre)
+        {
+            var xkeyParameter = xkey != null ?
+                new ObjectParameter("xkey", xkey) :
+                new ObjectParameter("xkey", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Valida_xKey_Acceso_Usuario", xkeyParameter, respuesta, nombre);
         }
     }
 }

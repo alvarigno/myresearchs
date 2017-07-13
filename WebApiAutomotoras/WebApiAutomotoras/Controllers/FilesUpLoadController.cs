@@ -58,7 +58,7 @@ namespace WebApiAutomotoras.Controllers
                             {
                                 var info = new FileInfo(i.LocalFileName);
                                 nombrerealarchivo = info.Name;
-                                Rename(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
+                                Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                 string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
                                 return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
 
@@ -91,7 +91,7 @@ namespace WebApiAutomotoras.Controllers
             }
         }
 
-        public void Rename(string direarchivo, string nombrearchivo, int sitio)
+        public void Renombra(string direarchivo, string nombrearchivo, int sitio)
         {
 
             if (File.Exists(uploadFolderPath + direarchivo) && validaextension(uploadFolderPath + direarchivo))
@@ -121,7 +121,11 @@ namespace WebApiAutomotoras.Controllers
                 return false;
             }
         }
-
+        /// <summary>
+        /// obtiene la ip registrada en base de datos a través del SP_Valida_ip_x_xkey 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public string VerificaIpAddress(string token) {
 
             Object ip = "0";
@@ -130,7 +134,7 @@ namespace WebApiAutomotoras.Controllers
             
             ObjectParameter respuestaParam = new ObjectParameter("respuesta", typeof(bool));
             ObjectParameter ipaddressParam = new ObjectParameter("ipaddress", typeof(string));
-            database.SP_Valida_ip_x_xkey(token, respuestaParam, ipaddressParam);
+            database.SPR_Valida_ip_x_xkey(token, respuestaParam, ipaddressParam);
 
             if (Boolean.Parse(respuestaParam.Value.ToString()) == true)
             {
