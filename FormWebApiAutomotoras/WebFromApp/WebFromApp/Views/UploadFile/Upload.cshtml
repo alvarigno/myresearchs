@@ -48,8 +48,8 @@
                             $('#idKey div.datakey').append("Su x-Key: <span>"+xkay+"</span>");
                         }
                     },
-                    error: function (msg) {
-                        alert("Error: Datos ingresados no son válidos, favor de verificar.");
+                    error: function (data) {
+                        alert("Error: " + data.responseJSON.msg);
                         $("#IdProcesando").addClass("hidden");
                         $("#IdEnviar").removeClass("hidden");
                     }
