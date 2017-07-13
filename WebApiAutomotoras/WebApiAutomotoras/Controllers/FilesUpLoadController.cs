@@ -86,7 +86,7 @@ namespace WebApiAutomotoras.Controllers
             }
             else {
 
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "This request is not properly formatted"));
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "ip no está registrada."));
 
             }
         }
