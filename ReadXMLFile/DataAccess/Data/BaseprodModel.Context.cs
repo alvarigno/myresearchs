@@ -27,14 +27,13 @@ namespace DataAccess.Data
             throw new UnintentionalCodeFirstException();
         }
     
-    
-        public virtual int SP_Valida_xKey_Acceso_Usuario(string xkey, ObjectParameter respuesta, ObjectParameter nombre)
+        public virtual int SPR_Valida_xKey_Acceso_Usuario(string xkey, ObjectParameter respuesta, ObjectParameter nombre)
         {
             var xkeyParameter = xkey != null ?
                 new ObjectParameter("xkey", xkey) :
                 new ObjectParameter("xkey", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Valida_xKey_Acceso_Usuario", xkeyParameter, respuesta, nombre);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Valida_xKey_Acceso_Usuario", xkeyParameter, respuesta, nombre);
         }
     }
 }

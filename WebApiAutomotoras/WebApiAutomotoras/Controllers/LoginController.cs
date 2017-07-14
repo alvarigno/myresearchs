@@ -8,6 +8,7 @@ using WebApiAutomotoras.Models.Parametros;
 using WebApiAutomotoras.Datos;
 using System.Data.Entity.Core.Objects;
 using System.Net;
+using DataAccess;
 
 
 namespace WebApiAutomotoras.Controllers
@@ -19,7 +20,7 @@ namespace WebApiAutomotoras.Controllers
         [Route("")]
         public HttpResponseMessage login([FromBody] LoginUploadParamModel  param)
         {
-            baseprod2Entities database = new baseprod2Entities();
+            DataAccess.Data.baseprodEntities database = new DataAccess.Data.baseprodEntities();
             ObjectParameter keyParam = new ObjectParameter("key", typeof(string));
 
             try

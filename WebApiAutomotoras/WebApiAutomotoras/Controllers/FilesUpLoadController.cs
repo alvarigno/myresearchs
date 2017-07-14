@@ -13,6 +13,7 @@ using WebApiAutomotoras.App_Code;
 using System.Web.Http.Cors;
 using WebApiAutomotoras.Datos;
 using System.Data.Entity.Core.Objects;
+using DataAccess;
 
 namespace WebApiAutomotoras.Controllers
 {
@@ -161,7 +162,7 @@ namespace WebApiAutomotoras.Controllers
 
             Object ip = "0";
 
-            baseprod2Entities database = new baseprod2Entities();
+            DataAccess.Data.baseprodEntities database = new DataAccess.Data.baseprodEntities();
             
             ObjectParameter respuestaParam = new ObjectParameter("respuesta", typeof(bool));
             ObjectParameter ipaddressParam = new ObjectParameter("ipaddress", typeof(string));

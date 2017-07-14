@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAutomotoras.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpLoadServicesRestWebApiModel", "UpLoadServicesRestWebApiModel\UpLoadServicesRestWebApiModel.csproj", "{45CC223E-70BD-4A84-B952-BB5060FE1E21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{C5A351FA-EB7B-4FEE-B604-F8B0C370F27C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{45CC223E-70BD-4A84-B952-BB5060FE1E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CC223E-70BD-4A84-B952-BB5060FE1E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CC223E-70BD-4A84-B952-BB5060FE1E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A351FA-EB7B-4FEE-B604-F8B0C370F27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A351FA-EB7B-4FEE-B604-F8B0C370F27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A351FA-EB7B-4FEE-B604-F8B0C370F27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A351FA-EB7B-4FEE-B604-F8B0C370F27C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

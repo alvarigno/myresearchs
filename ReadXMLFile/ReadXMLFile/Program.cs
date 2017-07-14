@@ -24,7 +24,7 @@ namespace ReadXMLFile
         static void Main(string[] args)
         {
 
-            XDocument main = XDocument.Load(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)+"\\xml\\base.xml");
+            XDocument main = XDocument.Load(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)+"\\xml\\base_v24.xml");
 
             Console.WriteLine("Revisión de Avisos");
 
