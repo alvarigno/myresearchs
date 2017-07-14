@@ -169,9 +169,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\CustomCheckLogin.cs" />
-    <Compile Include="App_Code\CustomCheckReferer.cs" />
-    <Compile Include="App_Code\Util.cs" />
+    <Content Include="App_Code\CustomCheckLogin.cs" />
+    <Content Include="App_Code\CustomCheckReferer.cs" />
+    <Content Include="App_Code\Util.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -328,6 +328,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{c5a351fa-eb7b-4fee-b604-f8b0c370f27c}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UpLoadServicesRestWebApiModel\UpLoadServicesRestWebApiModel.csproj">
       <Project>{45cc223e-70bd-4a84-b952-bb5060fe1e21}</Project>
       <Name>UpLoadServicesRestWebApiModel</Name>
