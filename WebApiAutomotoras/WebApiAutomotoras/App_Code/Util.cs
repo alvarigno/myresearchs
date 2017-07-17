@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DataAccess;
+using AccesoDatos.Data;
 
 namespace WebApiAutomotoras.App_Code
 {

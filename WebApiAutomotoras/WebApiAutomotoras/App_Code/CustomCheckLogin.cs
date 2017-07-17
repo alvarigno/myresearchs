@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-using DataAccess;
+using AccesoDatos.Data;
 
 namespace WebApiAutomotoras.App_Code
 {
@@ -19,7 +19,7 @@ namespace WebApiAutomotoras.App_Code
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            DataAccess.Data.baseprodEntities database = new DataAccess.Data.baseprodEntities();
+            baseprod2Entities database = new baseprod2Entities();
 
             string token = Util.getValueFromHeader("X-KEY") ?? "";
 

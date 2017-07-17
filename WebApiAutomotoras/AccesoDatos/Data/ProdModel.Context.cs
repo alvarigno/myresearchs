@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApiAutomotoras.Datos
+namespace AccesoDatos.Data
 {
     using System;
     using System.Data.Entity;
@@ -28,6 +28,15 @@ namespace WebApiAutomotoras.Datos
         }
     
     
+        public virtual int SP_apiCLA_CompruebaLogin(string key, ObjectParameter esValido)
+        {
+            var keyParameter = key != null ?
+                new ObjectParameter("key", key) :
+                new ObjectParameter("key", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_CompruebaLogin", keyParameter, esValido);
+        }
+    
         public virtual int SP_apiCLA_LoginModificacion(string rut, string clave, ObjectParameter key)
         {
             var rutParameter = rut != null ?
@@ -39,15 +48,6 @@ namespace WebApiAutomotoras.Datos
                 new ObjectParameter("clave", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_LoginModificacion", rutParameter, claveParameter, key);
-        }
-    
-        public virtual int SP_apiCLA_CompruebaLogin(string key, ObjectParameter esValido)
-        {
-            var keyParameter = key != null ?
-                new ObjectParameter("key", key) :
-                new ObjectParameter("key", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_CompruebaLogin", keyParameter, esValido);
         }
     
         public virtual int SPR_Valida_ip_x_xkey(string xkey, ObjectParameter respuesta, ObjectParameter ipaddress)

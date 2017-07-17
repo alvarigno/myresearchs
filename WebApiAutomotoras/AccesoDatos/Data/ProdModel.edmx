@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="baseprodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <Function Name="SP_apiCLA_CompruebaLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="key" Type="varchar" Mode="In" />
           <Parameter Name="esValido" Type="bit" Mode="InOut" />
@@ -24,30 +24,31 @@
           <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
           <Parameter Name="nombre" Type="varchar" Mode="InOut" />
         </Function>
-        <EntityContainer Name="baseprodModelStoreContainer" />
-      </Schema></edmx:StorageModels>
+        <EntityContainer Name="baseprod2ModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="baseprodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="baseprodEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="SPR_Valida_xKey_Acceso_Usuario">
-            <Parameter Name="xkey" Mode="In" Type="String" />
-            <Parameter Name="respuesta" Mode="InOut" Type="String" />
-            <Parameter Name="nombre" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SPR_Valida_ip_x_xkey">
-            <Parameter Name="xkey" Mode="In" Type="String" />
-            <Parameter Name="respuesta" Mode="InOut" Type="String" />
-            <Parameter Name="ipaddress" Mode="InOut" Type="String" />
+      <Schema Namespace="baseprod2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="baseprod2Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="SP_apiCLA_CompruebaLogin">
+            <Parameter Name="key" Mode="In" Type="String" />
+            <Parameter Name="esValido" Mode="InOut" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_apiCLA_LoginModificacion">
             <Parameter Name="rut" Mode="In" Type="String" />
             <Parameter Name="clave" Mode="In" Type="String" />
             <Parameter Name="key" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SP_apiCLA_CompruebaLogin">
-            <Parameter Name="key" Mode="In" Type="String" />
-            <Parameter Name="esValido" Mode="InOut" Type="Boolean" />
+          <FunctionImport Name="SPR_Valida_ip_x_xkey">
+            <Parameter Name="xkey" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="ipaddress" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SPR_Valida_xKey_Acceso_Usuario">
+            <Parameter Name="xkey" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="nombre" Mode="InOut" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -55,11 +56,11 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="baseprodModelStoreContainer" CdmEntityContainer="baseprodEntities" >
-        <FunctionImportMapping FunctionImportName="SPR_Valida_xKey_Acceso_Usuario" FunctionName="baseprodModel.Store.SPR_Valida_xKey_Acceso_Usuario" />
-          <FunctionImportMapping FunctionImportName="SPR_Valida_ip_x_xkey" FunctionName="baseprodModel.Store.SPR_Valida_ip_x_xkey" />
-          <FunctionImportMapping FunctionImportName="SP_apiCLA_LoginModificacion" FunctionName="baseprodModel.Store.SP_apiCLA_LoginModificacion" />
-          <FunctionImportMapping FunctionImportName="SP_apiCLA_CompruebaLogin" FunctionName="baseprodModel.Store.SP_apiCLA_CompruebaLogin" />
+        <EntityContainerMapping StorageEntityContainer="baseprod2ModelStoreContainer" CdmEntityContainer="baseprod2Entities" >
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_CompruebaLogin" FunctionName="baseprod2Model.Store.SP_apiCLA_CompruebaLogin" />
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_LoginModificacion" FunctionName="baseprod2Model.Store.SP_apiCLA_LoginModificacion" />
+          <FunctionImportMapping FunctionImportName="SPR_Valida_ip_x_xkey" FunctionName="baseprod2Model.Store.SPR_Valida_ip_x_xkey" />
+          <FunctionImportMapping FunctionImportName="SPR_Valida_xKey_Acceso_Usuario" FunctionName="baseprod2Model.Store.SPR_Valida_xKey_Acceso_Usuario" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
