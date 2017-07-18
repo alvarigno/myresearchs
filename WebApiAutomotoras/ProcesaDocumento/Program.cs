@@ -69,7 +69,7 @@ namespace ProcesaDocumento
         
         public static List<PublicacionModel> ExtraeDataXml(XDocument main)
         {
-
+            listado.Clear();
             //recuepra toda la información de cada nodo del XML que está procesando.
             var query = from t in main.Descendants("aviso")
                         select new
@@ -219,24 +219,14 @@ namespace ProcesaDocumento
                     fotos datalocal = new fotos();
 
                     datalocal.url = list.source;
-                    datalocal.name = list.name;
 
                     if (!Directory.Exists(pathfile))
                     {
                         pathfile = CrearDirectorioImagenes(dpublicacion.idfuente.ToString());
                     }
 
-                    if (DescargaImagen(list.source, pathfile))
-                    {
-                        listimagenes.Add(datalocal);
-                    }
-                    else {
-
-                        datalocal.url = list.source;
-                        datalocal.name = "descarga fallida.";
-                        listimagenes.Add(datalocal);
-
-                    }
+                    datalocal.url = DescargaImagen(list.source, pathfile);
+                    listimagenes.Add(datalocal);
                     
 
                 }
@@ -276,10 +266,10 @@ namespace ProcesaDocumento
             return pathfile;
         }
 
-        private static Boolean DescargaImagen(string urlfilename, string namefolder)
+        private static string DescargaImagen(string urlfilename, string namefolder)
         {
             Boolean cargo = false;
-
+            string pathimagen = "";
 
             try
             {
@@ -309,22 +299,20 @@ namespace ProcesaDocumento
 
                             }
                         });
-                    //webClient.DownloadFileAsync(new System.Uri(urlfilename), pathfile + "\\" + filename);
                     webClient.DownloadFile(new System.Uri(urlfilename), pathfile + "\\" + filename);
                     cargo = true;
-                    //listadofotos = listadofotos + pathfile + "\\" + filename + "*";
+                    pathimagen = pathfile + "\\" + filename;
                 }
 
             }
             catch (Exception e)
             {
 
-                //Console.Write(e.Message);
-                //listadofotos = listadofotos + e.Message + "*";
+                pathimagen = e.Message;
                 cargo = false;
             }
 
-            return cargo;
+            return pathimagen;
         }
 
     }

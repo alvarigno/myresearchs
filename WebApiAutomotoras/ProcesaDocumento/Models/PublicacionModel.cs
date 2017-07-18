@@ -83,7 +83,6 @@ namespace ProcesaDocumento.Models
     {
 
         public string url { get; set; }
-        public string name { get; set; }
 
     }
 
