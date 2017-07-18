@@ -13,6 +13,7 @@ using WebApiAutomotoras.App_Code;
 using System.Web.Http.Cors;
 using System.Data.Entity.Core.Objects;
 using AccesoDatos.Data;
+using ProcesaDocumento;
 
 namespace WebApiAutomotoras.Controllers
 {
@@ -68,8 +69,9 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
+                                        PasaDocumentoXml(uploadFolderPath + nombrearchivosubido);
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
-
+                                        
                                     });
 
                                     return fileInfo.AsQueryable();
@@ -200,6 +202,14 @@ namespace WebApiAutomotoras.Controllers
             }
 
             return context.Request.ServerVariables["REMOTE_ADDR"];
+        }
+
+        public static void PasaDocumentoXml(string rutadocumento) {
+
+
+            Program procesa = new Program();
+            procesa.ObtieneDocumentoXml(rutadocumento);
+
         }
 
     }

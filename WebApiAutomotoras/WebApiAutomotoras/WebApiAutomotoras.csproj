@@ -300,6 +300,10 @@
       <Project>{7b8b5161-9755-456e-a6f7-2dc36cf04f9c}</Project>
       <Name>AccesoDatos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProcesaDocumento\ProcesaDocumento.csproj">
+      <Project>{e0311f54-ee66-4bb9-9012-1a6d2952f8bf}</Project>
+      <Name>ProcesaDocumento</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UpLoadServicesRestWebApiModel\UpLoadServicesRestWebApiModel.csproj">
       <Project>{45cc223e-70bd-4a84-b952-bb5060fe1e21}</Project>
       <Name>UpLoadServicesRestWebApiModel</Name>
