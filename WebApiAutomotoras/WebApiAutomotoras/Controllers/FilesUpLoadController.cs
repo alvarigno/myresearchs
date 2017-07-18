@@ -26,6 +26,7 @@ namespace WebApiAutomotoras.Controllers
         int sitioprocedencia;
         string nombrerealarchivo;
         string uploadFolderPath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded\\";
+        Task taskDocumento;
 
         [HttpPost]
         [Route("")]
@@ -70,7 +71,7 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        Task.Run(() => PasaDocumentoXml(nuevoarchivo));
+                                        taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo));
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
                                         
                                     });
@@ -209,9 +210,14 @@ namespace WebApiAutomotoras.Controllers
         private async void PasaDocumentoXml(string rutadocumento)
         {
 
-
             Program procesa = new Program();
             procesa.ObtieneDocumentoXml(rutadocumento);
+            if (taskDocumento.IsCompleted) {
+
+                taskDocumento.Dispose();
+            }
+
+
 
         }
         //protected static void PasaDocumentoXml(string rutadocumento) {
