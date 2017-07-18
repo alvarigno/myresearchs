@@ -78,6 +78,7 @@ namespace ProcesaDocumento
                             patente = t.Attribute("patente").Value,
                             revision = t.Attribute("rdiccionario").Value,
                             sucursal = t.Element("vehiculo").Descendants("sucursal").Attributes("id").FirstOrDefault().Value,
+                            categoria = t.Element("vehiculo").Descendants("categoria").Attributes("id").FirstOrDefault().Value,
                             tipo = t.Element("vehiculo").Descendants("tipo").Attributes("id").FirstOrDefault().Value,
                             txmarca = t.Element("vehiculo").Descendants("marca").FirstOrDefault().Value,
                             marca = t.Element("vehiculo").Descendants("marca").Attributes("id").FirstOrDefault().Value,
@@ -118,6 +119,7 @@ namespace ProcesaDocumento
                 dVehiculo.patente = item.patente;
                 dpublicacion.revision = item.revision;
                 dpublicacion.codCliente = int.Parse(item.sucursal);
+                dVehiculo.categoria = int.Parse(item.categoria);
                 dVehiculo.tipo = item.tipo;
                 dVehiculo.txtmarca = item.txmarca;
                 dVehiculo.marca = int.Parse(item.marca);

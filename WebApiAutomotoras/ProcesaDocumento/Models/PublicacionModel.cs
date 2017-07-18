@@ -23,6 +23,7 @@ namespace ProcesaDocumento.Models
 
         public string patente { get; set; }
         public string tipo { get; set; }
+        public int categoria { get; set; }
         public int marca { get; set; }
         public string txtmarca { get; set; }
         public string modelo { get; set; }

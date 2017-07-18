@@ -5,10 +5,11 @@
     </identificacion>
     <listado>
       <publicaciones>10</publicaciones>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456701" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="0">nombre de sucursal</sucursal>  
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="5">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -48,10 +49,11 @@
               <image source="http://wwww.dominio01.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456702" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="1">nombre de sucursal</sucursal> 
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="3">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -91,10 +93,11 @@
               <image source="http://wwww.dominio02.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456703" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="2">nombre de sucursal</sucursal> 
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="1">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -134,10 +137,11 @@
               <image source="http://wwww.dominio03.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456704" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="0">nombre de sucursal</sucursal>  
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="5">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -177,10 +181,11 @@
               <image source="http://wwww.dominio04.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456705" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="1">nombre de sucursal</sucursal> 
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="3">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -220,10 +225,11 @@
               <image source="http://wwww.dominio05.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456706" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="2">nombre de sucursal</sucursal> 
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="1">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -263,10 +269,11 @@
               <image source="http://wwww.dominio06.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456707" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="0">nombre de sucursal</sucursal>  
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="5">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -306,10 +313,11 @@
               <image source="http://wwww.dominio07.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456708" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="1">nombre de sucursal</sucursal> 
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="3">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -349,10 +357,11 @@
               <image source="http://wwww.dominio08.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456709" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="2">nombre de sucursal</sucursal> 
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="1">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
@@ -392,10 +401,11 @@
               <image source="http://wwww.dominio09.cl/img/imgagen_03.jpg">imgagen_03.jpg</image>
           </fotos>
       </aviso>
-      <aviso id="234567" patente="FFGG56" rdiccionario="S">
+      <aviso id="23456710" patente="FFGG56" rdiccionario="S">
           <vehiculo>
               <sucursal id="2">nombre de sucursal</sucursal> 
-              <tipo id="1">automovil</tipo>
+              <categoria id="1">Autos, camionetas y 4x4</categoria>
+              <tipo id="A">automovil</tipo>
               <marca id="1">VOLVO</marca>
               <modelo>S60</modelo>
               <version>NC</version>
