@@ -77,6 +77,8 @@ namespace ProcesaDocumento.Models
 
         public string llantas { get; set; }
 
+        public string plataforma { get; set; } = "SIA"; //Sistema integración Automotoras
+      
     }
 
     public class fotos

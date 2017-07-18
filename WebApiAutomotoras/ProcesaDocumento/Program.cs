@@ -210,6 +210,7 @@ namespace ProcesaDocumento
                     {
                         dEquipamiento.unicoDueno = list.Value;
                     }
+
                 }
 
                 foreach (var list in item.img)
@@ -268,7 +269,6 @@ namespace ProcesaDocumento
 
         private static string DescargaImagen(string urlfilename, string namefolder)
         {
-            Boolean cargo = false;
             string pathimagen = "";
 
             try
@@ -300,7 +300,6 @@ namespace ProcesaDocumento
                             }
                         });
                     webClient.DownloadFile(new System.Uri(urlfilename), pathfile + "\\" + filename);
-                    cargo = true;
                     pathimagen = pathfile + "\\" + filename;
                 }
 
@@ -309,7 +308,7 @@ namespace ProcesaDocumento
             {
 
                 pathimagen = e.Message;
-                cargo = false;
+
             }
 
             return pathimagen;
