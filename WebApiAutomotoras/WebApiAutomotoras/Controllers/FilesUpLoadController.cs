@@ -32,6 +32,7 @@ namespace WebApiAutomotoras.Controllers
         [CustomCheckLogin]
         public Task<IQueryable<FilesUpLoad>> Upload(string nombrearchivo, int sitio)
         {
+
             string hash = Util.getValueFromHeader("X-KEY");
             string ipregistrada = VerificaIpAddress(hash);
             string ipqueaccesa = GetIPAddress();
@@ -69,7 +70,7 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        PasaDocumentoXml(uploadFolderPath + nombrearchivosubido);
+                                        Task.Run(() => PasaDocumentoXml(nuevoarchivo));
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
                                         
                                     });
@@ -77,8 +78,9 @@ namespace WebApiAutomotoras.Controllers
                                     return fileInfo.AsQueryable();
 
                                 });
-
+                                
                                 return task;
+
                             }
                             else
                             {
@@ -113,6 +115,7 @@ namespace WebApiAutomotoras.Controllers
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "ip no está registrada."));
 
             }
+           
         }
 
 
@@ -128,7 +131,6 @@ namespace WebApiAutomotoras.Controllers
             if (File.Exists(uploadFolderPath + direarchivo) && validaextension(uploadFolderPath + direarchivo))
             {
                 File.Move(uploadFolderPath + direarchivo, uploadFolderPath + nombrearchivo);
-               // insertaDocumentoBD(nombrearchivo, sitio);
                 File.Delete(uploadFolderPath + direarchivo);
             }
             else
@@ -204,13 +206,21 @@ namespace WebApiAutomotoras.Controllers
             return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
-        public static void PasaDocumentoXml(string rutadocumento) {
+        private async void PasaDocumentoXml(string rutadocumento)
+        {
 
 
             Program procesa = new Program();
             procesa.ObtieneDocumentoXml(rutadocumento);
 
         }
+        //protected static void PasaDocumentoXml(string rutadocumento) {
+        //
+        //
+        //    Program procesa = new Program();
+        //    procesa.ObtieneDocumentoXml(rutadocumento);
+        //
+        //}
 
     }
 }

@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using AccesoDatos.Data;
 using ProcesaDocumento.Models;
 using System.Net;
+using SubidaImagenesServer;
 
 namespace ProcesaDocumento
 {
@@ -28,7 +29,6 @@ namespace ProcesaDocumento
             if (revisaxkey(main)) {
 
                 ExtraeDataXml(main);
-
             }
 
         }
@@ -225,8 +225,13 @@ namespace ProcesaDocumento
                     {
                         pathfile = CrearDirectorioImagenes(dpublicacion.idfuente.ToString());
                     }
-
+                    
                     datalocal.url = DescargaImagen(list.source, pathfile);
+
+                    //Carga imagen por imagen en servidor de Chileutos.
+                    UpLoadImageCA UpLoadImg = new UpLoadImageCA();
+                    datalocal.url = UpLoadImg.Uploadimage(datalocal.url);
+
                     listimagenes.Add(datalocal);
                     
 
@@ -234,7 +239,7 @@ namespace ProcesaDocumento
 
                 count = count + 1;
 
-                datavehiculo.plataforma = "SIR"; //Servicio de integración remota.
+                
                 dpublicacion.dVehiculo = dVehiculo;
                 dpublicacion.dEquipamiento = dEquipamiento;
                 dpublicacion.dVehiculo.listadofotos = listimagenes.ToArray();

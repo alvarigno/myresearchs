@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcesaDocumento", "ProcesaDocumento\ProcesaDocumento.csproj", "{E0311F54-EE66-4BB9-9012-1A6D2952F8BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubidaImagenesServer", "SubidaImagenesServer\SubidaImagenesServer.csproj", "{E38AB8E0-37E4-4EAB-B138-4A5ECB6154CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E0311F54-EE66-4BB9-9012-1A6D2952F8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0311F54-EE66-4BB9-9012-1A6D2952F8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0311F54-EE66-4BB9-9012-1A6D2952F8BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E38AB8E0-37E4-4EAB-B138-4A5ECB6154CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E38AB8E0-37E4-4EAB-B138-4A5ECB6154CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E38AB8E0-37E4-4EAB-B138-4A5ECB6154CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E38AB8E0-37E4-4EAB-B138-4A5ECB6154CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
