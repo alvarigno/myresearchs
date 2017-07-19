@@ -138,6 +138,7 @@ namespace ProcesaDocumento
                 dVehiculo.techo = item.techo;
                 dVehiculo.puertas = int.Parse(item.puertas);
                 dVehiculo.comentario = item.comentarios;
+               
 
                 foreach (var list in item.equi)
                 {
@@ -212,6 +213,9 @@ namespace ProcesaDocumento
                     }
 
                 }
+
+                dVehiculo.edicion = GetEdition(item.txmarca, item.modelo, item.version, item.carroceria, int.Parse(item.puertas), int.Parse(item.ano), dEquipamiento.transmision);
+                dVehiculo.uidJato = getCodigoJajoNoJato(item.txmarca, item.modelo, item.version, item.carroceria, int.Parse(item.puertas), int.Parse(item.ano), dEquipamiento.transmision, int.Parse(item.combustible), dVehiculo.edicion, dVehiculo.categoria);
 
                 foreach (var list in item.img)
                 {
@@ -317,6 +321,63 @@ namespace ProcesaDocumento
             }
 
             return pathimagen;
+        }
+
+        private static long getCodigoJajoNoJato(string marca, string modelo, string version, string carroceria, int puertas, int ano, string transmision, int combustible, string edicion, int categoria) {
+
+            long uidJatorespuesta = 0;
+
+            if (edicion == "")
+            {
+
+                edicion = "-";
+            }
+
+            if (transmision == "S")
+            {
+
+                transmision = "A";
+
+            }
+            else
+            {
+
+                transmision = "M";
+
+            }
+
+                bdToolsEntities bdTools = new bdToolsEntities();
+
+                var uidJato = bdTools.bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl(marca, modelo, version, carroceria, puertas, ano, transmision, edicion).FirstOrDefault();
+
+                if (uidJato == null)
+                {
+                    uidJato = bdTools.SP_bdj_getNonJatoID(categoria, marca, modelo, ano, carroceria, transmision, combustible.ToString()).FirstOrDefault();
+
+                }
+
+                uidJatorespuesta = (long)uidJato;
+
+
+            return uidJatorespuesta;
+
+        }
+
+        private static string GetEdition(string marca, string modelo, string version, string carroceria, int puertas, int agno, string trans) {
+
+            string edition = "";
+
+            bdToolsEntities bdTools = new bdToolsEntities();
+
+            var edicion = bdTools.bdj_Ltl_SEL_marca_modelo_version_carroceria_ptas_ano_trans(marca, modelo, version, carroceria, puertas, agno, trans).FirstOrDefault();
+
+            if (String.IsNullOrEmpty(edicion)) {
+
+                edicion = "";
+            }
+
+            return edition = edicion;
+
         }
 
     }

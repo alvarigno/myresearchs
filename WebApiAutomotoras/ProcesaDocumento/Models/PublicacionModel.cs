@@ -28,6 +28,7 @@ namespace ProcesaDocumento.Models
         public string txtmarca { get; set; }
         public string modelo { get; set; }
         public string version { get; set; }
+        public string edicion { get; set; }
         public string carroceria { get; set; }
         public int ano { get; set; }
         public int puertas { get; set; }

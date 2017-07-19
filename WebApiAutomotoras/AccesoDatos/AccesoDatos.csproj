@@ -81,6 +81,13 @@
     <Content Include="Data\ProdModel.edmx.diagram">
       <DependentUpon>ProdModel.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Data\BDToolsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BDToolsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Data\BDToolsModel.edmx.diagram">
+      <DependentUpon>BDToolsModel.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,6 +96,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\BDToolsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BDToolsModel.edmx</DependentUpon>
+      <LastGenOutput>BDToolsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\BDToolsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BDToolsModel.edmx</DependentUpon>
+      <LastGenOutput>BDToolsModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Data\ProdModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ProdModel.Context.cs</LastGenOutput>
@@ -102,6 +119,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BDToolsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDToolsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BDToolsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDToolsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BDToolsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDToolsModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Data\ProdModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

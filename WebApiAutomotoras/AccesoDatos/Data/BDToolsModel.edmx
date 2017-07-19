@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bdToolsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="marca" Type="nvarchar" Mode="In" />
+          <Parameter Name="modelo" Type="nvarchar" Mode="In" />
+          <Parameter Name="version" Type="nvarchar" Mode="In" />
+          <Parameter Name="carroceria" Type="nvarchar" Mode="In" />
+          <Parameter Name="ptas" Type="numeric" Mode="In" />
+          <Parameter Name="ano" Type="numeric" Mode="In" />
+          <Parameter Name="trans" Type="nvarchar" Mode="In" />
+          <Parameter Name="ltl" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="bdj_Ltl_SEL_marca_modelo_version_carroceria_ptas_ano_trans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="marca" Type="nvarchar" Mode="In" />
+          <Parameter Name="modelo" Type="nvarchar" Mode="In" />
+          <Parameter Name="version" Type="nvarchar" Mode="In" />
+          <Parameter Name="carroceria" Type="nvarchar" Mode="In" />
+          <Parameter Name="ptas" Type="numeric" Mode="In" />
+          <Parameter Name="ano" Type="numeric" Mode="In" />
+          <Parameter Name="trans" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_bdj_getNonJatoID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCategoria" Type="numeric" Mode="In" />
+          <Parameter Name="marca" Type="nvarchar" Mode="In" />
+          <Parameter Name="modelo" Type="nvarchar" Mode="In" />
+          <Parameter Name="ano" Type="numeric" Mode="In" />
+          <Parameter Name="carroceria" Type="nvarchar" Mode="In" />
+          <Parameter Name="trans" Type="nvarchar" Mode="In" />
+          <Parameter Name="combustible" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="bdToolsModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdToolsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="bdToolsEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl" ReturnType="Collection(Int64)">
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="modelo" Mode="In" Type="String" />
+            <Parameter Name="version" Mode="In" Type="String" />
+            <Parameter Name="carroceria" Mode="In" Type="String" />
+            <Parameter Name="ptas" Mode="In" Type="Decimal" />
+            <Parameter Name="ano" Mode="In" Type="Decimal" />
+            <Parameter Name="trans" Mode="In" Type="String" />
+            <Parameter Name="ltl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_bdj_getNonJatoID" ReturnType="Collection(Int32)">
+            <Parameter Name="idCategoria" Mode="In" Type="Decimal" />
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="modelo" Mode="In" Type="String" />
+            <Parameter Name="ano" Mode="In" Type="Decimal" />
+            <Parameter Name="carroceria" Mode="In" Type="String" />
+            <Parameter Name="trans" Mode="In" Type="String" />
+            <Parameter Name="combustible" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="bdj_Ltl_SEL_marca_modelo_version_carroceria_ptas_ano_trans" ReturnType="Collection(String)">
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="modelo" Mode="In" Type="String" />
+            <Parameter Name="version" Mode="In" Type="String" />
+            <Parameter Name="carroceria" Mode="In" Type="String" />
+            <Parameter Name="ptas" Mode="In" Type="Decimal" />
+            <Parameter Name="ano" Mode="In" Type="Decimal" />
+            <Parameter Name="trans" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdToolsModelStoreContainer" CdmEntityContainer="bdToolsEntities" >
+          <FunctionImportMapping FunctionImportName="bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl" FunctionName="bdToolsModel.Store.bdj_idJato_SEL_marca_modelo_version_carroceria_ptas_ano_trans_ltl" />
+          <FunctionImportMapping FunctionImportName="SP_bdj_getNonJatoID" FunctionName="bdToolsModel.Store.SP_bdj_getNonJatoID" />
+          <FunctionImportMapping FunctionImportName="bdj_Ltl_SEL_marca_modelo_version_carroceria_ptas_ano_trans" FunctionName="bdToolsModel.Store.bdj_Ltl_SEL_marca_modelo_version_carroceria_ptas_ano_trans" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
