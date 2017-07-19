@@ -212,21 +212,14 @@ namespace WebApiAutomotoras.Controllers
 
             Program procesa = new Program();
             procesa.ObtieneDocumentoXml(rutadocumento);
+
             if (taskDocumento.IsCompleted) {
 
                 taskDocumento.Dispose();
+
             }
-
-
-
+            
         }
-        //protected static void PasaDocumentoXml(string rutadocumento) {
-        //
-        //
-        //    Program procesa = new Program();
-        //    procesa.ObtieneDocumentoXml(rutadocumento);
-        //
-        //}
 
     }
 }
