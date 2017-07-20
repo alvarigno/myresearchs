@@ -43,7 +43,6 @@ namespace ProcesaDocumento.Models
         public int combustible { get; set; }
         public string comentario { get; set; }
         public string[] listadofotos { get; set; }
-        public string plataforma { get; set; } //DATO DE PROCEDENCIA DE LA INSERCCIÓN - APPDESTOCKditec
         public long uidJato { get; set; }
 
     }
@@ -77,6 +76,8 @@ namespace ProcesaDocumento.Models
         public string fwd { get; set; }
 
         public string llantas { get; set; }
+
+        public string consignacion { get; set; }
 
         public string plataforma { get; set; } = "SIA"; //Sistema integración Automotoras
       

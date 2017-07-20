@@ -215,6 +215,11 @@ namespace ProcesaDocumento
                         dEquipamiento.unicoDueno = list.Value;
                     }
 
+                    if (list.Name == "consignacion")
+                    {
+                        dEquipamiento.consignacion = list.Value;
+                    }
+
                 }
 
 
@@ -254,9 +259,23 @@ namespace ProcesaDocumento
                     dpublicacion.dEquipamiento = dEquipamiento;
                     dpublicacion.dVehiculo.listadofotos = listimagenes.ToArray();
 
-                    if (!InsertPublicacion(dpublicacion, nombrearchivo)) {
+                    string[] resultadosinsert = InsertaDatosParaPublicacion(dpublicacion, nombrearchivo);
 
+                    if (!Boolean.Parse(resultadosinsert[0]))
+                    {
 
+                        resultadosinsert = ActualizaDatosParaPublicacion(dpublicacion, nombrearchivo, dpublicacion.idfuente);
+
+                        if (Boolean.Parse(resultadosinsert[0]))
+                        {
+                            //Actualiza Registro con ID de Chileautos
+
+                        }
+
+                    }
+                    else {
+
+                        //Publica datos de vahículo, Retorna ID de Chileautos y Actualiza Registro con idCa y Fecha de Pubglicación.
 
                     }
 
@@ -552,19 +571,41 @@ namespace ProcesaDocumento
             return confirma;
         }
 
-        private static Boolean InsertPublicacion(PublicacionModel dato, string nombre_archivo) {
+        private static string[] InsertaDatosParaPublicacion(PublicacionModel dato, string nombre_archivo) {
 
-            Boolean respuesta = false;
-            
+            string[] resultados = new string[2];
+
             DateTime fecha_i_date = DateTime.Now;
             string fotos = "";
             fotos = string.Join("*", dato.dVehiculo.listadofotos);
 
             baseprod2Entities bdprod = new baseprod2Entities();
-            ObjectParameter respuestasp = new ObjectParameter("respuesta", typeof(bool));
-            var data = bdprod.SPR_Inserta_datos_vehiculos_publicar(dato.idfuente, dato.dEquipamiento.nuevo, dato.dVehiculo.categoria, dato.dVehiculo.tipo, dato.dVehiculo.carroceria, dato.dVehiculo.marca, dato.dVehiculo.modelo, dato.dVehiculo.version, dato.dVehiculo.ano, dato.dVehiculo.precio, dato.dVehiculo.color, dato.dVehiculo.kilom, dato.dVehiculo.motor, dato.dVehiculo.combustible, dato.dVehiculo.cilindrada, dato.dEquipamiento.transmision, dato.dEquipamiento.aireAcon, dato.dVehiculo.tipoDireccion, dato.dEquipamiento.radio, dato.dEquipamiento.alzaVidrios, dato.dEquipamiento.espejos, dato.dEquipamiento.frenosAbs, dato.dEquipamiento.airbag, dato.dEquipamiento.unicoDueno, dato.dEquipamiento.cierreCentral, dato.dEquipamiento.catalitico, dato.dEquipamiento.fwd, dato.dEquipamiento.llantas,  dato.dVehiculo.puertas.ToString(), dato.dEquipamiento.alarma, dato.dVehiculo.techo, dato.dVehiculo.comentario, dato.dVehiculo.patente, fotos, fecha_i_date, dato.codCliente, nombre_archivo, respuestasp);
+            ObjectParameter respuestainsertsp = new ObjectParameter("respuesta", typeof(bool));
+            ObjectParameter idpinsertsp = new ObjectParameter("idinsert", typeof(int));
+            Object data = bdprod.SPR_Inserta_datos_vehiculos_publicar(dato.idfuente, dato.dEquipamiento.nuevo, dato.dVehiculo.categoria, dato.dVehiculo.tipo, dato.dVehiculo.carroceria, dato.dVehiculo.marca, dato.dVehiculo.modelo, dato.dVehiculo.version, dato.dVehiculo.ano, dato.dVehiculo.precio, dato.dVehiculo.color, dato.dVehiculo.kilom, dato.dVehiculo.motor, dato.dVehiculo.combustible, dato.dVehiculo.cilindrada, dato.dEquipamiento.transmision, dato.dEquipamiento.aireAcon, dato.dVehiculo.tipoDireccion, dato.dEquipamiento.radio, dato.dEquipamiento.alzaVidrios, dato.dEquipamiento.espejos, dato.dEquipamiento.frenosAbs, dato.dEquipamiento.airbag, dato.dEquipamiento.unicoDueno, dato.dEquipamiento.cierreCentral, dato.dEquipamiento.catalitico, dato.dEquipamiento.fwd, dato.dEquipamiento.llantas,  dato.dVehiculo.puertas.ToString(), dato.dEquipamiento.alarma, dato.dEquipamiento.consignacion, dato.dVehiculo.techo, dato.dVehiculo.comentario, dato.dVehiculo.patente, fotos, fecha_i_date, dato.codCliente, nombre_archivo, respuestainsertsp, idpinsertsp);
 
-            return respuesta;
+            resultados[0] = respuestainsertsp.Value.ToString();
+            resultados[1] = idpinsertsp.Value.ToString();
+
+            return resultados;
+        }
+
+        private static string[] ActualizaDatosParaPublicacion(PublicacionModel dato, string nombre_archivo, string idfuente)
+        {
+
+            string[] resultados = new string[2];
+            string fotos = "";
+            fotos = string.Join("*", dato.dVehiculo.listadofotos);
+            
+            baseprod2Entities bdprod = new baseprod2Entities();
+            ObjectParameter respuestaactualizacionsp = new ObjectParameter("respuestaupdate", typeof(bool));
+            ObjectParameter idrespuestaactualizacionsp = new ObjectParameter("idregistro", typeof(int));
+            Object data = bdprod.SPR_Actualiza_datos_vehiculos_publicar(dato.idfuente, dato.dEquipamiento.nuevo, dato.dVehiculo.categoria, dato.dVehiculo.tipo, dato.dVehiculo.carroceria, dato.dVehiculo.marca, dato.dVehiculo.modelo, dato.dVehiculo.version, dato.dVehiculo.ano, dato.dVehiculo.precio, dato.dVehiculo.color, dato.dVehiculo.kilom, dato.dVehiculo.motor, dato.dVehiculo.combustible, dato.dVehiculo.cilindrada, dato.dEquipamiento.transmision, dato.dEquipamiento.aireAcon, dato.dVehiculo.tipoDireccion, dato.dEquipamiento.radio, dato.dEquipamiento.alzaVidrios, dato.dEquipamiento.espejos, dato.dEquipamiento.frenosAbs, dato.dEquipamiento.airbag, dato.dEquipamiento.unicoDueno, dato.dEquipamiento.cierreCentral, dato.dEquipamiento.catalitico, dato.dEquipamiento.fwd, dato.dEquipamiento.llantas, dato.dVehiculo.puertas.ToString(), dato.dEquipamiento.alarma, dato.dEquipamiento.consignacion, dato.dVehiculo.techo, dato.dVehiculo.comentario, dato.dVehiculo.patente, fotos, dato.codCliente, nombre_archivo, respuestaactualizacionsp, idrespuestaactualizacionsp);
+            
+            resultados[0] = respuestaactualizacionsp.Value.ToString();
+            resultados[1] = idrespuestaactualizacionsp.Value.ToString();
+
+            return resultados;
         }
 
     }

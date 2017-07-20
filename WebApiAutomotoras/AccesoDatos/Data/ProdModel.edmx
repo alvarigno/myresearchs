@@ -20,6 +20,47 @@
           <Parameter Name="clave" Type="varchar" Mode="In" />
           <Parameter Name="key" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="SPR_Actualiza_datos_vehiculos_publicar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo_auto_origen" Type="varchar" Mode="In" />
+          <Parameter Name="Nuevo_o_usado" Type="varchar" Mode="In" />
+          <Parameter Name="categoria" Type="int" Mode="In" />
+          <Parameter Name="Tipo_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="Carroceria" Type="varchar" Mode="In" />
+          <Parameter Name="Marca" Type="int" Mode="In" />
+          <Parameter Name="Modelo" Type="varchar" Mode="In" />
+          <Parameter Name="Version" Type="varchar" Mode="In" />
+          <Parameter Name="Ano" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="int" Mode="In" />
+          <Parameter Name="Color" Type="varchar" Mode="In" />
+          <Parameter Name="KM" Type="int" Mode="In" />
+          <Parameter Name="motor" Type="varchar" Mode="In" />
+          <Parameter Name="combustible" Type="int" Mode="In" />
+          <Parameter Name="Cilindrada" Type="int" Mode="In" />
+          <Parameter Name="tipo_cambio" Type="varchar" Mode="In" />
+          <Parameter Name="aire_acondicionado" Type="varchar" Mode="In" />
+          <Parameter Name="tipo_direccion" Type="varchar" Mode="In" />
+          <Parameter Name="radio" Type="varchar" Mode="In" />
+          <Parameter Name="alzavidrios_electricos" Type="varchar" Mode="In" />
+          <Parameter Name="espejos_electricos" Type="varchar" Mode="In" />
+          <Parameter Name="frenos_ABS" Type="varchar" Mode="In" />
+          <Parameter Name="airbag" Type="varchar" Mode="In" />
+          <Parameter Name="unico_dueno" Type="varchar" Mode="In" />
+          <Parameter Name="cierre_centralizado" Type="varchar" Mode="In" />
+          <Parameter Name="catalitico" Type="varchar" Mode="In" />
+          <Parameter Name="fwd" Type="varchar" Mode="In" />
+          <Parameter Name="Llantas" Type="varchar" Mode="In" />
+          <Parameter Name="Puertas" Type="varchar" Mode="In" />
+          <Parameter Name="Alarma" Type="varchar" Mode="In" />
+          <Parameter Name="consignacion" Type="varchar" Mode="In" />
+          <Parameter Name="Techo" Type="varchar" Mode="In" />
+          <Parameter Name="comentarios" Type="varchar" Mode="In" />
+          <Parameter Name="patente" Type="varchar" Mode="In" />
+          <Parameter Name="fotos" Type="varchar" Mode="In" />
+          <Parameter Name="sucursal" Type="int" Mode="In" />
+          <Parameter Name="nombre_archivo" Type="varchar" Mode="In" />
+          <Parameter Name="respuestaupdate" Type="varchar" Mode="InOut" />
+          <Parameter Name="idregistro" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="SPR_Inserta_datos_vehiculos_publicar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo_auto_origen" Type="varchar" Mode="In" />
           <Parameter Name="Nuevo_o_usado" Type="varchar" Mode="In" />
@@ -51,6 +92,7 @@
           <Parameter Name="Llantas" Type="varchar" Mode="In" />
           <Parameter Name="Puertas" Type="varchar" Mode="In" />
           <Parameter Name="Alarma" Type="varchar" Mode="In" />
+          <Parameter Name="consignacion" Type="varchar" Mode="In" />
           <Parameter Name="Techo" Type="varchar" Mode="In" />
           <Parameter Name="comentarios" Type="varchar" Mode="In" />
           <Parameter Name="patente" Type="varchar" Mode="In" />
@@ -59,6 +101,7 @@
           <Parameter Name="sucursal" Type="int" Mode="In" />
           <Parameter Name="nombre_archivo" Type="varchar" Mode="In" />
           <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
+          <Parameter Name="idinsert" Type="int" Mode="InOut" />
         </Function>
         <Function Name="SPR_Valida_ip_x_xkey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="xkey" Type="varchar" Mode="In" />
@@ -132,6 +175,7 @@
             <Parameter Name="Llantas" Mode="In" Type="String" />
             <Parameter Name="Puertas" Mode="In" Type="String" />
             <Parameter Name="Alarma" Mode="In" Type="String" />
+            <Parameter Name="consignacion" Mode="In" Type="String" />
             <Parameter Name="Techo" Mode="In" Type="String" />
             <Parameter Name="comentarios" Mode="In" Type="String" />
             <Parameter Name="patente" Mode="In" Type="String" />
@@ -140,6 +184,48 @@
             <Parameter Name="sucursal" Mode="In" Type="Int32" />
             <Parameter Name="nombre_archivo" Mode="In" Type="String" />
             <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="idinsert" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPR_Actualiza_datos_vehiculos_publicar">
+            <Parameter Name="codigo_auto_origen" Mode="In" Type="String" />
+            <Parameter Name="Nuevo_o_usado" Mode="In" Type="String" />
+            <Parameter Name="categoria" Mode="In" Type="Int32" />
+            <Parameter Name="Tipo_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="Carroceria" Mode="In" Type="String" />
+            <Parameter Name="Marca" Mode="In" Type="Int32" />
+            <Parameter Name="Modelo" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="String" />
+            <Parameter Name="Ano" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Int32" />
+            <Parameter Name="Color" Mode="In" Type="String" />
+            <Parameter Name="KM" Mode="In" Type="Int32" />
+            <Parameter Name="motor" Mode="In" Type="String" />
+            <Parameter Name="combustible" Mode="In" Type="Int32" />
+            <Parameter Name="Cilindrada" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_cambio" Mode="In" Type="String" />
+            <Parameter Name="aire_acondicionado" Mode="In" Type="String" />
+            <Parameter Name="tipo_direccion" Mode="In" Type="String" />
+            <Parameter Name="radio" Mode="In" Type="String" />
+            <Parameter Name="alzavidrios_electricos" Mode="In" Type="String" />
+            <Parameter Name="espejos_electricos" Mode="In" Type="String" />
+            <Parameter Name="frenos_ABS" Mode="In" Type="String" />
+            <Parameter Name="airbag" Mode="In" Type="String" />
+            <Parameter Name="unico_dueno" Mode="In" Type="String" />
+            <Parameter Name="cierre_centralizado" Mode="In" Type="String" />
+            <Parameter Name="catalitico" Mode="In" Type="String" />
+            <Parameter Name="fwd" Mode="In" Type="String" />
+            <Parameter Name="Llantas" Mode="In" Type="String" />
+            <Parameter Name="Puertas" Mode="In" Type="String" />
+            <Parameter Name="Alarma" Mode="In" Type="String" />
+            <Parameter Name="consignacion" Mode="In" Type="String" />
+            <Parameter Name="Techo" Mode="In" Type="String" />
+            <Parameter Name="comentarios" Mode="In" Type="String" />
+            <Parameter Name="patente" Mode="In" Type="String" />
+            <Parameter Name="fotos" Mode="In" Type="String" />
+            <Parameter Name="sucursal" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_archivo" Mode="In" Type="String" />
+            <Parameter Name="respuestaupdate" Mode="InOut" Type="String" />
+            <Parameter Name="idregistro" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_apiCLA_Categorias_Result">
@@ -177,6 +263,8 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPR_Inserta_datos_vehiculos_publicar" FunctionName="baseprod2Model.Store.SPR_Inserta_datos_vehiculos_publicar" />
+          <FunctionImportMapping FunctionImportName="SPR_Actualiza_datos_vehiculos_publicar" FunctionName="baseprod2Model.Store.SPR_Actualiza_datos_vehiculos_publicar">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
