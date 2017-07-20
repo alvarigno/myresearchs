@@ -4,7 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SP_apiCLA_CarroceriasCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codCategoria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_apiCLA_Categorias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCategoria" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_apiCLA_CompruebaLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="key" Type="varchar" Mode="In" />
           <Parameter Name="esValido" Type="bit" Mode="InOut" />
@@ -13,6 +19,46 @@
           <Parameter Name="rut" Type="varchar" Mode="In" />
           <Parameter Name="clave" Type="varchar" Mode="In" />
           <Parameter Name="key" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SPR_Inserta_datos_vehiculos_publicar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo_auto_origen" Type="varchar" Mode="In" />
+          <Parameter Name="Nuevo_o_usado" Type="varchar" Mode="In" />
+          <Parameter Name="categoria" Type="int" Mode="In" />
+          <Parameter Name="Tipo_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="Carroceria" Type="varchar" Mode="In" />
+          <Parameter Name="Marca" Type="int" Mode="In" />
+          <Parameter Name="Modelo" Type="varchar" Mode="In" />
+          <Parameter Name="Version" Type="varchar" Mode="In" />
+          <Parameter Name="Ano" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="int" Mode="In" />
+          <Parameter Name="Color" Type="varchar" Mode="In" />
+          <Parameter Name="KM" Type="int" Mode="In" />
+          <Parameter Name="motor" Type="varchar" Mode="In" />
+          <Parameter Name="combustible" Type="int" Mode="In" />
+          <Parameter Name="Cilindrada" Type="int" Mode="In" />
+          <Parameter Name="tipo_cambio" Type="varchar" Mode="In" />
+          <Parameter Name="aire_acondicionado" Type="varchar" Mode="In" />
+          <Parameter Name="tipo_direccion" Type="varchar" Mode="In" />
+          <Parameter Name="radio" Type="varchar" Mode="In" />
+          <Parameter Name="alzavidrios_electricos" Type="varchar" Mode="In" />
+          <Parameter Name="espejos_electricos" Type="varchar" Mode="In" />
+          <Parameter Name="frenos_ABS" Type="varchar" Mode="In" />
+          <Parameter Name="airbag" Type="varchar" Mode="In" />
+          <Parameter Name="unico_dueno" Type="varchar" Mode="In" />
+          <Parameter Name="cierre_centralizado" Type="varchar" Mode="In" />
+          <Parameter Name="catalitico" Type="varchar" Mode="In" />
+          <Parameter Name="fwd" Type="varchar" Mode="In" />
+          <Parameter Name="Llantas" Type="varchar" Mode="In" />
+          <Parameter Name="Puertas" Type="varchar" Mode="In" />
+          <Parameter Name="Alarma" Type="varchar" Mode="In" />
+          <Parameter Name="Techo" Type="varchar" Mode="In" />
+          <Parameter Name="comentarios" Type="varchar" Mode="In" />
+          <Parameter Name="patente" Type="varchar" Mode="In" />
+          <Parameter Name="fotos" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_i_data" Type="datetime" Mode="In" />
+          <Parameter Name="sucursal" Type="int" Mode="In" />
+          <Parameter Name="nombre_archivo" Type="varchar" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
         </Function>
         <Function Name="SPR_Valida_ip_x_xkey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="xkey" Type="varchar" Mode="In" />
@@ -25,8 +71,7 @@
           <Parameter Name="nombre" Type="varchar" Mode="InOut" />
         </Function>
         <EntityContainer Name="baseprod2ModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="baseprod2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -50,7 +95,61 @@
             <Parameter Name="respuesta" Mode="InOut" Type="String" />
             <Parameter Name="nombre" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_apiCLA_Categorias" ReturnType="Collection(baseprod2Model.SP_apiCLA_Categorias_Result)">
+          <Parameter Name="idCategoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_apiCLA_CarroceriasCategoria" ReturnType="Collection(baseprod2Model.SP_apiCLA_CarroceriasCategoria_Result)">
+          <Parameter Name="codCategoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPR_Inserta_datos_vehiculos_publicar">
+            <Parameter Name="codigo_auto_origen" Mode="In" Type="String" />
+            <Parameter Name="Nuevo_o_usado" Mode="In" Type="String" />
+            <Parameter Name="categoria" Mode="In" Type="Int32" />
+            <Parameter Name="Tipo_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="Carroceria" Mode="In" Type="String" />
+            <Parameter Name="Marca" Mode="In" Type="Int32" />
+            <Parameter Name="Modelo" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="String" />
+            <Parameter Name="Ano" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Int32" />
+            <Parameter Name="Color" Mode="In" Type="String" />
+            <Parameter Name="KM" Mode="In" Type="Int32" />
+            <Parameter Name="motor" Mode="In" Type="String" />
+            <Parameter Name="combustible" Mode="In" Type="Int32" />
+            <Parameter Name="Cilindrada" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_cambio" Mode="In" Type="String" />
+            <Parameter Name="aire_acondicionado" Mode="In" Type="String" />
+            <Parameter Name="tipo_direccion" Mode="In" Type="String" />
+            <Parameter Name="radio" Mode="In" Type="String" />
+            <Parameter Name="alzavidrios_electricos" Mode="In" Type="String" />
+            <Parameter Name="espejos_electricos" Mode="In" Type="String" />
+            <Parameter Name="frenos_ABS" Mode="In" Type="String" />
+            <Parameter Name="airbag" Mode="In" Type="String" />
+            <Parameter Name="unico_dueno" Mode="In" Type="String" />
+            <Parameter Name="cierre_centralizado" Mode="In" Type="String" />
+            <Parameter Name="catalitico" Mode="In" Type="String" />
+            <Parameter Name="fwd" Mode="In" Type="String" />
+            <Parameter Name="Llantas" Mode="In" Type="String" />
+            <Parameter Name="Puertas" Mode="In" Type="String" />
+            <Parameter Name="Alarma" Mode="In" Type="String" />
+            <Parameter Name="Techo" Mode="In" Type="String" />
+            <Parameter Name="comentarios" Mode="In" Type="String" />
+            <Parameter Name="patente" Mode="In" Type="String" />
+            <Parameter Name="fotos" Mode="In" Type="String" />
+            <Parameter Name="fecha_i_data" Mode="In" Type="DateTime" />
+            <Parameter Name="sucursal" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_archivo" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SP_apiCLA_Categorias_Result">
+          <Property Type="Int32" Name="idCategoria" Nullable="false" />
+          <Property Type="String" Name="categoria" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_apiCLA_CarroceriasCategoria_Result">
+          <Property Type="String" Name="cod_carroceria" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="carroceria" Nullable="true" MaxLength="35" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -61,6 +160,23 @@
           <FunctionImportMapping FunctionImportName="SP_apiCLA_LoginModificacion" FunctionName="baseprod2Model.Store.SP_apiCLA_LoginModificacion" />
           <FunctionImportMapping FunctionImportName="SPR_Valida_ip_x_xkey" FunctionName="baseprod2Model.Store.SPR_Valida_ip_x_xkey" />
           <FunctionImportMapping FunctionImportName="SPR_Valida_xKey_Acceso_Usuario" FunctionName="baseprod2Model.Store.SPR_Valida_xKey_Acceso_Usuario" />
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_Categorias" FunctionName="baseprod2Model.Store.SP_apiCLA_Categorias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="baseprod2Model.SP_apiCLA_Categorias_Result">
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_CarroceriasCategoria" FunctionName="baseprod2Model.Store.SP_apiCLA_CarroceriasCategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="baseprod2Model.SP_apiCLA_CarroceriasCategoria_Result">
+                <ScalarProperty Name="cod_carroceria" ColumnName="cod_carroceria" />
+                <ScalarProperty Name="carroceria" ColumnName="carroceria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPR_Inserta_datos_vehiculos_publicar" FunctionName="baseprod2Model.Store.SPR_Inserta_datos_vehiculos_publicar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

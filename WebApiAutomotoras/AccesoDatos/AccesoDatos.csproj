@@ -149,6 +149,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProdModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\SP_apiCLA_CarroceriasCategoria_Result.cs">
+      <DependentUpon>ProdModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_apiCLA_Categorias_Result.cs">
+      <DependentUpon>ProdModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

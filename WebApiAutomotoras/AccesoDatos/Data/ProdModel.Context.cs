@@ -67,5 +67,176 @@ namespace AccesoDatos.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Valida_xKey_Acceso_Usuario", xkeyParameter, respuesta, nombre);
         }
+    
+        public virtual ObjectResult<SP_apiCLA_Categorias_Result> SP_apiCLA_Categorias(Nullable<int> idCategoria)
+        {
+            var idCategoriaParameter = idCategoria.HasValue ?
+                new ObjectParameter("idCategoria", idCategoria) :
+                new ObjectParameter("idCategoria", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_apiCLA_Categorias_Result>("SP_apiCLA_Categorias", idCategoriaParameter);
+        }
+    
+        public virtual ObjectResult<SP_apiCLA_CarroceriasCategoria_Result> SP_apiCLA_CarroceriasCategoria(Nullable<int> codCategoria)
+        {
+            var codCategoriaParameter = codCategoria.HasValue ?
+                new ObjectParameter("codCategoria", codCategoria) :
+                new ObjectParameter("codCategoria", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_apiCLA_CarroceriasCategoria_Result>("SP_apiCLA_CarroceriasCategoria", codCategoriaParameter);
+        }
+    
+        public virtual int SPR_Inserta_datos_vehiculos_publicar(string codigo_auto_origen, string nuevo_o_usado, Nullable<int> categoria, string tipo_vehiculo, string carroceria, Nullable<int> marca, string modelo, string version, Nullable<int> ano, Nullable<int> precio, string color, Nullable<int> kM, string motor, Nullable<int> combustible, Nullable<int> cilindrada, string tipo_cambio, string aire_acondicionado, string tipo_direccion, string radio, string alzavidrios_electricos, string espejos_electricos, string frenos_ABS, string airbag, string unico_dueno, string cierre_centralizado, string catalitico, string fwd, string llantas, string puertas, string alarma, string techo, string comentarios, string patente, string fotos, Nullable<System.DateTime> fecha_i_data, Nullable<int> sucursal, string nombre_archivo, ObjectParameter respuesta)
+        {
+            var codigo_auto_origenParameter = codigo_auto_origen != null ?
+                new ObjectParameter("codigo_auto_origen", codigo_auto_origen) :
+                new ObjectParameter("codigo_auto_origen", typeof(string));
+    
+            var nuevo_o_usadoParameter = nuevo_o_usado != null ?
+                new ObjectParameter("Nuevo_o_usado", nuevo_o_usado) :
+                new ObjectParameter("Nuevo_o_usado", typeof(string));
+    
+            var categoriaParameter = categoria.HasValue ?
+                new ObjectParameter("categoria", categoria) :
+                new ObjectParameter("categoria", typeof(int));
+    
+            var tipo_vehiculoParameter = tipo_vehiculo != null ?
+                new ObjectParameter("Tipo_vehiculo", tipo_vehiculo) :
+                new ObjectParameter("Tipo_vehiculo", typeof(string));
+    
+            var carroceriaParameter = carroceria != null ?
+                new ObjectParameter("Carroceria", carroceria) :
+                new ObjectParameter("Carroceria", typeof(string));
+    
+            var marcaParameter = marca.HasValue ?
+                new ObjectParameter("Marca", marca) :
+                new ObjectParameter("Marca", typeof(int));
+    
+            var modeloParameter = modelo != null ?
+                new ObjectParameter("Modelo", modelo) :
+                new ObjectParameter("Modelo", typeof(string));
+    
+            var versionParameter = version != null ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(string));
+    
+            var anoParameter = ano.HasValue ?
+                new ObjectParameter("Ano", ano) :
+                new ObjectParameter("Ano", typeof(int));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("Precio", precio) :
+                new ObjectParameter("Precio", typeof(int));
+    
+            var colorParameter = color != null ?
+                new ObjectParameter("Color", color) :
+                new ObjectParameter("Color", typeof(string));
+    
+            var kMParameter = kM.HasValue ?
+                new ObjectParameter("KM", kM) :
+                new ObjectParameter("KM", typeof(int));
+    
+            var motorParameter = motor != null ?
+                new ObjectParameter("motor", motor) :
+                new ObjectParameter("motor", typeof(string));
+    
+            var combustibleParameter = combustible.HasValue ?
+                new ObjectParameter("combustible", combustible) :
+                new ObjectParameter("combustible", typeof(int));
+    
+            var cilindradaParameter = cilindrada.HasValue ?
+                new ObjectParameter("Cilindrada", cilindrada) :
+                new ObjectParameter("Cilindrada", typeof(int));
+    
+            var tipo_cambioParameter = tipo_cambio != null ?
+                new ObjectParameter("tipo_cambio", tipo_cambio) :
+                new ObjectParameter("tipo_cambio", typeof(string));
+    
+            var aire_acondicionadoParameter = aire_acondicionado != null ?
+                new ObjectParameter("aire_acondicionado", aire_acondicionado) :
+                new ObjectParameter("aire_acondicionado", typeof(string));
+    
+            var tipo_direccionParameter = tipo_direccion != null ?
+                new ObjectParameter("tipo_direccion", tipo_direccion) :
+                new ObjectParameter("tipo_direccion", typeof(string));
+    
+            var radioParameter = radio != null ?
+                new ObjectParameter("radio", radio) :
+                new ObjectParameter("radio", typeof(string));
+    
+            var alzavidrios_electricosParameter = alzavidrios_electricos != null ?
+                new ObjectParameter("alzavidrios_electricos", alzavidrios_electricos) :
+                new ObjectParameter("alzavidrios_electricos", typeof(string));
+    
+            var espejos_electricosParameter = espejos_electricos != null ?
+                new ObjectParameter("espejos_electricos", espejos_electricos) :
+                new ObjectParameter("espejos_electricos", typeof(string));
+    
+            var frenos_ABSParameter = frenos_ABS != null ?
+                new ObjectParameter("frenos_ABS", frenos_ABS) :
+                new ObjectParameter("frenos_ABS", typeof(string));
+    
+            var airbagParameter = airbag != null ?
+                new ObjectParameter("airbag", airbag) :
+                new ObjectParameter("airbag", typeof(string));
+    
+            var unico_duenoParameter = unico_dueno != null ?
+                new ObjectParameter("unico_dueno", unico_dueno) :
+                new ObjectParameter("unico_dueno", typeof(string));
+    
+            var cierre_centralizadoParameter = cierre_centralizado != null ?
+                new ObjectParameter("cierre_centralizado", cierre_centralizado) :
+                new ObjectParameter("cierre_centralizado", typeof(string));
+    
+            var cataliticoParameter = catalitico != null ?
+                new ObjectParameter("catalitico", catalitico) :
+                new ObjectParameter("catalitico", typeof(string));
+    
+            var fwdParameter = fwd != null ?
+                new ObjectParameter("fwd", fwd) :
+                new ObjectParameter("fwd", typeof(string));
+    
+            var llantasParameter = llantas != null ?
+                new ObjectParameter("Llantas", llantas) :
+                new ObjectParameter("Llantas", typeof(string));
+    
+            var puertasParameter = puertas != null ?
+                new ObjectParameter("Puertas", puertas) :
+                new ObjectParameter("Puertas", typeof(string));
+    
+            var alarmaParameter = alarma != null ?
+                new ObjectParameter("Alarma", alarma) :
+                new ObjectParameter("Alarma", typeof(string));
+    
+            var techoParameter = techo != null ?
+                new ObjectParameter("Techo", techo) :
+                new ObjectParameter("Techo", typeof(string));
+    
+            var comentariosParameter = comentarios != null ?
+                new ObjectParameter("comentarios", comentarios) :
+                new ObjectParameter("comentarios", typeof(string));
+    
+            var patenteParameter = patente != null ?
+                new ObjectParameter("patente", patente) :
+                new ObjectParameter("patente", typeof(string));
+    
+            var fotosParameter = fotos != null ?
+                new ObjectParameter("fotos", fotos) :
+                new ObjectParameter("fotos", typeof(string));
+    
+            var fecha_i_dataParameter = fecha_i_data.HasValue ?
+                new ObjectParameter("fecha_i_data", fecha_i_data) :
+                new ObjectParameter("fecha_i_data", typeof(System.DateTime));
+    
+            var sucursalParameter = sucursal.HasValue ?
+                new ObjectParameter("sucursal", sucursal) :
+                new ObjectParameter("sucursal", typeof(int));
+    
+            var nombre_archivoParameter = nombre_archivo != null ?
+                new ObjectParameter("nombre_archivo", nombre_archivo) :
+                new ObjectParameter("nombre_archivo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Inserta_datos_vehiculos_publicar", codigo_auto_origenParameter, nuevo_o_usadoParameter, categoriaParameter, tipo_vehiculoParameter, carroceriaParameter, marcaParameter, modeloParameter, versionParameter, anoParameter, precioParameter, colorParameter, kMParameter, motorParameter, combustibleParameter, cilindradaParameter, tipo_cambioParameter, aire_acondicionadoParameter, tipo_direccionParameter, radioParameter, alzavidrios_electricosParameter, espejos_electricosParameter, frenos_ABSParameter, airbagParameter, unico_duenoParameter, cierre_centralizadoParameter, cataliticoParameter, fwdParameter, llantasParameter, puertasParameter, alarmaParameter, techoParameter, comentariosParameter, patenteParameter, fotosParameter, fecha_i_dataParameter, sucursalParameter, nombre_archivoParameter, respuesta);
+        }
     }
 }

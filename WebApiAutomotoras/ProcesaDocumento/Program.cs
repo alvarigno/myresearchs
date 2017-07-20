@@ -8,6 +8,7 @@ using AccesoDatos.Data;
 using ProcesaDocumento.Models;
 using System.Net;
 using SubidaImagenesServer;
+using System.Data.Entity.Core.Objects;
 
 namespace ProcesaDocumento
 {
@@ -25,10 +26,11 @@ namespace ProcesaDocumento
 
         public void ObtieneDocumentoXml(string rutaxml) {
 
+            string nombrearchivo = Path.GetFileName(rutaxml);
             XDocument main = XDocument.Load(rutaxml);
             if (revisaxkey(main)) {
 
-                ExtraeDataXml(main);
+                ExtraeDataXml(main, nombrearchivo);
             }
 
         }
@@ -67,7 +69,7 @@ namespace ProcesaDocumento
 
         }
         
-        public static List<PublicacionModel> ExtraeDataXml(XDocument main)
+        public static List<PublicacionModel> ExtraeDataXml(XDocument main, string nombrearchivo)
         {
             listado.Clear();
             //recuepra toda la información de cada nodo del XML que está procesando.
@@ -109,13 +111,14 @@ namespace ProcesaDocumento
 
             foreach (var item in query)
             {
-                List<fotos> listimagenes = new List<fotos>();
+                List<string> listimagenes = new List<string>();
 
                 PublicacionModel dpublicacion = new PublicacionModel();
                 datosVehiculo dVehiculo = new datosVehiculo();
                 datosEquipamiento dEquipamiento = new datosEquipamiento();
 
-                dpublicacion.idfuente = int.Parse(item.idfuente);
+                dpublicacion.codCliente = int.Parse(item.sucursal);
+                dpublicacion.idfuente = item.idfuente;
                 dVehiculo.patente = item.patente;
                 dpublicacion.revision = item.revision;
                 dpublicacion.codCliente = int.Parse(item.sucursal);
@@ -214,41 +217,51 @@ namespace ProcesaDocumento
 
                 }
 
-                dVehiculo.edicion = GetEdition(item.txmarca, item.modelo, item.version, item.carroceria, int.Parse(item.puertas), int.Parse(item.ano), dEquipamiento.transmision);
-                dVehiculo.uidJato = getCodigoJajoNoJato(item.txmarca, item.modelo, item.version, item.carroceria, int.Parse(item.puertas), int.Parse(item.ano), dEquipamiento.transmision, int.Parse(item.combustible), dVehiculo.edicion, dVehiculo.categoria);
 
-                foreach (var list in item.img)
-                {
-                    string pathfile = System.IO.Path.Combine(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded", dpublicacion.idfuente.ToString());
-                   
-                    fotos datalocal = new fotos();
+                if (ValidaDatos(dVehiculo.carroceria, dVehiculo.puertas, dEquipamiento.transmision, dVehiculo.combustible, dVehiculo.categoria ) == 5)
+                { 
 
-                    datalocal.url = list.source;
+                    dVehiculo.edicion = GetEdition(item.txmarca, item.modelo, item.version, item.carroceria, int.Parse(item.puertas), int.Parse(item.ano), dEquipamiento.transmision);
+                    dVehiculo.uidJato = getCodigoJajoNoJato(item.txmarca, item.modelo, item.version, item.carroceria, int.Parse(item.puertas), int.Parse(item.ano), dEquipamiento.transmision, int.Parse(item.combustible), dVehiculo.edicion, dVehiculo.categoria);
 
-                    if (!Directory.Exists(pathfile))
+                    foreach (var list in item.img)
                     {
-                        pathfile = CrearDirectorioImagenes(dpublicacion.idfuente.ToString());
+                        string pathfile = System.IO.Path.Combine(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded", dpublicacion.idfuente.ToString());
+                   
+                        fotos datalocal = new fotos();
+
+                        datalocal.url = list.source;
+
+                        if (!Directory.Exists(pathfile))
+                        {
+                            pathfile = CrearDirectorioImagenes(dpublicacion.idfuente.ToString());
+                        }
+                    
+                        datalocal.url = DescargaImagen(list.source, pathfile);
+
+                        //Carga imagen por imagen en servidor de Chileutos.
+                        UpLoadImageCA UpLoadImg = new UpLoadImageCA();
+                        datalocal.url = UpLoadImg.Uploadimage(datalocal.url);
+
+                        listimagenes.Add(datalocal.url);
+                    
+
                     }
-                    
-                    datalocal.url = DescargaImagen(list.source, pathfile);
 
-                    //Carga imagen por imagen en servidor de Chileutos.
-                    UpLoadImageCA UpLoadImg = new UpLoadImageCA();
-                    datalocal.url = UpLoadImg.Uploadimage(datalocal.url);
+                    count = count + 1;
 
-                    listimagenes.Add(datalocal);
-                    
+                    dpublicacion.dVehiculo = dVehiculo;
+                    dpublicacion.dEquipamiento = dEquipamiento;
+                    dpublicacion.dVehiculo.listadofotos = listimagenes.ToArray();
 
+                    if (!InsertPublicacion(dpublicacion, nombrearchivo)) {
+
+
+
+                    }
+
+                    listado.Add(dpublicacion);
                 }
-
-                count = count + 1;
-
-                
-                dpublicacion.dVehiculo = dVehiculo;
-                dpublicacion.dEquipamiento = dEquipamiento;
-                dpublicacion.dVehiculo.listadofotos = listimagenes.ToArray();
-
-                listado.Add(dpublicacion);
 
             }
 
@@ -380,7 +393,179 @@ namespace ProcesaDocumento
 
         }
 
+        private static int ValidaDatos(string carroceria, int puertas, string transmision, int combustible, int categoria) {
 
+            int cantidadvalida = 0;
+
+            if (ValidaCategoria(categoria)) {
+
+                cantidadvalida = cantidadvalida + 1;
+
+            }
+
+            if (ValidaCarroceria(categoria, carroceria))
+            {
+
+                cantidadvalida = cantidadvalida + 1;
+
+            }
+
+            if (ValidaCombustible(combustible))
+            {
+
+                cantidadvalida = cantidadvalida + 1;
+
+            }
+
+            if (ValidaPuertas(puertas))
+            {
+
+                cantidadvalida = cantidadvalida + 1;
+
+            }
+
+            if (ValidaTransmision(transmision))
+            {
+
+                cantidadvalida = cantidadvalida + 1;
+
+            }
+
+            return cantidadvalida;
+        }
+
+        private static Boolean ValidaCategoria(int categoria) {
+
+            Boolean confirma = false;
+
+            baseprod2Entities baseprod = new baseprod2Entities();
+
+            var dato = baseprod.SP_apiCLA_Categorias(categoria).FirstOrDefault();
+
+            if (dato.idCategoria == categoria)
+            {
+
+                confirma = true;
+
+            }
+
+            return confirma;
+
+        }
+
+        private static Boolean ValidaCarroceria(int categoria, string carroceria)
+        {
+
+            Boolean confirma = false;
+
+            baseprod2Entities baseprod = new baseprod2Entities();
+
+            var dato = baseprod.SP_apiCLA_CarroceriasCategoria(categoria).ToArray();
+
+            foreach (var data in dato)
+            {
+
+                if (data.cod_carroceria == carroceria)
+                {
+
+                    confirma = true;
+
+                }
+
+            }
+
+
+          
+            return confirma;
+
+        }
+
+        private static Boolean ValidaCombustible(int codigo)
+        {
+
+            List<CombustibleModel> combustibles = new List<CombustibleModel>();
+
+            combustibles.Add(new CombustibleModel { codCombustible = 1, combustible = "Bencina" });
+            combustibles.Add(new CombustibleModel { codCombustible = 2, combustible = "Diesel (Petroleo)" });
+            combustibles.Add(new CombustibleModel { codCombustible = 3, combustible = "Gas" });
+            combustibles.Add(new CombustibleModel { codCombustible = 4, combustible = "Híbrido" });
+            combustibles.Add(new CombustibleModel { codCombustible = 5, combustible = "Eléctrico" });
+            combustibles.Add(new CombustibleModel { codCombustible = 10, combustible = "Otro" });
+
+            Boolean confirma = false;
+
+            var value = combustibles.Find(item => item.codCombustible == codigo).codCombustible;
+
+            if (value == codigo)
+            {
+
+                confirma = true;
+
+            }
+
+            return confirma;
+
+        }
+
+        private static Boolean ValidaPuertas(int codigo) {
+
+            List<PuertaModel> puertas = new List<PuertaModel>();
+
+            puertas.Add(new PuertaModel { codPuerta = 0, puerta = 0 });
+            puertas.Add(new PuertaModel { codPuerta = 2, puerta = 2 });
+            puertas.Add(new PuertaModel { codPuerta = 3, puerta = 3 });
+            puertas.Add(new PuertaModel { codPuerta = 4, puerta = 4 });
+            puertas.Add(new PuertaModel { codPuerta = 5, puerta = 5 });
+
+            Boolean confirma = false;
+
+            var value = puertas.Find(item => item.codPuerta == codigo).codPuerta;
+
+            if (value == codigo)
+            {
+
+                confirma = true;
+
+            }
+
+            return confirma;
+
+        }
+
+        private static Boolean ValidaTransmision(string codigo) {
+
+            Boolean confirma = false;
+
+            if (codigo.ToUpper() == "S") {
+
+                confirma = true;
+
+            }
+
+            if (codigo.ToUpper() == "N")
+            {
+
+                confirma = true;
+
+            }
+
+            return confirma;
+        }
+
+        private static Boolean InsertPublicacion(PublicacionModel dato, string nombre_archivo) {
+
+            Boolean respuesta = false;
+            
+            DateTime fecha_i_date = DateTime.Now;
+            string fotos = "";
+            fotos = string.Join("*", dato.dVehiculo.listadofotos);
+
+            baseprod2Entities bdprod = new baseprod2Entities();
+            ObjectParameter respuestasp = new ObjectParameter("respuesta", typeof(bool));
+            var data = bdprod.SPR_Inserta_datos_vehiculos_publicar(dato.idfuente, dato.dEquipamiento.nuevo, dato.dVehiculo.categoria, dato.dVehiculo.tipo, dato.dVehiculo.carroceria, dato.dVehiculo.marca, dato.dVehiculo.modelo, dato.dVehiculo.version, dato.dVehiculo.ano, dato.dVehiculo.precio, dato.dVehiculo.color, dato.dVehiculo.kilom, dato.dVehiculo.motor, dato.dVehiculo.combustible, dato.dVehiculo.cilindrada, dato.dEquipamiento.transmision, dato.dEquipamiento.aireAcon, dato.dVehiculo.tipoDireccion, dato.dEquipamiento.radio, dato.dEquipamiento.alzaVidrios, dato.dEquipamiento.espejos, dato.dEquipamiento.frenosAbs, dato.dEquipamiento.airbag, dato.dEquipamiento.unicoDueno, dato.dEquipamiento.cierreCentral, dato.dEquipamiento.catalitico, dato.dEquipamiento.fwd, dato.dEquipamiento.llantas,  dato.dVehiculo.puertas.ToString(), dato.dEquipamiento.alarma, dato.dVehiculo.techo, dato.dVehiculo.comentario, dato.dVehiculo.patente, fotos, fecha_i_date, dato.codCliente, nombre_archivo, respuestasp);
+
+            return respuesta;
+        }
 
     }
 }

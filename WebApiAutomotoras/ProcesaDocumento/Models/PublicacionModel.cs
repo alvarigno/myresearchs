@@ -8,8 +8,8 @@ namespace ProcesaDocumento.Models
     public class PublicacionModel
     {
 
-        public int codCliente { get; set; }
-        public int idfuente { get; set; }
+        public int codCliente { get; set; }//cliente sucursal
+        public string idfuente { get; set; }//codigo auto de la automotora
         public string ip { get; set; }
         public string revision { get; set; }
         public datosVehiculo dVehiculo { get; set; }
@@ -42,7 +42,7 @@ namespace ProcesaDocumento.Models
         public string techo { get; set; }
         public int combustible { get; set; }
         public string comentario { get; set; }
-        public fotos[] listadofotos { get; set; }
+        public string[] listadofotos { get; set; }
         public string plataforma { get; set; } //DATO DE PROCEDENCIA DE LA INSERCCIÓN - APPDESTOCKditec
         public long uidJato { get; set; }
 
