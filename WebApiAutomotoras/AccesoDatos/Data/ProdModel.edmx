@@ -20,6 +20,11 @@
           <Parameter Name="clave" Type="varchar" Mode="In" />
           <Parameter Name="key" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="SP_apiCLA_MarcasCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCategoria" Type="int" Mode="In" />
+          <Parameter Name="maxTop" Type="int" Mode="In" />
+          <Parameter Name="top" Type="bit" Mode="In" />
+        </Function>
         <Function Name="SPR_Actualiza_datos_vehiculos_publicar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo_auto_origen" Type="varchar" Mode="In" />
           <Parameter Name="Nuevo_o_usado" Type="varchar" Mode="In" />
@@ -36,6 +41,7 @@
           <Parameter Name="motor" Type="varchar" Mode="In" />
           <Parameter Name="combustible" Type="int" Mode="In" />
           <Parameter Name="Cilindrada" Type="int" Mode="In" />
+          <Parameter Name="potencia" Type="varchar" Mode="In" />
           <Parameter Name="tipo_cambio" Type="varchar" Mode="In" />
           <Parameter Name="aire_acondicionado" Type="varchar" Mode="In" />
           <Parameter Name="tipo_direccion" Type="varchar" Mode="In" />
@@ -58,6 +64,7 @@
           <Parameter Name="fotos" Type="varchar" Mode="In" />
           <Parameter Name="sucursal" Type="int" Mode="In" />
           <Parameter Name="nombre_archivo" Type="varchar" Mode="In" />
+          <Parameter Name="ipaddress" Type="varchar" Mode="In" />
           <Parameter Name="respuestaupdate" Type="varchar" Mode="InOut" />
           <Parameter Name="idregistro" Type="int" Mode="InOut" />
         </Function>
@@ -77,6 +84,7 @@
           <Parameter Name="motor" Type="varchar" Mode="In" />
           <Parameter Name="combustible" Type="int" Mode="In" />
           <Parameter Name="Cilindrada" Type="int" Mode="In" />
+          <Parameter Name="potencia" Type="varchar" Mode="In" />
           <Parameter Name="tipo_cambio" Type="varchar" Mode="In" />
           <Parameter Name="aire_acondicionado" Type="varchar" Mode="In" />
           <Parameter Name="tipo_direccion" Type="varchar" Mode="In" />
@@ -100,8 +108,13 @@
           <Parameter Name="fecha_i_data" Type="datetime" Mode="In" />
           <Parameter Name="sucursal" Type="int" Mode="In" />
           <Parameter Name="nombre_archivo" Type="varchar" Mode="In" />
+          <Parameter Name="ipaddress" Type="varchar" Mode="In" />
           <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
           <Parameter Name="idinsert" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPublicAutom" Type="int" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
         </Function>
         <Function Name="SPR_Valida_ip_x_xkey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="xkey" Type="varchar" Mode="In" />
@@ -160,6 +173,7 @@
             <Parameter Name="motor" Mode="In" Type="String" />
             <Parameter Name="combustible" Mode="In" Type="Int32" />
             <Parameter Name="Cilindrada" Mode="In" Type="Int32" />
+            <Parameter Name="potencia" Mode="In" Type="String" />
             <Parameter Name="tipo_cambio" Mode="In" Type="String" />
             <Parameter Name="aire_acondicionado" Mode="In" Type="String" />
             <Parameter Name="tipo_direccion" Mode="In" Type="String" />
@@ -183,6 +197,7 @@
             <Parameter Name="fecha_i_data" Mode="In" Type="DateTime" />
             <Parameter Name="sucursal" Mode="In" Type="Int32" />
             <Parameter Name="nombre_archivo" Mode="In" Type="String" />
+            <Parameter Name="ipaddress" Mode="In" Type="String" />
             <Parameter Name="respuesta" Mode="InOut" Type="String" />
             <Parameter Name="idinsert" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -202,6 +217,7 @@
             <Parameter Name="motor" Mode="In" Type="String" />
             <Parameter Name="combustible" Mode="In" Type="Int32" />
             <Parameter Name="Cilindrada" Mode="In" Type="Int32" />
+            <Parameter Name="potencia" Mode="In" Type="String" />
             <Parameter Name="tipo_cambio" Mode="In" Type="String" />
             <Parameter Name="aire_acondicionado" Mode="In" Type="String" />
             <Parameter Name="tipo_direccion" Mode="In" Type="String" />
@@ -224,8 +240,18 @@
             <Parameter Name="fotos" Mode="In" Type="String" />
             <Parameter Name="sucursal" Mode="In" Type="Int32" />
             <Parameter Name="nombre_archivo" Mode="In" Type="String" />
+            <Parameter Name="ipaddress" Mode="In" Type="String" />
             <Parameter Name="respuestaupdate" Mode="InOut" Type="String" />
             <Parameter Name="idregistro" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_apiCLA_MarcasCategoria" ReturnType="Collection(baseprod2Model.SP_apiCLA_MarcasCategoria_Result)">
+            <Parameter Name="idCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="maxTop" Mode="In" Type="Int32" />
+            <Parameter Name="top" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA" ReturnType="Collection(baseprod2Model.SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result)">
+            <Parameter Name="idPublicAutom" Mode="In" Type="Int32" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_apiCLA_Categorias_Result">
@@ -235,6 +261,51 @@
         <ComplexType Name="SP_apiCLA_CarroceriasCategoria_Result">
           <Property Type="String" Name="cod_carroceria" Nullable="true" MaxLength="2" />
           <Property Type="String" Name="carroceria" Nullable="true" MaxLength="35" />
+        </ComplexType>
+        <ComplexType Name="SP_apiCLA_MarcasCategoria_Result">
+          <Property Type="Int32" Name="codMarca" Nullable="false" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="top" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result">
+          <Property Type="Int32" Name="idPublicAutom" Nullable="false" />
+          <Property Type="String" Name="Nuevo_o_usado" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="categoria" Nullable="false" />
+          <Property Type="String" Name="Tipo_vehiculo" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Carroceria" Nullable="true" MaxLength="3" />
+          <Property Type="Int32" Name="Marca" Nullable="false" />
+          <Property Type="String" Name="Modelo" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="Version" Nullable="true" MaxLength="70" />
+          <Property Type="Int32" Name="Ano" Nullable="false" />
+          <Property Type="Int32" Name="Precio" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="KM" Nullable="false" />
+          <Property Type="String" Name="motor" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="combustible" Nullable="false" />
+          <Property Type="Int32" Name="Cilindrada" Nullable="false" />
+          <Property Type="String" Name="potencia" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="tipo_cambio" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="aire_acondicionado" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="tipo_direccion" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="radio" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="alzavidrios_electricos" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="espejos_electricos" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="frenos_ABS" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="airbag" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="unico_dueno" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="cierre_centralizado" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="catalitico" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="fwd" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Llantas" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Puertas" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Alarma" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="consignacion" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Techo" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="comentarios" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="patente" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="fotos" Nullable="true" MaxLength="7990" />
+          <Property Type="Int32" Name="sucursal" Nullable="false" />
+          <Property Type="String" Name="ipaddress" Nullable="true" MaxLength="20" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -264,6 +335,59 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPR_Inserta_datos_vehiculos_publicar" FunctionName="baseprod2Model.Store.SPR_Inserta_datos_vehiculos_publicar" />
           <FunctionImportMapping FunctionImportName="SPR_Actualiza_datos_vehiculos_publicar" FunctionName="baseprod2Model.Store.SPR_Actualiza_datos_vehiculos_publicar">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_apiCLA_MarcasCategoria" FunctionName="baseprod2Model.Store.SP_apiCLA_MarcasCategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="baseprod2Model.SP_apiCLA_MarcasCategoria_Result">
+                <ScalarProperty Name="codMarca" ColumnName="codMarca" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="top" ColumnName="top" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA" FunctionName="baseprod2Model.Store.SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="baseprod2Model.SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result">
+                <ScalarProperty Name="idPublicAutom" ColumnName="idPublicAutom" />
+                <ScalarProperty Name="Nuevo_o_usado" ColumnName="Nuevo_o_usado" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="Tipo_vehiculo" ColumnName="Tipo_vehiculo" />
+                <ScalarProperty Name="Carroceria" ColumnName="Carroceria" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="KM" ColumnName="KM" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="combustible" ColumnName="combustible" />
+                <ScalarProperty Name="Cilindrada" ColumnName="Cilindrada" />
+                <ScalarProperty Name="potencia" ColumnName="potencia" />
+                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+                <ScalarProperty Name="aire_acondicionado" ColumnName="aire_acondicionado" />
+                <ScalarProperty Name="tipo_direccion" ColumnName="tipo_direccion" />
+                <ScalarProperty Name="radio" ColumnName="radio" />
+                <ScalarProperty Name="alzavidrios_electricos" ColumnName="alzavidrios_electricos" />
+                <ScalarProperty Name="espejos_electricos" ColumnName="espejos_electricos" />
+                <ScalarProperty Name="frenos_ABS" ColumnName="frenos_ABS" />
+                <ScalarProperty Name="airbag" ColumnName="airbag" />
+                <ScalarProperty Name="unico_dueno" ColumnName="unico_dueno" />
+                <ScalarProperty Name="cierre_centralizado" ColumnName="cierre_centralizado" />
+                <ScalarProperty Name="catalitico" ColumnName="catalitico" />
+                <ScalarProperty Name="fwd" ColumnName="fwd" />
+                <ScalarProperty Name="Llantas" ColumnName="Llantas" />
+                <ScalarProperty Name="Puertas" ColumnName="Puertas" />
+                <ScalarProperty Name="Alarma" ColumnName="Alarma" />
+                <ScalarProperty Name="consignacion" ColumnName="consignacion" />
+                <ScalarProperty Name="Techo" ColumnName="Techo" />
+                <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+                <ScalarProperty Name="patente" ColumnName="patente" />
+                <ScalarProperty Name="fotos" ColumnName="fotos" />
+                <ScalarProperty Name="sucursal" ColumnName="sucursal" />
+                <ScalarProperty Name="ipaddress" ColumnName="ipaddress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

@@ -71,7 +71,7 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo));
+                                        taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa));
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
                                         
                                     });
@@ -207,11 +207,11 @@ namespace WebApiAutomotoras.Controllers
             return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
-        private async void PasaDocumentoXml(string rutadocumento)
+        private async void PasaDocumentoXml(string rutadocumento, string iporigen)
         {
 
             Program procesa = new Program();
-            procesa.ObtieneDocumentoXml(rutadocumento);
+            procesa.ObtieneDocumentoXml(rutadocumento, iporigen);
 
             if (taskDocumento.IsCompleted) {
 

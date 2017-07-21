@@ -149,10 +149,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProdModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result.cs">
+      <DependentUpon>ProdModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\SP_apiCLA_CarroceriasCategoria_Result.cs">
       <DependentUpon>ProdModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\SP_apiCLA_Categorias_Result.cs">
+      <DependentUpon>ProdModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SP_apiCLA_MarcasCategoria_Result.cs">
       <DependentUpon>ProdModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />

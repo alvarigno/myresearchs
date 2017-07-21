@@ -86,7 +86,7 @@ namespace AccesoDatos.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_apiCLA_CarroceriasCategoria_Result>("SP_apiCLA_CarroceriasCategoria", codCategoriaParameter);
         }
     
-        public virtual int SPR_Inserta_datos_vehiculos_publicar(string codigo_auto_origen, string nuevo_o_usado, Nullable<int> categoria, string tipo_vehiculo, string carroceria, Nullable<int> marca, string modelo, string version, Nullable<int> ano, Nullable<int> precio, string color, Nullable<int> kM, string motor, Nullable<int> combustible, Nullable<int> cilindrada, string tipo_cambio, string aire_acondicionado, string tipo_direccion, string radio, string alzavidrios_electricos, string espejos_electricos, string frenos_ABS, string airbag, string unico_dueno, string cierre_centralizado, string catalitico, string fwd, string llantas, string puertas, string alarma, string consignacion, string techo, string comentarios, string patente, string fotos, Nullable<System.DateTime> fecha_i_data, Nullable<int> sucursal, string nombre_archivo, ObjectParameter respuesta, ObjectParameter idinsert)
+        public virtual int SPR_Inserta_datos_vehiculos_publicar(string codigo_auto_origen, string nuevo_o_usado, Nullable<int> categoria, string tipo_vehiculo, string carroceria, Nullable<int> marca, string modelo, string version, Nullable<int> ano, Nullable<int> precio, string color, Nullable<int> kM, string motor, Nullable<int> combustible, Nullable<int> cilindrada, string potencia, string tipo_cambio, string aire_acondicionado, string tipo_direccion, string radio, string alzavidrios_electricos, string espejos_electricos, string frenos_ABS, string airbag, string unico_dueno, string cierre_centralizado, string catalitico, string fwd, string llantas, string puertas, string alarma, string consignacion, string techo, string comentarios, string patente, string fotos, Nullable<System.DateTime> fecha_i_data, Nullable<int> sucursal, string nombre_archivo, string ipaddress, ObjectParameter respuesta, ObjectParameter idinsert)
         {
             var codigo_auto_origenParameter = codigo_auto_origen != null ?
                 new ObjectParameter("codigo_auto_origen", codigo_auto_origen) :
@@ -147,6 +147,10 @@ namespace AccesoDatos.Data
             var cilindradaParameter = cilindrada.HasValue ?
                 new ObjectParameter("Cilindrada", cilindrada) :
                 new ObjectParameter("Cilindrada", typeof(int));
+    
+            var potenciaParameter = potencia != null ?
+                new ObjectParameter("potencia", potencia) :
+                new ObjectParameter("potencia", typeof(string));
     
             var tipo_cambioParameter = tipo_cambio != null ?
                 new ObjectParameter("tipo_cambio", tipo_cambio) :
@@ -240,10 +244,14 @@ namespace AccesoDatos.Data
                 new ObjectParameter("nombre_archivo", nombre_archivo) :
                 new ObjectParameter("nombre_archivo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Inserta_datos_vehiculos_publicar", codigo_auto_origenParameter, nuevo_o_usadoParameter, categoriaParameter, tipo_vehiculoParameter, carroceriaParameter, marcaParameter, modeloParameter, versionParameter, anoParameter, precioParameter, colorParameter, kMParameter, motorParameter, combustibleParameter, cilindradaParameter, tipo_cambioParameter, aire_acondicionadoParameter, tipo_direccionParameter, radioParameter, alzavidrios_electricosParameter, espejos_electricosParameter, frenos_ABSParameter, airbagParameter, unico_duenoParameter, cierre_centralizadoParameter, cataliticoParameter, fwdParameter, llantasParameter, puertasParameter, alarmaParameter, consignacionParameter, techoParameter, comentariosParameter, patenteParameter, fotosParameter, fecha_i_dataParameter, sucursalParameter, nombre_archivoParameter, respuesta, idinsert);
+            var ipaddressParameter = ipaddress != null ?
+                new ObjectParameter("ipaddress", ipaddress) :
+                new ObjectParameter("ipaddress", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Inserta_datos_vehiculos_publicar", codigo_auto_origenParameter, nuevo_o_usadoParameter, categoriaParameter, tipo_vehiculoParameter, carroceriaParameter, marcaParameter, modeloParameter, versionParameter, anoParameter, precioParameter, colorParameter, kMParameter, motorParameter, combustibleParameter, cilindradaParameter, potenciaParameter, tipo_cambioParameter, aire_acondicionadoParameter, tipo_direccionParameter, radioParameter, alzavidrios_electricosParameter, espejos_electricosParameter, frenos_ABSParameter, airbagParameter, unico_duenoParameter, cierre_centralizadoParameter, cataliticoParameter, fwdParameter, llantasParameter, puertasParameter, alarmaParameter, consignacionParameter, techoParameter, comentariosParameter, patenteParameter, fotosParameter, fecha_i_dataParameter, sucursalParameter, nombre_archivoParameter, ipaddressParameter, respuesta, idinsert);
         }
     
-        public virtual int SPR_Actualiza_datos_vehiculos_publicar(string codigo_auto_origen, string nuevo_o_usado, Nullable<int> categoria, string tipo_vehiculo, string carroceria, Nullable<int> marca, string modelo, string version, Nullable<int> ano, Nullable<int> precio, string color, Nullable<int> kM, string motor, Nullable<int> combustible, Nullable<int> cilindrada, string tipo_cambio, string aire_acondicionado, string tipo_direccion, string radio, string alzavidrios_electricos, string espejos_electricos, string frenos_ABS, string airbag, string unico_dueno, string cierre_centralizado, string catalitico, string fwd, string llantas, string puertas, string alarma, string consignacion, string techo, string comentarios, string patente, string fotos, Nullable<int> sucursal, string nombre_archivo, ObjectParameter respuestaupdate, ObjectParameter idregistro)
+        public virtual int SPR_Actualiza_datos_vehiculos_publicar(string codigo_auto_origen, string nuevo_o_usado, Nullable<int> categoria, string tipo_vehiculo, string carroceria, Nullable<int> marca, string modelo, string version, Nullable<int> ano, Nullable<int> precio, string color, Nullable<int> kM, string motor, Nullable<int> combustible, Nullable<int> cilindrada, string potencia, string tipo_cambio, string aire_acondicionado, string tipo_direccion, string radio, string alzavidrios_electricos, string espejos_electricos, string frenos_ABS, string airbag, string unico_dueno, string cierre_centralizado, string catalitico, string fwd, string llantas, string puertas, string alarma, string consignacion, string techo, string comentarios, string patente, string fotos, Nullable<int> sucursal, string nombre_archivo, string ipaddress, ObjectParameter respuestaupdate, ObjectParameter idregistro)
         {
             var codigo_auto_origenParameter = codigo_auto_origen != null ?
                 new ObjectParameter("codigo_auto_origen", codigo_auto_origen) :
@@ -304,6 +312,10 @@ namespace AccesoDatos.Data
             var cilindradaParameter = cilindrada.HasValue ?
                 new ObjectParameter("Cilindrada", cilindrada) :
                 new ObjectParameter("Cilindrada", typeof(int));
+    
+            var potenciaParameter = potencia != null ?
+                new ObjectParameter("potencia", potencia) :
+                new ObjectParameter("potencia", typeof(string));
     
             var tipo_cambioParameter = tipo_cambio != null ?
                 new ObjectParameter("tipo_cambio", tipo_cambio) :
@@ -393,7 +405,37 @@ namespace AccesoDatos.Data
                 new ObjectParameter("nombre_archivo", nombre_archivo) :
                 new ObjectParameter("nombre_archivo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Actualiza_datos_vehiculos_publicar", codigo_auto_origenParameter, nuevo_o_usadoParameter, categoriaParameter, tipo_vehiculoParameter, carroceriaParameter, marcaParameter, modeloParameter, versionParameter, anoParameter, precioParameter, colorParameter, kMParameter, motorParameter, combustibleParameter, cilindradaParameter, tipo_cambioParameter, aire_acondicionadoParameter, tipo_direccionParameter, radioParameter, alzavidrios_electricosParameter, espejos_electricosParameter, frenos_ABSParameter, airbagParameter, unico_duenoParameter, cierre_centralizadoParameter, cataliticoParameter, fwdParameter, llantasParameter, puertasParameter, alarmaParameter, consignacionParameter, techoParameter, comentariosParameter, patenteParameter, fotosParameter, sucursalParameter, nombre_archivoParameter, respuestaupdate, idregistro);
+            var ipaddressParameter = ipaddress != null ?
+                new ObjectParameter("ipaddress", ipaddress) :
+                new ObjectParameter("ipaddress", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Actualiza_datos_vehiculos_publicar", codigo_auto_origenParameter, nuevo_o_usadoParameter, categoriaParameter, tipo_vehiculoParameter, carroceriaParameter, marcaParameter, modeloParameter, versionParameter, anoParameter, precioParameter, colorParameter, kMParameter, motorParameter, combustibleParameter, cilindradaParameter, potenciaParameter, tipo_cambioParameter, aire_acondicionadoParameter, tipo_direccionParameter, radioParameter, alzavidrios_electricosParameter, espejos_electricosParameter, frenos_ABSParameter, airbagParameter, unico_duenoParameter, cierre_centralizadoParameter, cataliticoParameter, fwdParameter, llantasParameter, puertasParameter, alarmaParameter, consignacionParameter, techoParameter, comentariosParameter, patenteParameter, fotosParameter, sucursalParameter, nombre_archivoParameter, ipaddressParameter, respuestaupdate, idregistro);
+        }
+    
+        public virtual ObjectResult<SP_apiCLA_MarcasCategoria_Result> SP_apiCLA_MarcasCategoria(Nullable<int> idCategoria, Nullable<int> maxTop, Nullable<bool> top)
+        {
+            var idCategoriaParameter = idCategoria.HasValue ?
+                new ObjectParameter("idCategoria", idCategoria) :
+                new ObjectParameter("idCategoria", typeof(int));
+    
+            var maxTopParameter = maxTop.HasValue ?
+                new ObjectParameter("maxTop", maxTop) :
+                new ObjectParameter("maxTop", typeof(int));
+    
+            var topParameter = top.HasValue ?
+                new ObjectParameter("top", top) :
+                new ObjectParameter("top", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_apiCLA_MarcasCategoria_Result>("SP_apiCLA_MarcasCategoria", idCategoriaParameter, maxTopParameter, topParameter);
+        }
+    
+        public virtual ObjectResult<SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result> SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA(Nullable<int> idPublicAutom, ObjectParameter respuesta)
+        {
+            var idPublicAutomParameter = idPublicAutom.HasValue ?
+                new ObjectParameter("idPublicAutom", idPublicAutom) :
+                new ObjectParameter("idPublicAutom", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result>("SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA", idPublicAutomParameter, respuesta);
         }
     }
 }
