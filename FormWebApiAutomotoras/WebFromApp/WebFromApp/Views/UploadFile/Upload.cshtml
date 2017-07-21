@@ -61,6 +61,8 @@
     $('#IdUpload').click(function() {
 
         SubmitButtonOnclick();
+        $('#idKey').addClass("hidden");
+        $("#IdProcesando").removeClass("hidden");
 
     });
 
@@ -87,9 +89,13 @@
             processData: false,
             success: function (data) {
                 alert("Éxito, archivo subido de forma correcta.");
+                $('#idKey').removeClass("hidden");
+                $("#IdProcesando").addClass("hidden");
             },
             error: function (data) {
                 alert("Error: " + data.responseText);
+                $('#idKey').removeClass("hidden");
+                $("#IdProcesando").addClass("hidden");
             }
         });
     }
