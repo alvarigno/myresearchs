@@ -282,14 +282,23 @@ namespace ProcesaDocumento
                             ///aquí quede//
                             string edicion = GetEdition(ObtieneMarcaxCategoria(datosparapublicar.categoria, datosparapublicar.marca), datosparapublicar.modelo, datosparapublicar.version, datosparapublicar.carroceria, datosparapublicar.puertas, datosparapublicar.ano, datosparapublicar.transmision);
                             datosparapublicar.uidJato = getCodigoJajoNoJato(ObtieneMarcaxCategoria(datosparapublicar.categoria, datosparapublicar.marca), datosparapublicar.modelo, datosparapublicar.version, datosparapublicar.carroceria, datosparapublicar.puertas, datosparapublicar.ano, datosparapublicar.transmision, datosparapublicar.combustible, edicion, datosparapublicar.categoria);
+                            int idtabautos = ActualizaAviso(datosparapublicar);
+                            ActualizaRegistroAutomotora(int.Parse(resultadosinsert[1]), idtabautos);
 
                         }
 
                     }
                     else {
 
-                        Otienedata(int.Parse(resultadosinsert[1]));
+                        
                         //Publica datos de vahículo, Retorna ID de Chileautos y Actualiza Registro con idCa y Fecha de Pubglicación.
+                        PublicarChileautosModel datosparapublicar = Otienedata(int.Parse(resultadosinsert[1]));
+                        datosparapublicar.ip = iporigen;
+                        ///aquí quede//
+                        string edicion = GetEdition(ObtieneMarcaxCategoria(datosparapublicar.categoria, datosparapublicar.marca), datosparapublicar.modelo, datosparapublicar.version, datosparapublicar.carroceria, datosparapublicar.puertas, datosparapublicar.ano, datosparapublicar.transmision);
+                        datosparapublicar.uidJato = getCodigoJajoNoJato(ObtieneMarcaxCategoria(datosparapublicar.categoria, datosparapublicar.marca), datosparapublicar.modelo, datosparapublicar.version, datosparapublicar.carroceria, datosparapublicar.puertas, datosparapublicar.ano, datosparapublicar.transmision, datosparapublicar.combustible, edicion, datosparapublicar.categoria);
+                        int idtabautos = PublicaAviso(datosparapublicar);
+                        ActualizaRegistroAutomotora(int.Parse(resultadosinsert[1]),idtabautos);
 
                     }
 
@@ -622,6 +631,34 @@ namespace ProcesaDocumento
             return resultados;
         }
 
+        private static int PublicaAviso(PublicarChileautosModel datosparapublicar) {
+
+            int cod_auto=0;
+
+            baseprod2Entities bdprod = new baseprod2Entities();
+
+            var data = bdprod.SP_PublicarAviso_Automotoras(datosparapublicar.codCliente ,datosparapublicar.ip ,datosparapublicar.patente ,datosparapublicar.tipo ,datosparapublicar.marca ,datosparapublicar.modelo ,datosparapublicar.ano ,datosparapublicar.version ,datosparapublicar.carroceria ,datosparapublicar.puertas ,datosparapublicar.tipoDireccion ,datosparapublicar.precio ,datosparapublicar.cilindrada ,datosparapublicar.potencia ,datosparapublicar.color ,datosparapublicar.kilom ,datosparapublicar.motor ,datosparapublicar.techo ,datosparapublicar.combustible ,datosparapublicar.comentario ,datosparapublicar.uidJato ,datosparapublicar.airbag ,datosparapublicar.aireAcon ,datosparapublicar.alarma ,datosparapublicar.alzaVidrios ,datosparapublicar.nuevo ,datosparapublicar.transmision ,datosparapublicar.radio ,datosparapublicar.espejos ,datosparapublicar.frenosAbs ,datosparapublicar.unicoDueno ,datosparapublicar.cierreCentral ,datosparapublicar.catalitico ,datosparapublicar.fwd ,datosparapublicar.llantas ,datosparapublicar.listaFotos ,datosparapublicar.plataforma ,datosparapublicar.consignacion).FirstOrDefault();
+
+            cod_auto = int.Parse(data.codauto.ToString());
+
+            return cod_auto;
+        }
+
+        private static int ActualizaAviso(PublicarChileautosModel datosparapublicar)
+        {
+
+            int cod_auto = 0;
+
+            baseprod2Entities bdprod = new baseprod2Entities();
+
+            var data = bdprod.SP_ActualizarAviso_Automotoras(datosparapublicar.codauto, datosparapublicar.codCliente, datosparapublicar.ip, datosparapublicar.patente, datosparapublicar.tipo, datosparapublicar.marca, datosparapublicar.modelo, datosparapublicar.ano, datosparapublicar.version, datosparapublicar.carroceria, datosparapublicar.puertas, datosparapublicar.tipoDireccion, datosparapublicar.precio, datosparapublicar.cilindrada, datosparapublicar.potencia, datosparapublicar.color, datosparapublicar.kilom, datosparapublicar.motor, datosparapublicar.techo, datosparapublicar.combustible, datosparapublicar.comentario, datosparapublicar.uidJato, datosparapublicar.airbag, datosparapublicar.aireAcon, datosparapublicar.alarma, datosparapublicar.alzaVidrios, datosparapublicar.nuevo, datosparapublicar.transmision, datosparapublicar.radio, datosparapublicar.espejos, datosparapublicar.frenosAbs, datosparapublicar.unicoDueno, datosparapublicar.cierreCentral, datosparapublicar.catalitico, datosparapublicar.fwd, datosparapublicar.llantas, datosparapublicar.listaFotos, datosparapublicar.plataforma, datosparapublicar.consignacion).FirstOrDefault();
+
+            cod_auto = int.Parse(data.codauto.ToString());
+
+            return cod_auto;
+        }
+
+
         private static string ObtieneMarcaxCategoria(int categoria, int idmarca)
         {
 
@@ -657,6 +694,8 @@ namespace ProcesaDocumento
 
             foreach (var d in datos) {
 
+                datospublicar.codauto = d.cod_auto_CA; 
+                datospublicar.codCliente = d.sucursal;
                 datospublicar.patente = d.patente;
                 datospublicar.categoria = d.categoria;
                 datospublicar.tipo = d.Tipo_vehiculo;
@@ -726,7 +765,7 @@ namespace ProcesaDocumento
             return false;
         }
 
-        public static Boolean ProcesaDirectorio(string targetDirectory)
+        private static Boolean ProcesaDirectorio(string targetDirectory)
         {
             Boolean eliminado = true;
             // Process the list of files found in the directory.
@@ -744,6 +783,21 @@ namespace ProcesaDocumento
             }
 
             return eliminado;
+        }
+
+        private static Boolean ActualizaRegistroAutomotora(int id, int codauto) {
+
+            baseprod2Entities bdprod = new baseprod2Entities();
+
+            Boolean respuesta = false;
+
+            ObjectParameter respuestaspr = new ObjectParameter("respuesta", typeof(bool));
+            var dato = bdprod.SPR_Inserta_CodAutoCA_de_CA_en_Automotora(id,codauto, respuestaspr);
+
+            respuesta = Boolean.Parse(respuestaspr.Value.ToString());
+
+            return respuesta;
+
         }
 
 

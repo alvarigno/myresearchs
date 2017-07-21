@@ -49,6 +49,7 @@ namespace AccesoDatos.Data
         public string comentarios { get; set; }
         public string patente { get; set; }
         public string fotos { get; set; }
+        public Nullable<int> cod_auto_CA { get; set; }
         public int sucursal { get; set; }
         public string ipaddress { get; set; }
     }

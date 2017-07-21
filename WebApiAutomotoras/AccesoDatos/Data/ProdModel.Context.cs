@@ -429,6 +429,163 @@ namespace AccesoDatos.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_apiCLA_MarcasCategoria_Result>("SP_apiCLA_MarcasCategoria", idCategoriaParameter, maxTopParameter, topParameter);
         }
     
+        public virtual ObjectResult<SP_PublicarAviso_Automotoras_Result> SP_PublicarAviso_Automotoras(Nullable<int> codCliente, string ip, string patente, string tipo, Nullable<int> marca, string modelo, Nullable<int> ano, string version, string carroceria, Nullable<int> puertas, string tipoDireccion, Nullable<int> precio, Nullable<int> cilindrada, string potencia, string color, Nullable<int> kilom, string motor, string techo, Nullable<int> combustible, string comentario, Nullable<long> uidJato, string airbag, string aireAcon, string alarma, string alzaVidrios, string nuevo, string transmision, string radio, string espejos, string frenosAbs, string unicoDueno, string cierreCentral, string catalitico, string fwd, string llantas, string listaFotos, string plataforma, string consignacion)
+        {
+            var codClienteParameter = codCliente.HasValue ?
+                new ObjectParameter("codCliente", codCliente) :
+                new ObjectParameter("codCliente", typeof(int));
+    
+            var ipParameter = ip != null ?
+                new ObjectParameter("ip", ip) :
+                new ObjectParameter("ip", typeof(string));
+    
+            var patenteParameter = patente != null ?
+                new ObjectParameter("patente", patente) :
+                new ObjectParameter("patente", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var marcaParameter = marca.HasValue ?
+                new ObjectParameter("marca", marca) :
+                new ObjectParameter("marca", typeof(int));
+    
+            var modeloParameter = modelo != null ?
+                new ObjectParameter("modelo", modelo) :
+                new ObjectParameter("modelo", typeof(string));
+    
+            var anoParameter = ano.HasValue ?
+                new ObjectParameter("ano", ano) :
+                new ObjectParameter("ano", typeof(int));
+    
+            var versionParameter = version != null ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(string));
+    
+            var carroceriaParameter = carroceria != null ?
+                new ObjectParameter("carroceria", carroceria) :
+                new ObjectParameter("carroceria", typeof(string));
+    
+            var puertasParameter = puertas.HasValue ?
+                new ObjectParameter("puertas", puertas) :
+                new ObjectParameter("puertas", typeof(int));
+    
+            var tipoDireccionParameter = tipoDireccion != null ?
+                new ObjectParameter("tipoDireccion", tipoDireccion) :
+                new ObjectParameter("tipoDireccion", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(int));
+    
+            var cilindradaParameter = cilindrada.HasValue ?
+                new ObjectParameter("cilindrada", cilindrada) :
+                new ObjectParameter("cilindrada", typeof(int));
+    
+            var potenciaParameter = potencia != null ?
+                new ObjectParameter("potencia", potencia) :
+                new ObjectParameter("potencia", typeof(string));
+    
+            var colorParameter = color != null ?
+                new ObjectParameter("color", color) :
+                new ObjectParameter("color", typeof(string));
+    
+            var kilomParameter = kilom.HasValue ?
+                new ObjectParameter("kilom", kilom) :
+                new ObjectParameter("kilom", typeof(int));
+    
+            var motorParameter = motor != null ?
+                new ObjectParameter("motor", motor) :
+                new ObjectParameter("motor", typeof(string));
+    
+            var techoParameter = techo != null ?
+                new ObjectParameter("techo", techo) :
+                new ObjectParameter("techo", typeof(string));
+    
+            var combustibleParameter = combustible.HasValue ?
+                new ObjectParameter("combustible", combustible) :
+                new ObjectParameter("combustible", typeof(int));
+    
+            var comentarioParameter = comentario != null ?
+                new ObjectParameter("comentario", comentario) :
+                new ObjectParameter("comentario", typeof(string));
+    
+            var uidJatoParameter = uidJato.HasValue ?
+                new ObjectParameter("uidJato", uidJato) :
+                new ObjectParameter("uidJato", typeof(long));
+    
+            var airbagParameter = airbag != null ?
+                new ObjectParameter("airbag", airbag) :
+                new ObjectParameter("airbag", typeof(string));
+    
+            var aireAconParameter = aireAcon != null ?
+                new ObjectParameter("aireAcon", aireAcon) :
+                new ObjectParameter("aireAcon", typeof(string));
+    
+            var alarmaParameter = alarma != null ?
+                new ObjectParameter("alarma", alarma) :
+                new ObjectParameter("alarma", typeof(string));
+    
+            var alzaVidriosParameter = alzaVidrios != null ?
+                new ObjectParameter("alzaVidrios", alzaVidrios) :
+                new ObjectParameter("alzaVidrios", typeof(string));
+    
+            var nuevoParameter = nuevo != null ?
+                new ObjectParameter("nuevo", nuevo) :
+                new ObjectParameter("nuevo", typeof(string));
+    
+            var transmisionParameter = transmision != null ?
+                new ObjectParameter("transmision", transmision) :
+                new ObjectParameter("transmision", typeof(string));
+    
+            var radioParameter = radio != null ?
+                new ObjectParameter("radio", radio) :
+                new ObjectParameter("radio", typeof(string));
+    
+            var espejosParameter = espejos != null ?
+                new ObjectParameter("espejos", espejos) :
+                new ObjectParameter("espejos", typeof(string));
+    
+            var frenosAbsParameter = frenosAbs != null ?
+                new ObjectParameter("frenosAbs", frenosAbs) :
+                new ObjectParameter("frenosAbs", typeof(string));
+    
+            var unicoDuenoParameter = unicoDueno != null ?
+                new ObjectParameter("unicoDueno", unicoDueno) :
+                new ObjectParameter("unicoDueno", typeof(string));
+    
+            var cierreCentralParameter = cierreCentral != null ?
+                new ObjectParameter("cierreCentral", cierreCentral) :
+                new ObjectParameter("cierreCentral", typeof(string));
+    
+            var cataliticoParameter = catalitico != null ?
+                new ObjectParameter("catalitico", catalitico) :
+                new ObjectParameter("catalitico", typeof(string));
+    
+            var fwdParameter = fwd != null ?
+                new ObjectParameter("fwd", fwd) :
+                new ObjectParameter("fwd", typeof(string));
+    
+            var llantasParameter = llantas != null ?
+                new ObjectParameter("llantas", llantas) :
+                new ObjectParameter("llantas", typeof(string));
+    
+            var listaFotosParameter = listaFotos != null ?
+                new ObjectParameter("listaFotos", listaFotos) :
+                new ObjectParameter("listaFotos", typeof(string));
+    
+            var plataformaParameter = plataforma != null ?
+                new ObjectParameter("plataforma", plataforma) :
+                new ObjectParameter("plataforma", typeof(string));
+    
+            var consignacionParameter = consignacion != null ?
+                new ObjectParameter("consignacion", consignacion) :
+                new ObjectParameter("consignacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PublicarAviso_Automotoras_Result>("SP_PublicarAviso_Automotoras", codClienteParameter, ipParameter, patenteParameter, tipoParameter, marcaParameter, modeloParameter, anoParameter, versionParameter, carroceriaParameter, puertasParameter, tipoDireccionParameter, precioParameter, cilindradaParameter, potenciaParameter, colorParameter, kilomParameter, motorParameter, techoParameter, combustibleParameter, comentarioParameter, uidJatoParameter, airbagParameter, aireAconParameter, alarmaParameter, alzaVidriosParameter, nuevoParameter, transmisionParameter, radioParameter, espejosParameter, frenosAbsParameter, unicoDuenoParameter, cierreCentralParameter, cataliticoParameter, fwdParameter, llantasParameter, listaFotosParameter, plataformaParameter, consignacionParameter);
+        }
+    
         public virtual ObjectResult<SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result> SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA(Nullable<int> idPublicAutom, ObjectParameter respuesta)
         {
             var idPublicAutomParameter = idPublicAutom.HasValue ?
@@ -436,6 +593,180 @@ namespace AccesoDatos.Data
                 new ObjectParameter("idPublicAutom", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA_Result>("SPR_Obtiene_dato_vehiculo_Automotora_publicar_en_CA", idPublicAutomParameter, respuesta);
+        }
+    
+        public virtual int SPR_Inserta_CodAutoCA_de_CA_en_Automotora(Nullable<int> idPublicAutom, Nullable<int> codauto, ObjectParameter respuesta)
+        {
+            var idPublicAutomParameter = idPublicAutom.HasValue ?
+                new ObjectParameter("idPublicAutom", idPublicAutom) :
+                new ObjectParameter("idPublicAutom", typeof(int));
+    
+            var codautoParameter = codauto.HasValue ?
+                new ObjectParameter("Codauto", codauto) :
+                new ObjectParameter("Codauto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Inserta_CodAutoCA_de_CA_en_Automotora", idPublicAutomParameter, codautoParameter, respuesta);
+        }
+    
+        public virtual ObjectResult<SP_ActualizarAviso_Automotoras_Result> SP_ActualizarAviso_Automotoras(Nullable<int> codigoauto, Nullable<int> codCliente, string ip, string patente, string tipo, Nullable<int> marca, string modelo, Nullable<int> ano, string version, string carroceria, Nullable<int> puertas, string tipoDireccion, Nullable<int> precio, Nullable<int> cilindrada, string potencia, string color, Nullable<int> kilom, string motor, string techo, Nullable<int> combustible, string comentario, Nullable<long> uidJato, string airbag, string aireAcon, string alarma, string alzaVidrios, string nuevo, string transmision, string radio, string espejos, string frenosAbs, string unicoDueno, string cierreCentral, string catalitico, string fwd, string llantas, string listaFotos, string plataforma, string consignacion)
+        {
+            var codigoautoParameter = codigoauto.HasValue ?
+                new ObjectParameter("codigoauto", codigoauto) :
+                new ObjectParameter("codigoauto", typeof(int));
+    
+            var codClienteParameter = codCliente.HasValue ?
+                new ObjectParameter("codCliente", codCliente) :
+                new ObjectParameter("codCliente", typeof(int));
+    
+            var ipParameter = ip != null ?
+                new ObjectParameter("ip", ip) :
+                new ObjectParameter("ip", typeof(string));
+    
+            var patenteParameter = patente != null ?
+                new ObjectParameter("patente", patente) :
+                new ObjectParameter("patente", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var marcaParameter = marca.HasValue ?
+                new ObjectParameter("marca", marca) :
+                new ObjectParameter("marca", typeof(int));
+    
+            var modeloParameter = modelo != null ?
+                new ObjectParameter("modelo", modelo) :
+                new ObjectParameter("modelo", typeof(string));
+    
+            var anoParameter = ano.HasValue ?
+                new ObjectParameter("ano", ano) :
+                new ObjectParameter("ano", typeof(int));
+    
+            var versionParameter = version != null ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(string));
+    
+            var carroceriaParameter = carroceria != null ?
+                new ObjectParameter("carroceria", carroceria) :
+                new ObjectParameter("carroceria", typeof(string));
+    
+            var puertasParameter = puertas.HasValue ?
+                new ObjectParameter("puertas", puertas) :
+                new ObjectParameter("puertas", typeof(int));
+    
+            var tipoDireccionParameter = tipoDireccion != null ?
+                new ObjectParameter("tipoDireccion", tipoDireccion) :
+                new ObjectParameter("tipoDireccion", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(int));
+    
+            var cilindradaParameter = cilindrada.HasValue ?
+                new ObjectParameter("cilindrada", cilindrada) :
+                new ObjectParameter("cilindrada", typeof(int));
+    
+            var potenciaParameter = potencia != null ?
+                new ObjectParameter("potencia", potencia) :
+                new ObjectParameter("potencia", typeof(string));
+    
+            var colorParameter = color != null ?
+                new ObjectParameter("color", color) :
+                new ObjectParameter("color", typeof(string));
+    
+            var kilomParameter = kilom.HasValue ?
+                new ObjectParameter("kilom", kilom) :
+                new ObjectParameter("kilom", typeof(int));
+    
+            var motorParameter = motor != null ?
+                new ObjectParameter("motor", motor) :
+                new ObjectParameter("motor", typeof(string));
+    
+            var techoParameter = techo != null ?
+                new ObjectParameter("techo", techo) :
+                new ObjectParameter("techo", typeof(string));
+    
+            var combustibleParameter = combustible.HasValue ?
+                new ObjectParameter("combustible", combustible) :
+                new ObjectParameter("combustible", typeof(int));
+    
+            var comentarioParameter = comentario != null ?
+                new ObjectParameter("comentario", comentario) :
+                new ObjectParameter("comentario", typeof(string));
+    
+            var uidJatoParameter = uidJato.HasValue ?
+                new ObjectParameter("uidJato", uidJato) :
+                new ObjectParameter("uidJato", typeof(long));
+    
+            var airbagParameter = airbag != null ?
+                new ObjectParameter("airbag", airbag) :
+                new ObjectParameter("airbag", typeof(string));
+    
+            var aireAconParameter = aireAcon != null ?
+                new ObjectParameter("aireAcon", aireAcon) :
+                new ObjectParameter("aireAcon", typeof(string));
+    
+            var alarmaParameter = alarma != null ?
+                new ObjectParameter("alarma", alarma) :
+                new ObjectParameter("alarma", typeof(string));
+    
+            var alzaVidriosParameter = alzaVidrios != null ?
+                new ObjectParameter("alzaVidrios", alzaVidrios) :
+                new ObjectParameter("alzaVidrios", typeof(string));
+    
+            var nuevoParameter = nuevo != null ?
+                new ObjectParameter("nuevo", nuevo) :
+                new ObjectParameter("nuevo", typeof(string));
+    
+            var transmisionParameter = transmision != null ?
+                new ObjectParameter("transmision", transmision) :
+                new ObjectParameter("transmision", typeof(string));
+    
+            var radioParameter = radio != null ?
+                new ObjectParameter("radio", radio) :
+                new ObjectParameter("radio", typeof(string));
+    
+            var espejosParameter = espejos != null ?
+                new ObjectParameter("espejos", espejos) :
+                new ObjectParameter("espejos", typeof(string));
+    
+            var frenosAbsParameter = frenosAbs != null ?
+                new ObjectParameter("frenosAbs", frenosAbs) :
+                new ObjectParameter("frenosAbs", typeof(string));
+    
+            var unicoDuenoParameter = unicoDueno != null ?
+                new ObjectParameter("unicoDueno", unicoDueno) :
+                new ObjectParameter("unicoDueno", typeof(string));
+    
+            var cierreCentralParameter = cierreCentral != null ?
+                new ObjectParameter("cierreCentral", cierreCentral) :
+                new ObjectParameter("cierreCentral", typeof(string));
+    
+            var cataliticoParameter = catalitico != null ?
+                new ObjectParameter("catalitico", catalitico) :
+                new ObjectParameter("catalitico", typeof(string));
+    
+            var fwdParameter = fwd != null ?
+                new ObjectParameter("fwd", fwd) :
+                new ObjectParameter("fwd", typeof(string));
+    
+            var llantasParameter = llantas != null ?
+                new ObjectParameter("llantas", llantas) :
+                new ObjectParameter("llantas", typeof(string));
+    
+            var listaFotosParameter = listaFotos != null ?
+                new ObjectParameter("listaFotos", listaFotos) :
+                new ObjectParameter("listaFotos", typeof(string));
+    
+            var plataformaParameter = plataforma != null ?
+                new ObjectParameter("plataforma", plataforma) :
+                new ObjectParameter("plataforma", typeof(string));
+    
+            var consignacionParameter = consignacion != null ?
+                new ObjectParameter("consignacion", consignacion) :
+                new ObjectParameter("consignacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ActualizarAviso_Automotoras_Result>("SP_ActualizarAviso_Automotoras", codigoautoParameter, codClienteParameter, ipParameter, patenteParameter, tipoParameter, marcaParameter, modeloParameter, anoParameter, versionParameter, carroceriaParameter, puertasParameter, tipoDireccionParameter, precioParameter, cilindradaParameter, potenciaParameter, colorParameter, kilomParameter, motorParameter, techoParameter, combustibleParameter, comentarioParameter, uidJatoParameter, airbagParameter, aireAconParameter, alarmaParameter, alzaVidriosParameter, nuevoParameter, transmisionParameter, radioParameter, espejosParameter, frenosAbsParameter, unicoDuenoParameter, cierreCentralParameter, cataliticoParameter, fwdParameter, llantasParameter, listaFotosParameter, plataformaParameter, consignacionParameter);
         }
     }
 }

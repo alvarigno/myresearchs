@@ -11,7 +11,8 @@ namespace ProcesaDocumento.Models
         public int codCliente { get; set; }
         public string ip { get; set; }
 
-	    //datos vehiculo
+        //datos vehiculo
+        public int? codauto { get; set; } // usado para actualizar
         public string patente { get; set; }
         public int categoria { get; set; }
         public string tipo { get; set; }
