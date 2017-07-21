@@ -226,13 +226,12 @@ namespace ProcesaDocumento
 
                 if (ValidaDatos(dVehiculo.carroceria, dVehiculo.puertas, dEquipamiento.transmision, dVehiculo.combustible, dVehiculo.categoria ) == 5)
                 { 
+
                     string pathfile = System.IO.Path.Combine(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded", dpublicacion.idfuente.ToString()+ "_"+ dpublicacion.codCliente);
-
-
-
+                    
                     if (Directory.Exists(pathfile)) {
 
-                        if (!ProcessDirectory(pathfile)) {
+                        if (!ProcesaDirectorio(pathfile)) {
 
                             Directory.Delete(pathfile, true);
 
@@ -242,19 +241,14 @@ namespace ProcesaDocumento
 
                     foreach (var list in item.img)
                     {
-                        
-                   
+
                         fotos datalocal = new fotos();
 
                         datalocal.url = list.source;
 
-                        //if (!Directory.Exists(pathfile))
-                        //{
-                            pathfile = CrearDirectorioImagenes(dpublicacion.idfuente.ToString() + "_" + dpublicacion.codCliente);
-                        //}
-
+                        //Creadirectorio de imágenes
+                        pathfile = CrearDirectorioImagenes(dpublicacion.idfuente.ToString() + "_" + dpublicacion.codCliente);
                         
-
                         datalocal.url = DescargaImagen(list.source, pathfile);
 
                         //Carga imagen por imagen en servidor de Chileutos.
@@ -732,7 +726,7 @@ namespace ProcesaDocumento
             return false;
         }
 
-        public static Boolean ProcessDirectory(string targetDirectory)
+        public static Boolean ProcesaDirectorio(string targetDirectory)
         {
             Boolean eliminado = true;
             // Process the list of files found in the directory.
