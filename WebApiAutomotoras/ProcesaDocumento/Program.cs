@@ -658,7 +658,6 @@ namespace ProcesaDocumento
             return cod_auto;
         }
 
-
         private static string ObtieneMarcaxCategoria(int categoria, int idmarca)
         {
 
