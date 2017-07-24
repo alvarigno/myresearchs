@@ -618,7 +618,7 @@ namespace ProcesaDocumento
 
             string[] resultados = new string[2];
             string fotos = "";
-            fotos = string.Join("*", dato.dVehiculo.listadofotos);
+            fotos = string.Join(",", dato.dVehiculo.listadofotos);
             
             baseprod2Entities bdprod = new baseprod2Entities();
             ObjectParameter respuestaactualizacionsp = new ObjectParameter("respuestaupdate", typeof(bool));

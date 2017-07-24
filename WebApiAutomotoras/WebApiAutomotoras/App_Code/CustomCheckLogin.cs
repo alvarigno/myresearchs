@@ -24,7 +24,7 @@ namespace WebApiAutomotoras.App_Code
             string token = Util.getValueFromHeader("X-KEY") ?? "";
 
             ObjectParameter esValidoParam = new ObjectParameter("esValido", typeof(bool));
-            database.SP_apiCLA_CompruebaLogin(token, esValidoParam);
+            database.SPR_CompruebaLogin_Automotora(token, esValidoParam);
 
             if ((bool)esValidoParam.Value)
             {

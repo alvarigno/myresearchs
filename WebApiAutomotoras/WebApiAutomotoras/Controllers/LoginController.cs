@@ -24,7 +24,7 @@ namespace WebApiAutomotoras.Controllers
 
             try
             {
-                database.SP_apiCLA_LoginModificacion(param.rut, param.clave, keyParam);
+                database.SPR_LoginModificacion_Automotora(param.nombre, param.clave, keyParam);
 
                 if (keyParam.Value.ToString() == "notfound")
                 {

@@ -28,28 +28,6 @@ namespace AccesoDatos.Data
         }
     
     
-        public virtual int SP_apiCLA_CompruebaLogin(string key, ObjectParameter esValido)
-        {
-            var keyParameter = key != null ?
-                new ObjectParameter("key", key) :
-                new ObjectParameter("key", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_CompruebaLogin", keyParameter, esValido);
-        }
-    
-        public virtual int SP_apiCLA_LoginModificacion(string rut, string clave, ObjectParameter key)
-        {
-            var rutParameter = rut != null ?
-                new ObjectParameter("rut", rut) :
-                new ObjectParameter("rut", typeof(string));
-    
-            var claveParameter = clave != null ?
-                new ObjectParameter("clave", clave) :
-                new ObjectParameter("clave", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_apiCLA_LoginModificacion", rutParameter, claveParameter, key);
-        }
-    
         public virtual int SPR_Valida_ip_x_xkey(string xkey, ObjectParameter respuesta, ObjectParameter ipaddress)
         {
             var xkeyParameter = xkey != null ?
@@ -767,6 +745,28 @@ namespace AccesoDatos.Data
                 new ObjectParameter("consignacion", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ActualizarAviso_Automotoras_Result>("SP_ActualizarAviso_Automotoras", codigoautoParameter, codClienteParameter, ipParameter, patenteParameter, tipoParameter, marcaParameter, modeloParameter, anoParameter, versionParameter, carroceriaParameter, puertasParameter, tipoDireccionParameter, precioParameter, cilindradaParameter, potenciaParameter, colorParameter, kilomParameter, motorParameter, techoParameter, combustibleParameter, comentarioParameter, uidJatoParameter, airbagParameter, aireAconParameter, alarmaParameter, alzaVidriosParameter, nuevoParameter, transmisionParameter, radioParameter, espejosParameter, frenosAbsParameter, unicoDuenoParameter, cierreCentralParameter, cataliticoParameter, fwdParameter, llantasParameter, listaFotosParameter, plataformaParameter, consignacionParameter);
+        }
+    
+        public virtual int SPR_CompruebaLogin_Automotora(string key, ObjectParameter esValido)
+        {
+            var keyParameter = key != null ?
+                new ObjectParameter("key", key) :
+                new ObjectParameter("key", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_CompruebaLogin_Automotora", keyParameter, esValido);
+        }
+    
+        public virtual int SPR_LoginModificacion_Automotora(string nombre, string clave, ObjectParameter key)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var claveParameter = clave != null ?
+                new ObjectParameter("clave", clave) :
+                new ObjectParameter("clave", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_LoginModificacion_Automotora", nombreParameter, claveParameter, key);
         }
     }
 }
