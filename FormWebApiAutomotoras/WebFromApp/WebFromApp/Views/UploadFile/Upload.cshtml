@@ -7,7 +7,7 @@
 <h2>Upload</h2>
 <form>
     <div id="idPanelLogin">
-        <input type="text" id="Rut" value="" placeholder="ej.:122345648"/>
+        <input type="text" id="nombreusuario" value="" placeholder="ej.:122345648"/>
         <input type="password" id="PassWord" value="" placeholder="su clave de acceso" />
         <input type="button" value="Acceder" id="IdEnviar" />
     </div>
@@ -26,9 +26,9 @@
 <script type="text/javascript">
         $('#IdEnviar').click(function(){
                 // debugger;
-                var rut = $("#Rut").val();
+                var nombre = $("#nombreusuario").val();
                 var clave = $("#PassWord").val();
-                var hola = { rut: rut, clave: clave };
+                var hola = { nombre: nombre, clave: clave };
                 $("#IdProcesando").removeClass("hidden");
                 $("#IdEnviar").addClass("hidden");
                 $.ajax({
