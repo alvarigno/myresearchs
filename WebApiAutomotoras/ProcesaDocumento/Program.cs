@@ -600,7 +600,7 @@ namespace ProcesaDocumento
 
             DateTime fecha_i_date = DateTime.Now;
             string fotos = "";
-            fotos = string.Join("*", dato.dVehiculo.listadofotos);
+            fotos = string.Join(",", dato.dVehiculo.listadofotos);
 
             baseprod2Entities bdprod = new baseprod2Entities();
             ObjectParameter respuestainsertsp = new ObjectParameter("respuesta", typeof(bool));
