@@ -8,7 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBox VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="40" Width="399" Margin="0,0,108,10" TextAlignment="Justify" />
 
         <Button Content="Cargar" Name="btncarga" Width="53" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,55,10" Click="btncarga_Click" />
 

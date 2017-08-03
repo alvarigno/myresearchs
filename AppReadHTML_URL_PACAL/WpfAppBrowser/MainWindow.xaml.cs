@@ -29,6 +29,7 @@ namespace WpfAppBrowser
 
         public MainWindow()
         {
+
             InitializeComponent();
 
             myWebBrowser.Address = "http://www.macal.cl/Loteo.aspx";
@@ -36,13 +37,9 @@ namespace WpfAppBrowser
         }
 
         public void LoadHTML() {
-
-
+            
             var doc = new HtmlDocument();
-            var url = myWebBrowser.Address;
             var web = new HtmlWeb();
-            //doc = web.Load(myWebBrowser.Address);
-
 
             string HTML = myWebBrowser.GetSourceAsync().Result;
             doc.LoadHtml(HTML);
