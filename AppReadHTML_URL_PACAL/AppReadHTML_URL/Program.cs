@@ -37,32 +37,33 @@ namespace AppReadHTML_URL
 
             if (!VerificaContenido(doc))
             {
-               List<string> ListadoImagenes = ObtieneImagenes(doc);
-               List<string> ListadoDatos = ObtieneDatos(doc);
-               List<string> Listadotitulo = ObtieneTitulo(doc);
-               List<string> Listadovalor = ObtienValor(doc);
-               List<string> Listadovalortachado = ObtienValorTachado(doc);
-               List<string> Listadovalorbono = ObtienValorBono(doc);
-                //List<string> Listadoprueba = pruebauno(doc); 
-
-               //MuestraContenido(ListadoImagenes, "imágenes");
-               ProcesaDescargas(ListadoImagenes, codigo);
-               MuestraContenido(ListadoDatos, "listado de datos", codigo);
-               MuestraContenido(Listadotitulo, "título de la publicación", codigo);
-               MuestraContenido(Listadovalor, "Precio", codigo);
-               MuestraContenido(Listadovalorbono, "Valor bonificado", codigo);
-               MuestraContenido(Listadovalortachado, "Valor tachado", codigo);
-
-               CreaArchivoTxt(ContenidoPublicacion, codigo);
+                ObtieneImagenes(doc);
+                //             List<string> ListadoImagenes = ObtieneImagenes(doc);
+                //               List<string> ListadoDatos = ObtieneDatos(doc);
+                //               List<string> Listadotitulo = ObtieneTitulo(doc);
+                //               List<string> Listadovalor = ObtienValor(doc);
+                //               List<string> Listadovalortachado = ObtienValorTachado(doc);
+                //               List<string> Listadovalorbono = ObtienValorBono(doc);
+                //                //List<string> Listadoprueba = pruebauno(doc); 
+                //
+                //               //MuestraContenido(ListadoImagenes, "imágenes");
+                //               ProcesaDescargas(ListadoImagenes, codigo);
+                //               MuestraContenido(ListadoDatos, "listado de datos", codigo);
+                //               MuestraContenido(Listadotitulo, "título de la publicación", codigo);
+                //               MuestraContenido(Listadovalor, "Precio", codigo);
+                //               MuestraContenido(Listadovalorbono, "Valor bonificado", codigo);
+                //               MuestraContenido(Listadovalortachado, "Valor tachado", codigo);
+                //
+                //               CreaArchivoTxt(ContenidoPublicacion, codigo);
 
             }
             else {
 
-                List<string> datoserror = new List<string>();
-                Console.WriteLine("Vehículo no encontrado");
-                datoserror.Add("-> url Ficha: " + url + ".\r\n-> Código: " + codigo + ". \r\n-> no posee información.");
-                datoserror =  ModificaTexto(datoserror);
-                Console.WriteLine(datoserror[0]);
+              //  List<string> datoserror = new List<string>();
+              //  Console.WriteLine("Vehículo no encontrado");
+              //  datoserror.Add("-> url Ficha: " + url + ".\r\n-> Código: " + codigo + ". \r\n-> no posee información.");
+              //  datoserror =  ModificaTexto(datoserror);
+              //  Console.WriteLine(datoserror[0]);
 
             }
 
@@ -74,9 +75,9 @@ namespace AppReadHTML_URL
 
             var localdoc = new HtmlDocument();
             localdoc = doc;
-            var query = localdoc.DocumentNode.Descendants("img")
-            .Where(c => c.Attributes["itemprop"] != null)
-            .Select(c => c.ChildAttributes("src").FirstOrDefault().Value);
+            var query = localdoc.DocumentNode.Descendants("a")
+            .Where(c => (c.Attributes["class"] != null) && (c.Attributes["class"].Value == "fancybox-thumb"))
+            .Select(c => c.ChildAttributes("href").FirstOrDefault().Value);
 
             return query.ToList();
         }
@@ -90,7 +91,6 @@ namespace AppReadHTML_URL
             var query = localdoc.DocumentNode.Descendants("span")
             .Where(c => (c.Attributes["itemprop"] != null) && (c.Attributes["itemprop"].Value == "description"))
             .SelectMany(c => c.Descendants());
-
 
             foreach (var d in query) {
 

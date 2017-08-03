@@ -1,0 +1,18 @@
+﻿<Window x:Class="WpfAppBrowser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppBrowser"
+        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBox VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="40" Width="399" Margin="0,0,108,10" TextAlignment="Justify" />
+
+        <Button Content="Cargar" Name="btncarga" Width="53" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,55,10" Click="btncarga_Click" />
+
+        <cefSharp:ChromiumWebBrowser Grid.Row="1" Margin="55px" Name="myWebBrowser" />
+
+    </Grid>
+</Window>
