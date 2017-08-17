@@ -9,14 +9,15 @@ namespace WebApiUpLoadImageDM.Models
     public class FilesUpLoad
     {
 
-        public FilesUpLoad(string name)
+        public FilesUpLoad(string urlDM, string urlCA)
         {
-            NameDM = name;
+            FileDM = urlDM;
+            FileCA = urlCA;
         }
 
-        public string NameDM { get; set; }
+        public string FileDM { get; set; }
 
-        public string UrlLocal { get; set; }
+        public string FileCA { get; set; }
 
     }
 }

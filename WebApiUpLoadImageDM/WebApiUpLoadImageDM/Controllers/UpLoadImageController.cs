@@ -10,9 +10,11 @@ using System.Web.Http;
 using WebApiUpLoadImageDM.Models;
 using WebApiUpLoadImageDM.Infrastructure;
 using UpLoadFile;
+using System.Web.Http.Cors;
 
 namespace WebApiUpLoadImageDM.Controllers
 {
+
     [RoutePrefix("API-CLAImagDM/Upload")]
     public class UpLoadImageController : ApiController
     {
@@ -48,16 +50,20 @@ namespace WebApiUpLoadImageDM.Controllers
 
                             var fileInfo = streamProvider.FileData.Select(i =>
                             {
-                                DM_ImgUploadServer dataDm = new DM_ImgUploadServer();
+                                DM_ImgUploadServer ImagesDm = new DM_ImgUploadServer();
+                                CA_ImgUploadServer ImagesCa = new CA_ImgUploadServer();
+
                                 var info = new FileInfo(i.LocalFileName);
                                 nombrerealarchivo = info.Name;
                                 
                                 archivolocal = uploadFolderPath + nombrerealarchivo;
-                                string data = dataDm.Uploadimage(uploadFolderPath + nombrerealarchivo);
-                                data = "http://images.demotores.cl/post/tmp/siteposting/" + data;
+                                string dataDM = ImagesDm.Uploadimage(uploadFolderPath + nombrerealarchivo);
+                                dataDM = "http://images.demotores.cl/post/tmp/siteposting/" + dataDM;
+                                string dataCA = ImagesCa.Uploadimage(uploadFolderPath + nombrerealarchivo);
+
                                 string valoretorno = archivolocal;
                                 taskDocumento = Task.Factory.StartNew(() => eliminaDoc(archivolocal));
-                                return new FilesUpLoad(data);
+                                return new FilesUpLoad(dataDM, dataCA);
 
 
                             });
