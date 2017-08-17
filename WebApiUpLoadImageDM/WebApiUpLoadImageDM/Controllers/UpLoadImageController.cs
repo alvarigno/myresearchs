@@ -16,7 +16,6 @@ using System.Web.Http.Cors;
 namespace WebApiUpLoadImageDM.Controllers
 {
 
-    [RoutePrefix("API-CLAImagDM/Upload")]
     public class UpLoadImageController : ApiController
     {
 
@@ -29,7 +28,6 @@ namespace WebApiUpLoadImageDM.Controllers
 
 
         [HttpPost]
-        [EnableCors("*", "*", "POST,OPTIONS")]
         public async Task<HttpResponseMessage> Upload()
         {
 
@@ -55,12 +53,14 @@ namespace WebApiUpLoadImageDM.Controllers
                     docfiles.Add(img2);
                     taskDocumento = Task.Factory.StartNew(() => eliminaDoc(filePath));
                 }
-                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
             }
             else
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
+
+            result.Headers.Add("X-Custom-Header", "hello");
             return result;
 
         }
