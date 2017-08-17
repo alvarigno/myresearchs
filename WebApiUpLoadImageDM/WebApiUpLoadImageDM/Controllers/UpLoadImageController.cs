@@ -30,74 +30,38 @@ namespace WebApiUpLoadImageDM.Controllers
 
         [HttpPost]
         [EnableCors("*", "*", "POST,OPTIONS")]
-        public Task<IQueryable<FilesUpLoad>> Upload()
+        public async Task<HttpResponseMessage> Upload()
         {
-            string fileDM = "";
 
-            if (Request.Content.IsMimeMultipartContent())
+            DM_ImgUploadServer ImagesDm = new DM_ImgUploadServer();
+            CA_ImgUploadServer ImagesCa = new CA_ImgUploadServer();
+
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
             {
-                
-                try
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
                 {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = uploadFolderPath+postedFile.FileName;
+                    postedFile.SaveAs(filePath);
 
-                    if (Request.Content.IsMimeMultipartContent())
-                    {
-                        var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
+                    string dataDM = ImagesDm.Uploadimage(filePath);
+                    img1 = "http://images.demotores.cl/post/tmp/siteposting/" + dataDM;
+                    img2 = ImagesCa.Uploadimage(filePath);
 
-                        var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
-                        {
-                            if (t.IsFaulted || t.IsCanceled)
-                            {
-                                throw new HttpResponseException(HttpStatusCode.InternalServerError);
-                            }
-
-                            var fileInfo = streamProvider.FileData.Select(i =>
-                            {
-                                DM_ImgUploadServer ImagesDm = new DM_ImgUploadServer();
-                                CA_ImgUploadServer ImagesCa = new CA_ImgUploadServer();
-
-                                var info = new FileInfo(i.LocalFileName);
-                                nombrerealarchivo = info.Name;
-                                
-                                archivolocal = uploadFolderPath + nombrerealarchivo;
-                                string dataDM = ImagesDm.Uploadimage(uploadFolderPath + nombrerealarchivo);
-                                img1 = "http://images.demotores.cl/post/tmp/siteposting/" + dataDM;
-                                img2 = ImagesCa.Uploadimage(uploadFolderPath + nombrerealarchivo);
-
-                                string valoretorno = archivolocal;
-                                taskDocumento = Task.Factory.StartNew(() => eliminaDoc(archivolocal));
-                                return new FilesUpLoad(img1, img2);
-
-
-                            });
-
-                            return fileInfo.AsQueryable();
-
-                        });
-
-                        return task;
-
-                    }
-                    else
-                    {
-                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
-                    }
-
-
+                    docfiles.Add(img1);
+                    docfiles.Add(img2);
+                    taskDocumento = Task.Factory.StartNew(() => eliminaDoc(filePath));
                 }
-                catch (Exception ex)
-                {
-
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message.ToString());
-                }
-
-
-
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
             }
             else
             {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
+            return result;
 
         }
 
