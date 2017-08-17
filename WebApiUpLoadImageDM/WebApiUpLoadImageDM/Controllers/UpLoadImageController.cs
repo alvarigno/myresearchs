@@ -10,6 +10,7 @@ using System.Web.Http;
 using WebApiUpLoadImageDM.Models;
 using WebApiUpLoadImageDM.Infrastructure;
 using UpLoadFile;
+using System.Net.Http.Headers;
 using System.Web.Http.Cors;
 
 namespace WebApiUpLoadImageDM.Controllers
@@ -23,9 +24,12 @@ namespace WebApiUpLoadImageDM.Controllers
         string uploadFolderPath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded\\";
         string archivolocal = "";
         Task taskDocumento;
+        string img1;
+        string img2;
 
 
         [HttpPost]
+        [EnableCors("*", "*", "POST,OPTIONS")]
         public Task<IQueryable<FilesUpLoad>> Upload()
         {
             string fileDM = "";
@@ -57,12 +61,12 @@ namespace WebApiUpLoadImageDM.Controllers
                                 
                                 archivolocal = uploadFolderPath + nombrerealarchivo;
                                 string dataDM = ImagesDm.Uploadimage(uploadFolderPath + nombrerealarchivo);
-                                dataDM = "http://images.demotores.cl/post/tmp/siteposting/" + dataDM;
-                                string dataCA = ImagesCa.Uploadimage(uploadFolderPath + nombrerealarchivo);
+                                img1 = "http://images.demotores.cl/post/tmp/siteposting/" + dataDM;
+                                img2 = ImagesCa.Uploadimage(uploadFolderPath + nombrerealarchivo);
 
                                 string valoretorno = archivolocal;
                                 taskDocumento = Task.Factory.StartNew(() => eliminaDoc(archivolocal));
-                                return new FilesUpLoad(dataDM, dataCA);
+                                return new FilesUpLoad(img1, img2);
 
 
                             });
@@ -71,9 +75,7 @@ namespace WebApiUpLoadImageDM.Controllers
 
                         });
 
-                        
                         return task;
-
 
                     }
                     else
@@ -86,7 +88,7 @@ namespace WebApiUpLoadImageDM.Controllers
                 catch (Exception ex)
                 {
 
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message.ToString());
                 }
 
 
