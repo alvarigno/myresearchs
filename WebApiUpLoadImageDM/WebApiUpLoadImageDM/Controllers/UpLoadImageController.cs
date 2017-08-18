@@ -65,6 +65,36 @@ namespace WebApiUpLoadImageDM.Controllers
 
         }
 
+
+        [Route("Administacion/aviso")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AdministraAvisoDm(string codauto)
+        {
+
+            HttpResponseMessage respuesta = null;
+            var httpRequest = HttpContext.Current.Request;
+
+            if (httpRequest.Form.Count > 0 && httpRequest.Form.Keys[0] == "codautoCA")
+            {
+                if (httpRequest.Form["codautoCA"] == "12345")
+                {
+                    respuesta = Request.CreateResponse(HttpStatusCode.OK, httpRequest.Form["codautoCA"]);
+                }
+                else
+                {
+
+                    respuesta = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Código no existe.");
+
+                }
+            }
+            else
+            {
+
+                respuesta = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Campo no existe.");
+            }
+            return respuesta;
+        }
+
         private static bool SiArchivoEstaBloqueado(FileInfo file)
         {
             FileStream stream = null;
