@@ -77,7 +77,7 @@ namespace WebApiUpLoadImageDM.Controllers
             if (codauto == "12345")
             {
 
-                respuesta = Request.CreateResponse(HttpStatusCode.OK, httpRequest.Form["codautoCA"]);
+                respuesta = Request.CreateResponse(HttpStatusCode.OK, codauto);
 
             }
             else
