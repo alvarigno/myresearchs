@@ -64,8 +64,7 @@ namespace WebApiUpLoadImageDM.Controllers
             return result;
 
         }
-
-
+        
         [Route("Administacion/aviso")]
         [HttpPost]
         public async Task<HttpResponseMessage> AdministraAvisoDm(string codauto)
