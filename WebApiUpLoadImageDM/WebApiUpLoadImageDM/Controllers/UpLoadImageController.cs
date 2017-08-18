@@ -74,16 +74,18 @@ namespace WebApiUpLoadImageDM.Controllers
             HttpResponseMessage respuesta = null;
             var httpRequest = HttpContext.Current.Request;
 
-                if (codauto == "12345")
-                {
-                    respuesta = Request.CreateResponse(HttpStatusCode.OK, httpRequest.Form["codautoCA"]);
-                }
-                else
-                {
+            if (codauto == "12345")
+            {
 
-                    respuesta = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Código no existe.");
+                respuesta = Request.CreateResponse(HttpStatusCode.OK, httpRequest.Form["codautoCA"]);
 
-                }
+            }
+            else
+            {
+
+                respuesta = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Código no existe.");
+
+            }
 
             return respuesta;
         }
