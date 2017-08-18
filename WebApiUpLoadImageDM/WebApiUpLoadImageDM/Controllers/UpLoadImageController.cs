@@ -74,9 +74,7 @@ namespace WebApiUpLoadImageDM.Controllers
             HttpResponseMessage respuesta = null;
             var httpRequest = HttpContext.Current.Request;
 
-            if (httpRequest.Form.Count > 0 && httpRequest.Form.Keys[0] == "codautoCA")
-            {
-                if (httpRequest.Form["codautoCA"] == "12345")
+                if (codauto == "12345")
                 {
                     respuesta = Request.CreateResponse(HttpStatusCode.OK, httpRequest.Form["codautoCA"]);
                 }
@@ -86,12 +84,7 @@ namespace WebApiUpLoadImageDM.Controllers
                     respuesta = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Código no existe.");
 
                 }
-            }
-            else
-            {
 
-                respuesta = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Campo no existe.");
-            }
             return respuesta;
         }
 
