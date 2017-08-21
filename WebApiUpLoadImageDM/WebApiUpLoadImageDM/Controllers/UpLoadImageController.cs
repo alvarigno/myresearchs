@@ -10,6 +10,7 @@ using System.Web.Http;
 using WebApiUpLoadImageDM.Models;
 using WebApiUpLoadImageDM.Infrastructure;
 using UpLoadFile;
+using PublicacionDM;
 using System.Net.Http.Headers;
 using System.Web.Http.Cors;
 
@@ -69,14 +70,14 @@ namespace WebApiUpLoadImageDM.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> AdministraAvisoDm(string codauto)
         {
-
+            PublicarDM dpublicacion = new PublicarDM();
             HttpResponseMessage respuesta = null;
             var httpRequest = HttpContext.Current.Request;
 
             if (codauto == "12345")
             {
-
-                respuesta = Request.CreateResponse(HttpStatusCode.OK, codauto);
+                string datarespuesta = dpublicacion.InsertarPublicacion();
+                respuesta = Request.CreateResponse(HttpStatusCode.OK, datarespuesta);
 
             }
             else

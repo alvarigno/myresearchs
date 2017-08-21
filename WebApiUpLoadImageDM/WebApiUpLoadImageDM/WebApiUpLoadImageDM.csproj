@@ -269,6 +269,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PublicacionDM\PublicacionDM.csproj">
+      <Project>{b42f3d73-5c39-45e0-aa6a-6fce3af2d68c}</Project>
+      <Name>PublicacionDM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UpLoadFile\UpLoadFile.csproj">
       <Project>{671b24ca-6f48-443f-9495-cc6d3c304be1}</Project>
       <Name>UpLoadFile</Name>
