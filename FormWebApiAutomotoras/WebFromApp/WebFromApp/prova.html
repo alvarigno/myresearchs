@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Mi aplicación ASP.NET</title>
+    <link href="/Content/css?v=MDbdFKJHBa_ctS5x4He1bMV0_RjRq8jpcIAvPpKiN6U1" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Nombre de aplicaci&#243;n</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/Home/About">Acerca de</a></li>
+                    <li><a href="/Home/Contact">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        
+
+
+
+<h2>Upload</h2>
+
+
+
+<form name="prueba" method="post">
+    
+        <div id="idKey">
+            <div class="datakey"></div>
+            <input type="file" id="fileUpload" />
+            <input type="button" value="cargar archivo" id="IdUpload" />
+        </div>
+    
+       
+    </form>
+
+
+    <form name="prueba" id="prueba" method="post">
+        
+            <div id="idKey">
+                <div class="datakey"></div>
+                <input type="text" id="codautoCA" name="codautoCA" />
+                <input type="button" value="cargar archivo" id="IdSenData" />
+            </div>
+        
+           
+        </form>
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2017 - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    <script src="/bundles/jquery?v=FVs3ACwOLIVInrAl5sdzR2jrCDmVOWFbZMY6g6Q0ulE1"></script>
+
+    <script src="/bundles/bootstrap?v=2Fz3B0iizV2NnnamQFrx-NbYJNTFeBJ2GM05SilbtQU1"></script>
+
+    
+<script type="text/javascript">
+
+    $('#IdUpload').click(function() {
+
+        SubmitButtonOnclick();
+
+    });
+
+    function SubmitButtonOnclick() {
+
+        var dataxkey = $('.datakey > span').text();
+        var file01 = $('#fileUpload').val();
+        var filename = file01.replace(/C:\\fakepath\\/i, '');
+
+        var headers = new Array();
+        headers["x-key"] = dataxkey;
+        headers["contentType"] = "multipart/form-data";
+
+        var formData = new FormData();
+        var file = document.getElementById("fileUpload").files[0];
+        formData.append('file', file);
+
+        alert("file: "+file);
+
+    $.ajax({
+        url: 'http://172.16.0.93:9041/api/UpLoadImage',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        success: function(data, textStatus, jqXHR)
+        {
+            alert(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            console.log('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
+        }
+    });
+
+    }
+
+
+    
+    $('#IdSenData').click(function() {
+
+        SubmitButtonOnclickcodauto();
+
+    });
+
+    function SubmitButtonOnclickcodauto() {
+
+        var dataxkey = $('.datakey > span').text();
+        var file01 = $('#fileUpload').val();
+        var filename = file01.replace(/C:\\fakepath\\/i, '');
+
+        var valores = $("#prueba").serialize();
+
+        $.ajax({
+            url: 'http://172.16.0.93:9041/Administacion/aviso?codauto='+$('#codautoCA').val(),
+            type: 'POST',
+            data: valores,
+            cache: false,
+            dataType: 'json',
+            processData: false, // Don't process the files
+            contentType: 'application/x-www-form-urlencoded', // Set content type to false as jQuery will tell the server its a query string request
+            success: function(data, textStatus, jqXHR)
+            {
+                alert(data);
+            },
+            error: function(jqXHR, data, errorThrown)
+            {
+                alert(jqXHR.responseJSON.Message);
+            }
+        });
+
+    }
+
+
+</script>
+
+</body>
+</html>
