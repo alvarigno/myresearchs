@@ -22,7 +22,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -65,7 +65,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -109,7 +109,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -153,7 +153,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -198,7 +198,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -243,7 +243,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -288,7 +288,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -333,7 +333,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -378,7 +378,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -423,7 +423,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
@@ -468,7 +468,7 @@
               <potencia>v16</potencia>
               <combustible id="2">Diesel</combustible>
               <cilindrada>1600</cilindrada>
-              <tipodireccion id="as">asistida</tipodireccion>
+              <tipodireccion id="A">asistida</tipodireccion>
               <techo id="TP">panoramico</techo>
               <puertas>4</puertas>
               <comentarios>Prueba</comentarios>
