@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SPR_Obtiene_datos_vehiculo_publicar_DM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codauto" Type="int" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
+          <Parameter Name="error" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="baseprod2ModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="baseprod2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="baseprod2Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="SPR_Obtiene_datos_vehiculo_publicar_DM" ReturnType="Collection(baseprod2Model.SPR_Obtiene_datos_vehiculo_publicar_DM_Result)">
+            <Parameter Name="codauto" Mode="In" Type="Int32" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="error" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
+          <Property Type="Int32" Name="codigoDM" Nullable="true" />
+          <Property Type="String" Name="especificaciones" Nullable="true" MaxLength="5000" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="modelo" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="version" Nullable="true" MaxLength="70" />
+          <Property Type="String" Name="imagenes" Nullable="true" MaxLength="3000" />
+          <Property Type="String" Name="Tipoveh" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="ANO" Nullable="true" />
+          <Property Type="Int32" Name="combustible" Nullable="true" />
+          <Property Type="String" Name="tipo_cambio" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="tipo_direccion" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Puertas" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Carroceria" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="color" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="km" Nullable="true" />
+          <Property Type="Int32" Name="PESOS" Nullable="true" />
+          <Property Type="Int32" Name="Pesosdos" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="baseprod2ModelStoreContainer" CdmEntityContainer="baseprod2Entities" >
+          <FunctionImportMapping FunctionImportName="SPR_Obtiene_datos_vehiculo_publicar_DM" FunctionName="baseprod2Model.Store.SPR_Obtiene_datos_vehiculo_publicar_DM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="baseprod2Model.SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
+                <ScalarProperty Name="codigoDM" ColumnName="codigoDM" />
+                <ScalarProperty Name="especificaciones" ColumnName="especificaciones" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="imagenes" ColumnName="imagenes" />
+                <ScalarProperty Name="Tipoveh" ColumnName="Tipoveh" />
+                <ScalarProperty Name="ANO" ColumnName="ANO" />
+                <ScalarProperty Name="combustible" ColumnName="combustible" />
+                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+                <ScalarProperty Name="tipo_direccion" ColumnName="tipo_direccion" />
+                <ScalarProperty Name="Puertas" ColumnName="Puertas" />
+                <ScalarProperty Name="Carroceria" ColumnName="Carroceria" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="km" ColumnName="km" />
+                <ScalarProperty Name="PESOS" ColumnName="PESOS" />
+                <ScalarProperty Name="Pesosdos" ColumnName="Pesosdos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
