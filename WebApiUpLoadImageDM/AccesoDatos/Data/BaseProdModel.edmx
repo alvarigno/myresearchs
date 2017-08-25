@@ -23,13 +23,9 @@
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
-          <Property Type="Int32" Name="codigoDM" Nullable="true" />
-          <Property Type="String" Name="especificaciones" Nullable="true" MaxLength="5000" />
           <Property Type="String" Name="marca" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="modelo" Nullable="true" MaxLength="80" />
           <Property Type="String" Name="version" Nullable="true" MaxLength="70" />
-          <Property Type="String" Name="imagenes" Nullable="true" MaxLength="3000" />
-          <Property Type="String" Name="Tipoveh" Nullable="true" MaxLength="2" />
           <Property Type="Int32" Name="ANO" Nullable="true" />
           <Property Type="Int32" Name="combustible" Nullable="true" />
           <Property Type="String" Name="tipo_cambio" Nullable="true" MaxLength="2" />
@@ -40,6 +36,19 @@
           <Property Type="Int32" Name="km" Nullable="true" />
           <Property Type="Int32" Name="PESOS" Nullable="true" />
           <Property Type="Int32" Name="Pesosdos" Nullable="true" />
+          <Property Type="String" Name="otros" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="cod_autoCH" Nullable="false" />
+          <Property Type="Int32" Name="codigoDM" Nullable="true" />
+          <Property Type="Int32" Name="COD_CLIENTE" Nullable="true" />
+          <Property Type="String" Name="Tipoveh" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="unico_dueno" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="patente" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="nuevo" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="motor" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="especificaciones" Nullable="true" MaxLength="5000" />
+          <Property Type="String" Name="imagenes" Nullable="true" MaxLength="3000" />
+          <Property Type="Int32" Name="idCategoria" Nullable="true" />
+          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -50,13 +59,9 @@
           <FunctionImportMapping FunctionImportName="SPR_Obtiene_datos_vehiculo_publicar_DM" FunctionName="baseprod2Model.Store.SPR_Obtiene_datos_vehiculo_publicar_DM">
             <ResultMapping>
               <ComplexTypeMapping TypeName="baseprod2Model.SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
-                <ScalarProperty Name="codigoDM" ColumnName="codigoDM" />
-                <ScalarProperty Name="especificaciones" ColumnName="especificaciones" />
                 <ScalarProperty Name="marca" ColumnName="marca" />
                 <ScalarProperty Name="modelo" ColumnName="modelo" />
                 <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="imagenes" ColumnName="imagenes" />
-                <ScalarProperty Name="Tipoveh" ColumnName="Tipoveh" />
                 <ScalarProperty Name="ANO" ColumnName="ANO" />
                 <ScalarProperty Name="combustible" ColumnName="combustible" />
                 <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
@@ -67,6 +72,19 @@
                 <ScalarProperty Name="km" ColumnName="km" />
                 <ScalarProperty Name="PESOS" ColumnName="PESOS" />
                 <ScalarProperty Name="Pesosdos" ColumnName="Pesosdos" />
+                <ScalarProperty Name="otros" ColumnName="otros" />
+                <ScalarProperty Name="cod_autoCH" ColumnName="cod_autoCH" />
+                <ScalarProperty Name="codigoDM" ColumnName="codigoDM" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="Tipoveh" ColumnName="Tipoveh" />
+                <ScalarProperty Name="unico_dueno" ColumnName="unico_dueno" />
+                <ScalarProperty Name="patente" ColumnName="patente" />
+                <ScalarProperty Name="nuevo" ColumnName="nuevo" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="especificaciones" ColumnName="especificaciones" />
+                <ScalarProperty Name="imagenes" ColumnName="imagenes" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

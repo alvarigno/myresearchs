@@ -8,12 +8,19 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using AccesoDatos;
+using System.Reflection;
+using System.Configuration;
 
 namespace PublicacionDM
 {
     public class PublicarDM
     {
 
+        static private string provider_DM = ConfigurationManager.AppSettings["provider_DM"].ToString();
+        static private string key_DM = ConfigurationManager.AppSettings["key_DM"].ToString();
+        static private string url_DM = ConfigurationManager.AppSettings["url_DM"].ToString();
+
+        public static Dictionary<string, string> DicCategorias = new Dictionary<string, string>();
         public static Dictionary<string, string> DicCombustibles = new Dictionary<string, string>();
         public static Dictionary<string, string> DicTransmision = new Dictionary<string, string>();
         public static Dictionary<string, string> DicDireccion = new Dictionary<string, string>();
@@ -24,6 +31,12 @@ namespace PublicacionDM
 
         public static void CargaDiccionarios()
         {
+            //Diccionario DicCategorias
+            DicCategorias.Add("1", "CAR");
+            DicCategorias.Add("2", "MOTORCYCLE");
+            DicCategorias.Add("4", "TRUCK");
+            DicCategorias.Add("11", "MOTORHOME");
+            DicCategorias.Add("8", "NAVIGATION");
 
             //Diccionario Combustibles
             DicCombustibles.Add("1", "Bencina");
@@ -34,8 +47,8 @@ namespace PublicacionDM
             DicCombustibles.Add("10", "Otros");
 
             //Diccionario Transmisión
-            DicCombustibles.Add("S", "Automática");
-            DicCombustibles.Add("N", "Manual");
+            DicTransmision.Add("S", "Automática");
+            DicTransmision.Add("N", "Manual");
 
             //Diccionario Dirección
             DicDireccion.Add("H", "Asistida");
@@ -98,6 +111,7 @@ namespace PublicacionDM
         }
         public static void CleanAllDiccionary() {
 
+            DicCategorias.Clear();
             DicCombustibles.Clear();
             DicTransmision.Clear();
             DicDireccion.Clear();
@@ -112,11 +126,12 @@ namespace PublicacionDM
         ///´Proceso que toma los datos y los pasa a la api DeMotores para su publicación. de acuerdo al idusuario designado.
         /// </summary>
         /// <returns></returns>
-        public string InsertarPublicacion() {
+        public string InsertarPublicacion( string codauto) {
 
             string result ="";
+            string data = "";
 
-            //var data = "vehicleType=CAR&brand=Suzuki&model=Aerio&version=GLX&year=2008&fuel=Bencina&transmission=Manual&steering=Asistida&doors=4&segment=Sedán&color=Otro Color&mileage=150000&price=5800000&subtitle=Suzuki Aerio GLX 2008&description=Un+modelo+pionero+que+nunca+perdi%C3%B3+su+liderazgo&provider=GRUPO_CCA&key=3453ceda832a83687d0905c2fcdfbe9c&userId=11053485&currency=CLP&image[0]=http://chileautos.li.csnstatic.com/chileautos/auto/particular/ap5655451225218551194.jpg&providerVehicleId=4050906";
+            //var data = "vehicleType=CAR&brand=Suzuki&model=Aerio&version=GLX&year=2008&fuel=Bencina&transmission=Manual&steering=Asistida&doors=4&segment=Sedán&color=Otro Color&mileage=150000&price=5800000&subtitle=Suzuki Aerio GLX 2008&description=Un+modelo+pionero+que+nunca+perdi%C3%B3+su+liderazgo&provider=CHILEAUTOS&key=9e82a921182f43149269bf08c09c1f4e&userId=11053485&currency=CLP&image[0]=http://chileautos.li.csnstatic.com/chileautos/auto/particular/ap5655451225218551194.jpg&providerVehicleId=2704599";
             //string url = "http://www.demotores.cl/frontend/rest/post.service";
             //string responseString;
             //
@@ -146,29 +161,982 @@ namespace PublicacionDM
 
             ProveedorDatos PrDatos = new ProveedorDatos();
 
-            var datosvehiculo = PrDatos.EntregaDatosVehiculo("2704599");
+            var datosvehiculo = PrDatos.EntregaDatosVehiculo(codauto);
 
-            CargaDiccionarios();
+            if (datosvehiculo != null)
+            {
 
-            string prova = ConsultaString(DicColor, "Rojo Vermellón");
+                data = ArmaDatosParaPublicar(datosvehiculo);
+                result = PublicaenDeMotoresApi(data);
 
-            CleanAllDiccionary();
+            }
+            else {
+
+                result = "no Existen datos para el registro: "+codauto;
+
+            }
 
             return result;
         }
 
+        public static string ArmaDatosParaPublicar(object datosvehiculo) {
 
-        public static string ConsultaString(Dictionary<string,string> destino, string compara) {
-            
-            
+            string data = "";
+            string useriddm = "11053485";
 
-            string resultado = "Otro Color";
+            Type myType = datosvehiculo.GetType();
+
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
+
+            int verificaCategoriaVehiculo = 0;
+
+            if (!String.IsNullOrEmpty(datosvehiculo.GetType().GetProperty("idCategoria").GetValue(datosvehiculo, null).ToString()))
+            {
+
+                verificaCategoriaVehiculo = int.Parse(datosvehiculo.GetType().GetProperty("idCategoria").GetValue(datosvehiculo, null).ToString());
+
+            }
+            
+            if (verificaCategoriaVehiculo == 1)
+            {
+
+                data = ProcesaDatosCar(props, datosvehiculo, useriddm);
+
+            }
+
+            if (verificaCategoriaVehiculo == 2)
+            {
+
+                data = ProcesaDatosMotorcycle(props, datosvehiculo, useriddm);
+
+            }
+
+            if (verificaCategoriaVehiculo == 4)
+            {
+
+                data = ProcesaDatosTruck(props, datosvehiculo, useriddm);
+
+            }
+
+            if (verificaCategoriaVehiculo == 11)
+            {
+
+                data = ProcesaDatosMotorhome(props, datosvehiculo, useriddm);
+
+            }
+
+            return data;
+        }
+
+
+        public static string ProcesaDatosCar(IList<PropertyInfo> props, object datosvehiculo, string useriddm) {
+
+            string datosparademotores = "";
+            string subtitulo = "";
+
+
+            foreach (PropertyInfo prop in props)
+            {
+                object propName = prop.Name;
+                object propValue = prop.GetValue(datosvehiculo, null);
+
+                if (propName.ToString() == "idCategoria")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "Tipoveh")
+                {
+                    if (propValue.ToString() == "CL")
+                    {
+
+                        datosparademotores = datosparademotores + "oldOrClassic=yes&";
+
+                    }
+
+                    if (propValue.ToString() == "TX")
+                    {
+
+                        datosparademotores = datosparademotores + "cab=yes&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "marca")
+                {
+
+                    datosparademotores = datosparademotores + "brand=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + propValue.ToString();
+                }
+
+                if (propName.ToString() == "modelo")
+                {
+
+                    datosparademotores = datosparademotores + "model=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "version")
+                {
+
+                    datosparademotores = datosparademotores + "version=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "ANO")
+                {
+
+                    datosparademotores = datosparademotores + "year=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "combustible")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "fuel=" + ConsultaCombustible(DicCombustibles, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "tipo_cambio")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "transmission=" + DicTransmision[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "tipo_direccion")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "Puertas")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "doors=" + DicNumPuertas[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "Carroceria")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "segment=" + DicCarrocerias[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "color")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "km")
+                {
+
+                    datosparademotores = datosparademotores + "mileage=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "PESOS")
+                {
+
+                    datosparademotores = datosparademotores + "price=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "Pesosdos")
+                {
+
+                    if (propValue == null)
+                    {
+
+                        datosparademotores = datosparademotores + "currency=CLP&";
+
+                    }
+                    else
+                    {
+
+                        datosparademotores = datosparademotores + "currency=USD&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "patente")
+                {
+                    if (propValue == null)
+                    {
+
+                        datosparademotores = datosparademotores + "licensePlate=" + propValue.ToString() + "&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "otros")
+                {
+
+                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "cod_autoCH")
+                {
+
+                    datosparademotores = datosparademotores + "providerVehicleId=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "unico_dueno")
+                {
+
+                    if (propValue.ToString() == "S")
+                    {
+
+                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "imagenes")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoImagenes(propValue.ToString());
+
+                    }
+
+                }
+
+                if (propName.ToString() == "especificaciones")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoEspecificaciones(propValue.ToString());
+
+                    }
+
+                }
+
+            }
+
+            datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+
+            return datosparademotores;
+
+        }
+
+        public static string ProcesaDatosMotorcycle(IList<PropertyInfo> props, object datosvehiculo, string useriddm)
+        {
+
+            string datosparademotores = "";
+            string subtitulo = "";
+
+            foreach (PropertyInfo prop in props)
+            {
+                object propName = prop.Name;
+                object propValue = prop.GetValue(datosvehiculo, null);
+
+                if (propName.ToString() == "idCategoria")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "marca")
+                {
+
+                    datosparademotores = datosparademotores + "brand=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + propValue.ToString();
+                }
+
+                if (propName.ToString() == "modelo")
+                {
+
+                    datosparademotores = datosparademotores + "model=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "ANO")
+                {
+
+                    datosparademotores = datosparademotores + "year=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "Carroceria")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "segment=" + DicCarroceriasMotos[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "color")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "km")
+                {
+
+                    datosparademotores = datosparademotores + "mileage=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "PESOS")
+                {
+
+                    datosparademotores = datosparademotores + "price=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "Pesosdos")
+                {
+
+                    if (propValue == null)
+                    {
+
+                        datosparademotores = datosparademotores + "currency=CLP&";
+
+                    }
+                    else
+                    {
+
+                        datosparademotores = datosparademotores + "currency=USD&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "otros")
+                {
+
+                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "cod_autoCH")
+                {
+
+                    datosparademotores = datosparademotores + "providerVehicleId=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "unico_dueno")
+                {
+
+                    if (propValue.ToString() == "S")
+                    {
+
+                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "imagenes")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoImagenes(propValue.ToString());
+
+                    }
+
+                }
+
+                if (propName.ToString() == "especificaciones")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoEspecificaciones(propValue.ToString());
+
+                    }
+
+                }
+
+            }
+            
+            datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+
+            return datosparademotores;
+
+        }
+
+        public static string ProcesaDatosTruck(IList<PropertyInfo> props, object datosvehiculo, string useriddm)
+        {
+
+            string datosparademotores = "";
+            string subtitulo = "";
+            
+            foreach (PropertyInfo prop in props)
+            {
+                object propName = prop.Name;
+                object propValue = prop.GetValue(datosvehiculo, null);
+
+                if (propName.ToString() == "idCategoria")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "marca")
+                {
+
+                    datosparademotores = datosparademotores + "brand=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + propValue.ToString();
+                }
+
+                if (propName.ToString() == "modelo")
+                {
+
+                    datosparademotores = datosparademotores + "model=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "version")
+                {
+
+                    datosparademotores = datosparademotores + "version=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "ANO")
+                {
+
+                    datosparademotores = datosparademotores + "year=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "combustible")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "fuel=" + ConsultaCombustible(DicCombustibles, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "tipo_cambio")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "transmission=" + DicTransmision[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "tipo_direccion")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "color")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "km")
+                {
+
+                    datosparademotores = datosparademotores + "mileage=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "PESOS")
+                {
+
+                    datosparademotores = datosparademotores + "price=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "Pesosdos")
+                {
+
+                    if (propValue == null)
+                    {
+
+                        datosparademotores = datosparademotores + "currency=CLP&";
+
+                    }
+                    else
+                    {
+
+                        datosparademotores = datosparademotores + "currency=USD&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "unico_dueno")
+                {
+
+                    if (propValue.ToString() == "S")
+                    {
+
+                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "motor")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + "engine="+ propValue.ToString() + "&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "otros")
+                {
+
+                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "cod_autoCH")
+                {
+
+                    datosparademotores = datosparademotores + "providerVehicleId=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "imagenes")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoImagenes(propValue.ToString());
+
+                    }
+
+                }
+
+                if (propName.ToString() == "especificaciones")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoEspecificaciones(propValue.ToString());
+
+                    }
+
+                }
+
+            }
+
+            datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+
+            return datosparademotores;
+
+        }
+
+        public static string ProcesaDatosMotorhome(IList<PropertyInfo> props, object datosvehiculo, string useriddm)
+        {
+
+            string datosparademotores = "";
+            string subtitulo = "";
+
+
+            foreach (PropertyInfo prop in props)
+            {
+                object propName = prop.Name;
+                object propValue = prop.GetValue(datosvehiculo, null);
+
+                if (propName.ToString() == "idCategoria")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "marca")
+                {
+
+                    datosparademotores = datosparademotores + "brand=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + propValue.ToString();
+                }
+
+                if (propName.ToString() == "modelo")
+                {
+
+                    datosparademotores = datosparademotores + "model=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "version")
+                {
+
+                    datosparademotores = datosparademotores + "version=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "ANO")
+                {
+
+                    datosparademotores = datosparademotores + "year=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "tipo_direccion")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "combustible")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "fuel=" + ConsultaCombustible(DicCombustibles, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "color")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "km")
+                {
+
+                    datosparademotores = datosparademotores + "mileage=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "PESOS")
+                {
+
+                    datosparademotores = datosparademotores + "price=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "Pesosdos")
+                {
+
+                    if (propValue == null)
+                    {
+
+                        datosparademotores = datosparademotores + "currency=CLP&";
+
+                    }
+                    else
+                    {
+
+                        datosparademotores = datosparademotores + "currency=USD&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "unico_dueno")
+                {
+
+                    if (propValue.ToString() == "S")
+                    {
+
+                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "otros")
+                {
+
+                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "cod_autoCH")
+                {
+
+                    datosparademotores = datosparademotores + "providerVehicleId=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "imagenes")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoImagenes(propValue.ToString());
+
+                    }
+
+                }
+
+                if (propName.ToString() == "especificaciones")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoEspecificaciones(propValue.ToString());
+
+                    }
+
+                }
+
+            }
+
+            datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+
+            return datosparademotores;
+
+        }
+
+        public static string ProcesaDatosNavigation(IList<PropertyInfo> props, object datosvehiculo, string useriddm)
+        {
+
+            string datosparademotores = "";
+            string subtitulo = "";
+            
+            foreach (PropertyInfo prop in props)
+            {
+                object propName = prop.Name;
+                object propValue = prop.GetValue(datosvehiculo, null);
+
+                if (propName.ToString() == "idCategoria")
+                {
+                    CargaDiccionarios();
+                    datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
+                    CleanAllDiccionary();
+                }
+
+                if (propName.ToString() == "marca")
+                {
+
+                    datosparademotores = datosparademotores + "brand=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + propValue.ToString();
+                }
+
+                if (propName.ToString() == "modelo")
+                {
+
+                    datosparademotores = datosparademotores + "model=" + propValue.ToString() + "&";
+                    subtitulo = subtitulo + " " + propValue.ToString();
+                }
+
+                if (propName.ToString() == "ANO")
+                {
+
+                    datosparademotores = datosparademotores + "year=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "nuevo")
+                {
+
+                    if (propValue.ToString() == "N") {
+
+                        datosparademotores = datosparademotores + "used=yes&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "PESOS")
+                {
+
+                    datosparademotores = datosparademotores + "price=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "Pesosdos")
+                {
+
+                    if (propValue == null)
+                    {
+
+                        datosparademotores = datosparademotores + "currency=CLP&";
+
+                    }
+                    else
+                    {
+
+                        datosparademotores = datosparademotores + "currency=USD&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "otros")
+                {
+
+                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "cod_autoCH")
+                {
+
+                    datosparademotores = datosparademotores + "providerVehicleId=" + propValue.ToString() + "&";
+
+                }
+
+                if (propName.ToString() == "unico_dueno")
+                {
+
+                    if (propValue.ToString() == "S")
+                    {
+
+                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+
+                    }
+
+                }
+
+                if (propName.ToString() == "imagenes")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoImagenes(propValue.ToString());
+
+                    }
+
+                }
+
+                if (propName.ToString() == "especificaciones")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + ListadoEspecificaciones(propValue.ToString());
+
+                    }
+
+                }
+                
+            }
+
+            datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+
+            return datosparademotores;
+
+        }
+
+        public static string PublicaenDeMotoresApi(string data) {
+
+            string respuesta = "";
+
+            string url = url_DM;
+            string responseString;
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var action = Uri.EscapeUriString(url);
+
+                var content = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                var response = client.PostAsync(action, content).Result;
+                var responseContent = response.Content;
+                responseString = responseContent.ReadAsStringAsync().Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    respuesta = responseString;
+                }
+                else
+                {
+                    respuesta = responseString;
+                }
+
+            }
+
+            return respuesta;
+        }
+
+        public static string ConsultaCategoria(Dictionary<string, string> destino, string compara)
+        {
+
+            string resultado = "";
+
+            if (String.IsNullOrEmpty(compara))
+            {
+
+                compara = resultado;
+
+            }
 
             int cost = 0;
 
             foreach (KeyValuePair<string, string> a in destino)
             {
                 cost = LevenshteinDistance.Compute(a.Key, compara);
+
+                if (cost == 0)
+                {
+
+                    resultado = a.Value;
+
+                }
+
+            }
+
+            return resultado;
+
+        }
+
+        public static string ConsultaCombustible(Dictionary<string, string> destino, string compara)
+        {
+
+            string resultado = "";
+
+            resultado = destino[compara];
+
+            return resultado;
+
+        }
+        
+        public static string ConsultaColor(Dictionary<string,string> destino, string compara) {
+            
+            string resultado = "Otro Color";
+
+            if (String.IsNullOrEmpty(compara)) {
+
+                compara = resultado;
+
+            }
+
+            int cost = 0;
+
+            foreach (KeyValuePair<string, string> a in destino)
+            {
+                cost = LevenshteinDistance.Compute(a.Key, compara.First().ToString().ToUpper() + compara.Substring(1));
 
                 if (cost == 0)
                 {
@@ -183,6 +1151,39 @@ namespace PublicacionDM
 
         }
 
+        public static string ListadoImagenes(string data) {
+
+            string imagenes = "";
+
+            string[] nums = data.Split(',').ToArray();
+
+            for (int i = 0; i < nums.Length; i++) {
+
+                imagenes = imagenes + "image[" + i + "]=" + nums[i]+"&";
+
+            }
+
+            return imagenes;
+
+        }
+
+        public static string ListadoEspecificaciones(string data)
+        {
+
+            string especificaciones = "";
+
+            string[] nums = data.Split(';').ToArray();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+
+                especificaciones = especificaciones + nums[i] + "&";
+
+            }
+
+            return especificaciones;
+
+        }
 
         /// <summary>
         /// Logra la major aproximación entre dos arreglos.

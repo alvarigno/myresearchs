@@ -74,9 +74,9 @@ namespace WebApiUpLoadImageDM.Controllers
             HttpResponseMessage respuesta = null;
             var httpRequest = HttpContext.Current.Request;
 
-            if (codauto == "12345")
+            if (!String.IsNullOrEmpty(codauto))
             {
-                string datarespuesta = dpublicacion.InsertarPublicacion();
+                string datarespuesta = dpublicacion.InsertarPublicacion(codauto);
                 respuesta = Request.CreateResponse(HttpStatusCode.OK, datarespuesta);
 
             }
