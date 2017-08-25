@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SPR_Actualiza_Estados_publicacion_DM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codauto" Type="int" Mode="In" />
+          <Parameter Name="coddm" Type="int" Mode="In" />
+          <Parameter Name="accion" Type="int" Mode="In" />
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
+          <Parameter Name="error" Type="int" Mode="InOut" />
+          <Parameter Name="codigodemotores" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="SPR_Obtiene_datos_vehiculo_publicar_DM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codauto" Type="int" Mode="In" />
           <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
@@ -21,11 +30,21 @@
             <Parameter Name="respuesta" Mode="InOut" Type="String" />
             <Parameter Name="error" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SPR_Actualiza_Estados_publicacion_DM">
+            <Parameter Name="codauto" Mode="In" Type="Int32" />
+            <Parameter Name="coddm" Mode="In" Type="Int32" />
+            <Parameter Name="accion" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="error" Mode="InOut" Type="Int32" />
+            <Parameter Name="codigodemotores" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
           <Property Type="String" Name="marca" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="modelo" Nullable="true" MaxLength="80" />
           <Property Type="String" Name="version" Nullable="true" MaxLength="70" />
+          <Property Type="Int32" Name="accion" Nullable="true" />
           <Property Type="Int32" Name="ANO" Nullable="true" />
           <Property Type="Int32" Name="combustible" Nullable="true" />
           <Property Type="String" Name="tipo_cambio" Nullable="true" MaxLength="2" />
@@ -62,6 +81,7 @@
                 <ScalarProperty Name="marca" ColumnName="marca" />
                 <ScalarProperty Name="modelo" ColumnName="modelo" />
                 <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="accion" ColumnName="accion" />
                 <ScalarProperty Name="ANO" ColumnName="ANO" />
                 <ScalarProperty Name="combustible" ColumnName="combustible" />
                 <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
@@ -88,6 +108,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPR_Actualiza_Estados_publicacion_DM" FunctionName="baseprod2Model.Store.SPR_Actualiza_Estados_publicacion_DM" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

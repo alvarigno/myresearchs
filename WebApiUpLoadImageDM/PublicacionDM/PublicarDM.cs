@@ -19,6 +19,7 @@ namespace PublicacionDM
         static private string provider_DM = ConfigurationManager.AppSettings["provider_DM"].ToString();
         static private string key_DM = ConfigurationManager.AppSettings["key_DM"].ToString();
         static private string url_DM = ConfigurationManager.AppSettings["url_DM"].ToString();
+        static private string url_DM_Elimina = ConfigurationManager.AppSettings["url_DM_Elimina"].ToString();
 
         public static Dictionary<string, string> DicCategorias = new Dictionary<string, string>();
         public static Dictionary<string, string> DicCombustibles = new Dictionary<string, string>();
@@ -131,6 +132,8 @@ namespace PublicacionDM
 
             string result ="";
             string data = "";
+            string estado = "";
+            string[] coddemotores = new string[2];
 
             try {
 
@@ -141,8 +144,49 @@ namespace PublicacionDM
                 if (datosvehiculo != null)
                 {
 
-                    data = ArmaDatosParaPublicar(datosvehiculo);
-                    result = PublicaenDeMotoresApi(data);
+                    coddemotores = ConsultaCodigoDeMotores(datosvehiculo);
+                    if (String.IsNullOrEmpty(coddemotores[0]) && String.IsNullOrEmpty(coddemotores[1]))
+                    {
+
+                        data = ArmaDatosParaPublicar(datosvehiculo);
+                        string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
+                        result = "Aviso número: " + codauto + ", en DeMotores.cl con código: "+ codigodemotores[0]+", su estado es: "+ codigodemotores[1];
+
+                    }
+                    else if(!String.IsNullOrEmpty(coddemotores[0]) && !String.IsNullOrEmpty(coddemotores[1]))
+                    {
+
+                        data = ArmaDatosParaPublicar(datosvehiculo);
+                        if (coddemotores[1] == "0" || coddemotores[1] == "3")
+                        {
+
+                            string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
+                            result = codigodemotores[0] + " "+ codigodemotores[1];
+
+                        }
+                        else {
+
+                            string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
+                            result = "Aviso número: " + codauto + ", en DeMotores.cl con código: " + codigodemotores[0] + ", su estado es: " + codigodemotores[1];
+
+                        }
+
+                    }
+                    else if (String.IsNullOrEmpty(coddemotores[0]) && !String.IsNullOrEmpty(coddemotores[1]))
+                    {
+
+                        if (coddemotores[1] == "0")
+                        {
+
+                            result = "Aviso número: " + codauto + ", posee un error: " + coddemotores[1];
+
+                        } else if (String.IsNullOrEmpty(coddemotores[0])) {
+
+                            result = "Aviso número: " + codauto + ", no posee un código en DeMotores.cl";
+
+                        }
+
+                    }
 
                 }
                 else
@@ -160,6 +204,91 @@ namespace PublicacionDM
 
             }
 
+        }
+
+        public string EliminarPublicacion(string codauto) {
+
+            string result = "";
+            string data = "";
+            string estado = "";
+            string[] coddemotores = new string[2];
+
+            try {
+
+                ProveedorDatos PrDatos = new ProveedorDatos();
+
+                var datosvehiculo = PrDatos.EntregaDatosVehiculo(codauto);
+
+                if (datosvehiculo != null)
+                {
+
+                    coddemotores = ConsultaCodigoDeMotores(datosvehiculo);
+                    if (String.IsNullOrEmpty(coddemotores[0]))
+                    {
+
+                        result = "Aviso número: " + codauto + " no está publicado en DeMotores.cl";
+
+                    }
+                    else {
+
+                        
+                        string resultadook = EliminaenDeMotoresApi(codauto);
+
+                        if (resultadook == "OK")
+                        {
+                            estado = ActualizaEstadosPublicacion(codauto, coddemotores[0], "3", "finalizado");
+                        }
+                        else {
+                            estado = ActualizaEstadosPublicacion(codauto, coddemotores[0], "0", "finalizado");
+                        }
+
+                        result = resultadook+", Aviso número: " + codauto + ", en DeMotores.cl su estadoes: "+estado;
+                        
+                    }
+
+                }
+                else
+                {
+
+                    result = "No Existen datos para el registro número: " + codauto;
+
+                }
+
+                return result;
+
+            } catch (Exception ex) {
+
+                result = "mensaje: " + ex;
+                
+            }
+
+
+            return result;
+        }
+
+        public static string[] ConsultaCodigoDeMotores(object datosvehiculo) {
+
+            string[] data = new string[2];
+
+            Type myType = datosvehiculo.GetType();
+
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
+
+            if (datosvehiculo.GetType().GetProperty("codigoDM").GetValue(datosvehiculo, null) != null) {
+
+                data[0] = datosvehiculo.GetType().GetProperty("codigoDM").GetValue(datosvehiculo, null).ToString();
+
+            }
+
+            if (datosvehiculo.GetType().GetProperty("accion").GetValue(datosvehiculo, null) != null)
+            {
+
+                data[1] = datosvehiculo.GetType().GetProperty("accion").GetValue(datosvehiculo, null).ToString();
+
+            }
+
+
+            return data;
         }
 
         public static string ArmaDatosParaPublicar(object datosvehiculo) {
@@ -210,8 +339,7 @@ namespace PublicacionDM
 
             return data;
         }
-
-
+        
         public static string ProcesaDatosCar(IList<PropertyInfo> props, object datosvehiculo, string useriddm) {
 
             string datosparademotores = "";
@@ -1029,26 +1157,110 @@ namespace PublicacionDM
 
         }
 
-        public static string PublicaenDeMotoresApi(string data) {
+        public static string[] PublicaenDeMotoresApi(string data, string codauto, string coddemotores, string accion) {
 
-            string respuesta = "";
+            string[] respuesta = new string[2];
 
             string url = url_DM;
             string responseString;
 
+            if (accion == "3")
+            {
+
+                respuesta[0] = "Aviso con código: " + codauto + ", posee un estado: ";
+                respuesta[1] = "finalizado";
+
+            } else if(accion == "0")
+            {
+
+                respuesta[0] = "Aviso con código: " + codauto + ", posee un: ";
+                respuesta[1] = "error";
+
+            }
+            else
+            {
+
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var action = Uri.EscapeUriString(url);
+
+                    var content = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                    var response = client.PostAsync(action, content).Result;
+                    var responseContent = response.Content;
+                    responseString = responseContent.ReadAsStringAsync().Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        respuesta[0] = responseString;
+
+                        if (!String.IsNullOrEmpty(coddemotores) && respuesta[0] == coddemotores)
+                        {
+
+                            respuesta[1] = ActualizaEstadosPublicacion(codauto, coddemotores, "2", "modificado");
+
+                        }
+                        else
+                        {
+
+                            respuesta[1] = ActualizaEstadosPublicacion(codauto, respuesta[0], "1", "publicado");
+
+                        }
+
+                    }
+                    else
+                    {
+                        if (String.IsNullOrEmpty(coddemotores))
+                        {
+
+                            respuesta[0] = responseString;
+                            respuesta[1] = ActualizaEstadosPublicacion(codauto, "", "0", "publicado");
+
+                        }
+                        else
+                        {
+
+                            respuesta[0] = responseString;
+                            respuesta[1] = ActualizaEstadosPublicacion(codauto, coddemotores, "0", "modificado");
+
+                        }
+
+
+                    }
+
+                }
+
+            }
+
+            return respuesta;
+        }
+
+        public static string EliminaenDeMotoresApi(string data)
+        {
+             
+            string respuesta = "";
+
+            string url = url_DM_Elimina;
+            string responseString;
+            string eliminardm = "provider="+provider_DM+"&key="+key_DM+"&providerVehicleId="+data;
+            respuesta = eliminardm;
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+            
                 var action = Uri.EscapeUriString(url);
-
-                var content = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
-
+            
+                var content = new StringContent(eliminardm, Encoding.UTF8, "application/x-www-form-urlencoded");
+            
                 var response = client.PostAsync(action, content).Result;
                 var responseContent = response.Content;
                 responseString = responseContent.ReadAsStringAsync().Result;
-
+            
                 if (response.IsSuccessStatusCode)
                 {
                     respuesta = responseString;
@@ -1057,7 +1269,7 @@ namespace PublicacionDM
                 {
                     respuesta = responseString;
                 }
-
+            
             }
 
             return respuesta;
@@ -1166,6 +1378,19 @@ namespace PublicacionDM
 
             return especificaciones;
 
+        }
+
+        public static string ActualizaEstadosPublicacion(string codauto, string coddm, string accion, string estado) {
+
+            string data = "";
+            string[] resultado = new string[3];
+
+            ProveedorDatos PrDatos = new ProveedorDatos();
+            resultado = PrDatos.ActualizaEstados(codauto, coddm, accion, estado);
+
+            data = resultado[0];
+
+            return data;
         }
 
         /// <summary>

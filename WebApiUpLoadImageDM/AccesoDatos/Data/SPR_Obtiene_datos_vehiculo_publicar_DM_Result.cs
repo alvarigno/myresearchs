@@ -16,6 +16,7 @@ namespace AccesoDatos.Data
         public string marca { get; set; }
         public string modelo { get; set; }
         public string version { get; set; }
+        public Nullable<int> accion { get; set; }
         public Nullable<int> ANO { get; set; }
         public Nullable<int> combustible { get; set; }
         public string tipo_cambio { get; set; }

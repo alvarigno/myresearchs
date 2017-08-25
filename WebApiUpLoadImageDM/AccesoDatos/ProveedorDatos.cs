@@ -28,5 +28,29 @@ namespace AccesoDatos
             return datosresultados;
         }
 
+        public String[] ActualizaEstados(string codauto, string coddm, string accion, string estado) {
+
+            string[] logrado = new string[3];
+            int codigodm = 0;
+            baseprod2Entities baseprod = new baseprod2Entities();
+            ObjectParameter respuesta = new ObjectParameter("respuesta", typeof(string));
+            ObjectParameter error = new ObjectParameter("error", typeof(int));
+            ObjectParameter codigodemotores = new ObjectParameter("codigodemotores", typeof(int));
+
+            if (String.IsNullOrEmpty(coddm))
+            {
+                codigodm = 0;
+            }else {
+                codigodm = int.Parse(coddm);
+            }
+
+            var datosresultados = baseprod.SPR_Actualiza_Estados_publicacion_DM(int.Parse(codauto), codigodm , int.Parse(accion), estado, respuesta, error,codigodemotores);
+            logrado[0] = respuesta.Value.ToString();
+            logrado[1] = error.Value.ToString();
+            logrado[2] = codigodemotores.Value.ToString();
+
+            return logrado;
+        }
+
     }
 }

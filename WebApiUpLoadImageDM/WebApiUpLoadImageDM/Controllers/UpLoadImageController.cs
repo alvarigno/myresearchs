@@ -90,6 +90,30 @@ namespace WebApiUpLoadImageDM.Controllers
             return respuesta;
         }
 
+        [Route("Administacion/aviso/Eliminar")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> EliminarAvisoDm(string codauto)
+        {
+            PublicarDM dpublicacion = new PublicarDM();
+            HttpResponseMessage respuesta = null;
+            var httpRequest = HttpContext.Current.Request;
+
+            if (!String.IsNullOrEmpty(codauto))
+            {
+                string datarespuesta = dpublicacion.EliminarPublicacion(codauto);
+                respuesta = Request.CreateResponse(HttpStatusCode.OK, datarespuesta);
+
+            }
+            else
+            {
+
+                respuesta = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Código no existe.");
+
+            }
+
+            return respuesta;
+        }
+
         private static bool SiArchivoEstaBloqueado(FileInfo file)
         {
             FileStream stream = null;

@@ -36,5 +36,26 @@ namespace AccesoDatos.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPR_Obtiene_datos_vehiculo_publicar_DM_Result>("SPR_Obtiene_datos_vehiculo_publicar_DM", codautoParameter, respuesta, error);
         }
+    
+        public virtual int SPR_Actualiza_Estados_publicacion_DM(Nullable<int> codauto, Nullable<int> coddm, Nullable<int> accion, string estado, ObjectParameter respuesta, ObjectParameter error, ObjectParameter codigodemotores)
+        {
+            var codautoParameter = codauto.HasValue ?
+                new ObjectParameter("codauto", codauto) :
+                new ObjectParameter("codauto", typeof(int));
+    
+            var coddmParameter = coddm.HasValue ?
+                new ObjectParameter("coddm", coddm) :
+                new ObjectParameter("coddm", typeof(int));
+    
+            var accionParameter = accion.HasValue ?
+                new ObjectParameter("accion", accion) :
+                new ObjectParameter("accion", typeof(int));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Actualiza_Estados_publicacion_DM", codautoParameter, coddmParameter, accionParameter, estadoParameter, respuesta, error, codigodemotores);
+        }
     }
 }
