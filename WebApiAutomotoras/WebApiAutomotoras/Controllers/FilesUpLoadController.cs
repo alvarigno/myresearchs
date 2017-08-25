@@ -27,6 +27,7 @@ namespace WebApiAutomotoras.Controllers
         string nombrerealarchivo;
         string uploadFolderPath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded\\";
         Task taskDocumento;
+        Task taskDocumentoEliminacion;
 
         [HttpPost]
         [Route("")]
@@ -71,7 +72,7 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa));
+                                        taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "publica/modifica"));
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
                                         
                                     });
@@ -117,6 +118,100 @@ namespace WebApiAutomotoras.Controllers
 
             }
            
+        }
+
+        [HttpPost]
+        [Route("Elimina/avisos")]
+        [CustomCheckLogin]
+        public Task<IQueryable<FilesUpLoad>> EliminaUpload(string nombrearchivo, int sitio)
+        {
+
+            string hash = Util.getValueFromHeader("X-KEY");
+            string ipregistrada = VerificaIpAddress(hash);
+            string ipqueaccesa = GetIPAddress();
+            nombrearchivosubido = nombrearchivo;
+            sitioprocedencia = sitio;
+
+            if (ipqueaccesa == ipregistrada)
+            {
+
+                if (validaextension(nombrearchivo))
+                {
+
+                    /** validación que archivo.xml sea distinto **/
+                    string rutadirectaarchivo = uploadFolderPath + nombrearchivo;
+
+                    if (!File.Exists(rutadirectaarchivo))
+                    {
+                        try
+                        {
+
+                            if (Request.Content.IsMimeMultipartContent())
+                            {
+                                var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
+
+                                var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
+                                {
+                                    if (t.IsFaulted || t.IsCanceled)
+                                    {
+                                        throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                                    }
+
+                                    var fileInfo = streamProvider.FileData.Select(i =>
+                                    {
+                                        var info = new FileInfo(i.LocalFileName);
+                                        nombrerealarchivo = info.Name;
+                                        Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
+                                        string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
+                                        taskDocumentoEliminacion = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "elimina"));
+                                        return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
+
+                                    });
+
+                                    return fileInfo.AsQueryable();
+
+                                });
+
+                                return task;
+
+                            }
+                            else
+                            {
+                                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
+                            }
+
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                        }
+
+                    }
+                    else
+                    {
+
+                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", ya existe."));
+
+                    }
+
+                }
+                else
+                {
+
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", debe ser extensión '.xml'."));
+
+                }
+
+            }
+            else
+            {
+
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "ip no está registrada."));
+
+            }
+
         }
 
 
@@ -207,11 +302,11 @@ namespace WebApiAutomotoras.Controllers
             return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
-        private async void PasaDocumentoXml(string rutadocumento, string iporigen)
+        private async void PasaDocumentoXml(string rutadocumento, string iporigen, string tarea)
         {
 
             Program procesa = new Program();
-            procesa.ObtieneDocumentoXml(rutadocumento, iporigen);
+            procesa.ObtieneDocumentoXml(rutadocumento, iporigen, tarea);
 
             if (taskDocumento.IsCompleted) {
 

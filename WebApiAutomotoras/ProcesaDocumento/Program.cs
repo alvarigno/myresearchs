@@ -23,14 +23,28 @@ namespace ProcesaDocumento
         static fotos datafotos = new fotos();
 
         static List<PublicacionModel> listado = new List<PublicacionModel>();
+        static List<string[]> listadoEliminacion = new List<string[]>();
 
-        public void ObtieneDocumentoXml(string rutaxml, string iporigen) {
+        public void ObtieneDocumentoXml(string rutaxml, string iporigen, string nombretarea) {
 
             string nombrearchivo = Path.GetFileName(rutaxml);
             XDocument main = XDocument.Load(rutaxml);
             if (revisaxkey(main)) {
 
-                ExtraeDataXml(main, nombrearchivo, iporigen);
+                if (nombretarea == "elimina")
+                {
+
+                    ExtraeDataXmlEliminacion(main, nombrearchivo, iporigen);
+
+                }
+
+                if(nombretarea == "publica/modifica")
+                {
+
+                    ExtraeDataXml(main, nombrearchivo, iporigen);
+
+                }
+
             }
 
         }
@@ -309,6 +323,37 @@ namespace ProcesaDocumento
 
             return listado;
 
+        }
+
+        public static List<string[]> ExtraeDataXmlEliminacion(XDocument main, string nombrearchivo, string iporigen)
+        {
+            listadoEliminacion.Clear();
+            string[] datos = new string[4];
+
+            //recuepra toda la información de cada nodo del XML que está procesando.
+            var query = from t in main.Descendants("aviso")
+                        select new
+                        {
+                            idfuente = t.Attribute("id").Value,
+                            patente = t.Attribute("patente").Value,
+                            elimina = t.Attribute("elimina").Value,
+                            sucursal = t.Element("vehiculo").Descendants("sucursal").Attributes("id").FirstOrDefault().Value
+
+                        };
+
+            foreach (var item in query)
+            {
+
+                datos[0] = item.idfuente;
+                datos[1] = item.patente;
+                datos[2] = item.elimina;
+                datos[3] = item.sucursal;
+
+                listadoEliminacion.Add(datos);
+
+            }
+
+            return listadoEliminacion;
         }
 
         private static string CrearDirectorioImagenes(string namefolder)
