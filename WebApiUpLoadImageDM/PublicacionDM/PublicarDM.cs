@@ -109,6 +109,7 @@ namespace PublicacionDM
             DicCarroceriasMotos.Add("Trabajo - calle", "Calle y Naked");
 
         }
+
         public static void CleanAllDiccionary() {
 
             DicCategorias.Clear();
@@ -131,52 +132,34 @@ namespace PublicacionDM
             string result ="";
             string data = "";
 
-            //var data = "vehicleType=CAR&brand=Suzuki&model=Aerio&version=GLX&year=2008&fuel=Bencina&transmission=Manual&steering=Asistida&doors=4&segment=Sedán&color=Otro Color&mileage=150000&price=5800000&subtitle=Suzuki Aerio GLX 2008&description=Un+modelo+pionero+que+nunca+perdi%C3%B3+su+liderazgo&provider=CHILEAUTOS&key=9e82a921182f43149269bf08c09c1f4e&userId=11053485&currency=CLP&image[0]=http://chileautos.li.csnstatic.com/chileautos/auto/particular/ap5655451225218551194.jpg&providerVehicleId=2704599";
-            //string url = "http://www.demotores.cl/frontend/rest/post.service";
-            //string responseString;
-            //
-            //using (var client = new HttpClient())
-            //{
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //
-            //    var action = Uri.EscapeUriString(url);
-            //
-            //    var content = new StringContent(data.ToString(), Encoding.UTF8, "application/x-www-form-urlencoded");
-            //    
-            //    var response = client.PostAsync(action, content).Result;
-            //    var responseContent = response.Content;
-            //    responseString = responseContent.ReadAsStringAsync().Result;
-            //
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        result = responseString;
-            //    }
-            //    else
-            //    {
-            //        result = responseString;
-            //    }
-            //
-            //}
+            try {
 
-            ProveedorDatos PrDatos = new ProveedorDatos();
+                ProveedorDatos PrDatos = new ProveedorDatos();
 
-            var datosvehiculo = PrDatos.EntregaDatosVehiculo(codauto);
+                var datosvehiculo = PrDatos.EntregaDatosVehiculo(codauto);
 
-            if (datosvehiculo != null)
-            {
+                if (datosvehiculo != null)
+                {
 
-                data = ArmaDatosParaPublicar(datosvehiculo);
-                result = PublicaenDeMotoresApi(data);
+                    data = ArmaDatosParaPublicar(datosvehiculo);
+                    result = PublicaenDeMotoresApi(data);
 
-            }
-            else {
+                }
+                else
+                {
 
-                result = "no Existen datos para el registro: "+codauto;
+                    result = "no Existen datos para el registro: " + codauto;
+
+                }
+
+                return result;
+
+            } catch (Exception ex){
+
+                return result = "Mensaje: " + ex;
 
             }
 
-            return result;
         }
 
         public static string ArmaDatosParaPublicar(object datosvehiculo) {
