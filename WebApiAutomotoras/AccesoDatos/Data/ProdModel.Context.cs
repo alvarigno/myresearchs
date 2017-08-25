@@ -768,5 +768,18 @@ namespace AccesoDatos.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_LoginModificacion_Automotora", nombreParameter, claveParameter, key);
         }
+    
+        public virtual int SPR_EliminaAviso_Automotoras(Nullable<int> codAuto, string ip)
+        {
+            var codAutoParameter = codAuto.HasValue ?
+                new ObjectParameter("codAuto", codAuto) :
+                new ObjectParameter("codAuto", typeof(int));
+    
+            var ipParameter = ip != null ?
+                new ObjectParameter("ip", ip) :
+                new ObjectParameter("ip", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_EliminaAviso_Automotoras", codAutoParameter, ipParameter);
+        }
     }
 }

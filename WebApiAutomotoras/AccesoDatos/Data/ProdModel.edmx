@@ -144,6 +144,10 @@
           <Parameter Name="key" Type="varchar" Mode="In" />
           <Parameter Name="esValido" Type="bit" Mode="InOut" />
         </Function>
+        <Function Name="SPR_EliminaAviso_Automotoras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codAuto" Type="int" Mode="In" />
+          <Parameter Name="ip" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SPR_Inserta_CodAutoCA_de_CA_en_Automotora" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPublicAutom" Type="int" Mode="In" />
           <Parameter Name="Codauto" Type="int" Mode="In" />
@@ -425,6 +429,10 @@
             <Parameter Name="clave" Mode="In" Type="String" />
             <Parameter Name="key" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SPR_EliminaAviso_Automotoras">
+            <Parameter Name="codAuto" Mode="In" Type="Int32" />
+            <Parameter Name="ip" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_apiCLA_Categorias_Result">
           <Property Type="Int32" Name="idCategoria" Nullable="false" />
@@ -588,6 +596,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPR_CompruebaLogin_Automotora" FunctionName="baseprod2Model.Store.SPR_CompruebaLogin_Automotora" />
           <FunctionImportMapping FunctionImportName="SPR_LoginModificacion_Automotora" FunctionName="baseprod2Model.Store.SPR_LoginModificacion_Automotora" />
+          <FunctionImportMapping FunctionImportName="SPR_EliminaAviso_Automotoras" FunctionName="baseprod2Model.Store.SPR_EliminaAviso_Automotoras" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
