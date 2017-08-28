@@ -349,6 +349,16 @@ namespace ProcesaDocumento
                 datos[2] = item.elimina;
                 datos[3] = item.sucursal;
 
+                if (datos[2] == "S")
+                {
+
+                    if (EliminaPublicacionAutomotora(int.Parse(datos[0]), int.Parse(datos[3]), iporigen))
+                    {
+
+                    }
+
+                }
+
                 listadoEliminacion.Add(datos);
 
             }
@@ -837,6 +847,25 @@ namespace ProcesaDocumento
 
             ObjectParameter respuestaspr = new ObjectParameter("respuesta", typeof(bool));
             var dato = bdprod.SPR_Inserta_CodAutoCA_de_CA_en_Automotora(id,codauto, respuestaspr);
+
+            respuesta = Boolean.Parse(respuestaspr.Value.ToString());
+
+            return respuesta;
+
+        }
+
+        private static Boolean EliminaPublicacionAutomotora(int codorigen, int sucursal, string iporigen)
+        {
+
+            baseprod2Entities bdprod = new baseprod2Entities();
+
+            Boolean respuesta = false;
+
+            ObjectParameter respuestaspr = new ObjectParameter("respuesta", typeof(bool));
+            ObjectParameter codigo_ca = new ObjectParameter("codigo_ca", typeof(int));
+            ObjectParameter eliminaok = new ObjectParameter("eliminaok", typeof(int));
+
+            var dato = bdprod.SPR_Elimina_Publicacion_Automotora(codorigen, sucursal, iporigen, codigo_ca, eliminaok, respuestaspr);
 
             respuesta = Boolean.Parse(respuestaspr.Value.ToString());
 

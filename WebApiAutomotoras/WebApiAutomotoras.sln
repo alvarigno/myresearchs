@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAutomotoras", "WebApiAutomotoras\WebApiAutomotoras.csproj", "{B5523DAC-AE28-48F7-8E79-FFB03EDC0E65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAutomotoras.Tests", "WebApiAutomotoras.Tests\WebApiAutomotoras.Tests.csproj", "{0B2E6D66-BA23-43D9-8032-93BFEC612D18}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpLoadServicesRestWebApiModel", "UpLoadServicesRestWebApiModel\UpLoadServicesRestWebApiModel.csproj", "{45CC223E-70BD-4A84-B952-BB5060FE1E21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\AccesoDatos.csproj", "{7B8B5161-9755-456E-A6F7-2DC36CF04F9C}"
@@ -25,10 +23,6 @@ Global
 		{B5523DAC-AE28-48F7-8E79-FFB03EDC0E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5523DAC-AE28-48F7-8E79-FFB03EDC0E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5523DAC-AE28-48F7-8E79-FFB03EDC0E65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B2E6D66-BA23-43D9-8032-93BFEC612D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B2E6D66-BA23-43D9-8032-93BFEC612D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B2E6D66-BA23-43D9-8032-93BFEC612D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B2E6D66-BA23-43D9-8032-93BFEC612D18}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45CC223E-70BD-4A84-B952-BB5060FE1E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{45CC223E-70BD-4A84-B952-BB5060FE1E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CC223E-70BD-4A84-B952-BB5060FE1E21}.Release|Any CPU.ActiveCfg = Release|Any CPU

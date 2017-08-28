@@ -163,7 +163,7 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        taskDocumentoEliminacion = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "elimina"));
+                                        taskDocumentoEliminacion = Task.Factory.StartNew(() => PasaDocumentoEliminacionXml(nuevoarchivo, ipqueaccesa, "elimina"));
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
 
                                     });
@@ -302,7 +302,9 @@ namespace WebApiAutomotoras.Controllers
             return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         private async void PasaDocumentoXml(string rutadocumento, string iporigen, string tarea)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
 
             Program procesa = new Program();
@@ -313,7 +315,26 @@ namespace WebApiAutomotoras.Controllers
                 taskDocumento.Dispose();
 
             }
+
             
+        }
+
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+        private async void PasaDocumentoEliminacionXml(string rutadocumento, string iporigen, string tarea)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+        {
+
+            Program procesa = new Program();
+            procesa.ObtieneDocumentoXml(rutadocumento, iporigen, tarea);
+
+            if (taskDocumentoEliminacion.IsCompleted)
+            {
+
+                taskDocumentoEliminacion.Dispose();
+
+            }
+
+
         }
 
     }

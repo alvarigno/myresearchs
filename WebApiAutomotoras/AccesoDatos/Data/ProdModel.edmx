@@ -144,9 +144,13 @@
           <Parameter Name="key" Type="varchar" Mode="In" />
           <Parameter Name="esValido" Type="bit" Mode="InOut" />
         </Function>
-        <Function Name="SPR_EliminaAviso_Automotoras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="codAuto" Type="int" Mode="In" />
-          <Parameter Name="ip" Type="varchar" Mode="In" />
+        <Function Name="SPR_Elimina_Publicacion_Automotora" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codorigen" Type="int" Mode="In" />
+          <Parameter Name="codigosucursal" Type="int" Mode="In" />
+          <Parameter Name="iporigen" Type="varchar" Mode="In" />
+          <Parameter Name="codigo_ca" Type="int" Mode="InOut" />
+          <Parameter Name="eliminaok" Type="int" Mode="InOut" />
+          <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
         </Function>
         <Function Name="SPR_Inserta_CodAutoCA_de_CA_en_Automotora" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPublicAutom" Type="int" Mode="In" />
@@ -429,9 +433,13 @@
             <Parameter Name="clave" Mode="In" Type="String" />
             <Parameter Name="key" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SPR_EliminaAviso_Automotoras">
-            <Parameter Name="codAuto" Mode="In" Type="Int32" />
-            <Parameter Name="ip" Mode="In" Type="String" />
+          <FunctionImport Name="SPR_Elimina_Publicacion_Automotora">
+            <Parameter Name="codorigen" Mode="In" Type="Int32" />
+            <Parameter Name="codigosucursal" Mode="In" Type="Int32" />
+            <Parameter Name="iporigen" Mode="In" Type="String" />
+            <Parameter Name="codigo_ca" Mode="InOut" Type="Int32" />
+            <Parameter Name="eliminaok" Mode="InOut" Type="Int32" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_apiCLA_Categorias_Result">
@@ -596,7 +604,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPR_CompruebaLogin_Automotora" FunctionName="baseprod2Model.Store.SPR_CompruebaLogin_Automotora" />
           <FunctionImportMapping FunctionImportName="SPR_LoginModificacion_Automotora" FunctionName="baseprod2Model.Store.SPR_LoginModificacion_Automotora" />
-          <FunctionImportMapping FunctionImportName="SPR_EliminaAviso_Automotoras" FunctionName="baseprod2Model.Store.SPR_EliminaAviso_Automotoras" />
+          <FunctionImportMapping FunctionImportName="SPR_Elimina_Publicacion_Automotora" FunctionName="baseprod2Model.Store.SPR_Elimina_Publicacion_Automotora" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

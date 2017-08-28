@@ -769,17 +769,21 @@ namespace AccesoDatos.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_LoginModificacion_Automotora", nombreParameter, claveParameter, key);
         }
     
-        public virtual int SPR_EliminaAviso_Automotoras(Nullable<int> codAuto, string ip)
+        public virtual int SPR_Elimina_Publicacion_Automotora(Nullable<int> codorigen, Nullable<int> codigosucursal, string iporigen, ObjectParameter codigo_ca, ObjectParameter eliminaok, ObjectParameter respuesta)
         {
-            var codAutoParameter = codAuto.HasValue ?
-                new ObjectParameter("codAuto", codAuto) :
-                new ObjectParameter("codAuto", typeof(int));
+            var codorigenParameter = codorigen.HasValue ?
+                new ObjectParameter("codorigen", codorigen) :
+                new ObjectParameter("codorigen", typeof(int));
     
-            var ipParameter = ip != null ?
-                new ObjectParameter("ip", ip) :
-                new ObjectParameter("ip", typeof(string));
+            var codigosucursalParameter = codigosucursal.HasValue ?
+                new ObjectParameter("codigosucursal", codigosucursal) :
+                new ObjectParameter("codigosucursal", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_EliminaAviso_Automotoras", codAutoParameter, ipParameter);
+            var iporigenParameter = iporigen != null ?
+                new ObjectParameter("iporigen", iporigen) :
+                new ObjectParameter("iporigen", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Elimina_Publicacion_Automotora", codorigenParameter, codigosucursalParameter, iporigenParameter, codigo_ca, eliminaok, respuesta);
         }
     }
 }
