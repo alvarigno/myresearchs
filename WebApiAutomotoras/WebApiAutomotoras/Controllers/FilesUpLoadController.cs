@@ -32,85 +32,82 @@ namespace WebApiAutomotoras.Controllers
         [HttpPost]
         [Route("")]
         [CustomCheckLogin]
-        public async Task<IQueryable<FilesUpLoad>> Upload(string nombrearchivo, int sitio)
+        public async Task<HttpResponseMessage> Upload()
         {
 
             string hash = Util.getValueFromHeader("X-KEY");
             string ipregistrada = VerificaIpAddress(hash);
             string ipqueaccesa = GetIPAddress();
-            nombrearchivosubido = nombrearchivo;
-            sitioprocedencia = sitio;
 
             if (ipqueaccesa == ipregistrada)
             {
 
-                if (validaextension(nombrearchivo))
+                try
                 {
 
-                    /** validación que archivo.xml sea distinto **/
-                    string rutadirectaarchivo = uploadFolderPath + nombrearchivo;
-
-                    if (!File.Exists(rutadirectaarchivo))
+                    if (Request.Content.IsMimeMultipartContent())
                     {
-                        try
+
+                        HttpResponseMessage result = null;
+                        var httpRequest = HttpContext.Current.Request;
+                        if (httpRequest.Files.Count > 0)
                         {
-
-                            if (Request.Content.IsMimeMultipartContent())
+                            var docfiles = new List<string>();
+                            foreach (string file in httpRequest.Files)
                             {
-                                var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
+                                var postedFile = httpRequest.Files[file];
+                                var filePath = uploadFolderPath + postedFile.FileName;
 
-                                var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
+                                if (validaextension(postedFile.FileName))
                                 {
-                                    if (t.IsFaulted || t.IsCanceled)
+                                    if (!File.Exists(filePath))
                                     {
-                                        throw new HttpResponseException(HttpStatusCode.InternalServerError);
+
+                                        postedFile.SaveAs(filePath);
+                                        taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(filePath, ipqueaccesa, "publica/modifica"));
+                                        result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + postedFile.FileName + ", cargado con éxito.");
+
+                                    }
+                                    else
+                                    {
+
+                                        result = Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + postedFile.FileName + ", ya existe.");
+
                                     }
 
-                                    var fileInfo = streamProvider.FileData.Select(i =>
-                                    {
-                                        var info = new FileInfo(i.LocalFileName);
-                                        nombrerealarchivo = info.Name;
-                                        Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
-                                        string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        //taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "publica/modifica"));
-                                        PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "publica/modifica");
-                                        return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
-                                        
-                                    });
+                                }
+                                else
+                                {
 
-                                    return fileInfo.AsQueryable();
+                                    result = Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + postedFile.FileName + ", debe ser extensión '.xml'.");
 
-                                });
-                                
-                                return await task;
+                                }
 
                             }
-                            else
-                            {
-                                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
-                            }
-
-
+                            //result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
+                                   
                         }
-                        catch (Exception ex)
+                        else
                         {
-
-                            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                            result = Request.CreateResponse(HttpStatusCode.BadRequest);
                         }
+
+                        return result;
 
                     }
                     else
                     {
-
-                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", ya existe."));
-
+                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
                     }
 
-                } else {
-
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", debe ser extensión '.xml'."));
 
                 }
+                catch (Exception ex)
+                {
+
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                }
+
 
             }
             else {
@@ -124,87 +121,86 @@ namespace WebApiAutomotoras.Controllers
         [HttpPost]
         [Route("Elimina/avisos")]
         [CustomCheckLogin]
-        public async Task<IQueryable<FilesUpLoad>> EliminaUpload(string nombrearchivo, int sitio)
+        public async Task<HttpResponseMessage> EliminaUpload()
         {
 
             string hash = Util.getValueFromHeader("X-KEY");
             string ipregistrada = VerificaIpAddress(hash);
             string ipqueaccesa = GetIPAddress();
-            nombrearchivosubido = nombrearchivo;
-            sitioprocedencia = sitio;
 
             if (ipqueaccesa == ipregistrada)
             {
 
-                if (validaextension(nombrearchivo))
+
+                try
                 {
 
-                    /** validación que archivo.xml sea distinto **/
-                    string rutadirectaarchivo = uploadFolderPath + nombrearchivo;
 
-                    if (!File.Exists(rutadirectaarchivo))
+
+                    if (Request.Content.IsMimeMultipartContent())
                     {
-                        try
+
+                        HttpResponseMessage result = null;
+                        var httpRequest = HttpContext.Current.Request;
+                        if (httpRequest.Files.Count > 0)
                         {
-
-                            if (Request.Content.IsMimeMultipartContent())
+                            var docfiles = new List<string>();
+                            foreach (string file in httpRequest.Files)
                             {
-                                var streamProvider = new WithExtensionMultipartFormDataStreamProvider(uploadFolderPath);
+                                var postedFile = httpRequest.Files[file];
+                                var filePath = uploadFolderPath + postedFile.FileName;
 
-                                var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IQueryable<FilesUpLoad>>(t =>
+                                if (validaextension(postedFile.FileName))
                                 {
-                                    if (t.IsFaulted || t.IsCanceled)
+                                    if (!File.Exists(filePath))
                                     {
-                                        throw new HttpResponseException(HttpStatusCode.InternalServerError);
+
+                                        postedFile.SaveAs(filePath);
+                                        taskDocumentoEliminacion = Task.Factory.StartNew(() => PasaDocumentoEliminacionXml(filePath, ipqueaccesa, "elimina"));
+                                        result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + postedFile.FileName + ", cargado con éxito.");
+
+                                    }
+                                    else
+                                    {
+
+                                        result = Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + postedFile.FileName + ", ya existe.");
+
                                     }
 
-                                    var fileInfo = streamProvider.FileData.Select(i =>
-                                    {
-                                        var info = new FileInfo(i.LocalFileName);
-                                        nombrerealarchivo = info.Name;
-                                        Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
-                                        string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        //taskDocumento = Task.Factory.StartNew(() => PasaDocumentoEliminacionXml(nuevoarchivo, ipqueaccesa, "elimina"));
-                                        PasaDocumentoEliminacionXml(nuevoarchivo, ipqueaccesa, "elimina");
-                                        return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
+                                }
+                                else
+                                {
 
-                                    });
+                                    result = Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + postedFile.FileName + ", debe ser extensión '.xml'.");
 
-                                    return fileInfo.AsQueryable();
-
-                                });
-
-                                return await task;
+                                }
 
                             }
-                            else
-                            {
-                                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
-                            }
-
+                            //result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
 
                         }
-                        catch (Exception ex)
+                        else
                         {
-
-                            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                            result = Request.CreateResponse(HttpStatusCode.BadRequest);
                         }
+
+                        return result;
 
                     }
                     else
                     {
-
-                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", ya existe."));
-
+                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
                     }
 
+
+
                 }
-                else
+                catch (Exception ex)
                 {
 
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + nombrearchivo + ", debe ser extensión '.xml'."));
-
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
                 }
+
 
             }
             else
@@ -214,18 +210,6 @@ namespace WebApiAutomotoras.Controllers
 
             }
 
-        }
-
-        [HttpPost]
-        [Route("ProcesaAviso/")]
-        [CustomCheckLogin]
-        public HttpResponseMessage ProcesaArchivo(string nombrearchivo, string ip)
-        {
-            string releases = "";
-       
-            PasaDocumentoXml(@"C:\Users\Álvaro\Source\Repos\myresearchs\WebApiAutomotoras\WebApiAutomotoras\fileLoaded\" + nombrearchivo, ip, "publica /modifica");
-       
-            return Request.CreateResponse(HttpStatusCode.OK, releases);
         }
 
 
