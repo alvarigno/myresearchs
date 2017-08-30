@@ -25,7 +25,7 @@ namespace ProcesaDocumento
         static List<PublicacionModel> listado = new List<PublicacionModel>();
         static List<string[]> listadoEliminacion = new List<string[]>();
 
-        public void ObtieneDocumentoXml(string rutaxml, string iporigen, string nombretarea) {
+        public string ObtieneDocumentoXml(string rutaxml, string iporigen, string nombretarea) {
 
             string nombrearchivo = Path.GetFileName(rutaxml);
             XDocument main = XDocument.Load(rutaxml);
@@ -46,6 +46,8 @@ namespace ProcesaDocumento
                 }
 
             }
+
+            return nombrearchivo;
 
         }
 
