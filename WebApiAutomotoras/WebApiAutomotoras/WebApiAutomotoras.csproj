@@ -275,6 +275,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="xml\doc_v1.1.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
