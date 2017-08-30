@@ -32,7 +32,7 @@ namespace WebApiAutomotoras.Controllers
         [HttpPost]
         [Route("")]
         [CustomCheckLogin]
-        public Task<IQueryable<FilesUpLoad>> Upload(string nombrearchivo, int sitio)
+        public async Task<IQueryable<FilesUpLoad>> Upload(string nombrearchivo, int sitio)
         {
 
             string hash = Util.getValueFromHeader("X-KEY");
@@ -72,7 +72,8 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "publica/modifica"));
+                                        //taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "publica/modifica"));
+                                        PasaDocumentoXml(nuevoarchivo, ipqueaccesa, "publica/modifica");
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
                                         
                                     });
@@ -81,7 +82,7 @@ namespace WebApiAutomotoras.Controllers
 
                                 });
                                 
-                                return task;
+                                return await task;
 
                             }
                             else
@@ -123,7 +124,7 @@ namespace WebApiAutomotoras.Controllers
         [HttpPost]
         [Route("Elimina/avisos")]
         [CustomCheckLogin]
-        public Task<IQueryable<FilesUpLoad>> EliminaUpload(string nombrearchivo, int sitio)
+        public async Task<IQueryable<FilesUpLoad>> EliminaUpload(string nombrearchivo, int sitio)
         {
 
             string hash = Util.getValueFromHeader("X-KEY");
@@ -163,7 +164,8 @@ namespace WebApiAutomotoras.Controllers
                                         nombrerealarchivo = info.Name;
                                         Renombra(nombrerealarchivo, nombrearchivosubido, sitioprocedencia);
                                         string nuevoarchivo = uploadFolderPath + nombrearchivosubido;
-                                        taskDocumentoEliminacion = Task.Factory.StartNew(() => PasaDocumentoEliminacionXml(nuevoarchivo, ipqueaccesa, "elimina"));
+                                        //taskDocumento = Task.Factory.StartNew(() => PasaDocumentoEliminacionXml(nuevoarchivo, ipqueaccesa, "elimina"));
+                                        PasaDocumentoEliminacionXml(nuevoarchivo, ipqueaccesa, "elimina");
                                         return new FilesUpLoad(uploadFolderPath + nombrearchivosubido, Request.RequestUri.AbsoluteUri + "?filename=" + nombrearchivosubido, (nuevoarchivo.Length / 1024).ToString());
 
                                     });
@@ -172,7 +174,7 @@ namespace WebApiAutomotoras.Controllers
 
                                 });
 
-                                return task;
+                                return await task;
 
                             }
                             else
@@ -214,17 +216,17 @@ namespace WebApiAutomotoras.Controllers
 
         }
 
-       // [HttpPost]
-       // [Route("ProcesaAviso/")]
-       // [CustomCheckLogin]
-       // public HttpResponseMessage ProcesaArchivo(string nombrearchivo, string ip)
-       // {
-       //     string releases = "";
-       //
-       //     releases = PasaDocumentoXml(nombrearchivo, ip, "publica/modifica").ToString();
-       //
-       //     return Request.CreateResponse(HttpStatusCode.OK, releases);
-       // }
+        [HttpPost]
+        [Route("ProcesaAviso/")]
+        [CustomCheckLogin]
+        public HttpResponseMessage ProcesaArchivo(string nombrearchivo, string ip)
+        {
+            string releases = "";
+       
+            PasaDocumentoXml(@"C:\Users\Álvaro\Source\Repos\myresearchs\WebApiAutomotoras\WebApiAutomotoras\fileLoaded\" + nombrearchivo, ip, "publica /modifica");
+       
+            return Request.CreateResponse(HttpStatusCode.OK, releases);
+        }
 
 
         /// <summary>
@@ -323,13 +325,6 @@ namespace WebApiAutomotoras.Controllers
                 Program procesa = new Program();
                 procesa.ObtieneDocumentoXml(rutadocumento, iporigen, tarea);
 
-                if (taskDocumento.IsCompleted)
-                {
-
-                    taskDocumento.Dispose();
-
-                }
-
             });
             
         }
@@ -342,13 +337,8 @@ namespace WebApiAutomotoras.Controllers
                 Program procesa = new Program();
                 procesa.ObtieneDocumentoXml(rutadocumento, iporigen, tarea);
 
-                if (taskDocumentoEliminacion.IsCompleted)
-                {
-
-                    taskDocumentoEliminacion.Dispose();
-
-                }
             });
+
         }
 
 

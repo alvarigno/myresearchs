@@ -28,8 +28,8 @@ namespace SubidaImagenesServer
             string categoria = "auto";
             string vendedor = "automotora";
 
-          //  try
-          //  {
+            try
+            {
 
 
                 string urlUploadPhotoServer = _urlPhotoServer;
@@ -64,14 +64,14 @@ namespace SubidaImagenesServer
 
                     }
 
-           // }
-           // catch (Exception e)
-           // {
-           //
-           //     Console.WriteLine("error: " + e.Message);
-           //     foto = e.Message;
-           //
-           // }
+            }
+            catch (Exception e)
+            {
+           
+                Console.WriteLine("error: " + e.Message);
+                foto = e.Message;
+           
+            }
 
             return foto;
         }
