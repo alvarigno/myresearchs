@@ -20,6 +20,7 @@ namespace AppLoadDataCurifor
         public static Dictionary<string, string> DicComodin = new Dictionary<string, string>();
         public static Dictionary<string, string> DicCategoriasCurifor = new Dictionary<string, string>();
         public static Dictionary<string, string> DicSucursalesCurifor = new Dictionary<string, string>();
+        public static Dictionary<string, string> DicColoresCurifor = new Dictionary<string, string>();
         public static int[] idCurifor = new int[15];
 
 
@@ -116,7 +117,7 @@ namespace AppLoadDataCurifor
                                 new XElement("transmission", DicTipoCambio[x.tipo_cambio ?? string.Empty]),
                                 new XElement("doors", x.Puertas),
                                 new XElement("mileage", x.km),
-                                new XElement("color", x.color ?? string.Empty),
+                                new XElement("color", CompruebaColores(x.color ?? string.Empty, DicColoresCurifor)),
                                 new XElement("value", x.PESOS),
                                 new XElement("description", x.otros),
                                 new XElement("optionals",
@@ -294,6 +295,43 @@ namespace AppLoadDataCurifor
             DicSucursalesCurifor.Add("2444", "MACUL");
             DicSucursalesCurifor.Add("929", "SANTIAGO");
 
+            //Diccionario Colores Curifor
+            DicColoresCurifor.Add("Amarillo", "1");
+            DicColoresCurifor.Add("AMARILLO", "1");
+            DicColoresCurifor.Add("Beige", "4");
+            DicColoresCurifor.Add("BEIGE", "4");
+            DicColoresCurifor.Add("Blanco", "5");
+            DicColoresCurifor.Add("BLANCO", "5");
+            DicColoresCurifor.Add("Plata", "7");
+            DicColoresCurifor.Add("PLATA", "7");
+            DicColoresCurifor.Add("Negro", "8");
+            DicColoresCurifor.Add("NEGRO", "8");
+            DicColoresCurifor.Add("Verde", "9");
+            DicColoresCurifor.Add("VERDE", "9");
+            DicColoresCurifor.Add("Rojo", "10");
+            DicColoresCurifor.Add("ROJO", "10");
+            DicColoresCurifor.Add("Azul", "11");
+            DicColoresCurifor.Add("AZUL", "11");
+            DicColoresCurifor.Add("Gris", "12");
+            DicColoresCurifor.Add("GRIS", "12");
+            DicColoresCurifor.Add("Dorado", "13");
+            DicColoresCurifor.Add("DORADO", "13");
+            DicColoresCurifor.Add("Marrón", "14");
+            DicColoresCurifor.Add("MARRON", "14");
+            DicColoresCurifor.Add("Vino", "15");
+            DicColoresCurifor.Add("VINO", "15");
+            DicColoresCurifor.Add("Púrpura", "16");
+            DicColoresCurifor.Add("PURPURA", "16");
+            DicColoresCurifor.Add("Naranja", "17");
+            DicColoresCurifor.Add("NARANJA", "17");
+            DicColoresCurifor.Add("Rosa", "25");
+            DicColoresCurifor.Add("ROSA", "25");
+            DicColoresCurifor.Add("Bronce", "26");
+            DicColoresCurifor.Add("BRONCE", "26");
+            DicColoresCurifor.Add("","24");
+
+
+
 
         }
 
@@ -307,10 +345,29 @@ namespace AppLoadDataCurifor
             DicComodin.Clear();
             DicCategoriasCurifor.Clear();
             DicSucursalesCurifor.Clear();
+            DicColoresCurifor.Clear();
+            
+        }
+
+        public static string CompruebaColores(string dato, Dictionary<string,string> Dicc) {
+
+            string valor = "";
+
+            if (Dicc.ContainsKey(dato))
+            {
+
+                valor = Dicc[dato];
+
+            }
+            else {
+
+                valor = "23";
+
+            }
 
 
 
-
+            return valor;
         }
 
 
