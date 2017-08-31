@@ -66,7 +66,7 @@ namespace WebApiUpLoadImageDM.Controllers
 
         }
         
-        [Route("Administacion/aviso")]
+        [Route("Administracion/aviso")]
         [HttpPost]
         public async Task<HttpResponseMessage> AdministraAvisoDm(string codauto)
         {
@@ -90,7 +90,7 @@ namespace WebApiUpLoadImageDM.Controllers
             return respuesta;
         }
 
-        [Route("Administacion/aviso/Eliminar")]
+        [Route("Administracion/aviso/Eliminar")]
         [HttpPost]
         public async Task<HttpResponseMessage> EliminarAvisoDm(string codauto)
         {
