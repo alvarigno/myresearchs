@@ -9,8 +9,8 @@ namespace SubidaImagenesServer
     public class UpLoadImageCA
     {
 
-        public string _urlPhotoServer = "https://staging-chileautos.li.csnstatic.com/chileautos/";
-        public string _urlPhotoServerFinal = "https://chileautos.li.csnstatic.com/chileautos/";
+        public string _urlPhotoServer = "https://chileautos.storage.csnstatic.com/chileautos/";
+        public string _urlPhotoServerFinal = "https://chileautos.pxcrush.net/chileautos/";
 
         public byte[] imgToByteArray(string inImg)
         {

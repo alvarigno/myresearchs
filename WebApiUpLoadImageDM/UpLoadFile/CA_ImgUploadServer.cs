@@ -14,11 +14,8 @@ namespace UpLoadFile
 
         
 
-        public string _urlPhotoServer = "https://upLoad-chileautos.li.csnstatic.com/chileautos/";
-        public string _urlPhotoServerFinal = "https://chileautos.li.csnstatic.com/chileautos/";
-
-        //public string _urlPhotoServer = "https://staging-chileautos.li.csnstatic.com/chileautos/";
-        //public string _urlPhotoServerFinal = "https://staging-chileautos.li.csnstatic.com/chileautos/";
+        public string _urlPhotoServer = "https://chileautos.storage.csnstatic.com/chileautos/";
+        public string _urlPhotoServerFinal = "https://chileautos.pxcrush.net/chileautos/";
 
         public byte[] imgToByteArray(string inImg)
         {
