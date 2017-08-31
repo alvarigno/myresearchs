@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="baseprod2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tabautos">
+          <Key>
+            <PropertyRef Name="COD_AUTO" />
+          </Key>
+          <Property Name="COD_AUTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_toma_foto" Type="varchar" MaxLength="20" />
+          <Property Name="fotografo" Type="varchar" MaxLength="5" />
+          <Property Name="digitador" Type="varchar" MaxLength="5" />
+          <Property Name="fecha_ingreso" Type="datetime" />
+          <Property Name="COD_CLIENTE" Type="int" />
+          <Property Name="nuevo" Type="varchar" MaxLength="1" />
+          <Property Name="Tipoveh" Type="varchar" MaxLength="2" />
+          <Property Name="Carroceria" Type="varchar" MaxLength="2" />
+          <Property Name="COD_MARCA" Type="int" />
+          <Property Name="MODELO" Type="varchar" MaxLength="80" />
+          <Property Name="Version" Type="varchar" MaxLength="70" />
+          <Property Name="ANO" Type="int" />
+          <Property Name="valor_ref" Type="varchar" MaxLength="15" />
+          <Property Name="PESOS" Type="int" />
+          <Property Name="Pesosdos" Type="int" />
+          <Property Name="Potencia" Type="varchar" MaxLength="30" />
+          <Property Name="color" Type="varchar" MaxLength="30" />
+          <Property Name="km" Type="int" />
+          <Property Name="milla" Type="varchar" MaxLength="10" />
+          <Property Name="motor" Type="varchar" MaxLength="30" />
+          <Property Name="combustible" Type="int" />
+          <Property Name="Cilindrada" Type="int" />
+          <Property Name="foto_chica" Type="varchar" MaxLength="100" />
+          <Property Name="foto_grande" Type="varchar" MaxLength="100" />
+          <Property Name="tipo_cambio" Type="varchar" MaxLength="2" />
+          <Property Name="aire_acondicionado" Type="varchar" MaxLength="2" />
+          <Property Name="tipo_direccion" Type="varchar" MaxLength="2" />
+          <Property Name="radio" Type="varchar" MaxLength="3" />
+          <Property Name="alzavidrios_electricos" Type="varchar" MaxLength="2" />
+          <Property Name="espejos_electricos" Type="varchar" MaxLength="2" />
+          <Property Name="frenos_ABS" Type="varchar" MaxLength="2" />
+          <Property Name="airbag" Type="varchar" MaxLength="2" />
+          <Property Name="unico_dueno" Type="varchar" MaxLength="2" />
+          <Property Name="cierre_centralizado" Type="varchar" MaxLength="2" />
+          <Property Name="catalitico" Type="varchar" MaxLength="2" />
+          <Property Name="fwd" Type="varchar" MaxLength="2" />
+          <Property Name="Llantas" Type="varchar" MaxLength="2" />
+          <Property Name="Puertas" Type="varchar" MaxLength="2" />
+          <Property Name="Alarma" Type="varchar" MaxLength="2" />
+          <Property Name="Techo" Type="varchar" MaxLength="3" />
+          <Property Name="otros" Type="varchar" MaxLength="255" />
+          <Property Name="pass" Type="varchar" MaxLength="25" />
+          <Property Name="nom" Type="varchar" MaxLength="10" />
+          <Property Name="emailpart" Type="varchar" MaxLength="80" />
+          <Property Name="ciudadpart" Type="varchar" MaxLength="4" />
+          <Property Name="Convenio" Type="varchar" MaxLength="1" />
+          <Property Name="destacado" Type="char" MaxLength="1" />
+          <Property Name="patente" Type="varchar" MaxLength="10" />
+          <Property Name="contauto" Type="int" />
+          <Property Name="foto2" Type="varchar" MaxLength="100" />
+          <Property Name="foto3" Type="varchar" MaxLength="150" />
+          <Property Name="foto4" Type="varchar" MaxLength="100" />
+          <Property Name="foto5" Type="varchar" MaxLength="100" />
+          <Property Name="foto6" Type="varchar" MaxLength="100" />
+          <Property Name="foto7" Type="varchar" MaxLength="100" />
+          <Property Name="foto8" Type="varchar" MaxLength="100" />
+          <Property Name="vendido" Type="int" />
+          <Property Name="falso" Type="int" />
+          <Property Name="reemplazo" Type="char" MaxLength="1" />
+          <Property Name="financiamiento" Type="char" MaxLength="1" />
+          <Property Name="seguro" Type="char" MaxLength="1" />
+          <Property Name="transferencia" Type="char" MaxLength="1" />
+          <Property Name="horario" Type="char" MaxLength="1" />
+          <Property Name="nomauto" Type="char" MaxLength="100" />
+          <Property Name="fonauto" Type="char" MaxLength="35" />
+          <Property Name="cod_auto_ant" Type="int" />
+          <Property Name="cod_modelo" Type="int" />
+          <Property Name="cod_version" Type="int" />
+          <Property Name="publishedDate" Type="datetime" />
+          <Property Name="fechaRepublicado" Type="datetime" />
+          <Property Name="consignacion" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="tabCategoria-Tipo">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+            <PropertyRef Name="idTipoVeh" />
+          </Key>
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="idTipoVeh" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tabclientes">
+          <Key>
+            <PropertyRef Name="COD_CLIENTE" />
+          </Key>
+          <Property Name="COD_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="nombre_legal" Type="char" MaxLength="45" />
+          <Property Name="nombre_fantasia" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="DIRECCION" Type="char" MaxLength="50" />
+          <Property Name="comuna" Type="char" MaxLength="30" />
+          <Property Name="cod_ciudad" Type="int" />
+          <Property Name="FONOS" Type="varchar" MaxLength="50" />
+          <Property Name="FAX" Type="char" MaxLength="20" />
+          <Property Name="email_nuestro" Type="char" MaxLength="100" />
+          <Property Name="email_propio" Type="char" MaxLength="100" />
+          <Property Name="CONTACTO" Type="char" MaxLength="100" />
+          <Property Name="representante_legal" Type="char" MaxLength="30" />
+          <Property Name="rut" Type="char" MaxLength="10" />
+          <Property Name="giro" Type="char" MaxLength="30" />
+          <Property Name="rentacar" Type="char" MaxLength="2" />
+          <Property Name="carpeta" Type="char" MaxLength="30" />
+          <Property Name="horario" Type="char" MaxLength="150" />
+          <Property Name="foto_grande" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="foto_chica" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_ingreso" Type="datetime" />
+          <Property Name="facilidades" Type="char" MaxLength="255" />
+          <Property Name="fecha_ultima_act" Type="datetime" />
+          <Property Name="otros" Type="char" MaxLength="200" />
+          <Property Name="nomcli" Type="char" MaxLength="50" />
+          <Property Name="passcli" Type="char" MaxLength="50" />
+          <Property Name="sucursal" Type="int" />
+          <Property Name="visible" Type="char" MaxLength="1" />
+          <Property Name="contclie" Type="int" />
+          <Property Name="publishedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tabmarcas">
+          <Key>
+            <PropertyRef Name="COD_MARCA" />
+          </Key>
+          <Property Name="COD_MARCA" Type="int" Nullable="false" />
+          <Property Name="DES_MARCA" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Logo" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_fotosNuevoServer">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_auto" Type="int" Nullable="false" />
+          <Property Name="foto" Type="varchar" MaxLength="250" />
+          <Property Name="orden" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="baseprod2ModelStoreContainer">
+          <EntitySet Name="tabautos" EntityType="Self.tabautos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tabCategoria-Tipo" EntityType="Self.tabCategoria-Tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tabclientes" EntityType="Self.tabclientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tabmarcas" EntityType="Self.tabmarcas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_fotosNuevoServer" EntityType="Self.tbl_fotosNuevoServer" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="baseprod2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tabautos">
+          <Key>
+            <PropertyRef Name="COD_AUTO" />
+          </Key>
+          <Property Name="COD_AUTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_toma_foto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fotografo" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="digitador" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="COD_CLIENTE" Type="Int32" />
+          <Property Name="nuevo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Tipoveh" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Carroceria" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="COD_MARCA" Type="Int32" />
+          <Property Name="MODELO" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Version" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="ANO" Type="Int32" />
+          <Property Name="valor_ref" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PESOS" Type="Int32" />
+          <Property Name="Pesosdos" Type="Int32" />
+          <Property Name="Potencia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="km" Type="Int32" />
+          <Property Name="milla" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="motor" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="combustible" Type="Int32" />
+          <Property Name="Cilindrada" Type="Int32" />
+          <Property Name="foto_chica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto_grande" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_cambio" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="aire_acondicionado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_direccion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="radio" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="alzavidrios_electricos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="espejos_electricos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="frenos_ABS" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="airbag" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="unico_dueno" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="cierre_centralizado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="catalitico" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="fwd" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Llantas" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Puertas" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Alarma" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Techo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="otros" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="emailpart" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ciudadpart" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Convenio" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="destacado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="patente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contauto" Type="Int32" />
+          <Property Name="foto2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="foto4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto7" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="vendido" Type="Int32" />
+          <Property Name="falso" Type="Int32" />
+          <Property Name="reemplazo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="financiamiento" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="seguro" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="transferencia" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="horario" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="nomauto" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="fonauto" Type="String" MaxLength="35" FixedLength="true" Unicode="false" />
+          <Property Name="cod_auto_ant" Type="Int32" />
+          <Property Name="cod_modelo" Type="Int32" />
+          <Property Name="cod_version" Type="Int32" />
+          <Property Name="publishedDate" Type="DateTime" Precision="3" />
+          <Property Name="fechaRepublicado" Type="DateTime" Precision="3" />
+          <Property Name="consignacion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tabclientes">
+          <Key>
+            <PropertyRef Name="COD_CLIENTE" />
+          </Key>
+          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="nombre_legal" Type="String" MaxLength="45" FixedLength="true" Unicode="false" />
+          <Property Name="nombre_fantasia" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="comuna" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="cod_ciudad" Type="Int32" />
+          <Property Name="FONOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="email_nuestro" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="email_propio" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="CONTACTO" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="representante_legal" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="rut" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="giro" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="rentacar" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="carpeta" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="horario" Type="String" MaxLength="150" FixedLength="true" Unicode="false" />
+          <Property Name="foto_grande" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="foto_chica" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="facilidades" Type="String" MaxLength="255" FixedLength="true" Unicode="false" />
+          <Property Name="fecha_ultima_act" Type="DateTime" Precision="3" />
+          <Property Name="otros" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Name="nomcli" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="passcli" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="sucursal" Type="Int32" />
+          <Property Name="visible" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="contclie" Type="Int32" />
+          <Property Name="publishedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_fotosNuevoServer">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_auto" Type="Int32" Nullable="false" />
+          <Property Name="foto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="orden" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="baseprod2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tabautos" EntityType="Self.tabautos" />
+          <EntitySet Name="tabclientes" EntityType="Self.tabclientes" />
+          <EntitySet Name="tbl_fotosNuevoServer" EntityType="Self.tbl_fotosNuevoServer" />
+          <EntitySet Name="tabCategoria_Tipo" EntityType="baseprod2Model.tabCategoria_Tipo" />
+          <EntitySet Name="tabmarcas" EntityType="baseprod2Model.tabmarcas" />
+        </EntityContainer>
+        <EntityType Name="tabCategoria_Tipo">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+            <PropertyRef Name="idTipoVeh" />
+          </Key>
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="idTipoVeh" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tabmarcas">
+          <Key>
+            <PropertyRef Name="COD_MARCA" />
+          </Key>
+          <Property Name="COD_MARCA" Type="Int32" Nullable="false" />
+          <Property Name="DES_MARCA" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="baseprod2ModelStoreContainer" CdmEntityContainer="baseprod2Entities">
+          <EntitySetMapping Name="tabautos">
+            <EntityTypeMapping TypeName="baseprod2Model.tabautos">
+              <MappingFragment StoreEntitySet="tabautos">
+                <ScalarProperty Name="COD_AUTO" ColumnName="COD_AUTO" />
+                <ScalarProperty Name="fecha_toma_foto" ColumnName="fecha_toma_foto" />
+                <ScalarProperty Name="fotografo" ColumnName="fotografo" />
+                <ScalarProperty Name="digitador" ColumnName="digitador" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="nuevo" ColumnName="nuevo" />
+                <ScalarProperty Name="Tipoveh" ColumnName="Tipoveh" />
+                <ScalarProperty Name="Carroceria" ColumnName="Carroceria" />
+                <ScalarProperty Name="COD_MARCA" ColumnName="COD_MARCA" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="ANO" ColumnName="ANO" />
+                <ScalarProperty Name="valor_ref" ColumnName="valor_ref" />
+                <ScalarProperty Name="PESOS" ColumnName="PESOS" />
+                <ScalarProperty Name="Pesosdos" ColumnName="Pesosdos" />
+                <ScalarProperty Name="Potencia" ColumnName="Potencia" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="km" ColumnName="km" />
+                <ScalarProperty Name="milla" ColumnName="milla" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="combustible" ColumnName="combustible" />
+                <ScalarProperty Name="Cilindrada" ColumnName="Cilindrada" />
+                <ScalarProperty Name="foto_chica" ColumnName="foto_chica" />
+                <ScalarProperty Name="foto_grande" ColumnName="foto_grande" />
+                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+                <ScalarProperty Name="aire_acondicionado" ColumnName="aire_acondicionado" />
+                <ScalarProperty Name="tipo_direccion" ColumnName="tipo_direccion" />
+                <ScalarProperty Name="radio" ColumnName="radio" />
+                <ScalarProperty Name="alzavidrios_electricos" ColumnName="alzavidrios_electricos" />
+                <ScalarProperty Name="espejos_electricos" ColumnName="espejos_electricos" />
+                <ScalarProperty Name="frenos_ABS" ColumnName="frenos_ABS" />
+                <ScalarProperty Name="airbag" ColumnName="airbag" />
+                <ScalarProperty Name="unico_dueno" ColumnName="unico_dueno" />
+                <ScalarProperty Name="cierre_centralizado" ColumnName="cierre_centralizado" />
+                <ScalarProperty Name="catalitico" ColumnName="catalitico" />
+                <ScalarProperty Name="fwd" ColumnName="fwd" />
+                <ScalarProperty Name="Llantas" ColumnName="Llantas" />
+                <ScalarProperty Name="Puertas" ColumnName="Puertas" />
+                <ScalarProperty Name="Alarma" ColumnName="Alarma" />
+                <ScalarProperty Name="Techo" ColumnName="Techo" />
+                <ScalarProperty Name="otros" ColumnName="otros" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="emailpart" ColumnName="emailpart" />
+                <ScalarProperty Name="ciudadpart" ColumnName="ciudadpart" />
+                <ScalarProperty Name="Convenio" ColumnName="Convenio" />
+                <ScalarProperty Name="destacado" ColumnName="destacado" />
+                <ScalarProperty Name="patente" ColumnName="patente" />
+                <ScalarProperty Name="contauto" ColumnName="contauto" />
+                <ScalarProperty Name="foto2" ColumnName="foto2" />
+                <ScalarProperty Name="foto3" ColumnName="foto3" />
+                <ScalarProperty Name="foto4" ColumnName="foto4" />
+                <ScalarProperty Name="foto5" ColumnName="foto5" />
+                <ScalarProperty Name="foto6" ColumnName="foto6" />
+                <ScalarProperty Name="foto7" ColumnName="foto7" />
+                <ScalarProperty Name="foto8" ColumnName="foto8" />
+                <ScalarProperty Name="vendido" ColumnName="vendido" />
+                <ScalarProperty Name="falso" ColumnName="falso" />
+                <ScalarProperty Name="reemplazo" ColumnName="reemplazo" />
+                <ScalarProperty Name="financiamiento" ColumnName="financiamiento" />
+                <ScalarProperty Name="seguro" ColumnName="seguro" />
+                <ScalarProperty Name="transferencia" ColumnName="transferencia" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="nomauto" ColumnName="nomauto" />
+                <ScalarProperty Name="fonauto" ColumnName="fonauto" />
+                <ScalarProperty Name="cod_auto_ant" ColumnName="cod_auto_ant" />
+                <ScalarProperty Name="cod_modelo" ColumnName="cod_modelo" />
+                <ScalarProperty Name="cod_version" ColumnName="cod_version" />
+                <ScalarProperty Name="publishedDate" ColumnName="publishedDate" />
+                <ScalarProperty Name="fechaRepublicado" ColumnName="fechaRepublicado" />
+                <ScalarProperty Name="consignacion" ColumnName="consignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tabclientes">
+            <EntityTypeMapping TypeName="baseprod2Model.tabclientes">
+              <MappingFragment StoreEntitySet="tabclientes">
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="nombre_legal" ColumnName="nombre_legal" />
+                <ScalarProperty Name="nombre_fantasia" ColumnName="nombre_fantasia" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="comuna" ColumnName="comuna" />
+                <ScalarProperty Name="cod_ciudad" ColumnName="cod_ciudad" />
+                <ScalarProperty Name="FONOS" ColumnName="FONOS" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="email_nuestro" ColumnName="email_nuestro" />
+                <ScalarProperty Name="email_propio" ColumnName="email_propio" />
+                <ScalarProperty Name="CONTACTO" ColumnName="CONTACTO" />
+                <ScalarProperty Name="representante_legal" ColumnName="representante_legal" />
+                <ScalarProperty Name="rut" ColumnName="rut" />
+                <ScalarProperty Name="giro" ColumnName="giro" />
+                <ScalarProperty Name="rentacar" ColumnName="rentacar" />
+                <ScalarProperty Name="carpeta" ColumnName="carpeta" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="foto_grande" ColumnName="foto_grande" />
+                <ScalarProperty Name="foto_chica" ColumnName="foto_chica" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="facilidades" ColumnName="facilidades" />
+                <ScalarProperty Name="fecha_ultima_act" ColumnName="fecha_ultima_act" />
+                <ScalarProperty Name="otros" ColumnName="otros" />
+                <ScalarProperty Name="nomcli" ColumnName="nomcli" />
+                <ScalarProperty Name="passcli" ColumnName="passcli" />
+                <ScalarProperty Name="sucursal" ColumnName="sucursal" />
+                <ScalarProperty Name="visible" ColumnName="visible" />
+                <ScalarProperty Name="contclie" ColumnName="contclie" />
+                <ScalarProperty Name="publishedDate" ColumnName="publishedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_fotosNuevoServer">
+            <EntityTypeMapping TypeName="baseprod2Model.tbl_fotosNuevoServer">
+              <MappingFragment StoreEntitySet="tbl_fotosNuevoServer">
+                <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+                <ScalarProperty Name="cod_auto" ColumnName="cod_auto" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tabCategoria_Tipo">
+            <EntityTypeMapping TypeName="baseprod2Model.tabCategoria_Tipo">
+              <MappingFragment StoreEntitySet="tabCategoria-Tipo">
+                <ScalarProperty Name="idTipoVeh" ColumnName="idTipoVeh" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tabmarcas">
+            <EntityTypeMapping TypeName="baseprod2Model.tabmarcas">
+              <MappingFragment StoreEntitySet="tabmarcas">
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="DES_MARCA" ColumnName="DES_MARCA" />
+                <ScalarProperty Name="COD_MARCA" ColumnName="COD_MARCA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
