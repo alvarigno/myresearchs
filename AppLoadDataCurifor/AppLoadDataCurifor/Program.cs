@@ -62,6 +62,7 @@ namespace AppLoadDataCurifor
                              {
 
                                  tbl.COD_AUTO,
+                                 tbl.nuevo,
                                  tbl.COD_MARCA,
                                  tbl.MODELO,
                                  tbl.Version,
@@ -93,6 +94,7 @@ namespace AppLoadDataCurifor
                              }).ToList().Select(
                                 x => new XElement("item",
                                 new XElement("code", x.COD_AUTO),
+                                new XElement("new", new XAttribute("Descripcion","N(no),S(si)"), x.nuevo),
                                 new XElement("title",
 
                                     (from mar in BD.tabmarcas where mar.COD_MARCA == x.COD_MARCA select new { mar.DES_MARCA }).ToList().Select(m => x.ANO + " " + (m.DES_MARCA).Trim() + " " + x.MODELO + " " + x.Version)
