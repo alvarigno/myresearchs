@@ -330,6 +330,13 @@ namespace PublicacionDM
 
             }
 
+            if (verificaCategoriaVehiculo == 8)
+            {
+
+                data = ProcesaDatosNavigation(props, datosvehiculo, useriddm);
+
+            }
+
             if (verificaCategoriaVehiculo == 11)
             {
 
