@@ -269,7 +269,7 @@ namespace ProcesaDocumento
                         UpLoadImageCA UpLoadImg = new UpLoadImageCA();
                         datalocal.url = UpLoadImg.Uploadimage(datalocal.url);
 
-                        listimagenes.Add(datalocal.url);
+                        listimagenes.Add(datalocal.url.ToString());
                     
 
                     }

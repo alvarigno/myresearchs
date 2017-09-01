@@ -41,8 +41,8 @@ namespace SubidaImagenesServer
 
                     using (var client = new HttpClient())
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages-stg@chileautos.cl");
-                        client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "UdDX6eTJejSYBvTm7CMl");
+                        client.DefaultRequestHeaders.TryAddWithoutValidation("Username", "liveimages@chileautos.cl");
+                        client.DefaultRequestHeaders.TryAddWithoutValidation("Password", "13Hq0hMLVYweN4bNJVVf");
 
                         Uri uri = new Uri(img);
                         string filename = System.IO.Path.GetFileName(uri.LocalPath);

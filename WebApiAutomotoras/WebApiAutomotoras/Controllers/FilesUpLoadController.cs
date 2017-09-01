@@ -212,7 +212,6 @@ namespace WebApiAutomotoras.Controllers
 
         }
 
-
         /// <summary>
         /// Modifica el nombre del archivo obtenido del directorio temp de windows.
         /// </summary>
