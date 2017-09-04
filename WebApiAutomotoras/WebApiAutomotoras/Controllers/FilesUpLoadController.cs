@@ -212,13 +212,7 @@ namespace WebApiAutomotoras.Controllers
 
         }
 
-        /// <summary>
-        /// Modifica el nombre del archivo obtenido del directorio temp de windows.
-        /// </summary>
-        /// <param name="direarchivo"></param>
-        /// <param name="nombrearchivo"></param>
-        /// <param name="sitio"></param>
-        public void Renombra(string direarchivo, string nombrearchivo, int sitio)
+        protected void Renombra(string direarchivo, string nombrearchivo, int sitio)
         {
 
             if (File.Exists(uploadFolderPath + direarchivo) && validaextension(uploadFolderPath + direarchivo))
@@ -236,8 +230,7 @@ namespace WebApiAutomotoras.Controllers
 
         }
 
-
-        public bool validaextension(string fileName)
+        protected bool validaextension(string fileName)
         {
             if (fileName.Contains(".xml"))
             {
@@ -249,12 +242,7 @@ namespace WebApiAutomotoras.Controllers
             }
         }
 
-        /// <summary>
-        /// obtiene la ip registrada en base de datos a través del SP_Valida_ip_x_xkey 
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public string VerificaIpAddress(string token) {
+        protected string VerificaIpAddress(string token) {
 
             Object ip = "0";
 
@@ -278,10 +266,6 @@ namespace WebApiAutomotoras.Controllers
             return ip.ToString();
         }
 
-        /// <summary>
-        /// obtiene la ip del cliente que accesa al servicio.
-        /// </summary>
-        /// <returns></returns>
         protected string GetIPAddress()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
