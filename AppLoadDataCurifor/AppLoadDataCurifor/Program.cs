@@ -21,6 +21,7 @@ namespace AppLoadDataCurifor
         public static Dictionary<string, string> DicCategoriasCurifor = new Dictionary<string, string>();
         public static Dictionary<string, string> DicSucursalesCurifor = new Dictionary<string, string>();
         public static Dictionary<string, string> DicColoresCurifor = new Dictionary<string, string>();
+        public static Dictionary<string, string> DicOpcionalesCurifor = new Dictionary<string, string>();
         public static int[] idCurifor = new int[15];
 
 
@@ -79,6 +80,7 @@ namespace AppLoadDataCurifor
                                  tbl.color,
                                  tbl.PESOS,
                                  tbl.otros,
+                                 tbl.unico_dueno,
                                  tbl.aire_acondicionado,
                                  tbl.tipo_direccion,
                                  tbl.radio,
@@ -96,7 +98,7 @@ namespace AppLoadDataCurifor
                              }).ToList().Select(
                                 x => new XElement("item",
                                 new XElement("code", x.COD_AUTO),
-                                new XElement("new", new XAttribute("Descripcion","nuevo/usado"), DicNuevousado[x.nuevo]),
+                                new XElement("new", new XAttribute("Descripcion", "nuevo/usado"), DicNuevousado[x.nuevo]),
                                 new XElement("title",
 
                                     (from mar in BD.tabmarcas where mar.COD_MARCA == x.COD_MARCA select new { mar.DES_MARCA }).ToList().Select(m => x.ANO + " " + (m.DES_MARCA).Trim() + " " + x.MODELO + " " + x.Version)
@@ -122,19 +124,21 @@ namespace AppLoadDataCurifor
                                 new XElement("description", x.otros),
                                 new XElement("optionals",
 
-                                    new XElement("aire_acondicionado", DicComodin[x.aire_acondicionado ?? string.Empty]),
-                                    new XElement("tipo_direccion", x.tipo_direccion ?? string.Empty),
-                                    new XElement("radio", DicComodin[x.radio ?? string.Empty]),
-                                    new XElement("alzavidrios_electricos", DicComodin[x.alzavidrios_electricos ?? string.Empty]),
-                                    new XElement("espejos_electricos", DicComodin[x.espejos_electricos ?? string.Empty]),
-                                    new XElement("frenos_ABS", DicComodin[x.frenos_ABS ?? string.Empty]),
-                                    new XElement("airbag", DicComodin[x.airbag ?? string.Empty]),
-                                    new XElement("cierre_centralizado", DicComodin[x.cierre_centralizado ?? string.Empty]),
-                                    new XElement("catalitico", DicComodin[x.catalitico ?? string.Empty]),
-                                    new XElement("fwd", DicComodin[x.fwd ?? string.Empty]),
-                                    new XElement("Llantas", DicComodin[x.Llantas ?? string.Empty]),
-                                    new XElement("Alarma", DicComodin[x.Alarma ?? string.Empty]),
-                                    new XElement("Techo", DicTecho[x.Techo ?? string.Empty])
+
+                                    new XElement(GetOpcion("aire_acondicionado", DicComodin[x.aire_acondicionado ?? string.Empty])),
+                                    new XElement(GetOpcion("unico_dueño", DicComodin[x.unico_dueno ?? string.Empty])),
+                                    new XElement(GetOpcion("tipo_direccion", x.tipo_direccion ?? string.Empty)),
+                                    new XElement(GetOpcion("radio", DicComodin[x.radio ?? string.Empty])),
+                                    new XElement(GetOpcion("alzavidrios_electricos", DicComodin[x.alzavidrios_electricos ?? string.Empty])),
+                                    new XElement(GetOpcion("espejos_electricos", DicComodin[x.espejos_electricos ?? string.Empty])),
+                                    new XElement(GetOpcion("frenos_ABS", DicComodin[x.frenos_ABS ?? string.Empty])),
+                                    new XElement(GetOpcion("airbag", DicComodin[x.airbag ?? string.Empty])),
+                                    new XElement(GetOpcion("cierre_centralizado", DicComodin[x.cierre_centralizado ?? string.Empty])),
+                                    new XElement(GetOpcion("catalitico", DicComodin[x.catalitico ?? string.Empty])),
+                                    new XElement(GetOpcion("fwd", DicComodin[x.fwd ?? string.Empty])),
+                                    new XElement(GetOpcion("Llantas", DicComodin[x.Llantas ?? string.Empty])),
+                                    new XElement(GetOpcion("Alarma", DicComodin[x.Alarma ?? string.Empty])),
+                                    new XElement(GetOpcion("Techo", DicTecho[x.Techo ?? string.Empty]))
 
                                 ),
                                 new XElement("images", (
@@ -331,6 +335,21 @@ namespace AppLoadDataCurifor
             DicColoresCurifor.Add("","24");
 
 
+            //Diccionario de Opcionales
+            DicOpcionalesCurifor.Add("aire_acondicionado","2");
+            DicOpcionalesCurifor.Add("tipo_direccion","3");
+            DicOpcionalesCurifor.Add("radio","37");
+            DicOpcionalesCurifor.Add("alzavidrios_electricos","29");
+            DicOpcionalesCurifor.Add("espejos_electricos","6");
+            DicOpcionalesCurifor.Add("frenos_ABS","8");
+            DicOpcionalesCurifor.Add("airbag","28");
+            DicOpcionalesCurifor.Add("cierre_centralizado","");
+            DicOpcionalesCurifor.Add("catalitico","");
+            DicOpcionalesCurifor.Add("fwd","16");
+            DicOpcionalesCurifor.Add("Llantas","15");
+            DicOpcionalesCurifor.Add("Alarma","7");
+            DicOpcionalesCurifor.Add("Techo","20");
+
 
 
         }
@@ -346,7 +365,9 @@ namespace AppLoadDataCurifor
             DicCategoriasCurifor.Clear();
             DicSucursalesCurifor.Clear();
             DicColoresCurifor.Clear();
-            
+            DicOpcionalesCurifor.Clear();
+
+
         }
 
         public static string CompruebaColores(string dato, Dictionary<string,string> Dicc) {
@@ -368,6 +389,146 @@ namespace AppLoadDataCurifor
 
 
             return valor;
+        }
+
+
+        public static XElement GetOpcion(string etiqueta, string valor) {
+            
+           XElement data = null;
+            data = new XElement("optional", "0");
+
+            if (etiqueta == "unico_dueño" && valor == "S") {
+
+                data = new XElement("optional", "1003");
+            }
+
+            if (etiqueta == "aire_acondicionado" && valor == "S")
+            {
+
+                data = new XElement("optional", "2");
+
+            }
+
+            if (etiqueta == "radio" && valor == "S")
+            {
+
+                data = new XElement("optional", "37");
+
+            }
+
+            if (etiqueta == "alzavidrios_electricos" && valor == "S")
+            {
+
+                data = new XElement("optional", "29");
+
+            }
+
+            if (etiqueta == "espejos_electricos" && valor == "S")
+            {
+
+                data = new XElement("optional", "6");
+
+            }
+
+            if (etiqueta == "frenos_ABS" && valor == "S")
+            {
+
+                data = new XElement("optional", "8");
+
+            }
+
+            if (etiqueta == "airbag" && valor == "S")
+            {
+
+                data = new XElement("optional", "28");
+
+            }
+
+            if (etiqueta == "cierre_centralizado" && valor == "S")
+            {
+
+                data = new XElement("optional", "0");
+
+            }
+
+            if (etiqueta == "catalitico" && valor == "S")
+            {
+
+                data = new XElement("optional", "0");
+
+            }
+
+            if (etiqueta == "fwd" && valor == "S")
+            {
+
+                data = new XElement("optional", "16");
+
+            }
+
+            if (etiqueta == "Llantas" && valor == "S")
+            {
+
+                data = new XElement("optional", "15");
+
+            }
+
+            if (etiqueta == "Alarma" && valor == "S")
+            {
+
+                data = new XElement("optional", "7");
+
+            }
+
+            if (etiqueta == "Techo" && valor != "")
+            {
+                data = new XElement("optional", "20");
+
+                if (valor == "Ninguno") {
+
+                    data = new XElement("optional", "0");
+
+                }
+
+                if(valor == "ST")
+                {
+
+                    data = new XElement("optional", "0");
+
+                }
+
+
+            }
+
+
+
+            return data;
+        }
+
+
+        public static XElement GetOptional(XObject x) {
+
+
+                XElement data = new XElement("optional",x);
+
+
+                    //data = data + new XElement("aire_acondicionado", DicComodin[x.aire_acondicionado ?? string.Empty]);
+                    //data = data + new XElement("tipo_direccion", x.tipo_direccion ?? string.Empty);
+                    //data = data + new XElement("radio", DicComodin[x.radio ?? string.Empty]);
+                    //data = data + new XElement("alzavidrios_electricos", DicComodin[x.alzavidrios_electricos ?? string.Empty]);
+                    //data = data + new XElement("espejos_electricos", DicComodin[x.espejos_electricos ?? string.Empty]);
+                    //data = data + new XElement("frenos_ABS", DicComodin[x.frenos_ABS ?? string.Empty]);
+                    //data = data + new XElement("airbag", DicComodin[x.airbag ?? string.Empty]);
+                    //data = data + new XElement("cierre_centralizado", DicComodin[x.cierre_centralizado ?? string.Empty]);
+                    //data = data + new XElement("catalitico", DicComodin[x.catalitico ?? string.Empty]);
+                    //data = data + new XElement("fwd", DicComodin[x.fwd ?? string.Empty]);
+                    //data = data + new XElement("Llantas", DicComodin[x.Llantas ?? string.Empty]);
+                    //data = data + new XElement("Alarma", DicComodin[x.Alarma ?? string.Empty]);
+                    //data = data + new XElement("Techo", DicTecho[x.Techo ?? string.Empty]);
+
+
+            return data;
+
+
         }
 
 
