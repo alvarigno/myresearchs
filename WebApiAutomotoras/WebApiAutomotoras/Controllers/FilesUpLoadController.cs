@@ -32,6 +32,10 @@ namespace WebApiAutomotoras.Controllers
         [HttpPost]
         [Route("")]
         [CustomCheckLogin]
+        /// <summary>
+        /// Get text by ID
+        /// </summary>
+        /// <param name="id">ID used to get the result text.</param>
         public async Task<HttpResponseMessage> Upload()
         {
 
