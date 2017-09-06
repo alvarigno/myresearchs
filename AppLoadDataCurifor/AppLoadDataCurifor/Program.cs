@@ -60,7 +60,7 @@ namespace AppLoadDataCurifor
                     XElement Registros = new XElement("stock",
 
                             (from tbl in BD.tabautos
-                             where tbl.COD_CLIENTE == valor
+                             where ((tbl.COD_CLIENTE == valor) && (tbl.nuevo == "N"))
                              select new
                              {
 
@@ -98,7 +98,7 @@ namespace AppLoadDataCurifor
                              }).ToList().Select(
                                 x => new XElement("item",
                                 new XElement("code", x.COD_AUTO),
-                                new XElement("new", new XAttribute("Descripcion", "nuevo/usado"), DicNuevousado[x.nuevo]),
+                                //new XElement("new", new XAttribute("Descripcion", "nuevo/usado"), DicNuevousado[x.nuevo]),
                                 new XElement("title",
 
                                     (from mar in BD.tabmarcas where mar.COD_MARCA == x.COD_MARCA select new { mar.DES_MARCA }).ToList().Select(m => x.ANO + " " + (m.DES_MARCA).Trim() + " " + x.MODELO + " " + x.Version)
@@ -123,8 +123,7 @@ namespace AppLoadDataCurifor
                                 new XElement("value", x.PESOS),
                                 new XElement("description", x.otros),
                                 new XElement("optionals",
-
-
+                                
                                     new XElement(GetOpcion("aire_acondicionado", DicComodin[x.aire_acondicionado ?? string.Empty])),
                                     new XElement(GetOpcion("unico_dueño", DicComodin[x.unico_dueno ?? string.Empty])),
                                     new XElement(GetOpcion("tipo_direccion", x.tipo_direccion ?? string.Empty)),
@@ -143,7 +142,7 @@ namespace AppLoadDataCurifor
                                 ),
                                 new XElement("images", (
 
-                                    from img in BD.tbl_fotosNuevoServer where img.cod_auto == x.COD_AUTO select new { img.foto, img.orden }).ToList().Select(j => new XElement("image", new XAttribute("orden", j.orden), j.foto)
+                                    from img in BD.tbl_fotosNuevoServer where img.cod_auto == x.COD_AUTO select new { img.foto, img.orden }).ToList().Select(j => new XElement("image", j.foto)
 
                                     )
                                 )
