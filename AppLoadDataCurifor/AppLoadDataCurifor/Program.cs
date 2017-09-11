@@ -115,7 +115,7 @@ namespace AppLoadDataCurifor
                                     )
                                     ),
                                 new XElement("segment", DicCarroceria[x.Carroceria ?? string.Empty]),
-                                new XElement("fuel", x.combustible),
+                                new XElement("fuel", DicCombustibles[x.combustible.ToString() ?? string.Empty]),
                                 new XElement("transmission", DicTipoCambio[x.tipo_cambio ?? string.Empty]),
                                 new XElement("doors", x.Puertas),
                                 new XElement("mileage", x.km),
@@ -245,7 +245,7 @@ namespace AppLoadDataCurifor
             DicCombustibles.Add("1", "2");//Bencina
             DicCombustibles.Add("2", "6");//Diesel (petróleo)
             DicCombustibles.Add("5", "8");//Eléctrico
-            DicCombustibles.Add("3","Gas");
+            DicCombustibles.Add("3","7");//gas
             DicCombustibles.Add("4", "8");//Híbrido
             DicCombustibles.Add("10","Otros");
 
