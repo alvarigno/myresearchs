@@ -83,6 +83,7 @@
     <Compile Include="CA_ImgUploadServer.cs" />
     <Compile Include="DM_ImgUploadServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Drawing\img.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

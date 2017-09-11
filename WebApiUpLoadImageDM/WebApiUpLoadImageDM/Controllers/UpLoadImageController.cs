@@ -13,6 +13,8 @@ using UpLoadFile;
 using PublicacionDM;
 using System.Net.Http.Headers;
 using System.Web.Http.Cors;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace WebApiUpLoadImageDM.Controllers
 {
@@ -26,6 +28,7 @@ namespace WebApiUpLoadImageDM.Controllers
         Task taskDocumento;
         string img1;
         string img2;
+        public const int OrientationId = 0x0112;
 
 
         [HttpPost]
@@ -46,15 +49,57 @@ namespace WebApiUpLoadImageDM.Controllers
                     var filePath = uploadFolderPath+postedFile.FileName;
                     postedFile.SaveAs(filePath);
 
+                    //////////////////////////////////////////////////////////////
+                    // Cambia la orientación de las imágenes //
+
+                    FileStream stream = File.OpenRead(filePath);
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    //Begins the process of writing the byte array back to a file
+
+
+                    using (Stream file2 = File.OpenWrite(filePath))
+                    {
+                        file2.Write(fileBytes, 0, fileBytes.Length);
+                    }
+
+                    filePath = CambiaOrientacion(filePath);
+
+                    ///////////////////////////////////////////////////////////
+
+
                     string dataDM = ImagesDm.Uploadimage(filePath);
-                    img1 = "http://images.demotores.cl/post/tmp/siteposting/" + dataDM;
+                    if (!String.IsNullOrEmpty(dataDM))
+                    {
+                        img1 = "http://images.demotores.cl/post/tmp/siteposting/" + dataDM;
+                    }
+                    else {
+
+                        img1 = null;
+
+                    }
                     img2 = ImagesCa.Uploadimage(filePath);
 
                     docfiles.Add(img1);
                     docfiles.Add(img2);
                     taskDocumento = Task.Factory.StartNew(() => eliminaDoc(filePath));
                 }
-                result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
+
+                if (docfiles[0] != null && docfiles[1] != null)
+                {
+
+                    result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
+
+                }
+                else {
+
+                    result = Request.CreateResponse(HttpStatusCode.BadRequest, "imágenes no cargadas");
+
+                }
+
+                
             }
             else
             {
@@ -175,6 +220,98 @@ namespace WebApiUpLoadImageDM.Controllers
 
             }
 
+        }
+
+
+        private static string CambiaOrientacion(string urlfile) {
+
+            Image img1 = Image.FromFile(urlfile);
+            Image img = OrientImage(img1);
+
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            ms.ToArray();
+            File.WriteAllBytes(urlfile, (Byte[])ms.ToArray()); // Requires System.IO
+            return urlfile;
+
+        }
+
+        public enum ExifOrientations
+        {
+            Unknown = 0,
+            TopLeft = 1,
+            TopRight = 2,
+            BottomRight = 3,
+            BottomLeft = 4,
+            LeftTop = 5,
+            RightTop = 6,
+            RightBottom = 7,
+            LeftBottom = 8,
+        }
+
+
+        public static ExifOrientations ImageOrientation(Image img)
+        {
+
+            int orientation_index = Array.IndexOf(img.PropertyIdList, OrientationId);
+
+
+            if (orientation_index < 0) return ExifOrientations.Unknown;
+
+            return (ExifOrientations)img.GetPropertyItem(OrientationId).Value[0];
+        }
+
+
+        public static Image OrientImage(Image img)
+        {
+
+            ExifOrientations orientation = ImageOrientation(img);
+
+            switch (orientation)
+            {
+                case ExifOrientations.Unknown:
+                case ExifOrientations.TopLeft:
+                    break;
+                case ExifOrientations.TopRight:
+                    img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    break;
+                case ExifOrientations.BottomRight:
+                    img.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                    break;
+                case ExifOrientations.BottomLeft:
+                    img.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                    break;
+                case ExifOrientations.LeftTop:
+                    img.RotateFlip(RotateFlipType.Rotate90FlipX);
+                    break;
+                case ExifOrientations.RightTop:
+                    img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    break;
+                case ExifOrientations.RightBottom:
+                    img.RotateFlip(RotateFlipType.Rotate90FlipY);
+                    break;
+                case ExifOrientations.LeftBottom:
+                    img.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    break;
+            }
+
+
+            SetImageOrientation(img, ExifOrientations.TopLeft);
+            return img;
+        }
+
+
+        public static void SetImageOrientation(Image img, ExifOrientations orientation)
+        {
+            const int OrientationId = 0x0112;
+
+            int orientation_index = Array.IndexOf(img.PropertyIdList, OrientationId);
+
+            if (orientation_index < 0) return;
+
+            PropertyItem item = img.GetPropertyItem(OrientationId);
+            item.Value[0] = (byte)orientation;
+            img.SetPropertyItem(item);
         }
 
     }
