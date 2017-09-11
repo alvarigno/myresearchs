@@ -50,6 +50,7 @@ namespace PublicacionDM
             //Diccionario Transmisión
             DicTransmision.Add("S", "Automática");
             DicTransmision.Add("N", "Manual");
+            DicTransmision.Add("", "Manual");
 
             //Diccionario Dirección
             DicDireccion.Add("H", "Asistida");
@@ -128,7 +129,7 @@ namespace PublicacionDM
         ///´Proceso que toma los datos y los pasa a la api DeMotores para su publicación. de acuerdo al idusuario designado.
         /// </summary>
         /// <returns></returns>
-        public string InsertarPublicacion( string codauto) {
+        public string InsertarPublicacion(string codauto) {
 
             string result ="";
             string data = "";
@@ -144,47 +145,61 @@ namespace PublicacionDM
                 if (datosvehiculo != null)
                 {
 
-                    coddemotores = ConsultaCodigoDeMotores(datosvehiculo);
-                    if (String.IsNullOrEmpty(coddemotores[0]) && String.IsNullOrEmpty(coddemotores[1]))
+                   string idCategoria =  (string)datosvehiculo.GetType().GetProperty("Categoria").GetValue(datosvehiculo, null);
+
+                    if (!String.IsNullOrEmpty(idCategoria))
                     {
 
-                        data = ArmaDatosParaPublicar(datosvehiculo);
-                        string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
-                        result = "Aviso número: " + codauto + ", en DeMotores.cl con código: "+ codigodemotores[0]+", su estado es: "+ codigodemotores[1];
-
-                    }
-                    else if(!String.IsNullOrEmpty(coddemotores[0]) && !String.IsNullOrEmpty(coddemotores[1]))
-                    {
-
-                        data = ArmaDatosParaPublicar(datosvehiculo);
-                        if (coddemotores[1] == "0" || coddemotores[1] == "3")
+                        coddemotores = ConsultaCodigoDeMotores(datosvehiculo);
+                        if (String.IsNullOrEmpty(coddemotores[0]) && String.IsNullOrEmpty(coddemotores[1]))
                         {
 
-                            string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
-                            result = codigodemotores[0] + " "+ codigodemotores[1];
-
-                        }
-                        else {
-
+                            data = ArmaDatosParaPublicar(datosvehiculo);
                             string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
                             result = "Aviso número: " + codauto + ", en DeMotores.cl con código: " + codigodemotores[0] + ", su estado es: " + codigodemotores[1];
 
                         }
-
-                    }
-                    else if (String.IsNullOrEmpty(coddemotores[0]) && !String.IsNullOrEmpty(coddemotores[1]))
-                    {
-
-                        if (coddemotores[1] == "0")
+                        else if (!String.IsNullOrEmpty(coddemotores[0]) && !String.IsNullOrEmpty(coddemotores[1]))
                         {
 
-                            result = "Aviso número: " + codauto + ", posee un error: " + coddemotores[1];
+                            data = ArmaDatosParaPublicar(datosvehiculo);
+                            if (coddemotores[1] == "0" || coddemotores[1] == "3")
+                            {
 
-                        } else if (String.IsNullOrEmpty(coddemotores[0])) {
+                                string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
+                                result = codigodemotores[0] + " " + codigodemotores[1];
 
-                            result = "Aviso número: " + codauto + ", no posee un código en DeMotores.cl";
+                            }
+                            else
+                            {
+
+                                string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
+                                result = "Aviso número: " + codauto + ", en DeMotores.cl con código: " + codigodemotores[0] + ", su estado es: " + codigodemotores[1];
+
+                            }
 
                         }
+                        else if (String.IsNullOrEmpty(coddemotores[0]) && !String.IsNullOrEmpty(coddemotores[1]))
+                        {
+
+                            if (coddemotores[1] == "0")
+                            {
+
+                                result = "Aviso número: " + codauto + ", posee un error: " + coddemotores[1];
+
+                            }
+                            else if (String.IsNullOrEmpty(coddemotores[0]))
+                            {
+
+                                result = "Aviso número: " + codauto + ", no posee un código en DeMotores.cl";
+
+                            }
+
+                        }
+                    }
+                    else {
+
+                        result = "No Existen datos para el registro: " + codauto+", revise si el código de publicación está eliminado.";
 
                     }
 
@@ -192,7 +207,7 @@ namespace PublicacionDM
                 else
                 {
 
-                    result = "no Existen datos para el registro: " + codauto;
+                    result = "No Existen datos para el registro: " + codauto;
 
                 }
 
@@ -294,13 +309,15 @@ namespace PublicacionDM
         public static string ArmaDatosParaPublicar(object datosvehiculo) {
 
             string data = "";
-            string useriddm = "11053485";
+
+            string useriddm = "";
 
             Type myType = datosvehiculo.GetType();
 
             IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
 
             int verificaCategoriaVehiculo = 0;
+            string codcliente = "";
 
             if (!String.IsNullOrEmpty(datosvehiculo.GetType().GetProperty("idCategoria").GetValue(datosvehiculo, null).ToString()))
             {
@@ -308,7 +325,17 @@ namespace PublicacionDM
                 verificaCategoriaVehiculo = int.Parse(datosvehiculo.GetType().GetProperty("idCategoria").GetValue(datosvehiculo, null).ToString());
 
             }
+
+            if (!String.IsNullOrEmpty(datosvehiculo.GetType().GetProperty("COD_CLIENTE").GetValue(datosvehiculo, null).ToString()))
+            {
+
+                codcliente = datosvehiculo.GetType().GetProperty("COD_CLIENTE").GetValue(datosvehiculo, null).ToString();
+
+            }
+
+            useriddm = ObtieneUidDM(codcliente);
             
+
             if (verificaCategoriaVehiculo == 1)
             {
 
@@ -352,17 +379,19 @@ namespace PublicacionDM
             string datosparademotores = "";
             string subtitulo = "";
 
-
+           
             foreach (PropertyInfo prop in props)
             {
+                CleanAllDiccionary();
+                CargaDiccionarios();
                 object propName = prop.Name;
                 object propValue = prop.GetValue(datosvehiculo, null);
 
                 if (propName.ToString() == "idCategoria")
                 {
-                    CargaDiccionarios();
+                    
                     datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
+                   
                 }
 
                 if (propName.ToString() == "Tipoveh")
@@ -413,44 +442,48 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "combustible")
                 {
-                    CargaDiccionarios();
+                   
                     datosparademotores = datosparademotores + "fuel=" + ConsultaCombustible(DicCombustibles, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
+                    
                 }
 
                 if (propName.ToString() == "tipo_cambio")
                 {
-                    CargaDiccionarios();
-                    datosparademotores = datosparademotores + "transmission=" + DicTransmision[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "transmission=" + DicTransmision[propValue.ToString()] + "&";
+                    }
+                    else { 
+                        datosparademotores = datosparademotores + "transmission=Manual&";
+                    }
                 }
 
                 if (propName.ToString() == "tipo_direccion")
                 {
-                    CargaDiccionarios();
+                    
                     datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
+                    
                 }
 
                 if (propName.ToString() == "Puertas")
                 {
-                    CargaDiccionarios();
+                   
                     datosparademotores = datosparademotores + "doors=" + DicNumPuertas[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
+                    
                 }
 
                 if (propName.ToString() == "Carroceria")
                 {
-                    CargaDiccionarios();
+                    
                     datosparademotores = datosparademotores + "segment=" + DicCarrocerias[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
+                    
                 }
 
                 if (propName.ToString() == "color")
                 {
-                    CargaDiccionarios();
+                    
                     datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
+                    
                 }
 
                 if (propName.ToString() == "km")
@@ -545,9 +578,9 @@ namespace PublicacionDM
                     }
 
                 }
-
+               
             }
-
+            
             datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
 
             return datosparademotores;
@@ -562,14 +595,14 @@ namespace PublicacionDM
 
             foreach (PropertyInfo prop in props)
             {
+                CleanAllDiccionary();
+                CargaDiccionarios();
                 object propName = prop.Name;
                 object propValue = prop.GetValue(datosvehiculo, null);
 
                 if (propName.ToString() == "idCategoria")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "marca")
@@ -595,16 +628,12 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "Carroceria")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "segment=" + DicCarroceriasMotos[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "color")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "km")
@@ -705,14 +734,14 @@ namespace PublicacionDM
             
             foreach (PropertyInfo prop in props)
             {
+                CleanAllDiccionary();
+                CargaDiccionarios();
                 object propName = prop.Name;
                 object propValue = prop.GetValue(datosvehiculo, null);
 
                 if (propName.ToString() == "idCategoria")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "marca")
@@ -745,30 +774,30 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "combustible")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "fuel=" + ConsultaCombustible(DicCombustibles, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "tipo_cambio")
                 {
-                    CargaDiccionarios();
-                    datosparademotores = datosparademotores + "transmission=" + DicTransmision[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "transmission=" + DicTransmision[propValue.ToString()] + "&";
+                    }
+                    else
+                    {
+                        datosparademotores = datosparademotores + "transmission=Manual&";
+                    }
+                    
                 }
 
                 if (propName.ToString() == "tipo_direccion")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "color")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "km")
@@ -882,14 +911,14 @@ namespace PublicacionDM
 
             foreach (PropertyInfo prop in props)
             {
+                CleanAllDiccionary();
+                CargaDiccionarios();
                 object propName = prop.Name;
                 object propValue = prop.GetValue(datosvehiculo, null);
 
                 if (propName.ToString() == "idCategoria")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "marca")
@@ -922,23 +951,17 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "tipo_direccion")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "combustible")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "fuel=" + ConsultaCombustible(DicCombustibles, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "color")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "km")
@@ -1039,14 +1062,14 @@ namespace PublicacionDM
             
             foreach (PropertyInfo prop in props)
             {
+                CleanAllDiccionary();
+                CargaDiccionarios();
                 object propName = prop.Name;
                 object propValue = prop.GetValue(datosvehiculo, null);
 
                 if (propName.ToString() == "idCategoria")
                 {
-                    CargaDiccionarios();
                     datosparademotores = datosparademotores + "vehicleType=" + ConsultaCategoria(DicCategorias, propValue.ToString()) + "&";
-                    CleanAllDiccionary();
                 }
 
                 if (propName.ToString() == "marca")
@@ -1394,6 +1417,20 @@ namespace PublicacionDM
 
             ProveedorDatos PrDatos = new ProveedorDatos();
             resultado = PrDatos.ActualizaEstados(codauto, coddm, accion, estado);
+
+            data = resultado[0];
+
+            return data;
+        }
+
+        public static string ObtieneUidDM(string codclienteca)
+        {
+
+            string data = "";
+            string[] resultado = new string[2];
+
+            ProveedorDatos PrDatos = new ProveedorDatos();
+            resultado = PrDatos.OtieneCodUsuario(codclienteca);
 
             data = resultado[0];
 

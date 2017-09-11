@@ -52,5 +52,21 @@ namespace AccesoDatos
             return logrado;
         }
 
+        public String[] OtieneCodUsuario(string codcliente)
+        {
+
+            string[] logrado = new string[2];
+            baseprod2Entities baseprod = new baseprod2Entities();
+            ObjectParameter respuestauiddm = new ObjectParameter("CodIduDM", typeof(int));
+            ObjectParameter error = new ObjectParameter("error", typeof(int));
+
+            var datosresultados = baseprod.SPR_Obtiene_CodUsuarioDM_publicar_DM(int.Parse(codcliente), respuestauiddm, error);
+            logrado[0] = respuestauiddm.Value.ToString();
+            logrado[1] = error.Value.ToString();
+
+            return logrado;
+        }
+
+
     }
 }

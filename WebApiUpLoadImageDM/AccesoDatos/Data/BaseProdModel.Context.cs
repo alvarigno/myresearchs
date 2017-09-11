@@ -57,5 +57,14 @@ namespace AccesoDatos.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Actualiza_Estados_publicacion_DM", codautoParameter, coddmParameter, accionParameter, estadoParameter, respuesta, error, codigodemotores);
         }
+    
+        public virtual int SPR_Obtiene_CodUsuarioDM_publicar_DM(Nullable<int> codclienteCA, ObjectParameter codIduDM, ObjectParameter error)
+        {
+            var codclienteCAParameter = codclienteCA.HasValue ?
+                new ObjectParameter("codclienteCA", codclienteCA) :
+                new ObjectParameter("codclienteCA", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Obtiene_CodUsuarioDM_publicar_DM", codclienteCAParameter, codIduDM, error);
+        }
     }
 }

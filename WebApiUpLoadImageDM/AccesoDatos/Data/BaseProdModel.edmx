@@ -14,6 +14,11 @@
           <Parameter Name="error" Type="int" Mode="InOut" />
           <Parameter Name="codigodemotores" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="SPR_Obtiene_CodUsuarioDM_publicar_DM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codclienteCA" Type="int" Mode="In" />
+          <Parameter Name="CodIduDM" Type="int" Mode="InOut" />
+          <Parameter Name="error" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="SPR_Obtiene_datos_vehiculo_publicar_DM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codauto" Type="int" Mode="In" />
           <Parameter Name="respuesta" Type="varchar" Mode="InOut" />
@@ -38,6 +43,11 @@
             <Parameter Name="respuesta" Mode="InOut" Type="String" />
             <Parameter Name="error" Mode="InOut" Type="Int32" />
             <Parameter Name="codigodemotores" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPR_Obtiene_CodUsuarioDM_publicar_DM">
+            <Parameter Name="codclienteCA" Mode="In" Type="Int32" />
+            <Parameter Name="CodIduDM" Mode="InOut" Type="Int32" />
+            <Parameter Name="error" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
@@ -109,6 +119,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPR_Actualiza_Estados_publicacion_DM" FunctionName="baseprod2Model.Store.SPR_Actualiza_Estados_publicacion_DM" />
+          <FunctionImportMapping FunctionImportName="SPR_Obtiene_CodUsuarioDM_publicar_DM" FunctionName="baseprod2Model.Store.SPR_Obtiene_CodUsuarioDM_publicar_DM" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
