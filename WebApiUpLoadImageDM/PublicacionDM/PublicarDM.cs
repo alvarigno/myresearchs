@@ -156,7 +156,7 @@ namespace PublicacionDM
 
                             data = ArmaDatosParaPublicar(datosvehiculo);
                             string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
-                            result = "Aviso número: " + codauto + ", en DeMotores.cl con código: " + codigodemotores[0] + ", su estado es: " + codigodemotores[1];
+                            result = "Aviso número: " + codauto + ", en DeMotores.cl con código: " + codigodemotores[0] + ", su estado es: " + codigodemotores[1]+".";
 
                         }
                         else if (!String.IsNullOrEmpty(coddemotores[0]) && !String.IsNullOrEmpty(coddemotores[1]))
@@ -174,7 +174,7 @@ namespace PublicacionDM
                             {
 
                                 string[] codigodemotores = PublicaenDeMotoresApi(data, codauto, coddemotores[0], coddemotores[1]);
-                                result = "Aviso número: " + codauto + ", en DeMotores.cl con código: " + codigodemotores[0] + ", su estado es: " + codigodemotores[1];
+                                result = "Aviso número: " + codauto + ", en DeMotores.cl con código: " + codigodemotores[0] + ", su estado es: " + codigodemotores[1]+".";
 
                             }
 
@@ -185,13 +185,13 @@ namespace PublicacionDM
                             if (coddemotores[1] == "0")
                             {
 
-                                result = "Aviso número: " + codauto + ", posee un error: " + coddemotores[1];
+                                result = "Aviso número: " + codauto + ", posee en DeMotores un error: " + coddemotores[1];
 
                             }
                             else if (String.IsNullOrEmpty(coddemotores[0]))
                             {
 
-                                result = "Aviso número: " + codauto + ", no posee un código en DeMotores.cl";
+                                result = "Aviso número: " + codauto + ", no posee un código en DeMotores.cl.";
 
                             }
 
@@ -199,7 +199,7 @@ namespace PublicacionDM
                     }
                     else {
 
-                        result = "No Existen datos para el registro: " + codauto+", revise si el código de publicación está eliminado.";
+                        result = "No Existen datos para el registro: " + codauto+", revise el código de publicación, puede que esté eliminado.";
 
                     }
 
@@ -207,7 +207,7 @@ namespace PublicacionDM
                 else
                 {
 
-                    result = "No Existen datos para el registro: " + codauto;
+                    result = "No Existen datos para el registro: " + codauto+" para ser procesado en DeMotores.";
 
                 }
 
@@ -265,7 +265,7 @@ namespace PublicacionDM
                 else
                 {
 
-                    result = "No Existen datos para el registro número: " + codauto;
+                    result = "No Existen datos para el registro número: " + codauto+" para ser procesado en DeMotores.";
 
                 }
 
@@ -1218,14 +1218,14 @@ namespace PublicacionDM
             if (accion == "3")
             {
 
-                respuesta[0] = "Aviso con código: " + codauto + ", posee un estado: ";
-                respuesta[1] = "finalizado";
+                respuesta[0] = "Aviso con código: " + codauto + ", posee en DeMotores un estado: ";
+                respuesta[1] = "finalizado.";
 
             } else if(accion == "0")
             {
 
-                respuesta[0] = "Aviso con código: " + codauto + ", posee un: ";
-                respuesta[1] = "error";
+                respuesta[0] = "Aviso con código: " + codauto + ", posee en DeMotores un: ";
+                respuesta[1] = "error.";
 
             }
             else
