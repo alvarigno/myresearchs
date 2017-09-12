@@ -248,10 +248,18 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="xml\1028_0409201713154525.xml" />
+    <Content Include="xml\1028_0509201713154525.xml" />
+    <Content Include="xml\1093_0509201713154525.xml" />
+    <Content Include="xml\2449_0509201713154525.xml" />
+    <Content Include="xml\actualizacion_1028_0409201713154525.xml" />
     <Content Include="xml\base.xml" />
     <Content Include="xml\base_elimina.xml" />
+    <Content Include="xml\base_elimina_sucursal_1028.xml" />
     <Content Include="xml\base_v24.xml" />
     <Content Include="xml\base_v25.xml" />
+    <Content Include="xml\base_v25_v3.xml" />
+    <Content Include="xml\elimina_1028_0509201713154525.xml" />
     <None Include="Properties\PublishProfiles\PublishDesarrollo.pubxml" />
     <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -276,6 +284,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="xml\doc_v1.2.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
