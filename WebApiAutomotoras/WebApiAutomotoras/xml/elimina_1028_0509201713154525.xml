@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<publicacion>
+    <identificacion name="portillo s.a." fecha-creacion="2017-01-12 01:03:21">
+        <x-key>B451AA1ACC6275A9DED6C799722B50CB</x-key>
+    </identificacion>
+    <listado>
+      <publicaciones>11</publicaciones>
+      <aviso id="23456801" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456802" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456803" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456804" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456805" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456806" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456807" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456808" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456809" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456810" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456811" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456812" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456813" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456814" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456815" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456816" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456817" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456818" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456819" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456820" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456821" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456822" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456823" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456824" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456825" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456826" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456827" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456828" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456829" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456830" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456831" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456832" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456833" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456834" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456835" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456836" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456837" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456838" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456839" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456840" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456841" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456842" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456843" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456844" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456845" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456846" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456847" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456848" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456849" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456850" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456851" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456852" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456853" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456854" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456855" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456856" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456857" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456858" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456859" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456860" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456861" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456862" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456863" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456864" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456865" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456866" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456867" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456868" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456869" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456870" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456871" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456872" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456873" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456874" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456875" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456876" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456877" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456878" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456879" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456880" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456881" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456882" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456883" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456884" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456885" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456886" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456887" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456888" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456889" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456890" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456891" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456892" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456893" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456894" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456895" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456896" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456897" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456898" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456899" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+      <aviso id="23456900" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+          <sucursal id="1028">Ditec Automóviles División Usados - Ciudad Empresarial</sucursal>
+        </vehiculo>
+      </aviso>
+    </listado>
+</publicacion>
