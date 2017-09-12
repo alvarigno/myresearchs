@@ -460,9 +460,10 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "tipo_direccion")
                 {
-                    
-                    datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
-                    
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "steering=" + DicDireccion[propValue.ToString()] + "&";
+                    }
                 }
 
                 if (propName.ToString() == "Puertas")
@@ -474,30 +475,34 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "Carroceria")
                 {
-                    
-                    datosparademotores = datosparademotores + "segment=" + DicCarrocerias[propValue.ToString()] + "&";
-                    
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "segment=" + DicCarrocerias[propValue.ToString()] + "&";
+                    }
                 }
 
                 if (propName.ToString() == "color")
                 {
-                    
-                    datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
-                    
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
+                    }
                 }
 
                 if (propName.ToString() == "km")
                 {
-
-                    datosparademotores = datosparademotores + "mileage=" + propValue.ToString() + "&";
-
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "mileage=" + propValue.ToString() + "&";
+                    }
                 }
 
                 if (propName.ToString() == "PESOS")
                 {
-
-                    datosparademotores = datosparademotores + "price=" + propValue.ToString() + "&";
-
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "price=" + propValue.ToString() + "&";
+                    }
                 }
 
                 if (propName.ToString() == "Pesosdos")
@@ -520,7 +525,7 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "patente")
                 {
-                    if (propValue == null)
+                    if (propValue != null)
                     {
 
                         datosparademotores = datosparademotores + "licensePlate=" + propValue.ToString() + "&";
@@ -531,9 +536,10 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "otros")
                 {
-
-                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
-
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+                    }
                 }
 
                 if (propName.ToString() == "cod_autoCH")
@@ -546,13 +552,16 @@ namespace PublicacionDM
                 if (propName.ToString() == "unico_dueno")
                 {
 
-                    if (propValue.ToString() == "S")
+                    if (propValue != null)
                     {
+                        if (propValue.ToString() == "S")
+                        {
 
-                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+                            datosparademotores = datosparademotores + "uniqueOwner=yes&";
 
+                        }
                     }
-
+                    
                 }
 
                 if (propName.ToString() == "imagenes")
@@ -638,9 +647,7 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "km")
                 {
-
                     datosparademotores = datosparademotores + "mileage=" + propValue.ToString() + "&";
-
                 }
 
                 if (propName.ToString() == "PESOS")
@@ -670,9 +677,10 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "otros")
                 {
-
-                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
-
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+                    }
                 }
 
                 if (propName.ToString() == "cod_autoCH")
@@ -684,12 +692,14 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "unico_dueno")
                 {
-
-                    if (propValue.ToString() == "S")
+                    if (propValue != null)
                     {
+                        if (propValue.ToString() == "S")
+                        {
 
-                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+                            datosparademotores = datosparademotores + "uniqueOwner=yes&";
 
+                        }
                     }
 
                 }
@@ -834,12 +844,14 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "unico_dueno")
                 {
-
-                    if (propValue.ToString() == "S")
+                    if (propValue != null)
                     {
+                        if (propValue.ToString() == "S")
+                        {
 
-                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+                            datosparademotores = datosparademotores + "uniqueOwner=yes&";
 
+                        }
                     }
 
                 }
@@ -858,9 +870,10 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "otros")
                 {
-
-                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
-
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+                    }
                 }
 
                 if (propName.ToString() == "cod_autoCH")
@@ -998,21 +1011,24 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "unico_dueno")
                 {
-
-                    if (propValue.ToString() == "S")
+                    if (propValue != null)
                     {
+                        if (propValue.ToString() == "S")
+                        {
 
-                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+                            datosparademotores = datosparademotores + "uniqueOwner=yes&";
 
+                        }
                     }
 
                 }
 
                 if (propName.ToString() == "otros")
                 {
-
-                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
-
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+                    }
                 }
 
                 if (propName.ToString() == "cod_autoCH")
@@ -1095,11 +1111,14 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "nuevo")
                 {
+                    if (propValue != null)
+                    {
+                        if (propValue.ToString() == "N")
+                        {
 
-                    if (propValue.ToString() == "N") {
+                            datosparademotores = datosparademotores + "used=yes&";
 
-                        datosparademotores = datosparademotores + "used=yes&";
-
+                        }
                     }
 
                 }
@@ -1131,9 +1150,10 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "otros")
                 {
-
-                    datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
-
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "description=" + propValue.ToString() + "&";
+                    }
                 }
 
                 if (propName.ToString() == "cod_autoCH")
@@ -1145,14 +1165,15 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "unico_dueno")
                 {
-
-                    if (propValue.ToString() == "S")
+                    if (propValue != null)
                     {
+                        if (propValue.ToString() == "S")
+                        {
 
-                        datosparademotores = datosparademotores + "uniqueOwner=yes&";
+                            datosparademotores = datosparademotores + "uniqueOwner=yes&";
 
+                        }
                     }
-
                 }
 
                 if (propName.ToString() == "imagenes")
@@ -1384,7 +1405,7 @@ namespace PublicacionDM
 
             for (int i = 0; i < nums.Length; i++) {
 
-                imagenes = imagenes + "image[" + i + "]=" + nums[i]+"&";
+                imagenes = imagenes + "images=" + nums[i]+"&";
 
             }
 
