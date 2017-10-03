@@ -28,6 +28,7 @@ namespace WebApiUpLoadImageDM.Controllers
         Task taskDocumento;
         string img1;
         string img2;
+        int rotate; 
         public const int OrientationId = 0x0112;
 
 
@@ -45,6 +46,7 @@ namespace WebApiUpLoadImageDM.Controllers
                 var docfiles = new List<string>();
                 foreach (string file in httpRequest.Files)
                 {
+                    
                     var postedFile = httpRequest.Files[file];
                     var filePath = uploadFolderPath+postedFile.FileName;
                     postedFile.SaveAs(filePath);
@@ -222,19 +224,34 @@ namespace WebApiUpLoadImageDM.Controllers
 
         }
 
+        public static byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                return ms.ToArray();
+            }
+        }
+        public  static string CambiaOrientacion(string urlfile) {
 
-        private static string CambiaOrientacion(string urlfile) {
-
-            Image img1 = Image.FromFile(urlfile);
-            Image img = OrientImage(img1);
-
-            MemoryStream ms = new MemoryStream();
-            img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            ms.ToArray();
-            File.WriteAllBytes(urlfile, (Byte[])ms.ToArray()); // Requires System.IO
+            
+            Image img = Image.FromFile(urlfile);
+            ExifOrientations orientation = ImageOrientation(img);
+            OrientImage(img);
+            var bytes = ImageToByteArray(img);
+            if (orientation.ToString() != ExifOrientations.TopLeft.ToString()) {
+                if( orientation.ToString() != ExifOrientations.Unknown.ToString()) {
+                    File.WriteAllBytes(urlfile, bytes); // Requires System.IO
+                }
+                
+            }
+            
             return urlfile;
 
         }
+
+
+       
 
         public enum ExifOrientations
         {
@@ -270,6 +287,8 @@ namespace WebApiUpLoadImageDM.Controllers
             switch (orientation)
             {
                 case ExifOrientations.Unknown:
+                    
+                    break;
                 case ExifOrientations.TopLeft:
                     break;
                 case ExifOrientations.TopRight:

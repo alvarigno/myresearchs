@@ -97,18 +97,18 @@ namespace PublicacionDM
 
 
             //Diccionario DicCarrocerias Motos
-            DicCarroceriasMotos.Add("Chopper", "Custom y Choppers");
-            DicCarroceriasMotos.Add("Cuadrimoto", "Cuatriciclos y Triciclos");
-            DicCarroceriasMotos.Add("Custom", "Custom y Choppers");
-            DicCarroceriasMotos.Add("Deportivas", "Deportivas");
-            DicCarroceriasMotos.Add("Enduro - cross", "Cross y Enduro");
-            DicCarroceriasMotos.Add("Moto de nieve", "Motos de Nieve");
-            DicCarroceriasMotos.Add("Racing", "Touring y Trails");
-            DicCarroceriasMotos.Add("Retro", "Custom y Choppers");
-            DicCarroceriasMotos.Add("Scooter", "Scooters y Ciclomotores");
-            DicCarroceriasMotos.Add("Sport calle - urbanas", "");
-            DicCarroceriasMotos.Add("Todo terrenos", "Touring y Trails");
-            DicCarroceriasMotos.Add("Trabajo - calle", "Calle y Naked");
+            DicCarroceriasMotos.Add("CH", "Custom y Choppers");
+            DicCarroceriasMotos.Add("CD", "Cuatriciclos y Triciclos");
+            DicCarroceriasMotos.Add("MU", "Custom y Choppers");
+            DicCarroceriasMotos.Add("MD", "Deportivas");
+            DicCarroceriasMotos.Add("ME", "Cross y Enduro");
+            DicCarroceriasMotos.Add("MN", "Motos de Nieve");
+            DicCarroceriasMotos.Add("RA", "Touring y Trails");
+            DicCarroceriasMotos.Add("MR", "Custom y Choppers");
+            DicCarroceriasMotos.Add("SC", "Scooters y Ciclomotores");
+            DicCarroceriasMotos.Add("MS", "");
+            DicCarroceriasMotos.Add("MO", "Touring y Trails");
+            DicCarroceriasMotos.Add("MT", "Calle y Naked");
 
         }
 
@@ -257,7 +257,7 @@ namespace PublicacionDM
                             estado = ActualizaEstadosPublicacion(codauto, coddemotores[0], "0", "finalizado");
                         }
 
-                        result = resultadook+", Aviso número: " + codauto + ", en DeMotores.cl su estadoes: "+estado;
+                        result = resultadook+", Aviso número: " + codauto + ", en DeMotores.cl su estado es: "+estado;
                         
                     }
 
@@ -909,7 +909,7 @@ namespace PublicacionDM
 
             }
 
-            datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+            datosparademotores = datosparademotores + "segment=Camion" + "&provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
 
             return datosparademotores;
 
