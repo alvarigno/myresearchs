@@ -28,15 +28,6 @@ namespace AccesoDatos.Data
         }
     
     
-        public virtual ObjectResult<SPR_Obtiene_datos_vehiculo_publicar_DM_Result> SPR_Obtiene_datos_vehiculo_publicar_DM(Nullable<int> codauto, ObjectParameter respuesta, ObjectParameter error)
-        {
-            var codautoParameter = codauto.HasValue ?
-                new ObjectParameter("codauto", codauto) :
-                new ObjectParameter("codauto", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPR_Obtiene_datos_vehiculo_publicar_DM_Result>("SPR_Obtiene_datos_vehiculo_publicar_DM", codautoParameter, respuesta, error);
-        }
-    
         public virtual int SPR_Actualiza_Estados_publicacion_DM(Nullable<int> codauto, Nullable<int> coddm, Nullable<int> accion, string estado, ObjectParameter respuesta, ObjectParameter error, ObjectParameter codigodemotores)
         {
             var codautoParameter = codauto.HasValue ?
@@ -65,6 +56,15 @@ namespace AccesoDatos.Data
                 new ObjectParameter("codclienteCA", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPR_Obtiene_CodUsuarioDM_publicar_DM", codclienteCAParameter, codIduDM, error);
+        }
+    
+        public virtual ObjectResult<SPR_Obtiene_datos_vehiculo_publicar_DM_Result> SPR_Obtiene_datos_vehiculo_publicar_DM(Nullable<int> codauto, ObjectParameter respuesta, ObjectParameter error)
+        {
+            var codautoParameter = codauto.HasValue ?
+                new ObjectParameter("codauto", codauto) :
+                new ObjectParameter("codauto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPR_Obtiene_datos_vehiculo_publicar_DM_Result>("SPR_Obtiene_datos_vehiculo_publicar_DM", codautoParameter, respuesta, error);
         }
     }
 }

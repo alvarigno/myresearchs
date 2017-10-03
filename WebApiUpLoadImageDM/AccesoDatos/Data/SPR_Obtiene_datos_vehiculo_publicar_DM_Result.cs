@@ -21,6 +21,7 @@ namespace AccesoDatos.Data
         public Nullable<int> combustible { get; set; }
         public string tipo_cambio { get; set; }
         public string tipo_direccion { get; set; }
+        public Nullable<int> cilindrada { get; set; }
         public string Puertas { get; set; }
         public string Carroceria { get; set; }
         public string color { get; set; }

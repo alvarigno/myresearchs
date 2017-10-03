@@ -657,6 +657,18 @@ namespace PublicacionDM
 
                 }
 
+                if (propName.ToString() == "cilindrada")
+                {
+
+                    if (propValue != null)
+                    {
+
+                        datosparademotores = datosparademotores + "engineSize=" + propValue.ToString() + "&";
+
+                    }
+
+                }
+
                 if (propName.ToString() == "Pesosdos")
                 {
 
@@ -862,7 +874,7 @@ namespace PublicacionDM
                     if (propValue != null)
                     {
 
-                        datosparademotores = datosparademotores + "engine="+ propValue.ToString() + "&";
+                        datosparademotores = datosparademotores + "enginePower="+ propValue.ToString() + "&";
 
                     }
 

@@ -30,11 +30,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="baseprod2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="baseprod2Entities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="SPR_Obtiene_datos_vehiculo_publicar_DM" ReturnType="Collection(baseprod2Model.SPR_Obtiene_datos_vehiculo_publicar_DM_Result)">
-            <Parameter Name="codauto" Mode="In" Type="Int32" />
-            <Parameter Name="respuesta" Mode="InOut" Type="String" />
-            <Parameter Name="error" Mode="InOut" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="SPR_Actualiza_Estados_publicacion_DM">
             <Parameter Name="codauto" Mode="In" Type="Int32" />
             <Parameter Name="coddm" Mode="In" Type="Int32" />
@@ -49,6 +44,11 @@
             <Parameter Name="CodIduDM" Mode="InOut" Type="Int32" />
             <Parameter Name="error" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SPR_Obtiene_datos_vehiculo_publicar_DM" ReturnType="Collection(baseprod2Model.SPR_Obtiene_datos_vehiculo_publicar_DM_Result)">
+            <Parameter Name="codauto" Mode="In" Type="Int32" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+            <Parameter Name="error" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
           <Property Type="String" Name="marca" Nullable="true" MaxLength="30" />
@@ -59,6 +59,7 @@
           <Property Type="Int32" Name="combustible" Nullable="true" />
           <Property Type="String" Name="tipo_cambio" Nullable="true" MaxLength="2" />
           <Property Type="String" Name="tipo_direccion" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="cilindrada" Nullable="true" />
           <Property Type="String" Name="Puertas" Nullable="true" MaxLength="2" />
           <Property Type="String" Name="Carroceria" Nullable="true" MaxLength="2" />
           <Property Type="String" Name="color" Nullable="true" MaxLength="30" />
@@ -85,6 +86,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="baseprod2ModelStoreContainer" CdmEntityContainer="baseprod2Entities" >
+          <FunctionImportMapping FunctionImportName="SPR_Actualiza_Estados_publicacion_DM" FunctionName="baseprod2Model.Store.SPR_Actualiza_Estados_publicacion_DM" />
+          <FunctionImportMapping FunctionImportName="SPR_Obtiene_CodUsuarioDM_publicar_DM" FunctionName="baseprod2Model.Store.SPR_Obtiene_CodUsuarioDM_publicar_DM" />
           <FunctionImportMapping FunctionImportName="SPR_Obtiene_datos_vehiculo_publicar_DM" FunctionName="baseprod2Model.Store.SPR_Obtiene_datos_vehiculo_publicar_DM">
             <ResultMapping>
               <ComplexTypeMapping TypeName="baseprod2Model.SPR_Obtiene_datos_vehiculo_publicar_DM_Result">
@@ -96,6 +99,7 @@
                 <ScalarProperty Name="combustible" ColumnName="combustible" />
                 <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
                 <ScalarProperty Name="tipo_direccion" ColumnName="tipo_direccion" />
+                <ScalarProperty Name="cilindrada" ColumnName="cilindrada" />
                 <ScalarProperty Name="Puertas" ColumnName="Puertas" />
                 <ScalarProperty Name="Carroceria" ColumnName="Carroceria" />
                 <ScalarProperty Name="color" ColumnName="color" />
@@ -118,8 +122,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPR_Actualiza_Estados_publicacion_DM" FunctionName="baseprod2Model.Store.SPR_Actualiza_Estados_publicacion_DM" />
-          <FunctionImportMapping FunctionImportName="SPR_Obtiene_CodUsuarioDM_publicar_DM" FunctionName="baseprod2Model.Store.SPR_Obtiene_CodUsuarioDM_publicar_DM" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
