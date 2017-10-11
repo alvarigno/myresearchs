@@ -921,7 +921,7 @@ namespace PublicacionDM
 
             }
 
-            datosparademotores = datosparademotores + "segment=Camion" + "&provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+            datosparademotores = datosparademotores + "segment=camión" + "&provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
 
             return datosparademotores;
 
