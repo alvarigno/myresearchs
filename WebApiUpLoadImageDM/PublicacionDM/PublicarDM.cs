@@ -29,6 +29,7 @@ namespace PublicacionDM
         public static Dictionary<string, string> DicCarrocerias = new Dictionary<string, string>();
         public static Dictionary<string, string> DicColor = new Dictionary<string, string>();
         public static Dictionary<string, string> DicCarroceriasMotos = new Dictionary<string, string>();
+        public static Dictionary<string, string> DicCarroceriasNauticos = new Dictionary<string, string>();
 
         public static void CargaDiccionarios()
         {
@@ -110,6 +111,24 @@ namespace PublicacionDM
             DicCarroceriasMotos.Add("MO", "Touring y Trails");
             DicCarroceriasMotos.Add("MT", "Calle y Naked");
 
+            //Diccionario DicCarrocerias Náuticos
+            DicCarroceriasNauticos.Add("AF", "Otros");
+            DicCarroceriasNauticos.Add("BO", "Botes");
+            DicCarroceriasNauticos.Add("JS", "Motos de agua");
+            DicCarroceriasNauticos.Add("KY", "Kayak");
+            DicCarroceriasNauticos.Add("LA", "Lanchas");
+            DicCarroceriasNauticos.Add("MG", "Motos de agua");
+            DicCarroceriasNauticos.Add("MM", "Otros");
+            DicCarroceriasNauticos.Add("MS", "Otros");
+            DicCarroceriasNauticos.Add("N","Otros");
+            DicCarroceriasNauticos.Add("TB", "Otros");
+            DicCarroceriasNauticos.Add("TS", "Otros");
+            DicCarroceriasNauticos.Add("VE", "Embarcaciones a vela");
+            DicCarroceriasNauticos.Add("WS", "Otros");
+            DicCarroceriasNauticos.Add("YA", "Otros");
+            DicCarroceriasNauticos.Add("ZO", "Gomones");
+            DicCarroceriasNauticos.Add("", "Otros");
+
         }
 
         public static void CleanAllDiccionary() {
@@ -122,6 +141,7 @@ namespace PublicacionDM
             DicCarrocerias.Clear();
             DicColor.Clear();
             DicCarroceriasMotos.Clear();
+            DicCarroceriasNauticos.Clear();
 
         }
 
@@ -1075,8 +1095,8 @@ namespace PublicacionDM
                 }
 
             }
-
-            datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+            
+            datosparademotores = datosparademotores + "segment=Motor Home&provider =" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
 
             return datosparademotores;
 
@@ -1212,6 +1232,14 @@ namespace PublicacionDM
 
                 }
                 
+                if (propName.ToString() == "Tipoveh")
+                {
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "segment=" + DicCarroceriasNauticos[propValue.ToString()] + "&";
+                    }
+                }
+
             }
 
             datosparademotores = datosparademotores + "provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
