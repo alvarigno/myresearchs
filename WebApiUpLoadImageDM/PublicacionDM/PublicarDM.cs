@@ -662,7 +662,10 @@ namespace PublicacionDM
 
                 if (propName.ToString() == "color")
                 {
-                    datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
+                    if (propValue != null)
+                    {
+                        datosparademotores = datosparademotores + "color=" + ConsultaColor(DicColor, propValue.ToString()) + "&";
+                    }
                 }
 
                 if (propName.ToString() == "km")
@@ -1096,7 +1099,7 @@ namespace PublicacionDM
 
             }
             
-            datosparademotores = datosparademotores + "segment=Casas Rodantes&provider =" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+            datosparademotores = datosparademotores + "segment=MOTOR HOME&provider=" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
 
             return datosparademotores;
 
