@@ -1096,7 +1096,7 @@ namespace PublicacionDM
 
             }
             
-            datosparademotores = datosparademotores + "segment=Motor Home&provider =" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
+            datosparademotores = datosparademotores + "segment=Casas Rodantes&provider =" + provider_DM + "&key=" + key_DM + "&userId=" + useriddm + "&subtitle=" + subtitulo;
 
             return datosparademotores;
 
