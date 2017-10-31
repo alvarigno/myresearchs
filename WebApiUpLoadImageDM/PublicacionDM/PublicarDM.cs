@@ -72,6 +72,7 @@ namespace PublicacionDM
             DicCarrocerias.Add("HA", "Hatchback");
             DicCarrocerias.Add("OD", "Monovolumen");
             DicCarrocerias.Add("PU", "Pick Up");
+            DicCarrocerias.Add("DC", "Pick Up");
             DicCarrocerias.Add("CP", "Pick Up");
             DicCarrocerias.Add("SA", "Sedán");
             DicCarrocerias.Add("MM", "Utilitario");
