@@ -77,6 +77,9 @@ namespace PublicacionDM
             DicCarrocerias.Add("OC", "Pick Up");
             DicCarrocerias.Add("SA", "Sedán");
             DicCarrocerias.Add("MM", "Utilitario");
+            DicCarrocerias.Add("PV", "Utilitario");
+            DicCarrocerias.Add("RV", "Utilitario");
+            DicCarrocerias.Add("FW", "Utilitario");
 
             //Diccionario de Colores
             DicColor.Add("Amarillo", "Amarillo");
