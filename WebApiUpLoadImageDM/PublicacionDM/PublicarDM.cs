@@ -74,6 +74,7 @@ namespace PublicacionDM
             DicCarrocerias.Add("PU", "Pick Up");
             DicCarrocerias.Add("DC", "Pick Up");
             DicCarrocerias.Add("CP", "Pick Up");
+            DicCarrocerias.Add("OC", "Pick Up");
             DicCarrocerias.Add("SA", "Sedán");
             DicCarrocerias.Add("MM", "Utilitario");
 
