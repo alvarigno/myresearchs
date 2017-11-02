@@ -28,19 +28,9 @@ namespace AppMake360ViewIMG
             process.StandardInput.WriteLine(@".\gear360pano.cmd "+ urlsource);
             process.StandardInput.Close();
             process.WaitForExit();
-            //Console.WriteLine(process.StandardOutput.ReadToEnd());
-
-
-
-            //while (!process.StandardOutput.EndOfStream)
-            //{
-            //    string line = process.StandardOutput.ReadLine();
-            //    Console.WriteLine("salida: "+ line);
-            //}
 
             string namefile = Path.GetFileNameWithoutExtension(urlsource);
 
-            //string curFile = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\html\\data\\prova_v1_pano.jpg";
             string curFile = "C:\\Users\\Álvaro\\Desktop\\gear360pano-master\\html\\data\\"+ namefile + "_pano.jpg";
 
             if (File.Exists(curFile))
