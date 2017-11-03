@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiMake360View", "WebApi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppMake360ViewIMG", "AppMake360ViewIMG\AppMake360ViewIMG.csproj", "{5CA0F320-0019-4027-A1AC-1C2F694A3846}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpLoadFile", "UpLoadFile\UpLoadFile.csproj", "{2B1E1CA1-58B3-43D5-A13B-1950C4A8A51C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5CA0F320-0019-4027-A1AC-1C2F694A3846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CA0F320-0019-4027-A1AC-1C2F694A3846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CA0F320-0019-4027-A1AC-1C2F694A3846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B1E1CA1-58B3-43D5-A13B-1950C4A8A51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1E1CA1-58B3-43D5-A13B-1950C4A8A51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1E1CA1-58B3-43D5-A13B-1950C4A8A51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1E1CA1-58B3-43D5-A13B-1950C4A8A51C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

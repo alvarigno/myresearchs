@@ -54,5 +54,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UpLoadFile\UpLoadFile.csproj">
+      <Project>{2b1e1ca1-58b3-43d5-a13b-1950c4a8a51c}</Project>
+      <Name>UpLoadFile</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
