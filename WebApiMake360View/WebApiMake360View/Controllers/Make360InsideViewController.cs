@@ -9,6 +9,7 @@ using System.Web.Http.Cors;
 using System.IO;
 using System.Net;
 using AppMake360ViewIMG;
+using EliminaDocumentos;
 
 namespace WebApiMake360View.Controllers
 {
@@ -20,72 +21,87 @@ namespace WebApiMake360View.Controllers
         int sitioprocedencia;
         string nombrerealarchivo;
         string uploadFolderPath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded\\";
-        Task taskDocumento;
+        public static Task taskProcesaImg360;
         Task taskDocumentoEliminacion;
 
         [HttpPost]
         [Route("Inside360")]
-        public async Task<HttpResponseMessage> Upload() {
+        public async Task<HttpResponseMessage> Upload(string codauto) {
 
-                try
+            try
+            {
+
+                if (Request.Content.IsMimeMultipartContent())
                 {
 
-                    if (Request.Content.IsMimeMultipartContent())
+                    HttpResponseMessage result = null;
+                    var httpRequest = HttpContext.Current.Request;
+                    if (httpRequest.Files.Count > 0)
                     {
-
-                        HttpResponseMessage result = null;
-                        var httpRequest = HttpContext.Current.Request;
-                        if (httpRequest.Files.Count > 0)
+                        var docfiles = new List<string>();
+                        foreach (string file in httpRequest.Files)
                         {
-                            var docfiles = new List<string>();
-                            foreach (string file in httpRequest.Files)
-                            {
-                                var postedFile = httpRequest.Files[file];
-                                var filePath = uploadFolderPath + postedFile.FileName;
+                            var postedFile = httpRequest.Files[file];
+                            var filePath = uploadFolderPath + postedFile.FileName;
 
 
-                                    if (!File.Exists(filePath))
-                                    {
+                                if (!File.Exists(filePath))
+                                {
 
-                                        postedFile.SaveAs(filePath);
-                                        Program procesa = new Program();
-                                        string filelisto = procesa.ProcesaVista360(filePath, uploadFolderPath);
-                                        //taskDocumento = Task.Factory.StartNew(() => PasaDocumentoXml(filePath, ipqueaccesa, "publica/modifica"));
-                                        result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + filelisto + ", cargado con éxito.");
+                                    postedFile.SaveAs(filePath);
+                                    taskProcesaImg360 = Task.Factory.StartNew(() => ProcesaDocumento(filePath, uploadFolderPath));
+                                    result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + filePath + ", cargado con éxito.");
 
-                                    }
-                                    else
-                                    {
+                                }
+                                else
+                                {
 
-                                        result = Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + postedFile.FileName + ", ya existe.");
+                                    result = Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + postedFile.FileName + ", ya existe.");
 
-                                    }
-
-                            }
-                            //result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
+                                }
 
                         }
-                        else
-                        {
-                            result = Request.CreateResponse(HttpStatusCode.BadRequest);
-                        }
-
-                        return result;
+                        //result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
 
                     }
                     else
                     {
-                        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
+                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
                     }
 
+                    return result;
 
                 }
-                catch (Exception ex)
+                else
                 {
-
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
                 }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+            }
 
         }
+
+        public static void ProcesaDocumento(string filePath, string uploadFolderPath) {
+            
+            Program procesa = new Program();
+            Eliminar Eliminacion = new Eliminar();
+            string filelisto = procesa.ProcesaVista360(filePath, uploadFolderPath);
+
+            if (!string.IsNullOrEmpty(filelisto)) {
+
+                Eliminar.eliminaDoc(taskProcesaImg360, filePath);
+
+            }
+
+        }
+
+
+
     }
 }

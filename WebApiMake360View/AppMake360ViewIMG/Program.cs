@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using UpLoadFile;
+using EliminaDocumentos;
 
 namespace AppMake360ViewIMG
 {
     public class Program
     {
 
+        public static Task taskDocumentoEliminacion;
         public static string filename = "prova_v1.jpg";
         public static string urlsource = "C:\\Users\\Álvaro\\Desktop\\gear360pano-master\\";
         public static void Main(string[] args)
@@ -35,8 +37,9 @@ namespace AppMake360ViewIMG
 
             string resultado = "";
 
-            while (resultado == "") { 
+            while (resultado == "") {
 
+                Eliminar eliminacion = new Eliminar();
                 Process process = new Process();
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.CreateNoWindow = true;
@@ -58,6 +61,9 @@ namespace AppMake360ViewIMG
                     Console.WriteLine("\nimagen 360 creada con éxito.");
                     CA_ImgUploadServer subearchivo = new CA_ImgUploadServer();
                     resultado = subearchivo.Uploadimage(curFile);
+                    if (!String.IsNullOrEmpty(resultado)) { 
+                        taskDocumentoEliminacion = Task.Factory.StartNew(() => ProcesaDocumento(curFile));
+                    }
                 }
 
             }
@@ -66,8 +72,14 @@ namespace AppMake360ViewIMG
 
         }
 
+        public static void ProcesaDocumento( string urldoc) {
 
-       
-
+            Eliminar Eliminacion = new Eliminar();
+            if (!string.IsNullOrEmpty(urldoc))
+            {
+                Eliminar.eliminaDoc(taskDocumentoEliminacion, urldoc);
+            }
+        }
+        
     }
 }

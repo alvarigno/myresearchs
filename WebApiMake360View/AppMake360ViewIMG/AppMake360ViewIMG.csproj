@@ -55,6 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EliminaDocumentos\EliminaDocumentos.csproj">
+      <Project>{485f4a74-4cd4-48f4-a669-dc14ee732c43}</Project>
+      <Name>EliminaDocumentos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UpLoadFile\UpLoadFile.csproj">
       <Project>{2b1e1ca1-58b3-43d5-a13b-1950c4a8a51c}</Project>
       <Name>UpLoadFile</Name>
