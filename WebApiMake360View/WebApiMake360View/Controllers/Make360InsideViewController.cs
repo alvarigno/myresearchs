@@ -50,7 +50,7 @@ namespace WebApiMake360View.Controllers
 
                                     postedFile.SaveAs(filePath);
                                     taskProcesaImg360 = Task.Factory.StartNew(() => ProcesaDocumento(filePath, uploadFolderPath));
-                                    result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + filePath + ", cargado con éxito.");
+                                    result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + postedFile.FileName + ", cargado con éxito.");
 
                                 }
                                 else
