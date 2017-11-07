@@ -227,6 +227,7 @@
     <Content Include="fileLoaded\gear360sm-c200.pto" />
     <Content Include="fileLoaded\gear360sm-r210.pto" />
     <Content Include="fileLoaded\gear360video.pto" />
+    <Content Include="fileLoaded\gear360video.cmd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -251,6 +252,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fileLoaded\data\" />
+    <Folder Include="fileLoaded\frames\" />
+    <Folder Include="fileLoaded\video\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Make360InsideView\" />
   </ItemGroup>
