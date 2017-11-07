@@ -22,11 +22,12 @@ namespace WebApiMake360View.Controllers
         string nombrerealarchivo;
         string uploadFolderPath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "\\fileLoaded\\";
         public static Task taskProcesaImg360;
-        Task taskDocumentoEliminacion;
+        public static Task taskProcesaImg360OutSide;
+
 
         [HttpPost]
         [Route("Inside360")]
-        public async Task<HttpResponseMessage> Upload(string codauto) {
+        public async Task<HttpResponseMessage> UploadImg(string codauto) {
 
             try
             {
@@ -49,7 +50,7 @@ namespace WebApiMake360View.Controllers
                                 {
 
                                     postedFile.SaveAs(filePath);
-                                    taskProcesaImg360 = Task.Factory.StartNew(() => ProcesaDocumento(filePath, uploadFolderPath));
+                                    taskProcesaImg360 = Task.Factory.StartNew(() => ProcesaInsideView(filePath, uploadFolderPath));
                                     result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + postedFile.FileName + ", cargado con éxito.");
 
                                 }
@@ -87,15 +88,96 @@ namespace WebApiMake360View.Controllers
 
         }
 
-        public static void ProcesaDocumento(string filePath, string uploadFolderPath) {
+        [HttpPost]
+        [Route("Outside360")]
+        public async Task<HttpResponseMessage> UploadVideo(string codauto)
+        {
+
+            try
+            {
+
+                if (Request.Content.IsMimeMultipartContent())
+                {
+
+                    HttpResponseMessage result = null;
+                    var httpRequest = HttpContext.Current.Request;
+                    if (httpRequest.Files.Count > 0)
+                    {
+                        var docfiles = new List<string>();
+                        foreach (string file in httpRequest.Files)
+                        {
+                            var postedFile = httpRequest.Files[file];
+                            var filePath = uploadFolderPath + postedFile.FileName;
+
+
+                            if (!File.Exists(filePath))
+                            {
+
+                                postedFile.SaveAs(filePath);
+                                taskProcesaImg360OutSide = Task.Factory.StartNew(() => ProcesaOutsideView(filePath, uploadFolderPath));
+                                result = Request.CreateResponse(HttpStatusCode.OK, "Archivo " + postedFile.FileName + ", cargado con éxito.");
+
+                            }
+                            else
+                            {
+
+                                result = Request.CreateResponse(HttpStatusCode.NotAcceptable, "Archivo " + postedFile.FileName + ", ya existe.");
+
+                            }
+
+                        }
+                        //result = Request.CreateResponse(HttpStatusCode.OK, docfiles);
+
+                    }
+                    else
+                    {
+                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                    }
+
+                    return result;
+
+                }
+                else
+                {
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "Los datos requeridos no poseen la forma correcta."));
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+            }
+
+        }
+
+
+        public static void ProcesaInsideView(string filePath, string uploadFolderPath) {
             
             Program procesa = new Program();
             Eliminar Eliminacion = new Eliminar();
-            string filelisto = procesa.ProcesaVista360(filePath, uploadFolderPath);
+            string filelisto = procesa.ProcesaVista360Interna(filePath, uploadFolderPath);
 
             if (!string.IsNullOrEmpty(filelisto)) {
 
                 Eliminar.eliminaDoc(taskProcesaImg360, filePath);
+
+            }
+
+        }
+
+        public static void ProcesaOutsideView(string filePath, string uploadFolderPath)
+        {
+
+            Program procesa = new Program();
+            Eliminar Eliminacion = new Eliminar();
+            string filelisto = procesa.ProcesaVista360Externa(filePath, uploadFolderPath);
+
+            if (!string.IsNullOrEmpty(filelisto))
+            {
+
+                Eliminar.eliminaDoc(taskProcesaImg360OutSide, filePath);
 
             }
 
