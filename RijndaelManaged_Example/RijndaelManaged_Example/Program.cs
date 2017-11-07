@@ -67,6 +67,7 @@ namespace RijndaelManaged_Example
                 rijAlg.Key = Key;
                 rijAlg.IV = IV;
 
+
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform encryptor = rijAlg.CreateEncryptor(rijAlg.Key, rijAlg.IV);
 
