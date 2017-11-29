@@ -11,7 +11,7 @@ namespace ConsoleAppReadHTMLBody
     class Program
     {
 
-        public static string filePath = "http://autos.demotores.cl/dm-411265000";
+        public static string filePath = "http://autos.demotores.com.ar/dm-41132700";
         public static string prueba = @"";
 
         static void Main(string[] args)
@@ -83,7 +83,7 @@ namespace ConsoleAppReadHTMLBody
 
                 contenidoerror = contenidoerror + d.Value;
 
-               Boolean hola =  d.Value.Contains("¡Ups!");
+               Boolean hola =  d.Value.Contains("Error");
 
 
                 if (d.Value == "¡Ups! ")
