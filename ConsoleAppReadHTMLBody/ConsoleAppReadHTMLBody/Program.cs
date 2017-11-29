@@ -53,21 +53,20 @@ namespace ConsoleAppReadHTMLBody
 
             //encuentra tag h1//
             //var query = localdoc.DocumentNode.Descendants("div")
-            //.Where(c => (c.Attributes["id"] != null) && (c.Attributes["id"].Value == "wrapperError"))
-            //.Select(n => new
-            //    {
-            //        Value = n.Element("h1").InnerText,
-            //    })
-            //    .ToList();
+            //            .Where(c => (c.Attributes["id"] != null) && (c.Attributes["id"].Value == "wrapperError"))
+            //            .Select(n => new
+            //            {
+            //                Value = n.Element("h1").InnerText,
+            //            })
+            //            .ToList();
 
 
             //encuentra tag title//
             var query = localdoc.DocumentNode.Descendants("head")
-            .Select(n => new
-            {
-                Value = n.Element("title").InnerText
-            })
-                .ToList();
+                        .Select(n => new
+                        {
+                            Value = n.Element("title").InnerText
+                        }).ToList();
 
             //var query = localdoc.DocumentNode.Descendants("div")
             //.Where(c => (c.Attributes["id"] != null) && (c.Attributes["id"].Value == "wrapperError"))
