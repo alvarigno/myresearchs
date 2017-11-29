@@ -22,7 +22,8 @@ namespace ConsoleAppReadHTMLBody
             var doc = new HtmlDocument();
             var url = filePath;
             var web = new HtmlWeb();
-            doc = web.Load(url);
+            doc = web.Load(url);//para cargar html desde url.
+            //doc.LoadHtml(string var);//para cargar html desde variable.
 
             Console.WriteLine("Carga datos HTML");
 
@@ -52,21 +53,21 @@ namespace ConsoleAppReadHTMLBody
             List<string> retorna = new List<string>();
 
             //encuentra tag h1//
-            //var query = localdoc.DocumentNode.Descendants("div")
-            //            .Where(c => (c.Attributes["id"] != null) && (c.Attributes["id"].Value == "wrapperError"))
-            //            .Select(n => new
-            //            {
-            //                Value = n.Element("h1").InnerText,
-            //            })
-            //            .ToList();
+            var query = localdoc.DocumentNode.Descendants("div")
+                        .Where(c => (c.Attributes["id"] != null) && (c.Attributes["id"].Value == "wrapperError"))
+                        .Select(n => new
+                        {
+                            Value = n.Element("h1").InnerText,
+                        })
+                        .ToList();
 
 
             //encuentra tag title//
-            var query = localdoc.DocumentNode.Descendants("head")
-                        .Select(n => new
-                        {
-                            Value = n.Element("title").InnerText
-                        }).ToList();
+            //var query = localdoc.DocumentNode.Descendants("head")
+            //            .Select(n => new
+            //            {
+            //                Value = n.Element("title").InnerText
+            //            }).ToList();
 
             //var query = localdoc.DocumentNode.Descendants("div")
             //.Where(c => (c.Attributes["id"] != null) && (c.Attributes["id"].Value == "wrapperError"))
@@ -86,7 +87,7 @@ namespace ConsoleAppReadHTMLBody
                Boolean hola =  d.Value.Contains("Error");
 
 
-                if (d.Value == "¡Ups! ")
+                if (d.Value.Contains("¡Ups!"))
                 {
 
                     valido = true;
