@@ -15,7 +15,7 @@ namespace CountNodeAvisosXML
             Console.WriteLine("Cuenta de nodos, comienza");
 
 
-            XDocument main = XDocument.Load(@"C:\Chileautos_Desarrollo\desarrollo\integrador\pruebas\Derco\05122017\xml_20171205200735.xml");
+            XDocument main = XDocument.Load(@"C:\Chileautos_Desarrollo\desarrollo\integrador\pruebas\Derco\26122017\xml_20171226212730_prueba_1.xml");
 
             Console.WriteLine("Cantidad de nodos: "+ ExtraeDataXml(main));
             
