@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<publicacion>
+    <identificacion name="portillo s.a." fecha-creacion="2017-01-12 01:03:21">
+        <x-key>B451AA1ACC6275A9DED6C799722B50CB</x-key>
+    </identificacion>
+    <listado>
+      <publicaciones>11</publicaciones>
+      <aviso id="23456711" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="1093">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456712" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456713" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456714" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456715" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456716" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456717" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456718" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456719" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>
+      <aviso id="23456720" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>   
+      <aviso id="23456721" patente="FFGG56" rdiccionario="S" elimina="S">
+        <vehiculo>
+            <sucursal id="2449">Ditec Automóviles División Usados</sucursal>  
+        </vehiculo>
+      </aviso>    
+    </listado>
+</publicacion>
