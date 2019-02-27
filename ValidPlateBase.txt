@@ -1,0 +1,31 @@
+public static boolean isValid(String patente) {
+      String regEx = "^[a-zA-Z]{2}([a-zA-Z]{2}|[0-9]{2}|)[0-9]{2}$|^[a-zA-Z]{2}(0)?[0-9]{3}$|^[a-zA-Z]{3}[0-9]{3}$";
+      String regExLZ = "^[l-zL-Z]{1}"; //valida que la primera letra y/o valor sea entre la L y la Z
+      String regEx09 = "[0-9]{4}$"; //valida que los últimos cuatro digitos sean numeros
+      String regExVocales = "[aAeEiIoOuU]"; //valida que los últimos cuatro digitos sean numeros
+
+      boolean salida = false;
+      salida = validRegEx(regEx, patente);
+      if (salida) {
+
+          if(validRegEx(regExLZ, patente)){
+              salida = validRegEx(regEx09, patente);
+          }else{
+              salida = !validRegEx(regExVocales, patente.substring(3, 4));
+          }
+
+          salida = patente.endsWith("00") ? false : salida;
+
+          return salida;
+      }
+      return salida;
+  }
+
+  public static boolean validRegEx(String regEx, String value){
+
+      Pattern r = Pattern.compile(regEx);
+      Matcher m = r.matcher(value);
+
+      return m.find();
+
+  }
